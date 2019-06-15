@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/home/binakarir/anaconda3/envs/wxpython/bin/python",
+    "python.venvFolders": [
+        "/home/binakarir/anaconda3/envs"
+    ],
+    "python.venvPath": "/home/binakarir/anaconda3/envs",
+    "python.linting.pylintEnabled": true
+}

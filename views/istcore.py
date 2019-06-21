@@ -28,7 +28,7 @@ class VersiIST ( wx.Frame ):
 		self.m_panel1 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer2 = wx.BoxSizer( wx.VERTICAL )
 
-		self.m_staticText1 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Silahkan Pilih Versi IST", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText1 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Silahkan Pilih Versi ist", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText1.Wrap( -1 )
 
 		bSizer2.Add( self.m_staticText1, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
@@ -42,8 +42,8 @@ class VersiIST ( wx.Frame ):
 		self.m_staticline1 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		bSizer2.Add( self.m_staticline1, 0, wx.ALL|wx.EXPAND, 5 )
 
-		m_radioBoxVersiISTChoices = [ u"IST Versi Seleksi", u"IST Versi Binakarir" ]
-		self.m_radioBoxVersiIST = wx.RadioBox( self.m_panel1, wx.ID_ANY, u"Pilihan Versi IST", wx.DefaultPosition, wx.DefaultSize, m_radioBoxVersiISTChoices, 1, wx.RA_SPECIFY_COLS )
+		m_radioBoxVersiISTChoices = [ u"ist Versi Seleksi", u"ist Versi Binakarir" ]
+		self.m_radioBoxVersiIST = wx.RadioBox( self.m_panel1, wx.ID_ANY, u"Pilihan Versi ist", wx.DefaultPosition, wx.DefaultSize, m_radioBoxVersiISTChoices, 1, wx.RA_SPECIFY_COLS )
 		self.m_radioBoxVersiIST.SetSelection( 0 )
 		bSizer2.Add( self.m_radioBoxVersiIST, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
@@ -2108,7 +2108,7 @@ class ISTUtama ( wx.Frame ):
 
 		bSizer12.Add( ( 0, 125), 0, wx.EXPAND, 5 )
 
-		self.m_staticText2191 = wx.StaticText( self.m_panel7, wx.ID_ANY, u"HASIL ANALISIS IST", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText2191 = wx.StaticText( self.m_panel7, wx.ID_ANY, u"HASIL ANALISIS ist", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText2191.Wrap( -1 )
 
 		self.m_staticText2191.SetFont( wx.Font( 12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Sans" ) )

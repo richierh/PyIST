@@ -8,6 +8,9 @@ import os
 import sys
 import pathlib
 
+import wx
+
+
 # path = "{}{}".format(os.getcwd(), "/AppsSDS")
 # print (type(path))
 path= pathlib.Path.cwd()/'views'
@@ -22,4 +25,3 @@ cd = pathlib.Path.cwd()/"views"
 os.chdir(str(cd))
 
 from views.main import run
-

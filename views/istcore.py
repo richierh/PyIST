@@ -13,7 +13,7 @@ import wx.grid
 from wx.lib.agw import ultimatelistctrl as ULC
 
 ###########################################################################
-## Class VersiIST
+# Class VersiIST
 ###########################################################################
 
 class VersiIST ( wx.Frame ):
@@ -653,7 +653,7 @@ class ISTUtama ( wx.Frame ):
 
 		self.m_textCtrl271 = wx.TextCtrl( self.m_scrolledWindow1, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_textCtrl271.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
+	
 		fgSizer81.Add( self.m_textCtrl271, 0, wx.ALL, 5 )
 
 		self.m_staticText531 = wx.StaticText( self.m_scrolledWindow1, wx.ID_ANY, u"3", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2331,5 +2331,3 @@ class ISTUtama ( wx.Frame ):
 
 	def m_button_reset_onclick( self, event ):
 		event.Skip()
-
-

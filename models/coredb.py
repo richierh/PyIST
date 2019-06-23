@@ -219,6 +219,6 @@ if __name__ == '__main__':
     # print (pathloc)
     run = QueryTabel(pathloc)
 #     Table.pathloc = pathloc
-#     IST.delete_file()
+#     ist.delete_file()
     # object.query_option("nama kolom","nilai mentah","kelompokusia")
     print (run.query_option("SE","4",12))

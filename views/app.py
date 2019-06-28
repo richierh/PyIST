@@ -9,7 +9,7 @@
 
 import wx
 
-from views import ISTISTUtama
+from controllers.ISTISTUtama import ISTISTUtama
 
 
 class MyApp(wx.App):

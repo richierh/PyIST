@@ -12,10 +12,10 @@ import os
 import pathlib
 import sys
 import platform
-from coreapps.views.app import MyApp
+from views.app import MyApp
 from pathlib import Path
 
-pathwd = pathlib.Path.cwd() / "coreapps"
+pathwd = pathlib.Path.cwd() / "views"
 sys.path.append(str(pathwd))
 # print (sys.path)
 os.chdir(str(pathwd))

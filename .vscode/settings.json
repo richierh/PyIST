@@ -1,8 +1,7 @@
 {
-    "python.pythonPath": "/home/binakarir/anaconda3/envs/wxpython/bin/python",
-    "python.venvFolders": [
-        "/home/binakarir/anaconda3/envs"
-    ],
-    "python.venvPath": "/home/binakarir/anaconda3/envs",
-    "python.linting.pylintEnabled": true
+    "python.pythonPath": "/home/cireng/miniconda3/envs/wxpython/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pep8Enabled": true
 }

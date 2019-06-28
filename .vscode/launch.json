@@ -5,6 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: HEXACO File",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/cireng/Projects/pyhexaco/hexaco.py",
+            "console": "integratedTerminal"
+        },
+
+
+        {
+            "name": "Python: IST File",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/cireng/Projects/pyist/ist.py",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Python: Current File (Integrated Terminal)",
             "type": "python",
             "request": "launch",

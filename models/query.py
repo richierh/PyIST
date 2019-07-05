@@ -5,26 +5,286 @@ Created on May 4, 2019
 
 @author: cireng
 '''
-
+import sys
 import pathlib
 import sqlite3
 
-global path
 
-def connect_db():
+class SqliteDB(object):
+
+
+    def __init__(self,nama_file):
+        self.nama_file = nama_file
+        self.current_path = pathlib.Path.cwd()/""
+        # self.path_db = pathlib.Path(self.current_path.parent/f"models/{self.nama_file}")
+        self.path_db = pathlib.Path(self.current_path/f"models/{self.nama_file}")
+        print (self.path_db)
+        pass
     
-    path = pathlib.Path.cwd() / "models/ist"
-#     path = pathlib.Path.cwd() / "hexacodb"
-    print (path)
+    def __repr__(self):
 
-    print ("Connecting to {}".format(path))
-    print("...Processing....")
-    conne = sqlite3.connect(str(path))
-    return conne
+        return self.nama_file
+    
+    def scrub(self,table_name):
+        self.table_name = table_name
+        return ''.join( chr for chr in self.table_name if chr.isalnum() )
 
-def path():
-    pathl = pathlib.Path.cwd() / "models/hexacodb"
-    return pathl
+
+    def hitung_jumlah_row(self,nama_tabel):
+        self.conn = self.connect_db()
+        self.values = nama_tabel
+        # self.values = self.scrub(self.nama_tabel)
+        print (self.values)
+
+        self.sql_cmd =  f"""
+        SELECT Count(*) FROM {self.values} 
+               """
+
+        self.results = self.conn.execute(self.sql_cmd).fetchone()
+
+        self.close_db()
+        return self.results        
+
+
+    def connect_db(self):
+        print ("Connecting to {}.db".format(self.path_db))
+        print("...Processing....")
+        print("Database di buka")
+        conne = sqlite3.connect(str(self.path_db))
+        return conne
+    
+    def close_db(self):
+        print("Berhasil di proses")
+        print("Database ditutup")
+        return self.conn.close()
+
+
+    def query_tabel_data_kelompok(self) :
+        self.conn = self.connect_db()
+        sql_cmd = """
+
+    SELECT TableDataKelompokUmur12.* ,
+        TableDataKelompokUmur13.* ,
+        TableDataKelompokUmur14.* ,
+        TableDataKelompokUmur15.* ,
+        TableDataKelompokUmur16.* ,
+        TableDataKelompokUmur17.* ,
+        TableDataKelompokUmur18.* ,
+        TableDataKelompokUmur19.*
+        
+    FROM TableDataKelompokUmur12
+    LEFT JOIN TableDataKelompokUmur13 ,TableDataKelompokUmur14 , TableDataKelompokUmur15 ,
+            TableDataKelompokUmur16 ,TableDataKelompokUmur17 , TableDataKelompokUmur18 , 
+            TableDataKelompokUmur19
+
+    ON TableDataKelompokUmur12.RW = TableDataKelompokUmur13.RW
+    AND TableDataKelompokUmur12.RW = TableDataKelompokUmur14.RW
+    AND TableDataKelompokUmur12.RW = TableDataKelompokUmur15.RW
+    AND TableDataKelompokUmur12.RW = TableDataKelompokUmur16.RW
+    AND TableDataKelompokUmur12.RW = TableDataKelompokUmur17.RW
+    AND TableDataKelompokUmur12.RW = TableDataKelompokUmur18.RW
+    AND TableDataKelompokUmur12.RW = TableDataKelompokUmur19.RW
+ """
+        self.results = self.conn.execute(sql_cmd).fetchall()
+        self.close_db()
+
+        return self.results
+
+    def insert_tabel_data_kandidat(self,values):
+        self.values=values
+        self.conn = self.connect_db()
+        self.sql_cmd ="""
+INSERT INTO data_kandidat (
+                              tipe_kandidat,
+                              nama_kandidat,
+                              tanggal_tes,
+                              jenis_kelamin,
+                              tanggal_lahir
+                          )
+                          VALUES (
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?
+                          );
+
+        """
+
+        self.results = self.conn.executemany(self.sql_cmd,[self.values,])
+        self.conn.commit()
+        self.close_db()
+
+        return True
+
+    def insert_database_kandidat_tambahan1(self,values):
+
+            self.values=values
+            self.conn = self.connect_db()
+            self.sql_cmd ="""
+ INSERT INTO database_kandidat (
+                                  id_kand,
+                                  no_tes,
+                                  pendidikan_terakhir,
+                                  jurusan,
+                                  kota,
+                                  perusahaan_instansi,
+                                  posisi_jabatan
+                              )
+                              VALUES (
+                                  ?,
+                                  ?,
+                                  ?,
+                                  ?,
+                                  ?,
+                                  ?,
+                                  ?
+                              );
+
+            """
+            self.results = self.conn.executemany(self.sql_cmd,[self.values,])
+            self.conn.commit()
+            self.close_db()
+
+            return True
+
+
+    def insert_database_kandidat_tambahan2(self,values):
+
+            self.values=values
+            self.conn = self.connect_db()
+            self.sql_cmd ="""
+ INSERT INTO database_kandidat_2 (
+                                    id_kand,
+                                    asal_sekolah,
+                                    jurusan_sekolah,
+                                    asal_universitas,
+                                    jurusan_universitas,
+                                    kota,
+                                    hobi,
+                                    prestasi_akademik,
+                                    prestasi_non_akademik,
+                                    ekskul_yang_diikuti
+                                )
+                                VALUES (
+                                    ?,
+                                    ?,
+                                    ?,
+                                    ?,
+                                    ?,
+                                    ?,
+                                    ?,
+                                    ?,
+                                    ?,
+                                    ?
+                                );
+            """
+            self.results = self.conn.executemany(self.sql_cmd,[self.values,])
+            self.conn.commit()
+            self.close_db()
+
+            return True
+
+
+
+    def query_data_kandidat(self):
+        self.conn = self.connect_db()
+        sql_cmd = """
+        SELECT id_kand,
+            tipe_kandidat,
+            nama_kandidat,
+            tanggal_tes,
+            jenis_kelamin,
+            tanggal_lahir
+        FROM data_kandidat;
+
+ """
+        self.results = self.conn.execute(sql_cmd).fetchall()
+        self.close_db()
+
+        return self.results
+
+    def query_data_kandidat_leftjoin(self,tipe_kandidat):
+        self.conn = self.connect_db()
+        self.tipe_kandidat = tipe_kandidat
+
+        if self.tipe_kandidat == 1 :
+            sql_cmd = """
+            SELECT * 
+            FROM data_kandidat
+            LEFT JOIN database_kandidat
+            ON data_kandidat.id_kand = database_kandidat.id_kand
+            ;
+    """
+        elif self.tipe_kandidat == 2 :
+           sql_cmd = """
+            SELECT * 
+            FROM data_kandidat
+            LEFT JOIN database_kandidat_2
+            ON data_kandidat.id_kand = database_kandidat_2.id_kand
+            ;
+    """
+
+        self.results = self.conn.execute(sql_cmd).fetchall()
+        self.close_db()
+
+        return self.results
+
+class TabelJawaban(SqliteDB):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        pass 
+    
+    def __repr__(self):
+
+
+        return True
+
+    def insert_jawaban(self,values):
+        self.conn = self.connect_db()
+
+        self.values=  values
+        self.sql_cmd ="""
+INSERT INTO jawaban_peserta (   
+                                id_kand,
+                                id_input_ke,
+                                id_kunci_jawaban,
+                                no_jawaban,
+                                jawaban_peserta_se,
+                                kunci_jawaban_peserta_se,
+                                jawaban_peserta_wa,
+                                kunci_jawaban_wa,
+                                jawaban_peserta_an,
+                                kunci_jawaban_peserta_an,
+                                jawaban_peserta_ge,
+                                jawaban_peserta_ra,
+                                kunci_jawaban_ra,
+                                jawaban_peserta_zr,
+                                kunci_jawaban_peserta_zr,
+                                jawaba_peserta_fa,
+                                kunci_jawaban_peserta_fa,
+                                jawaban_peserta_wu,
+                                kunci_jawaban_peserta_wu,
+                                jawaban_peserta_me,
+                                kunci_jawaban_peserta_me
+                            )
+VALUES ((SELECT id_kand FROM data_kandidat ORDER BY id_kand DESC LIMIT 1),1,
+       1,(SELECT "Id Kunci Jawaban" FROM "Kunci Jawaban" WHERE No = 1),'jawaban_peserta_se','kunci_jawaban_peserta_se','jawaban_peserta_wa',
+       'kunci_jawaban_wa','jawaban_peserta_an','kunci_jawaban_peserta_an','jawaban_peserta_ge',
+       'jawaban_peserta_ra','kunci_jawaban_ra','jawaban_peserta_zr','kunci_jawaban_peserta_zr',
+       'jawaba_peserta_fa','kunci_jawaban_peserta_fa','jawaban_peserta_wu','kunci_jawaban_peserta_wu',
+       'jawaban_peserta_me','kunci_jawaban_peserta_me') ;
+"""
+
+        self.conn.execute(self.sql_cmd)#,[(self.values,)])
+        self.conn.commit()
+        self.close_db()
+        return True
+
+        
+
+
 
 def insert_input_peserta(values):
    
@@ -301,15 +561,22 @@ def update_rincian_data_peserta(values,id_pes):
 
     
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    path = pathlib.Path.cwd() / "hexacodb"
-#     print (path)
-#     connect_db(path)
-#     values = [(1,1,1,2,1),(1,1,1,1,1)]
-#     insert_input_peserta(values)
-    query_tabel_data_peserta("OFI SUNASTRI")
-    print(query_tabel_data_peserta("OFI SUNASTRI"))
+#     path = pathlib.Path.cwd() / "hexacodb"
+# #     print (path)
+# #     connect_db(path)
+# #     values = [(1,1,1,2,1),(1,1,1,1,1)]
+# #     insert_input_peserta(values)
+#     query_tabel_data_peserta("OFI SUNASTRI")
+#     print(query_tabel_data_peserta("OFI SUNASTRI"))
     
-    
-    
+if __name__=="__main__" :
+    file_db = "ist"
+    connect_db = SqliteDB(file_db)
+    # connect_db.query_tabel_data_kelompok()[1]
+    rw = 19
+    ceks = connect_db.query_tabel_data_kelompok()
+    for cek in ceks:
+        if rw == cek[0]:
+            print(f"berhasil : {cek[2]}")

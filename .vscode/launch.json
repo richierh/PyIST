@@ -12,7 +12,14 @@
             "console": "integratedTerminal"
         },
 
-
+        {
+            "name": "Python: tes IST File",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/cireng/Projects/pyist/tes.py",
+            "console": "integratedTerminal"
+        },
+ 
         {
             "name": "Python: IST File",
             "type": "python",

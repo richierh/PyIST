@@ -3,6 +3,10 @@
 
 import wx
 from views.istcore import ISTUtama
+from models.query import SqliteDB
+from pathlib import Path
+import wx.dataview
+from views.dataview import PanggilDataView,PanggilGrid
 
 '''
 Created on May 12, 2019
@@ -10,13 +14,44 @@ Created on May 12, 2019
 @author: cireng
 '''
 
-class HalamanEventControl(ISTUtama):
+
+class DataView(ISTUtama):
+
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        # self.panggildataview = PanggilDataView(self)
+        self.panggilgrid = PanggilGrid(self)
+        # bsizerdataview = wx.BoxSizer(wx.VERTICAL)
+
+        # self.m_dataViewListCtrl1 = wx.dataview.DataViewListCtrl( self.m_panel_input, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+        # self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+        # self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+        # self.m_dataViewListColumn3 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+        # bsizerdataview.Add( self.m_dataViewListCtrl1, 1, wx.ALL|wx.EXPAND, 5 )
+
+        pass
+
+class CekDB(DataView):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+
+        self.nama_file = "ist"
+        self.connect_db = SqliteDB("ist")
+        # print(self.connect_db.query_tabel_data_kelompok())
+        
+
+     
+
+class HalamanEventControl(CekDB):
     
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
         self.m_sebelumnya.Disable()
         self.m_kembali_ke_awal.Disable()
+
 
  
     def m_kembali_ke_awalOnButtonClick(self,event):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Jun 15 2019)
+## Python code generated with wxFormBuilder (version Jul  4 2019)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
@@ -264,10 +264,15 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel3 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer21 = wx.BoxSizer( wx.VERTICAL )
 
-		self.m_panel_input = wx.Panel( self.m_panel3, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+
+		bSizer21.Add( ( 0, 100), 0, 0, 5 )
+
+		self.m_panel_input9 = wx.Panel( self.m_panel3, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_panel_input9.Hide()
+
 		bSizer6 = wx.BoxSizer( wx.VERTICAL )
 
-		self.m_scrolledWindow1 = wx.ScrolledWindow( self.m_panel_input, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
+		self.m_scrolledWindow1 = wx.ScrolledWindow( self.m_panel_input9, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
 		self.m_scrolledWindow1.SetScrollRate( 5, 5 )
 		bSizer7 = wx.BoxSizer( wx.HORIZONTAL )
 
@@ -1804,19 +1809,21 @@ class ISTUtama ( wx.Frame ):
 
 		bSizer131 = wx.BoxSizer( wx.VERTICAL )
 
-		self.m_button6 = wx.Button( self.m_panel_input, wx.ID_ANY, u"Hitung", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button6 = wx.Button( self.m_panel_input9, wx.ID_ANY, u"Hitung", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer131.Add( self.m_button6, 0, wx.ALL, 5 )
 
 
 		bSizer6.Add( bSizer131, 0, wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 
-		self.m_panel_input.SetSizer( bSizer6 )
-		self.m_panel_input.Layout()
-		bSizer6.Fit( self.m_panel_input )
-		bSizer21.Add( self.m_panel_input, 1, wx.EXPAND |wx.ALL, 5 )
+		self.m_panel_input9.SetSizer( bSizer6 )
+		self.m_panel_input9.Layout()
+		bSizer6.Fit( self.m_panel_input9 )
+		bSizer21.Add( self.m_panel_input9, 1, wx.EXPAND |wx.ALL, 5 )
 
 		self.m_panel_input_total = wx.Panel( self.m_panel3, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_panel_input_total.Hide()
+
 		bSizer11 = wx.BoxSizer( wx.VERTICAL )
 
 		fgSizer9 = wx.FlexGridSizer( 0, 2, 0, 0 )
@@ -1913,6 +1920,59 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel_input_total.Layout()
 		bSizer11.Fit( self.m_panel_input_total )
 		bSizer21.Add( self.m_panel_input_total, 1, wx.EXPAND |wx.ALL, 5 )
+
+		self.m_panel_input = wx.Panel( self.m_panel3, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer23 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_grid2 = wx.grid.Grid( self.m_panel_input, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+
+		# Grid
+		self.m_grid2.CreateGrid( 20, 18 )
+		self.m_grid2.EnableEditing( True )
+		self.m_grid2.EnableGridLines( True )
+		self.m_grid2.EnableDragGridSize( False )
+		self.m_grid2.SetMargins( 0, 0 )
+
+		# Columns
+		self.m_grid2.SetColSize( 0, 30 )
+		self.m_grid2.SetColSize( 1, 80 )
+		self.m_grid2.SetColSize( 2, 30 )
+		self.m_grid2.SetColSize( 3, 80 )
+		self.m_grid2.SetColSize( 4, 30 )
+		self.m_grid2.SetColSize( 5, 80 )
+		self.m_grid2.SetColSize( 6, 30 )
+		self.m_grid2.SetColSize( 7, 80 )
+		self.m_grid2.SetColSize( 8, 30 )
+		self.m_grid2.SetColSize( 9, 80 )
+		self.m_grid2.SetColSize( 10, 30 )
+		self.m_grid2.SetColSize( 11, 80 )
+		self.m_grid2.SetColSize( 12, 30 )
+		self.m_grid2.SetColSize( 13, 80 )
+		self.m_grid2.SetColSize( 14, 30 )
+		self.m_grid2.SetColSize( 15, 80 )
+		self.m_grid2.SetColSize( 16, 30 )
+		self.m_grid2.SetColSize( 17, 80 )
+		self.m_grid2.EnableDragColMove( False )
+		self.m_grid2.EnableDragColSize( False )
+		self.m_grid2.SetColLabelSize( 30 )
+		self.m_grid2.SetColLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Rows
+		self.m_grid2.EnableDragRowSize( False )
+		self.m_grid2.SetRowLabelSize( 1 )
+		self.m_grid2.SetRowLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Label Appearance
+
+		# Cell Defaults
+		self.m_grid2.SetDefaultCellAlignment( wx.ALIGN_LEFT, wx.ALIGN_TOP )
+		bSizer23.Add( self.m_grid2, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+		self.m_panel_input.SetSizer( bSizer23 )
+		self.m_panel_input.Layout()
+		bSizer23.Fit( self.m_panel_input )
+		bSizer21.Add( self.m_panel_input, 1, wx.EXPAND|wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 
 		self.m_panel3.SetSizer( bSizer21 )

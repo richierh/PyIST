@@ -1,10 +1,12 @@
 #!usr/bin/env python
 
 '''
+
 Created on Mar 21, 2019
 
 from oscheck import *
 import@author: cireng
+
 '''
 
 import gettext
@@ -74,7 +76,7 @@ elif platform.system() == "Linux" :
     if my_file.is_file():
         print ("file ada")
         openWindows()
-        print ("le")
+        print ("Berakhir")
     else : 
         # print ("file tidak ada")
         KeyVerification = VerifyKey("2")

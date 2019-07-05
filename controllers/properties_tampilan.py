@@ -12,7 +12,8 @@ class PropertiesTampilan():
     def __init__(self,parent):
         self.parent = parent
 
-        print ("properties diaktifkan")
+        # print ("properties diaktifkan")
+        pass
     
 
     def logo_show(self):

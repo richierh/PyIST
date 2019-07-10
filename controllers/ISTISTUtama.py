@@ -161,12 +161,12 @@ class ISTISTUtama( ISTInheritedProperties ):
 	
 
 	
-	def m_textCtrlNamaOnLeftUp(self,event):
+	def m_textCtrl_namaOnLeftUp(self,event):
 
 
-		if self.m_textCtrlNama.GetValue()=="Ketik Nama Anda":
+		if self.m_textCtrl_nama.GetValue()=="Ketik Nama Anda":
 			# event.SetString("")
-			self.m_textCtrlNama.SetValue("")
+			self.m_textCtrl_nama.SetValue("")
 			print ("lewat sini")
 		
 		else :

@@ -3,15 +3,76 @@ Created on Feb 15, 2019
 
 @author: binakarir
 '''
-
+import wx
 from controllers.halaman_event import HalamanEventControl
-
+from views.menubar_tentang import TentangAplikasiInherited
+import pathlib
 # Ini adalah class untuk mengatur control input
 # Semua Control text di atur disini
 
 
+class MenuBarInherited(HalamanEventControl):
 
-class ISTInheritedProperties(HalamanEventControl):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+
+    def m_menu_keluarOnMenuSelection(self,event):
+        self.Close()
+        event.Skip()
+
+    def m_menu_bantuanOnMenuSelection(self,event):
+        self.TentangAplikasi = TentangAplikasiInherited(self)
+        self.TentangAplikasi.Show()
+        event.Skip()
+
+
+
+class PropertiesInput(MenuBarInherited):
+
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        
+    def get_biodata(self):
+        # menentukan tipe_biodata yang dipilih , apakah pendidikan ataukah pekerjaan
+        # self.tipe_biodata = 1 adalah tipe pendidikan , self.tipe_biodata =2 adalah tipe pekerjaan
+
+        if self.tipe_biodata == 1:
+            print ("Tipe pendidikan")
+        
+            self.biodata = [self.m_textCtrl_nama.GetValue(),
+            self.m_datePicker_tanggal_tes1.GetValue().Format("%d/%m/%Y"),
+            self.m_spinCtrl_usia.GetValue(),
+            self.m_choice_jenis_kelamin.GetString(self.m_choice_jenis_kelamin.GetSelection()),
+            self.m_datePicker_tanggal_lahir.GetValue().Format("%d/%m/%Y"),
+            self.m_textCtrl_asal_sekolah.GetValue(),
+            self.m_textCtrl_jurusan_sekolah.GetValue(),
+            self.m_textCtrl_asal_universitas.GetValue(),
+            self.m_textCtrl_jurusan_universitas.GetValue(),
+            self.m_textCtrl_kota.GetValue(),
+            self.m_textCtrl_hobi.GetValue(),
+            self.m_textCtrl_prestasi_akademik.GetValue(),
+            self.m_textCtrl_prestasi_non_akademik.GetValue(),
+            self.m_textCtrl_ekskul_yang_diikuti.GetValue()
+            ]
+        
+        elif self.tipe_biodata == 2 : 
+            print ("Tipe Pekerjaan")
+            self.biodata = [
+            self.m_textCtrl_no_tes.GetValue(),
+            self.m_datePicker_tanggal_tes2.GetValue().Format("%d/%m/%Y"),
+            8,
+            9,
+            10]
+
+        else :
+            print ("data belum ada")
+        
+        return self.biodata
+
+class ISTInheritedProperties(PropertiesInput):
     
     
     def __init__(self,parent,*args,**kwds):
@@ -300,10 +361,10 @@ class ISTInheritedProperties(HalamanEventControl):
 
     def biodata(self):
         # Ini adalah object untuk tarik data
-        return self.m_textCtrlNama,self.m_textCtrlNomor,\
+        return self.m_textCtrl_nama,self.m_textCtrlNomor,\
             self.m_textCtrlUsia,self.m_textCtrlKelas,\
             self.m_textCtrlAsalSekolah
-    def m_textCtrlNamaOnLeftUp( self, event ):
+    def m_textCtrl_namaOnLeftUp( self, event ):
         event.Skip()
 
     def m_buttonInput_JawabanOnButtonClick( self, event ):

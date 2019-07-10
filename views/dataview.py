@@ -19,6 +19,7 @@ class PanggilGrid():
 
 
     def __init__(self,parent):
+
         self.parent = parent
         self.parent.m_grid2.SetColLabelValue(0,"")
         self.parent.m_grid2.SetColLabelValue(1,"SE")
@@ -39,6 +40,7 @@ class PanggilGrid():
         self.parent.m_grid2.SetColLabelValue(16,"")
         self.parent.m_grid2.SetColLabelValue(17,"ME")
         self.parent.m_grid2.SetColLabelValue(18,"")
+
         for l in range(0,18):
             if not(l%2):
                 for i in range(0,20):
@@ -47,17 +49,50 @@ class PanggilGrid():
                     if l == 6 and i >=1 :
                         self.parent.m_grid2.SetCellValue(i,l,"")
                         self.parent.m_grid2.SetCellBackgroundColour(i,l, "grey")
+                        self.parent.m_grid2.SetReadOnly(i,l)
 
                     else :
                         self.parent.m_grid2.SetCellValue(i,l,str(stringval))
+                        self.parent.m_grid2.SetCellAlignment(i,l,wx.ALIGN_CENTRE,wx.ALIGN_CENTRE)
+                        self.parent.m_grid2.SetReadOnly(i,l)
+
             elif l == 7 and i >=1 :
-                for i in range(0,20):
+                for i in range(1,20):
                     stringval = i+1
 
                     self.parent.m_grid2.SetCellValue(i,l,"")
                     self.parent.m_grid2.SetCellBackgroundColour(i,l, "grey")
+                    self.parent.m_grid2.SetReadOnly(i,l)
 
+    def getdata(self):
+        self.data=[]
 
+        for l in range(0,18):
+
+            if l%2:
+                self.datapertama =  []
+
+                for i in range(0,20):
+                    stringval = i+1
+
+                    if l == 6 and i >=1 :
+                        # self.parent.m_grid2.GetCellValue(i,l)
+                        pass
+
+                    else :
+                        self.a = self.parent.m_grid2.GetCellValue(i,l)
+                        self.datapertama.append(self.a)
+            # elif l == 7 and i >=1 :
+            #     for i in range(1,20):
+            #         stringval = i+1
+
+            #         self.parent.m_grid2.GetCell(i,l,"")
+            #         self.parent.m_grid2.SetCellBackgroundColour(i,l, "grey")
+            #         self.parent.m_grid2.SetReadOnly(i,l)
+
+                self.data.append(self.datapertama)
+        return self.data
+            
 class PanggilDataView ():
 
     def __init__(self,parent):

@@ -94,6 +94,7 @@ if __name__ == "__main__":
     nama_file ="ist"
     print (nama_file)
     run = DatabaseControl(nama_file)
+    # [tipe_kandidat,nama_kandidat,tgl tes, jenis kelamin, tanggal lahir]
     data = [2,"Alif","2019/10/23","Laki-Laki","2002/12/04"]
     data2 = [2,3,4,6]
     run.insert_biodata(data,data2)

@@ -153,5 +153,22 @@
 				</object>
 			</object>
 		</object>
+		<object class="wxMenuBar" name="m_menubar1">
+			<label>MyMenuBar</label>
+			<object class="wxMenu" name="m_menu1">
+				<label>Berkas</label>
+				<object class="wxMenuItem" name="m_menu_keluar">
+					<label>Keluar</label>
+					<help></help>
+				</object>
+			</object>
+			<object class="wxMenu" name="m_menu2">
+				<label>Tentang</label>
+				<object class="wxMenuItem" name="m_menu_bantuan">
+					<label>Bantuan</label>
+					<help></help>
+				</object>
+			</object>
+		</object>
 	</object>
 </resource>

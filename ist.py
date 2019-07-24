@@ -76,7 +76,7 @@ elif platform.system() == "Linux" :
     if my_file.is_file():
         print ("file ada")
         openWindows()
-        print ("Berakhir")
+        # print ("Berakhir")
     else : 
         # print ("file tidak ada")
         KeyVerification = VerifyKey("2")

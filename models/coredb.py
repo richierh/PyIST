@@ -14,7 +14,7 @@ class Table():
     # pathloc  = []
     
     def __init__(self,parent):
-        print (pathloc)
+        # print (pathloc)
         self.pathloc = parent
         self.parent     = parent
         self.conn       = sqlite3.connect(self.pathloc)
@@ -99,7 +99,7 @@ class QueryTabel():
     
     def __init__(self,parent):
         self.pathloc = parent
-        print (pathloc)
+        # print (pathloc)
         self.parent     = parent
         self.conn       = sqlite3.connect(self.pathloc)
         self.cur        = self.conn.cursor()
@@ -221,4 +221,4 @@ if __name__ == '__main__':
 #     Table.pathloc = pathloc
 #     ist.delete_file()
     # object.query_option("nama kolom","nilai mentah","kelompokusia")
-    print (run.query_option("SE","4",12))
+    # print (run.query_option("SE","4",12))

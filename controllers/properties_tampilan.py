@@ -24,14 +24,14 @@ class PropertiesTampilan():
         self.parent.m_logo_binakarir.SetBitmap(wx.Bitmap(self.re_image))
 
 
-    def grafik_show(self):
+    def tabel_show(self):
         
         self.index = 0
         self.listheaderlistCtrl1 = [
             ["No","50",wx.LIST_FORMAT_CENTER],
             ["Aspek Analisa Skor ist","200",wx.LIST_FORMAT_LEFT],
-            ["Kelemahan","200",wx.LIST_FORMAT_LEFT],
-            ["Keunggulan","200",wx.LIST_FORMAT_LEFT]
+            ["Kelemahan","100",wx.LIST_FORMAT_LEFT],
+            ["Keunggulan","100",wx.LIST_FORMAT_LEFT]
             ]
       
         self.data = [

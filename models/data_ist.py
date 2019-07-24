@@ -9,7 +9,7 @@ class ISTCore(object):
 
     def __init__(self,**kwds):
         self.data = kwds
-        print (self.data)
+        # print (self.data)
 
         self.data.get("20")
         # print (self.data.get("20"))
@@ -51,12 +51,12 @@ if __name__ == "__main__":
         "0" : 74
     }
     a = DataIST()
-    print (a.datase)
+    # print (a.datase)
     run = ISTCore(**data)
     # ist.nilaise()
     # print (ist.nilaise())
     # print ("sukses")
-    print (run)
+    # print (run)
     if run == "134" :
-        print ("true")
+        # print ("true")
 

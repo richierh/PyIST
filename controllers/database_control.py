@@ -42,18 +42,18 @@ class DatabaseBioData(DatabaseConnect):
     def insert_biodata(self,*args):
         # list args[0] = [id_kand,tipe_kandidat,nama_kandidat,tanggal_tes,jenis_kelamin,tanggal_lahir]
         self.data = args
-        print (self.data)
+        # print (self.data)
         self.db.insert_tabel_data_kandidat(self.data[0])
         self.get_last_id = self.db.query_data_kandidat()[-1][0]
         self.tipe_kandidat = self.db.query_data_kandidat()[-1][1]
-        print (self.get_last_id)
-        print (self.tipe_kandidat)
+        # print (self.get_last_id)
+        # print (self.tipe_kandidat)
         if self.tipe_kandidat == 1 :
             self.data2 = args[1]
             self.data2.insert(0,self.get_last_id)
             # id_kand,no_tes, pendidikan_terakhir,jurusan, kota, perusahaan_instansi,posisi_jabatan       
 
-            print (self.data2)
+            # print (self.data2)
             self.db.insert_database_kandidat_tambahan1(self.data2)
         elif self.tipe_kandidat == 2 :
             self.data3 = args[2]
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     # print (pathlib.Path.cwd())
     from models.query import SqliteDB
     nama_file ="ist"
-    print (nama_file)
+    # print (nama_file)
     run = DatabaseControl(nama_file)
     # [tipe_kandidat,nama_kandidat,tgl tes, jenis kelamin, tanggal lahir]
     data = [2,"Alif","2019/10/23","Laki-Laki","2002/12/04"]

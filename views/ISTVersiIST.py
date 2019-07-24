@@ -14,10 +14,12 @@ class ISTVersiIST( istcore.VersiIST ):
 
 	def m_buttonVersiISTLanjutOnButtonClick(self, event):
 		if self.m_radioBoxVersiIST.GetSelection() == 0 :
-			print ("Masuk Versi Seleksi")
+			# print ("Masuk Versi Seleksi")
+			pass
 
 		elif self.m_radioBoxVersiIST.GetSelection()== 1 :
-			print ("Masuk Versi Binakarir")
+			# print ("Masuk Versi Binakarir")
+			pass
 	
 	def m_buttonTutupVersiISTOnButtonClick(self, event):
 		self.Close()

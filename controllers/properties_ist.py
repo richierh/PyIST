@@ -27,7 +27,6 @@ class MenuBarInherited(HalamanEventControl):
         event.Skip()
 
 
-
 class PropertiesInput(MenuBarInherited):
 
 
@@ -40,7 +39,7 @@ class PropertiesInput(MenuBarInherited):
         # self.tipe_biodata = 1 adalah tipe pendidikan , self.tipe_biodata =2 adalah tipe pekerjaan
 
         if self.tipe_biodata == 1:
-            print ("Tipe pendidikan")
+            # print ("Tipe pendidikan")
         
             self.biodata = [self.m_textCtrl_nama.GetValue(),
             self.m_datePicker_tanggal_tes1.GetValue().Format("%d/%m/%Y"),
@@ -59,18 +58,30 @@ class PropertiesInput(MenuBarInherited):
             ]
         
         elif self.tipe_biodata == 2 : 
-            print ("Tipe Pekerjaan")
+            # print ("Tipe Pekerjaan")
             self.biodata = [
             self.m_textCtrl_no_tes.GetValue(),
             self.m_datePicker_tanggal_tes2.GetValue().Format("%d/%m/%Y"),
-            8,
-            9,
-            10]
+            self.m_textCtrl_nama2.GetValue(),
+            self.m_choice_jenis_kelamin2.GetString(self.m_choice_jenis_kelamin2.GetSelection()),
+            self.m_datePicker_tanggal_lahir2.GetValue().Format("%d/%m/Y%"),
+            self.m_choice_pendidikan_terakhir2.GetString(self.m_choice_pendidikan_terakhir2.GetSelection()),
+            self.m_textCtrl_jurusan_pendidikan2.GetValue(),
+            self.m_textCtrl_kota2.GetValue(),
+            self.m_textCtrl_perusahaan_instansi2.GetValue(),
+            self.m_textCtrl_posisi_jabatan2.GetValue()
+            ]
 
         else :
-            print ("data belum ada")
+            # print ("data belum ada")
+            pass
         
         return self.biodata
+
+
+    def set_biodata_to_panel(self):
+        
+        pass
 
 class ISTInheritedProperties(PropertiesInput):
     
@@ -78,7 +89,7 @@ class ISTInheritedProperties(PropertiesInput):
     def __init__(self,parent,*args,**kwds):
         super().__init__(parent,*args,**kwds)
         self.parent = parent
-        print ("sukses")
+        # print ("sukses")
         self.list_se = [
             self.m_textCtrl6,    
             self.m_textCtrl8,    
@@ -440,7 +451,7 @@ class ISTInheritedProperties(PropertiesInput):
 
 if __name__ == '__main__':
     run = ListControlProperties(None)
-    print (run.list_an)
+    # print (run.list_an)
         
     
         

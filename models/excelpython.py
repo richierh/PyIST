@@ -13,9 +13,9 @@ class PyExcel():
 
     def __init__(self, *args):
         self.data = args   
-        print (self.data) 
+        # print (self.data) 
         self.pathexcel = pathlib.Path.cwd()/"models/aaa.xlsx"
-        print (str(self.pathexcel))
+        # print (str(self.pathexcel))
 
         self.wb = load_workbook(filename = self.pathexcel, read_only = False)
         # ws =  wb.active

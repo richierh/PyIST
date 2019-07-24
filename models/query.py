@@ -18,7 +18,7 @@ class SqliteDB(object):
         self.current_path = pathlib.Path.cwd()/""
         # self.path_db = pathlib.Path(self.current_path.parent/f"models/{self.nama_file}")
         self.path_db = pathlib.Path(self.current_path/f"models/{self.nama_file}")
-        print (self.path_db)
+        # print (self.path_db)
         pass
     
     def __repr__(self):
@@ -34,7 +34,7 @@ class SqliteDB(object):
         self.conn = self.connect_db()
         self.values = nama_tabel
         # self.values = self.scrub(self.nama_tabel)
-        print (self.values)
+        # print (self.values)
 
         self.sql_cmd =  f"""
         SELECT Count(*) FROM {self.values} 
@@ -340,8 +340,8 @@ def query_input_peserta(values):
     conne = connect_db()
     cursorexe = conne.cursor()
 #     values = ["select","select by"]
-    print (values[0])
-    print (values[1])
+    # print (values[0])
+    # print (values[1])
     
     if values[0]=="idpeserta":
         sqlcmd = """SELECT I.idinputpeserta,I.idpeserta,RDP."Nama Kandidat",I.NoSoal,I.JawabanPeserta,T.NamaSoal
@@ -375,7 +375,8 @@ def query_data_peserta():
     cursorexe.execute(sqlcmd)
     getdatas = cursorexe.fetchall()
     for data in getdatas:
-        print (data)
+        # print (data)
+        pass
     
     conne.close
 
@@ -414,8 +415,8 @@ def query_data_jawaban(values):
     conne = connect_db()
     cursorexe = conne.cursor()
 #     values = ["select","select by"]
-    print (values[0])
-    print (values[1])
+    # print (values[0])
+    # print (values[1])
     
     if values[0]=="idpeserta":
         sqlcmd = """SELECT I.idinputpeserta,I.idpeserta,I.NoSoal,I.JawabanPeserta,
@@ -444,8 +445,8 @@ def query_data_jawaban(values):
 def query_tabel_data_peserta(value):
     conne = connect_db()
     
-    print (value[0],value[1],value[2],value[3])
-    print ("ini value {},{},{},{}".format(value[0],value[1],value[2],value[3]))
+    # print (value[0],value[1],value[2],value[3])
+    # print ("ini value {},{},{},{}".format(value[0],value[1],value[2],value[3]))
     cursorexe = conne.cursor()
     
     if value[4]=="nama orang":
@@ -517,9 +518,9 @@ def update_jawaban(values,id_pes):
     conne = connect_db()
     cursorexe = conne.cursor()
 #     values = ["select","select by"]
-    print (values[0])
-    print (values[1])
-    print (values[2])
+    # print (values[0])
+    # print (values[1])
+    # print (values[2])
 
     sql_cmd = """
     UPDATE Input_Data_Jawaban_Peserta 
@@ -536,9 +537,9 @@ def update_rincian_data_peserta(values,id_pes):
     conne = connect_db()
     cursorexe = conne.cursor()
 #     values = ["select","select by"]
-    print(values[0])
-    print(values[1])
-    print(values[2])
+    # print(values[0])
+    # print(values[1])
+    # print(values[2])
 
     sql_cmd = """
     UPDATE [Rincian Data Peserta]
@@ -564,10 +565,10 @@ def update_rincian_data_peserta(values,id_pes):
 # if __name__ == "__main__":
     
 #     path = pathlib.Path.cwd() / "hexacodb"
-# #     print (path)
-# #     connect_db(path)
-# #     values = [(1,1,1,2,1),(1,1,1,1,1)]
-# #     insert_input_peserta(values)
+#     print (path)
+#     connect_db(path)
+#     values = [(1,1,1,2,1),(1,1,1,1,1)]
+#     insert_input_peserta(values)
 #     query_tabel_data_peserta("OFI SUNASTRI")
 #     print(query_tabel_data_peserta("OFI SUNASTRI"))
     
@@ -579,4 +580,5 @@ if __name__=="__main__" :
     ceks = connect_db.query_tabel_data_kelompok()
     for cek in ceks:
         if rw == cek[0]:
-            print(f"berhasil : {cek[2]}")
+            # print(f"berhasil : {cek[2]}")
+            pass

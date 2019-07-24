@@ -18,7 +18,7 @@ data3 = ["SMA NUSANTARA","IPA","INSTITUT ANTAH BERANTAH","TEKNIK SIPIL","JAMBI",
         "JUARA MAIN KELERENG","JUARA BALAP KARUNG","TAE KWON DO"]
 tabel = DatabaseBioData(tes)
 tabel.insert_biodata(data,data2,data3)
-print (tabel.lihat_data_kandidat_baru())
+# print (tabel.lihat_data_kandidat_baru())
 insert_jawaban = DataBaseInput(tes)
-print(insert_jawaban.insert_data_jawaban("jj"))
-print (insert_jawaban.get_jumlah_baris("jawaban_peserta"))
+# print(insert_jawaban.insert_data_jawaban("jj"))
+# print (insert_jawaban.get_jumlah_baris("jawaban_peserta"))

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Jul  9 2019)
+## Python code generated with wxFormBuilder (version Jul 24 2019)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
@@ -2392,7 +2392,7 @@ class ISTUtama ( wx.Frame ):
 		bSizer12 = wx.BoxSizer( wx.VERTICAL )
 
 
-		bSizer12.Add( ( 0, 125), 0, wx.EXPAND, 5 )
+		bSizer12.Add( ( 0, 125), 0, 0, 5 )
 
 		self.m_staticText2191 = wx.StaticText( self.m_panel7, wx.ID_ANY, u"HASIL ANALISIS IST", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText2191.Wrap( -1 )
@@ -2404,14 +2404,28 @@ class ISTUtama ( wx.Frame ):
 
 		bSizer12.Add( ( 0, 25), 0, 0, 5 )
 
+		self.m_staticText_berpikir = wx.StaticText( self.m_panel7, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText_berpikir.Wrap( -1 )
+
+		bSizer12.Add( self.m_staticText_berpikir, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+		self.m_panel22 = wx.Panel( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer12.Add( self.m_panel22, 1, wx.EXPAND |wx.ALL, 5 )
+
 		self.m_listCtrl1 = wx.ListCtrl( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,225 ), wx.LC_REPORT )
+		self.m_listCtrl1.Hide()
+
 		bSizer12.Add( self.m_listCtrl1, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		self.m_listCtrl2 = wx.ListCtrl( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,50 ), wx.LC_REPORT )
+		self.m_listCtrl2.Hide()
+
 		bSizer12.Add( self.m_listCtrl2, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		self.m_staticText217 = wx.StaticText( self.m_panel7, wx.ID_ANY, u"Keunggulan akan terisi apabila subjek mendapat skor SW lebih dari 100 pada beberapa subtest", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText217.Wrap( -1 )
+
+		self.m_staticText217.Hide()
 
 		bSizer12.Add( self.m_staticText217, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 

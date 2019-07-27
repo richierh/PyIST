@@ -126,10 +126,10 @@ class HalamanEventControl(CekDB):
             pass
 
         elif self.getSel == 4 :
-            print ('hell')
+            print ('hell0kl;k')
             # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
             self.grafik_hasil = GrafikHasil(self)
-            self.grafik.draw()
+            # self.grafik_hasil.draw()
             pass
 
         else :
@@ -143,10 +143,12 @@ class HalamanEventControl(CekDB):
         self.getSel = self.m_simplebook1.GetSelection()
         self.m_simplebook1.SetSelection(self.getSel + 1)
         self.getSel = self.m_simplebook1.GetSelection()
+
         if self.getSel == 1:
             self.m_selanjutnya.Disable()        
             self.m_sebelumnya.Enable()
             pass
+
         elif self.getSel == 3 :
             'Proses hitung dimulai ketika halaman 3 , atau pada saat penyajian grafik'
             print("penyajian grafik proses hitung")
@@ -159,17 +161,16 @@ class HalamanEventControl(CekDB):
 
             KalkulasiNilai(self)
 
-
-
-
-
             pass
+
         elif self.getSel == 4 :
             # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
             self.properties_tamp.tabel_show()
             self.grafik_hasil = GrafikHasil(self)
-            self.grafik.draw()
+            self.grafik_hasil.draw()
+            # self.m_staticText_berpikir.SetValue()
             pass
+
         else :
             # self.m_button3.Enable()
             pass

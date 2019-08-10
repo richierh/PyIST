@@ -19,6 +19,11 @@ class KalkulasiNilai():
 
 
         pass
-    
+
+
+
+    def konversi_nilai_ge(self,values):
+
+        pass
 
     

@@ -173,7 +173,7 @@
 	</object>
 	<object class="wxFrame" name="Biodata">
 		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
-		<size>500,300</size>
+		<size>388,460</size>
 		<title></title>
 		<centered>1</centered>
 		<aui_managed>0</aui_managed>
@@ -202,8 +202,8 @@
 										<cols>2</cols>
 										<vgap>0</vgap>
 										<hgap>0</hgap>
-										<growablecols>0,1</growablecols>
-										<growablerows>0,1,2,3,4,5,6,7,8,9,10,11,12,13</growablerows>
+										<growablecols></growablecols>
+										<growablerows></growablerows>
 										<object class="sizeritem">
 											<option>1</option>
 											<flag>wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT</flag>
@@ -484,7 +484,6 @@
 					<border>5</border>
 					<object class="wxPanel" name="m_panel17">
 						<style>wxTAB_TRAVERSAL</style>
-						<hidden>1</hidden>
 						<object class="wxBoxSizer">
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
@@ -499,8 +498,8 @@
 										<cols>2</cols>
 										<vgap>0</vgap>
 										<hgap>0</hgap>
-										<growablecols>0,1</growablecols>
-										<growablerows>0,1,2,3,4,5,6,7,8,9</growablerows>
+										<growablecols></growablecols>
+										<growablerows></growablerows>
 										<object class="sizeritem">
 											<option>1</option>
 											<flag>wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT</flag>
@@ -529,10 +528,10 @@
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
-											<object class="wxDatePickerCtrl" name="m_datePicker_tanggal_tes2">
-												<style>wxDP_DEFAULT</style>
+											<object class="wxTextCtrl" name="m_textCtrl_tanggal_tes2">
+												<value></value>
 											</object>
 										</object>
 										<object class="sizeritem">
@@ -546,7 +545,7 @@
 										</object>
 										<object class="sizeritem">
 											<option>1</option>
-											<flag>wxALL|wxEXPAND</flag>
+											<flag>wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
 											<object class="wxTextCtrl" name="m_textCtrl_nama2">
 												<value></value>
@@ -563,31 +562,27 @@
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
-											<object class="wxChoice" name="m_choice_jenis_kelamin2">
-												<selection>1</selection>
-												<content>
-													<item>Laki - Laki</item>
-													<item>Perempuan</item>
-												</content>
+											<object class="wxTextCtrl" name="m_textCtrl_jenis_kelamin2">
+												<value></value>
 											</object>
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
 											<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
-											<object class="wxStaticText" name="m_staticText2362">
+											<object class="wxStaticText" name="m_staticText_Tanggal_Lahir">
 												<label>Tanggal Lahir</label>
 												<wrap>-1</wrap>
 											</object>
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
-											<object class="wxDatePickerCtrl" name="m_datePicker_tanggal_lahir2">
-												<style>wxDP_DEFAULT</style>
+											<object class="wxTextCtrl" name="m_textCtrl_tanggal_lahir2">
+												<value></value>
 											</object>
 										</object>
 										<object class="sizeritem">
@@ -601,15 +596,10 @@
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
-											<object class="wxChoice" name="m_choice_pendidikan_terakhir2">
-												<selection>2</selection>
-												<content>
-													<item>SD</item>
-													<item>SMP</item>
-													<item>SMA</item>
-												</content>
+											<object class="wxTextCtrl" name="m_textCtrl_pendidikan_terakhir">
+												<value></value>
 											</object>
 										</object>
 										<object class="sizeritem">
@@ -623,7 +613,7 @@
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
 											<object class="wxTextCtrl" name="m_textCtrl_jurusan_pendidikan2">
 												<size>170,-1</size>
@@ -641,7 +631,7 @@
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
 											<object class="wxTextCtrl" name="m_textCtrl_kota2">
 												<size>150,-1</size>
@@ -659,7 +649,7 @@
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
 											<object class="wxTextCtrl" name="m_textCtrl_perusahaan_instansi2">
 												<size>160,-1</size>
@@ -677,7 +667,7 @@
 										</object>
 										<object class="sizeritem">
 											<option>0</option>
-											<flag>wxALL</flag>
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>
 											<object class="wxTextCtrl" name="m_textCtrl_posisi_jabatan2">
 												<size>170,-1</size>

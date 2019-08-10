@@ -5,7 +5,7 @@ import pathlib
 # chg_folder  = str(pathlib.Path(parent_folder))
 # sys.path.append(chg_folder)
 # # nama_file = str(pathlib.Path(chg_folder+"/models/ist"))
-from models.query import SqliteDB,TabelJawaban
+from models.query import SqliteDB,TabelJawaban,KonversiGE
 
 class DatabaseConnect():
 
@@ -65,7 +65,10 @@ class DatabaseBioData(DatabaseConnect):
         pass
 
     def lihat_data_kandidat_baru(self):
+        self.tipe_kandidat = self.db.query_data_kandidat()[-1][1]
+
         self.lihat_data = self.db.query_data_kandidat_leftjoin(self.tipe_kandidat)[-1]
+        print ("hello")
 
         return self.lihat_data
 
@@ -87,10 +90,29 @@ class DataBaseInput(DatabaseConnect):
 
         return True
 
+class DataKonversiGE(DataBaseInput):
+    
+    def __init__(self,parent):
+        super().__init__(parent)
+        print (self.nama_file)
+        self.db = KonversiGE(self.nama_file)
+
+    
+    def konversi_ge(self,values):
+        self.values = values
+        print (self.values)
+        self.nilai_ge = self.db.query_konversi(self.values)
+
+        return self.nilai_ge
+
+
+
+
+
 
 if __name__ == "__main__":
-    # print (pathlib.Path.cwd())
-    from models.query import SqliteDB
+    print (pathlib.Path.cwd())
+    
     nama_file ="ist"
     # print (nama_file)
     run = DatabaseControl(nama_file)
@@ -98,3 +120,5 @@ if __name__ == "__main__":
     data = [2,"Alif","2019/10/23","Laki-Laki","2002/12/04"]
     data2 = [2,3,4,6]
     run.insert_biodata(data,data2)
+
+

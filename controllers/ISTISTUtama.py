@@ -2,8 +2,8 @@
 
 from controllers.properties_ist import ISTInheritedProperties 
 from controllers.properties_tampilan import PropertiesTampilan, AddTextCtrlProperties
-
 # Implementing ISTUtama
+
 class ISTISTUtama( ISTInheritedProperties ):
 	def __init__( self, parent ,*args,**kwds):
 		super().__init__(parent,*args,**kwds)
@@ -18,23 +18,26 @@ class ISTISTUtama( ISTInheritedProperties ):
 		self.Maximize()
 		pass
 	
-	def m_button_lihat(self, event):
-		print ("click lihat")
-		
-		pass
+
 	
 	
-	def m_button_hapus_onclick( self, event ):
-		event.Skip()
+	# def m_button_hapus_onclick( self, event ):
+	# 	print ("hapus dari database")
+	# 	event.Skip()
 
-	def m_button_filter_onclick( self, event ):
-		event.Skip()
+	# def m_button_filter_onclick( self, event ):
+	# 	print ("you have click 'Filter'")
+	# 	self.openfilter = BukaFilter(self)
+	# 	self.openfilter.Show()
+	# 	event.Skip()
 
-	def m_button_lihat_dari_database_onclick( self, event ):
-		event.Skip()
+	# def m_button_lihat_dari_database_onclick( self, event ):
+	# 	print ("lihat dari database")
+	# 	event.Skip()
 
-	def m_button_reset_onclick( self, event ):
-		event.Skip()
+	# def m_button_reset_onclick( self, event ):
+	# 	print ("reset dari halaman terakhir")
+	# 	event.Skip()
 
 
 	

@@ -64,9 +64,11 @@ class GrafikHasil():
         self.sizer.Add(self.canvas, 0, wx.CENTER | wx.TOP | wx.GROW)
 
         self.parent.m_panel22.SetSizer(self.sizer)
-        self.parent.m_panel7.Layout()
+
         self.parent.m_panel22.Layout()
-        self.parent.Fit()
+
+        self.parent.m_panel7.Layout()
+        # self.Fit()
 
         # self.parent.m_panel18.Layout()
         # self.SetSizer(self.sizer)
@@ -81,7 +83,7 @@ class GrafikHasil():
         self.rects = self.axes.barh(y,x,color='green')
         self.axes.set_xlim(left=50,right=150)
         self.axes.set_yticks(self.y)
-        self.axes.set_title("Aspek")
+        self.axes.set_title("PROFIL KEUNGGULAN")
         self.autolabel()
 
 

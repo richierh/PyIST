@@ -8,6 +8,7 @@ Created on May 4, 2019
 import sys
 import pathlib
 import sqlite3
+import os
 
 
 class SqliteDB(object):
@@ -16,9 +17,9 @@ class SqliteDB(object):
     def __init__(self,nama_file):
         self.nama_file = nama_file
         self.current_path = pathlib.Path.cwd()/""
-        # self.path_db = pathlib.Path(self.current_path.parent/f"models/{self.nama_file}")
-        self.path_db = pathlib.Path(self.current_path/f"models/{self.nama_file}")
-        # print (self.path_db)
+        self.path_db = pathlib.Path(self.current_path.parent/f"models/{self.nama_file}")
+        # self.path_db = pathlib.Path(self.current_path/f"models/{self.nama_file}")
+        print (self.path_db)
         pass
     
     def __repr__(self):
@@ -204,7 +205,9 @@ INSERT INTO data_kandidat (
 
         return self.results
 
-    def query_data_kandidat_leftjoin(self,tipe_kandidat):
+    def query_data_kandidat_leftjoin(self,tipe_kandidat,filter="None"):
+        self.filter = filter
+        print (self.filter)
         self.conn = self.connect_db()
         self.tipe_kandidat = tipe_kandidat
 
@@ -229,6 +232,30 @@ INSERT INTO data_kandidat (
         self.close_db()
 
         return self.results
+
+class KonversiGE(SqliteDB):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        pass
+
+    def query_konversi(self,values):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+        self.sql_cmd = """
+        SELECT idge, no, nilai, konversi_ge 
+        FROM konversi_nilai_ge
+        WHERE nilai=?
+        """
+        self.cursorexe.execute(self.sql_cmd,[self.values,])
+        getdatas = self.cursorexe.fetchone()
+        # for data in getdatas:
+        #     # print (data)
+        #     pass
+        self.close_db()
+        print (getdatas)
+        return getdatas
 
 class TabelJawaban(SqliteDB):
 
@@ -440,7 +467,6 @@ def query_data_jawaban(values):
     conne.close
     return datas    
     
-
 
 def query_tabel_data_peserta(value):
     conne = connect_db()

@@ -7,8 +7,30 @@ import wx
 from controllers.halaman_event import HalamanEventControl
 from views.menubar_tentang import TentangAplikasiInherited
 import pathlib
+from views.buka_filter_db import FrameFilterDatabase
+
 # Ini adalah class untuk mengatur control input
 # Semua Control text di atur disini
+
+class BukaFilter(FrameFilterDatabase):
+	"this is class inherited from buka_filter_db.py"
+
+	def __init__(self,parent):
+		super().__init__(parent)
+	
+	def m_buttonFilterBatalOnButtonClick(self,event):
+		print ("klik batal")
+		self.Close()
+	
+	def m_buttonKlikFilterNoTesOnButtonClick(self,event):
+		print ("click by no test")
+	
+	def m_buttonKlikFilterOrangOnButtonClick(self,event):
+		print("click by person name")
+
+	def m_buttonKlikFilterTanggalOnButtonClick(self,event):
+		print ("click by tanggal")
+
 
 
 class MenuBarInherited(HalamanEventControl):
@@ -25,7 +47,6 @@ class MenuBarInherited(HalamanEventControl):
         self.TentangAplikasi = TentangAplikasiInherited(self)
         self.TentangAplikasi.Show()
         event.Skip()
-
 
 class PropertiesInput(MenuBarInherited):
 
@@ -64,7 +85,7 @@ class PropertiesInput(MenuBarInherited):
             self.m_datePicker_tanggal_tes2.GetValue().Format("%d/%m/%Y"),
             self.m_textCtrl_nama2.GetValue(),
             self.m_choice_jenis_kelamin2.GetString(self.m_choice_jenis_kelamin2.GetSelection()),
-            self.m_datePicker_tanggal_lahir2.GetValue().Format("%d/%m/Y%"),
+            self.m_datePicker_tanggal_lahir2.GetValue().Format("%d/%m/%Y"),
             self.m_choice_pendidikan_terakhir2.GetString(self.m_choice_pendidikan_terakhir2.GetSelection()),
             self.m_textCtrl_jurusan_pendidikan2.GetValue(),
             self.m_textCtrl_kota2.GetValue(),
@@ -372,6 +393,7 @@ class ISTInheritedProperties(PropertiesInput):
 
     def biodata(self):
         # Ini adalah object untuk tarik data
+        print ("lewat sini tak")
         return self.m_textCtrl_nama,self.m_textCtrlNomor,\
             self.m_textCtrlUsia,self.m_textCtrlKelas,\
             self.m_textCtrlAsalSekolah
@@ -432,21 +454,40 @@ class ISTInheritedProperties(PropertiesInput):
     def m_button6OnButtonClick( self, event ):
         event.Skip()
 
-    def m_button_lihat( self, event ):
-        event.Skip()
 
     def m_button_hapus_onclick( self, event ):
+        print ("hapus data")
         event.Skip()
 
     def m_button_filter_onclick( self, event ):
+        print ("you have click 'Filter'")
+        self.openfilter = BukaFilter(self)
+        self.openfilter.Show()
         event.Skip()
 
     def m_button_lihat_dari_database_onclick( self, event ):
-        event.Skip()
+        print ("lihat dari database")
+        from controllers.database_control import DatabaseBioData
+
+        self.run = DatabaseBioData(self.connect_db)
+        print (self.run.lihat_data_kandidat_baru())
+
 
     def m_button_reset_onclick( self, event ):
+        print ("bersihkan data")
         event.Skip()
 
+    def m_button_save_as_pdfOnButtonClick(self,event):
+        print("save to pdf file")
+
+    def m_button_print_pdfOnButtonClick(self,event):
+        print("print pdf file")
+    
+    def m_button_simpanOnButtonClick(self,event):
+        print ("simpan pdf file")
+
+    def m_button_reset_1OnButtonClick(self,event):
+        print ("reset halaman 4 ")
 
 
 if __name__ == '__main__':

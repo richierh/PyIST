@@ -1,16 +1,18 @@
 #! usr/bin/env python
 
-
+import pathlib
+import os
 import wx
+import wx.dataview
+
 from views.istcore import ISTUtama
 from models.query import SqliteDB
 from pathlib import Path
-import wx.dataview
 from views.dataview import PanggilDataView,PanggilGrid
 from controllers.ist_calculation import KalkulasiNilai
 from views.grafik_ist import GrafikLayout,GrafikHasil
 from controllers.biodata import Biodata
-
+from controllers.database_control import DataKonversiGE,DatabaseConnect
 
 
 '''
@@ -29,7 +31,7 @@ class DataView(ISTUtama):
         # bsizerdataview = wx.BoxSizer(wx.VERTICAL)
         self.m_panel3.Layout()
         self.m_panel_input.Layout()
-
+        
         # self.m_dataViewListCtrl1 = wx.dataview.DataViewListCtrl( self.m_panel_input, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
         # self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
         # self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
@@ -44,7 +46,6 @@ class DataView(ISTUtama):
 
         pass
 
-
 class CekDB(DataView):
 
 
@@ -53,8 +54,8 @@ class CekDB(DataView):
 
         self.nama_file = "ist"
         self.connect_db = SqliteDB("ist")
+        # print (self.connect_db.path_db)
         # print(self.connect_db.query_tabel_data_kelompok())
-
 
 class HalamanEventControl(CekDB):
     
@@ -129,13 +130,12 @@ class HalamanEventControl(CekDB):
             print ('hell0kl;k')
             # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
             self.grafik_hasil = GrafikHasil(self)
-            # self.grafik_hasil.draw()
+            self.grafik_hasil.draw()
             pass
 
         else :
             # self.m_button3.Enable()
             pass
-
 
     def m_selanjutnyaOnButtonClick(self,event):
         # print("klik Selanjutnya")
@@ -159,15 +159,28 @@ class HalamanEventControl(CekDB):
 
             # class untuk menghitung Nilai
 
-            KalkulasiNilai(self)
+            self.nilai = KalkulasiNilai(self)
+            ge = 20
+            self.databasekon = DatabaseConnect(self.nama_file)
+
+            # konversi nilai GE
+            self.con_datakonversi_ge = DataKonversiGE(self.databasekon)
+            self.nilai_ge = self.con_datakonversi_ge.konversi_ge(ge)
+            
+            
+  
+            print (self.nilai_ge[3])
 
             pass
 
         elif self.getSel == 4 :
             # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
+            global bsizer12
             self.properties_tamp.tabel_show()
             self.grafik_hasil = GrafikHasil(self)
             self.grafik_hasil.draw()
+            
+            self.m_dataViewListCtrl1.InsertItem(0,["df","dfs","sdf"])
             # self.m_staticText_berpikir.SetValue()
             pass
 

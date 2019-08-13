@@ -23,7 +23,8 @@ class KalkulasiNilai():
 
 
     def konversi_nilai_ge(self,values):
-
+        self.value = values
+        print (f"ini nilai GE {self.value}")
         pass
 
     

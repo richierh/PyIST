@@ -310,7 +310,48 @@ VALUES ((SELECT id_kand FROM data_kandidat ORDER BY id_kand DESC LIMIT 1),1,
         return True
 
         
+class TableDataKelompokUmur(SqliteDB):
 
+    def __init__(self,parent):
+        super().__init__(parent)
+        pass 
+    
+    def __repr__(self):
+
+
+        return True
+
+    def insert_jawaban(self,values):
+        self.conn = self.connect_db()
+
+        self.values=  values
+        self.sql_cmd =""" tes """
+
+        self.conn.execute(self.sql_cmd)#,[(self.values,)])
+        self.conn.commit()
+        self.close_db()
+        return True
+
+    def query_data(self, kelompok_umur = None):
+        self.kelompok_umur = kelompok_umur
+        # self.nilai = nilai_rw
+
+        self.kelompok_umur = 12
+
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+
+
+        self.sql_cmd = """ 
+        SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+        FROM TableDataKelompokUmur12;
+        """
+        self.cursorexe.execute(self.sql_cmd)#,[(self.values,)])
+        self.getdatas = self.cursorexe.fetchall()
+        
+        self.close_db()
+
+        return self.getdatas
 
 
 def insert_input_peserta(values):

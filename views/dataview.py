@@ -10,11 +10,72 @@
 import wx
 import wx.xrc
 import wx.dataview 
-
+from views.istcore import ISTUtama
 
 ###########################################################################
 ## Class MyFrame1
 ###########################################################################
+
+class Tes(ISTUtama):
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.tes = PanggilInputTotal(self)
+        self.tes2 = RWSWScore(self)
+
+class RWSWScore(ISTUtama):
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent =  parent   
+        self.parent.kelompok_usia
+        
+        self.parent.m_textCtrl_nilai_rw_se.SetValue(str(self.parent.input_peserta[0]))
+        self.parent.m_textCtrl_nilai_rw_wa.SetValue(str(self.parent.input_peserta[1]))
+        self.parent.m_textCtrl_nilai_rw_an.SetValue(str(self.parent.input_peserta[2]))
+        self.parent.m_textCtrl_nilai_rw_ge.SetValue(str(self.parent.input_peserta[3]))
+        self.parent.m_textCtrl_nilai_rw_me.SetValue(str(self.parent.input_peserta[4]))
+        self.parent.m_textCtrl_nilai_rw_ra.SetValue(str(self.parent.input_peserta[5]))
+        self.parent.m_textCtrl_nilai_rw_zr.SetValue(str(self.parent.input_peserta[6]))
+        self.parent.m_textCtrl_nilai_rw_fa.SetValue(str(self.parent.input_peserta[7]))
+        self.parent.m_textCtrl_nilai_rw_wu.SetValue(str(self.parent.input_peserta[8]))
+
+        self.parent.m_textCtrl_nilai_rw_jumlah.SetValue(str(sum(self.parent.input_peserta)))
+
+        self.parent.m_textCtrl_nilai_sw_se.SetValue("1")
+        self.parent.m_textCtrl_nilai_sw_wa.SetValue("2")
+        self.parent.m_textCtrl_nilai_sw_an.SetValue("3")
+        self.parent.m_textCtrl_nilai_sw_ge.SetValue("4")
+        self.parent.m_textCtrl_nilai_sw_me.SetValue("5")
+        self.parent.m_textCtrl_nilai_sw_ra.SetValue("6")
+        self.parent.m_textCtrl_nilai_sw_zr.SetValue("7")
+        self.parent.m_textCtrl_nilai_sw_fa.SetValue("8")
+        self.parent.m_textCtrl_nilai_sw_wu.SetValue("9")
+
+        self.parent.m_textCtrl_nilai_total_sw.SetValue("10")
+        self.parent.m_textCtrl_nilai_IQ.SetValue("11")
+
+        print ("tes")
+        
+
+class PanggilInputTotal(ISTUtama):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        
+
+    def getdata(self):
+        self.value = [self.parent.m_spinCtrl_se.GetValue(),
+        self.parent.m_spinCtrl_wa.GetValue(),
+        self.parent.m_spinCtrl_an.GetValue(),
+        self.parent.m_spinCtrl_ge.GetValue(),
+        self.parent.m_spinCtrl_ra.GetValue(),
+        self.parent.m_spinCtrl_zr.GetValue(),
+        self.parent.m_spinCtrl_fa.GetValue(),
+        self.parent.m_spinCtrl_wu.GetValue(),
+        self.parent.m_spinCtrl_me.GetValue()
+        ]
+        return self.value
+        
 class PanggilGrid():
 
 
@@ -91,8 +152,11 @@ class PanggilGrid():
             #         self.parent.m_grid2.SetReadOnly(i,l)
 
                 self.data.append(self.datapertama)
+                
         return self.data
-            
+
+
+        
 class PanggilDataView ():
 
     def __init__(self,parent):

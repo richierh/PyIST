@@ -31,17 +31,26 @@ class GrafikLayout():
         # self.SetSizer(self.sizer)
         # self.Fit()
 
-    def draw(self):
+    def draw(self,rw=None,sw=None):
+        self.rw = rw
+        self.sw = sw
         # print (t)
         x = ["SE","WA","AN","GE","RA","ZR","FA","WU","ME"]
         self.x = arange(len(x))
-        y = [1,5,7,5,2,6,8,2,1]
-        self.axes.plot(x,y)
+        
+        self.rw = [1,5,7,5,2,6,8,2,1]
+        self.axes.plot(x,self.rw)
         self.axes.set_xticks(self.x)
+        self.axes.set_ylim(bottom=0,top=20)
+        
         self.axes.set_title("Rw Score")
 
-        self.axes2.plot(x,y)
+        self.sw = [100,75,87,95,92,96,98,82,91]
+
+        self.axes2.plot(x,self.sw)
         self.axes2.set_xticks(self.x)
+        self.axes2.set_ylim(bottom=0,top=150)
+
         self.axes2.set_title("Sw Score")
 
 

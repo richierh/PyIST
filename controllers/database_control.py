@@ -5,7 +5,7 @@ import pathlib
 # chg_folder  = str(pathlib.Path(parent_folder))
 # sys.path.append(chg_folder)
 # # nama_file = str(pathlib.Path(chg_folder+"/models/ist"))
-from models.query import SqliteDB,TabelJawaban,KonversiGE
+from models.query import SqliteDB,TabelJawaban,KonversiGE,TableDataKelompokUmur
 
 class DatabaseConnect():
 
@@ -94,21 +94,29 @@ class DataKonversiGE(DataBaseInput):
     
     def __init__(self,parent):
         super().__init__(parent)
-        print (self.nama_file)
+        print (f"ini {self.nama_file}")
         self.db = KonversiGE(self.nama_file)
 
     
     def konversi_ge(self,values):
         self.values = values
-        print (self.values)
+        # print (f"ini nilai GE {self.values}")
         self.nilai_ge = self.db.query_konversi(self.values)
 
         return self.nilai_ge
 
+class TableDataKelompokUmurConnect(DataKonversiGE):
 
 
+    def __init__(self,parent):
+        super().__init__(parent)
+        print (f"ini nama {self.nama_file}")
+        self.db = TableDataKelompokUmur(self.nama_file)
 
-
+    def query_sw(self,kelompok_umur=None):
+        self.kelompok_umur = kelompok_umur
+        # self.nilai_sw = self.db.query_data(self.kelompok_umur)
+        # return self.nilai_sw
 
 if __name__ == "__main__":
     print (pathlib.Path.cwd())

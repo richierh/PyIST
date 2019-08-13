@@ -8,11 +8,11 @@ import wx.dataview
 from views.istcore import ISTUtama
 from models.query import SqliteDB
 from pathlib import Path
-from views.dataview import PanggilDataView,PanggilGrid
+from views.dataview import RWSWScore, PanggilDataView,PanggilGrid,PanggilInputTotal
 from controllers.ist_calculation import KalkulasiNilai
 from views.grafik_ist import GrafikLayout,GrafikHasil
 from controllers.biodata import Biodata
-from controllers.database_control import DataKonversiGE,DatabaseConnect
+from controllers.database_control import DataKonversiGE,DatabaseConnect,TableDataKelompokUmurConnect
 
 
 '''
@@ -28,6 +28,7 @@ class DataView(ISTUtama):
         super().__init__(parent)
         # self.panggildataview = PanggilDataView(self)
         self.panggilgrid = PanggilGrid(self)
+        self.panggil_nilai_total = PanggilInputTotal(self)
         # bsizerdataview = wx.BoxSizer(wx.VERTICAL)
         self.m_panel3.Layout()
         self.m_panel_input.Layout()
@@ -152,24 +153,43 @@ class HalamanEventControl(CekDB):
         elif self.getSel == 3 :
             'Proses hitung dimulai ketika halaman 3 , atau pada saat penyajian grafik'
             print("penyajian grafik proses hitung")
-            self.grafik = GrafikLayout(self)
-            self.grafik.draw()
 
-            self.panggilgrid.getdata()
+            if self.select_input == 1 :
+                self.input_peserta = self.panggilgrid.getdata()
+                self.ge = self.input_peserta[3][0]
+
+            elif self.select_input == 2 :
+                self.input_peserta = self.panggil_nilai_total.getdata()
+                self.ge = self.input_peserta[3]
+
+            else:
+                error_text == "select input tidak terdefinisikan"
+                return error_text
 
             # class untuk menghitung Nilai
-
             self.nilai = KalkulasiNilai(self)
-            ge = 20
             self.databasekon = DatabaseConnect(self.nama_file)
 
             # konversi nilai GE
             self.con_datakonversi_ge = DataKonversiGE(self.databasekon)
-            self.nilai_ge = self.con_datakonversi_ge.konversi_ge(ge)
-            
-            
-  
-            print (self.nilai_ge[3])
+            self.nilai_ge = self.con_datakonversi_ge.konversi_ge(self.ge)
+            self.nilai_ge = self.nilai_ge[3]
+            print (f"ini nilai {self.nilai_ge}")
+            self.kelompok_usia = self.m_spinCtrl_usia.GetValue()
+
+
+            self.hasil_sw = TableDataKelompokUmurConnect(self.databasekon)
+            self.hasil_sw.query_sw()
+
+
+
+            self.grafik = GrafikLayout(self)
+            self.grafik.draw()
+
+            # print (self.nilai_ge[3])
+
+
+            self.hasil_hal3 = RWSWScore(self)
 
             pass
 
@@ -184,8 +204,14 @@ class HalamanEventControl(CekDB):
             # self.m_staticText_berpikir.SetValue()
             pass
 
+        elif self.getSel == 5 :
+            
+            
+            pass
+
         else :
             # self.m_button3.Enable()
+            print ("masuk halaman 5")
             pass
 
     def m_input_manualOnButtonClick(self,event):

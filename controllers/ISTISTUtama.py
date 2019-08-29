@@ -158,11 +158,6 @@ class ISTISTUtama( ISTInheritedProperties ):
 		
 		pass
 
-
-
-
-	
-
 	
 	def m_textCtrl_namaOnLeftUp(self,event):
 

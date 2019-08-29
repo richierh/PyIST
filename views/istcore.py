@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Aug  4 2019)
+## Python code generated with wxFormBuilder (version Aug 22 2019)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
@@ -2031,6 +2031,7 @@ class ISTUtama ( wx.Frame ):
 
 		self.m_panel_input_total = wx.Panel( self.m_panel3, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		self.m_panel_input_total.SetFont( wx.Font( 18, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
+		self.m_panel_input_total.Hide()
 
 		bSizer11 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2136,8 +2137,6 @@ class ISTUtama ( wx.Frame ):
 		bSizer21.Add( self.m_panel_input_total, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		self.m_panel_input = wx.Panel( self.m_panel3, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		self.m_panel_input.Hide()
-
 		bSizer23 = wx.BoxSizer( wx.VERTICAL )
 
 		fgSizer23 = wx.FlexGridSizer( 0, 2, 0, 0 )
@@ -2146,7 +2145,7 @@ class ISTUtama ( wx.Frame ):
 
 		bSizer28 = wx.BoxSizer( wx.VERTICAL )
 
-		self.m_button14 = wx.Button( self.m_panel_input, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button14 = wx.Button( self.m_panel_input, wx.ID_ANY, u"Cek Validitas Input", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer28.Add( self.m_button14, 1, wx.EXPAND|wx.ALIGN_CENTER_HORIZONTAL|wx.TOP|wx.BOTTOM|wx.RIGHT, 5 )
 
 
@@ -2210,6 +2209,29 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel3.Layout()
 		bSizer21.Fit( self.m_panel3 )
 		self.m_simplebook1.AddPage( self.m_panel3, u"a page", False )
+		self.m_panel221 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer321 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer321.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.m_button = wx.Button( self.m_panel221, wx.ID_ANY, u"Norma Usia", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer321.Add( self.m_button, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+		self.m_button20 = wx.Button( self.m_panel221, wx.ID_ANY, u"Norma Pekerjaan", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer321.Add( self.m_button20, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+		self.m_button21 = wx.Button( self.m_panel221, wx.ID_ANY, u"Norma Sendiri", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer321.Add( self.m_button21, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+		bSizer321.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		self.m_panel221.SetSizer( bSizer321 )
+		self.m_panel221.Layout()
+		bSizer321.Fit( self.m_panel221 )
+		self.m_simplebook1.AddPage( self.m_panel221, u"a page", False )
 		self.m_panel6 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer9 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2263,10 +2285,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText206, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_se = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_se = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_se, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_se = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_se = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_se, 0, wx.ALL, 5 )
 
 		self.m_staticText207 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"WA", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2274,10 +2296,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText207, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_wa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_wa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_wa, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_wa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_wa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_wa, 0, wx.ALL, 5 )
 
 		self.m_staticText208 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"AN", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2471,9 +2493,9 @@ class ISTUtama ( wx.Frame ):
 		bSizer14.Add( fgSizer231, 0, wx.EXPAND, 5 )
 
 		self.m_dataViewListCtrl1 = wx.dataview.DataViewListCtrl( self.m_panel9, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Bidang Keilmuan", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Fakultas", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn3 = self.m_dataViewListCtrl1.AppendTextColumn( u"Jurusan", wx.dataview.DATAVIEW_CELL_INERT, 300, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Bidang Keilmuan", wx.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Fakultas", wx.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn3 = self.m_dataViewListCtrl1.AppendTextColumn( u"Jurusan", wx.DATAVIEW_CELL_INERT, 300, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
 		bSizer14.Add( self.m_dataViewListCtrl1, 1, wx.ALL|wx.EXPAND, 5 )
 
 
@@ -2517,10 +2539,10 @@ class ISTUtama ( wx.Frame ):
 		bSizer16.Add( self.custom_ultimateList , 1, wx.ALL|wx.EXPAND, 5 )
 
 		self.m_dataViewListCtrl2 = wx.dataview.DataViewListCtrl( self.m_panel10, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_dataViewListColumn4 = self.m_dataViewListCtrl2.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn5 = self.m_dataViewListCtrl2.AppendTextColumn( u"No Tes", wx.dataview.DATAVIEW_CELL_INERT, 150, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn6 = self.m_dataViewListCtrl2.AppendTextColumn( u"Nama Kandidat", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn7 = self.m_dataViewListCtrl2.AppendTextColumn( u"Tanggal Lahir", wx.dataview.DATAVIEW_CELL_INERT, 200, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn4 = self.m_dataViewListCtrl2.AppendTextColumn( u"No", wx.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn5 = self.m_dataViewListCtrl2.AppendTextColumn( u"No Tes", wx.DATAVIEW_CELL_INERT, 150, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn6 = self.m_dataViewListCtrl2.AppendTextColumn( u"Nama Kandidat", wx.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn7 = self.m_dataViewListCtrl2.AppendTextColumn( u"Tanggal Lahir", wx.DATAVIEW_CELL_INERT, 200, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
 		bSizer16.Add( self.m_dataViewListCtrl2, 1, wx.ALL|wx.EXPAND, 5 )
 
 
@@ -2595,7 +2617,10 @@ class ISTUtama ( wx.Frame ):
 		self.m_textCtrl76.Bind( wx.EVT_TEXT, self.m_textCtrl76OnText )
 		self.m_textCtrl486.Bind( wx.EVT_TEXT, self.m_textCtrl486OnText )
 		self.m_button6.Bind( wx.EVT_BUTTON, self.m_button6OnButtonClick )
-		self.m_button14.Bind( wx.EVT_BUTTON, self.m_button14OnButtonClick )
+		self.m_button14.Bind( wx.EVT_BUTTON, self.m_button_cek_validitas_input )
+		self.m_button.Bind( wx.EVT_BUTTON, self.m_button_norma_usia )
+		self.m_button20.Bind( wx.EVT_BUTTON, self.m_button20_norma_pekerjaan )
+		self.m_button21.Bind( wx.EVT_BUTTON, self.m_button21_norma_sendiri )
 		self.m_button_rincian_biodata.Bind( wx.EVT_BUTTON, self.m_button_rincian_biodata_on_buttonclick )
 		self.m_button_save_as_pdf.Bind( wx.EVT_BUTTON, self.m_button_save_as_pdfOnButtonClick )
 		self.m_button_print_pdf.Bind( wx.EVT_BUTTON, self.m_button_print_pdfOnButtonClick )
@@ -2679,7 +2704,16 @@ class ISTUtama ( wx.Frame ):
 	def m_button6OnButtonClick( self, event ):
 		event.Skip()
 
-	def m_button14OnButtonClick( self, event ):
+	def m_button_cek_validitas_input( self, event ):
+		event.Skip()
+
+	def m_button_norma_usia( self, event ):
+		event.Skip()
+
+	def m_button20_norma_pekerjaan( self, event ):
+		event.Skip()
+
+	def m_button21_norma_sendiri( self, event ):
 		event.Skip()
 
 	def m_button_rincian_biodata_on_buttonclick( self, event ):

@@ -254,6 +254,13 @@ class KonversiGE(SqliteDB):
         #     # print (data)
         #     pass
         self.close_db()
+        if self.values>=32:
+            getdatas = [33,33,33,20]
+
+        elif self.values==None :
+            getdatas = [33,33,33,0]
+
+
         print (getdatas)
         return getdatas
 
@@ -307,13 +314,27 @@ VALUES ((SELECT id_kand FROM data_kandidat ORDER BY id_kand DESC LIMIT 1),1,
         self.conn.execute(self.sql_cmd)#,[(self.values,)])
         self.conn.commit()
         self.close_db()
-        return True
 
+
+
+    def query_kunci_jawaban(self):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT "Id Kunci Jawaban", No, SE, WA, AN, GE, RA, ZR, FA, WU, ME 
+        FROM "Kunci Jawaban";
+        """
+        self.cursorexe.execute(self.sql_cmd)#,[(self.values,)])
+        self.getdatas = self.cursorexe.fetchall()
+        self.close_db()
+        return self.getdatas
+         
         
 class TableDataKelompokUmur(SqliteDB):
 
-    def __init__(self,parent):
+    def __init__(self,parent=None):
         super().__init__(parent)
+        self.parent = parent
         pass 
     
     def __repr__(self):
@@ -332,26 +353,171 @@ class TableDataKelompokUmur(SqliteDB):
         self.close_db()
         return True
 
-    def query_data(self, kelompok_umur = None):
+    def query_data(self, kelompok_umur = None,parent = None):
         self.kelompok_umur = kelompok_umur
         # self.nilai = nilai_rw
-
-        self.kelompok_umur = 12
+        self.parent = parent
+        self.parent.tipe_biodata
+    
 
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
 
+        if  self.parent.tipe_biodata == 1 :
 
-        self.sql_cmd = """ 
-        SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
-        FROM TableDataKelompokUmur12;
-        """
+            if self.kelompok_umur == 12 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur12;
+                """
+
+            elif self.kelompok_umur == 13 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur13;
+                """
+
+            elif self.kelompok_umur == 14 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur14;
+                """
+
+            elif self.kelompok_umur == 15 :
+
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur15;
+                """
+
+            elif self.kelompok_umur == 16 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur16;
+                """        
+
+            elif self.kelompok_umur == 17 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur17;
+                """        
+
+            elif self.kelompok_umur == 18 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur18;
+                """   
+
+            elif self.kelompok_umur == 19 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur19;
+                """    
+
+        elif self.parent.tipe_biodata == 2 :
+                self.sql_cmd = """ 
+                SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
+                FROM TableDataKelompokUmur19;
+                """    
+
+        else :
+            pass
+
         self.cursorexe.execute(self.sql_cmd)#,[(self.values,)])
         self.getdatas = self.cursorexe.fetchall()
         
         self.close_db()
 
         return self.getdatas
+
+
+    def query_geasamt(self,nilai_total_rw=None):
+        self.nilai_total_rw = nilai_total_rw
+        # self.nilai = nilai_rw
+        print (f"ini ada {self.nilai_total_rw}")
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """SELECT Range,
+       Gesamt12,
+       Gesamt13,
+       Gesamt14,
+       Gesamt15,
+       Gesamt16,
+       Gesamt17,
+       Gesamt18,
+       Gesamt19
+  FROM TabelDataGesamt
+  WHERE Range=?;
+        """
+
+        self.cursorexe.execute(self.sql_cmd,(self.nilai_total_rw,))
+        self.getdatas = self.cursorexe.fetchall()
+        
+        self.close_db()
+
+        return self.getdatas
+
+
+    def query_iq(self,nilai_geasamt=None):
+        self.nilai_geasamt = nilai_geasamt
+        # self.nilai = nilai_rw
+        print (f"ini ada {self.nilai_geasamt}")
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """SELECT SW,
+       IQ
+  FROM [Nilai IQ]
+  WHERE SW=?;
+        """
+
+        self.cursorexe.execute(self.sql_cmd,(self.nilai_geasamt,))
+        self.getdatas = self.cursorexe.fetchall()
+        
+        self.close_db()
+
+        return self.getdatas
+
+class BidangKeilmuan(SqliteDB):
+
+
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+        pass
+    
+    def __repr__(self):
+        return True
+
+    
+    def query_keilmuan(self,nilai_id):
+        self.id = nilai_id
+        # self.nilai = nilai_rw
+        print (f"ini ada {self.id}")
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """SELECT 
+       fakultas.id,
+       bidang_keilmuan.bidang_keilmuan,
+       id_fak,
+       fakultas.fakultas,
+       id_jur,
+       jurusan
+  FROM jurusan
+  LEFT JOIN fakultas
+  ON jurusan.id_fak = fakultas.id_fak 
+  LEFT JOIN bidang_keilmuan
+  ON bidang_keilmuan.id=fakultas.id
+  WHERE jurusan.id_fak=?
+;
+        """
+
+        self.cursorexe.execute(self.sql_cmd,(self.nilai_total_rw,))
+        self.getdatas = self.cursorexe.fetchall()
+        
+        self.close_db()
+
+        return self.getdatas
+
 
 
 def insert_input_peserta(values):

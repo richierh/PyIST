@@ -26,49 +26,50 @@ class PropertiesTampilan():
 
     def tabel_show(self):
         
-        self.index = 0
-        self.listheaderlistCtrl1 = [
-            ["No","50",wx.LIST_FORMAT_CENTER],
-            ["Aspek Analisa Skor ist","200",wx.LIST_FORMAT_LEFT],
-            ["Kelemahan","100",wx.LIST_FORMAT_LEFT],
-            ["Keunggulan","100",wx.LIST_FORMAT_LEFT]
-            ]
+#         self.index = 0
+#         self.listheaderlistCtrl1 = [
+#             ["No","50",wx.LIST_FORMAT_CENTER],
+#             ["Aspek Analisa Skor ist","200",wx.LIST_FORMAT_LEFT],
+#             ["Kelemahan","100",wx.LIST_FORMAT_LEFT],
+#             ["Keunggulan","100",wx.LIST_FORMAT_LEFT]
+#             ]
       
-        self.data = [
-            [8,"Kemampuan berbahasa"],
-            [7,"Pengembalian keputusan"],
-            [6,"Daya analisis"],
-            [5,"Judgement"],
-            [4,"Ketelitian"],
-            [3,"Kreatifitas"],
-            [2,"Daya ingat dan konsentrasi"],
-            [1,"Kemampuan berhitung"],
-            ]
-#         print (self.listheaderlistCtrl1[self.index][0])
-        for listheader in self.listheaderlistCtrl1 :
-            print (listheader[0])
-            self.parent.m_listCtrl1.InsertColumn(self.index,listheader[0],format = listheader[2],width = int(listheader[1]))
-            self.index+=1
+#         self.data = [
+#             [8,"Kemampuan berbahasa"],
+#             [7,"Pengembalian keputusan"],
+#             [6,"Daya analisis"],
+#             [5,"Judgement"],
+#             [4,"Ketelitian"],
+#             [3,"Kreatifitas"],
+#             [2,"Daya ingat dan konsentrasi"],
+#             [1,"Kemampuan berhitung"],
+#             ]
+# #         print (self.listheaderlistCtrl1[self.index][0])
+#         for listheader in self.listheaderlistCtrl1 :
+#             print (listheader[0])
+#             self.parent.m_listCtrl1.InsertColumn(self.index,listheader[0],format = listheader[2],width = int(listheader[1]))
+#             self.index+=1
         
-        for i in self.data :
-            print (i)
-            index = self.parent.m_listCtrl1.InsertItem(0, str(i[0])) 
-            self.parent.m_listCtrl1.SetItem(index, 1, str(i[1])) 
-#             self.parent.m_listCtrl1.SetStringItem(index, 2, i[1]) 
+#         for i in self.data :
+#             print (i)
+#             index = self.parent.m_listCtrl1.InsertItem(0, str(i[0])) 
+#             self.parent.m_listCtrl1.SetItem(index, 1, str(i[1])) 
+# #             self.parent.m_listCtrl1.SetStringItem(index, 2, i[1]) 
  
  
       
-        self.listheaderlistCtrl2 = [
-            ["Flexibilitas Berpikir",300,wx.LIST_FORMAT_CENTER],
-            ["Kemantapan Berpikir",300,wx.LIST_FORMAT_CENTER],
-            ]
+#         self.listheaderlistCtrl2 = [
+#             ["Flexibilitas Berpikir",300,wx.LIST_FORMAT_CENTER],
+#             ["Kemantapan Berpikir",300,wx.LIST_FORMAT_CENTER],
+#             ]
          
-        self.index2 = 0
+#         self.index2 = 0
         
-        for listheader in self.listheaderlistCtrl2 :
-            print (listheader[0])
-            self.parent.m_listCtrl2.InsertColumn(self.index2,listheader[0],format = listheader[2],width = int(listheader[1]))
-            self.index2+=1
+#         for listheader in self.listheaderlistCtrl2 :
+#             print (listheader[0])
+#             self.parent.m_listCtrl2.InsertColumn(self.index2,listheader[0],format = listheader[2],width = int(listheader[1]))
+#             self.index2+=1
+        pass
     
 
 class AddTextCtrlProperties():

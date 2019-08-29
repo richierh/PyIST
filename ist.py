@@ -1,4 +1,4 @@
-#!usr/bin/env python
+#!/home/cireng/miniconda3/envs/wxpython/bin/python
 
 '''
 
@@ -44,7 +44,7 @@ def openWindows():
     return None
 
 def close():
-    from coreapps.views.authenticationFrameWarningKey import authenticationFrameWarningKey
+    from views.authenticationFrameWarningKey import authenticationFrameWarningKey
     
     start = authenticationFrameWarningKey(None)
     start.Show()
@@ -52,7 +52,7 @@ def close():
 
 if platform.system() == "Windows":
 #     print (platform.system())
-    my_file = Path("C:\\ProgramData\\3351.txt")
+    my_file = Path("C:\\ProgramData\\4251.txt")
 #     print (my_file)
     if my_file.is_file():
         # print ("file ada")
@@ -70,7 +70,7 @@ if platform.system() == "Windows":
 
 elif platform.system() == "Linux" :
     print (platform.system())
-    my_file = Path.home() / ".3351"
+    my_file = Path.home() / ".4251"
     print (my_file)
     # print (my_file)
     if my_file.is_file():

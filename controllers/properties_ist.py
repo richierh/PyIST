@@ -6,8 +6,6 @@ Created on Feb 15, 2019
 import wx
 import pathlib
 from shutil import copyfile
-
-
 from controllers.halaman_event import HalamanEventControl
 from views.menubar_tentang import TentangAplikasiInherited
 from views.buka_filter_db import FrameFilterDatabase
@@ -15,9 +13,10 @@ from views.dialog_save import DialogSavePDF
 from controllers.database_control import DatabaseBioData
 
 
-
 # Ini adalah class untuk mengatur control input
 # Semua Control text di atur disini
+
+
 
 class BukaFilter(FrameFilterDatabase):
     "this is class inherited from buka_filter_db.py"
@@ -135,6 +134,13 @@ class BukaDialogSimpanPDF(DialogSavePDF):
         print ("close")
         self.Close()
         event.Skip()
+    
+    def m_button_cek_validitas_input( self, event ):
+        print("cek validitas")
+        print (self.panggilgrid.getdata())
+
+        event.Skip()
+
 
 
 class ISTInheritedProperties(PropertiesInput):
@@ -511,17 +517,14 @@ class ISTInheritedProperties(PropertiesInput):
 
     def m_button_save_as_pdfOnButtonClick(self,event):
         print("save to pdf file")
+        self.a = BukaDialogSimpanPDF(self)
+        self.a.Show()
 
     def m_button_print_pdfOnButtonClick(self,event):
         print("print pdf file")
     
     def m_button_simpanOnButtonClick(self,event):
-        print ("simpan pdf file")
-        self.a = BukaDialogSimpanPDF(self)
-        self.a.Show()
-
-
-
+        print ("simpan hasil")
 
 
     def m_button_reset_1OnButtonClick(self,event):

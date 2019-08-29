@@ -11,8 +11,7 @@ class KalkulasiNilai():
         self.getdata_hasil_input = self.parent.panggilgrid.getdata()
         self.getdata_biodata = self.parent.get_biodata()
         self.select_input = self.parent.select_input
-        
-
+    
         pass
 
     def method_hitung(self):

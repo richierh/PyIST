@@ -28,6 +28,14 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "Python: SDS File",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/cireng/Projects/PySDS/run.py",
+            "console": "integratedTerminal"
+        },
+
+        {
             "name": "Python: Current File (Integrated Terminal)",
             "type": "python",
             "request": "launch",

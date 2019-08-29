@@ -24,28 +24,35 @@ class GrafikLayout():
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.sizer.Add(self.canvas, 3, wx.LEFT | wx.TOP | wx.GROW)
 
-
         self.parent.m_panel61.SetSizer(self.sizer)
         self.parent.m_panel61.Layout()
         self.parent.m_panel18.Layout()
         # self.SetSizer(self.sizer)
         # self.Fit()
 
-    def draw(self,rw=None,sw=None):
-        self.rw = rw
-        self.sw = sw
+    def draw(self,nilai_rw_sw,rw=None,sw=None):
+        self.rw_sw = nilai_rw_sw
+        self.rw = []
+        self.sw = []
+        print (self.rw_sw)
+        for data in self.rw_sw:
+            self.rw.append(data[0])
+            self.sw.append(data[1])
+
+        # self.rw = rw
+        # self.sw = sw
         # print (t)
         x = ["SE","WA","AN","GE","RA","ZR","FA","WU","ME"]
         self.x = arange(len(x))
         
-        self.rw = [1,5,7,5,2,6,8,2,1]
+        # self.rw = [1,5,7,5,2,6,8,2,1]
         self.axes.plot(x,self.rw)
         self.axes.set_xticks(self.x)
         self.axes.set_ylim(bottom=0,top=20)
         
         self.axes.set_title("Rw Score")
 
-        self.sw = [100,75,87,95,92,96,98,82,91]
+        # self.sw = [100,75,87,95,92,96,98,82,91]
 
         self.axes2.plot(x,self.sw)
         self.axes2.set_xticks(self.x)
@@ -65,7 +72,6 @@ class GrafikHasil():
 
         self.axes = self.figure.add_subplot(111)
 
-
         self.canvas = FigureCanvas(self.parent.m_panel22, -1, self.figure)
         # self.canvas = FigureCanvas(self, -1, self.figure)
 
@@ -83,13 +89,15 @@ class GrafikHasil():
         # self.SetSizer(self.sizer)
         # self.Fit()
 
-    def draw(self):
+    def draw(self,nilai_grafik = None):
+        self.grafik = nilai_grafik
         # print (t)
         y = ["Kemampuan\nberhitung","Daya ingat\ndan konsentrasi","Kreatifitas",
             "Ketelitian","Judgement", "Daya\nanalisis", "Pengembalian\nkeputusan"]
         self.y = arange(len(y))
         x = [130,136,79,125,128,146,128]
         self.rects = self.axes.barh(y,x,color='green')
+        # self.axes.invert_yaxis()
         self.axes.set_xlim(left=50,right=150)
         self.axes.set_yticks(self.y)
         self.axes.set_title("PROFIL KEUNGGULAN")

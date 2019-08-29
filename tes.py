@@ -15,7 +15,7 @@ data2 = ["22343","S1","PSIKOLOGI","BANDUNG","PT JARINGAN INTERNASIONAL","SENIOR 
                                     # prestasi_non_akademik,
                                     # ekskul_yang_diikuti
 data3 = ["SMA NUSANTARA","IPA","INSTITUT ANTAH BERANTAH","TEKNIK SIPIL","JAMBI","MEMASAK",\
-        "JUARA MAIN KELERENG","JUARA BALAP KARUNG","TAE KWON DO"]
+        "JUARA MAIN KELERENG","JUARA BALAP KARUNG","TAE KWON DO","12"]
 tabel = DatabaseBioData(tes)
 tabel.insert_biodata(data,data2,data3)
 # print (tabel.lihat_data_kandidat_baru())

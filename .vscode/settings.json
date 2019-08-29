@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/cireng/miniconda3/envs/wxpython/bin/python",
+    "python.pythonPath": "/home/cireng/.pyenv/shims/python",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": false,
     "python.linting.enabled": true,

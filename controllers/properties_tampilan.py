@@ -15,6 +15,12 @@ class PropertiesTampilan():
         # print ("properties diaktifkan")
         pass
     
+    
+    def tabel_show(self):
+        self.parent.m_dataViewListColumn12 = self.parent.m_dataViewListCtrl9.AppendTextColumn( u"CAS", wx.DATAVIEW_CELL_INERT, 75, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+
+        pass
+
 
     def logo_show(self):
         self.pathpict = pathlib.Path.cwd()/"resources/images/binadata.png"

@@ -9,7 +9,6 @@ from models.query import SqliteDB,TabelJawaban,KonversiGE,TableDataKelompokUmur
 from numpy import arange, sin, pi
 
 
-
 class DatabaseConnect():
 
     def __init__(self,nama_file):
@@ -26,7 +25,6 @@ class DatabaseConnect():
     def __repr__(self):
         return self.nama_file
 
-    
 
 class DatabaseBioData(DatabaseConnect):
 
@@ -61,8 +59,7 @@ class DatabaseBioData(DatabaseConnect):
             self.data3.insert(0,self.get_last_id)
             # id_kand,asal_sekolah,jurusan,asal_universitas,jurusan,kota,hoby,prestasi_akademik,prestasi_non_akademik,
             # ekskul yang pernah diikuti
-            self.db.insert_database_kandidat_tambahan2(self.data3)
-            
+            self.db.insert_database_kandidat_tambahan2(self.data3)     
         pass
 
     def lihat_data_kandidat_baru(self):

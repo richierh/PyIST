@@ -126,6 +126,8 @@ class ISTUtama ( wx.Frame ):
 		m_radioBox_biodataChoices = [ u"Pendidikan", u"Pekerjaan" ]
 		self.m_radioBox_biodata = wx.RadioBox( self.m_panel15, wx.ID_ANY, u"Biodata ", wx.DefaultPosition, wx.DefaultSize, m_radioBox_biodataChoices, 2, wx.RA_SPECIFY_COLS )
 		self.m_radioBox_biodata.SetSelection( 0 )
+		self.m_radioBox_biodata.Hide()
+
 		bSizer5.Add( self.m_radioBox_biodata, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		bSizer19 = wx.BoxSizer( wx.HORIZONTAL )
@@ -294,7 +296,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel16.SetSizer( bSizer25 )
 		self.m_panel16.Layout()
 		bSizer25.Fit( self.m_panel16 )
-		bSizer27.Add( self.m_panel16, 1, wx.EXPAND |wx.ALL, 5 )
+		bSizer27.Add( self.m_panel16, 4, wx.EXPAND|wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		self.m_panel17 = wx.Panel( self.m_panel15, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		self.m_panel17.Hide()
@@ -413,19 +415,19 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel17.SetSizer( bSizer26 )
 		self.m_panel17.Layout()
 		bSizer26.Fit( self.m_panel17 )
-		bSizer27.Add( self.m_panel17, 1, wx.EXPAND|wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		bSizer27.Add( self.m_panel17, 4, wx.EXPAND|wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 
 		bSizer19.Add( bSizer27, 5, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
 
 
-		bSizer19.Add( ( 25, 0), 0, wx.ALIGN_CENTER_VERTICAL, 5 )
+		bSizer19.Add( ( 0, 0), 0, wx.ALIGN_CENTER_VERTICAL, 5 )
 
 		self.m_logo_binakarir = wx.StaticBitmap( self.m_panel15, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer19.Add( self.m_logo_binakarir, 5, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		bSizer19.Add( self.m_logo_binakarir, 3, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
-		bSizer19.Add( ( 0, 0), 1, 0, 5 )
+		bSizer19.Add( ( 0, 0), 2, 0, 5 )
 
 
 		bSizer5.Add( bSizer19, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
@@ -447,12 +449,15 @@ class ISTUtama ( wx.Frame ):
 
 		bSizer20.Add( ( 0, 50), 3, wx.EXPAND, 5 )
 
-		self.m_staticText347 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Pilihan Cara Input", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText347 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Pilihan Cara Input", wx.DefaultPosition, wx.Size( 230,40 ), 0 )
 		self.m_staticText347.Wrap( -1 )
 
 		self.m_staticText347.SetFont( wx.Font( 24, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
 
-		bSizer20.Add( self.m_staticText347, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		bSizer20.Add( self.m_staticText347, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+		bSizer20.Add( ( 0, 25), 1, wx.EXPAND, 5 )
 
 		self.m_input_manual = wx.Button( self.m_panel2, wx.ID_ANY, u"Input Per Nomor", wx.DefaultPosition, wx.Size( 200,100 ), 0 )
 		self.m_input_manual.SetFont( wx.Font( 18, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
@@ -2493,10 +2498,15 @@ class ISTUtama ( wx.Frame ):
 		bSizer14.Add( fgSizer231, 0, wx.EXPAND, 5 )
 
 		self.m_dataViewListCtrl1 = wx.dataview.DataViewListCtrl( self.m_panel9, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Bidang Keilmuan", wx.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Fakultas", wx.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn3 = self.m_dataViewListCtrl1.AppendTextColumn( u"Jurusan", wx.DATAVIEW_CELL_INERT, 300, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListCtrl1.Hide()
+
+		self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Bidang Keilmuan", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Fakultas", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn3 = self.m_dataViewListCtrl1.AppendTextColumn( u"Jurusan", wx.dataview.DATAVIEW_CELL_INERT, 300, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer14.Add( self.m_dataViewListCtrl1, 1, wx.ALL|wx.EXPAND, 5 )
+
+		self.m_panel26 = wx.Panel( self.m_panel9, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer14.Add( self.m_panel26, 1, wx.EXPAND |wx.ALL, 5 )
 
 
 		self.m_panel9.SetSizer( bSizer14 )
@@ -2539,10 +2549,10 @@ class ISTUtama ( wx.Frame ):
 		bSizer16.Add( self.custom_ultimateList , 1, wx.ALL|wx.EXPAND, 5 )
 
 		self.m_dataViewListCtrl2 = wx.dataview.DataViewListCtrl( self.m_panel10, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_dataViewListColumn4 = self.m_dataViewListCtrl2.AppendTextColumn( u"No", wx.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn5 = self.m_dataViewListCtrl2.AppendTextColumn( u"No Tes", wx.DATAVIEW_CELL_INERT, 150, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn6 = self.m_dataViewListCtrl2.AppendTextColumn( u"Nama Kandidat", wx.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn7 = self.m_dataViewListCtrl2.AppendTextColumn( u"Tanggal Lahir", wx.DATAVIEW_CELL_INERT, 200, wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn4 = self.m_dataViewListCtrl2.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn5 = self.m_dataViewListCtrl2.AppendTextColumn( u"No Tes", wx.dataview.DATAVIEW_CELL_INERT, 150, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn6 = self.m_dataViewListCtrl2.AppendTextColumn( u"Nama Kandidat", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn7 = self.m_dataViewListCtrl2.AppendTextColumn( u"Tanggal Lahir", wx.dataview.DATAVIEW_CELL_INERT, 200, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer16.Add( self.m_dataViewListCtrl2, 1, wx.ALL|wx.EXPAND, 5 )
 
 
@@ -2619,8 +2629,8 @@ class ISTUtama ( wx.Frame ):
 		self.m_button6.Bind( wx.EVT_BUTTON, self.m_button6OnButtonClick )
 		self.m_button14.Bind( wx.EVT_BUTTON, self.m_button_cek_validitas_input )
 		self.m_button.Bind( wx.EVT_BUTTON, self.m_button_norma_usia )
-		self.m_button20.Bind( wx.EVT_BUTTON, self.m_button20_norma_pekerjaan )
-		self.m_button21.Bind( wx.EVT_BUTTON, self.m_button21_norma_sendiri )
+		self.m_button20.Bind( wx.EVT_BUTTON, self.m_button_norma_pekerjaan )
+		self.m_button21.Bind( wx.EVT_BUTTON, self.m_button_norma_sendiri )
 		self.m_button_rincian_biodata.Bind( wx.EVT_BUTTON, self.m_button_rincian_biodata_on_buttonclick )
 		self.m_button_save_as_pdf.Bind( wx.EVT_BUTTON, self.m_button_save_as_pdfOnButtonClick )
 		self.m_button_print_pdf.Bind( wx.EVT_BUTTON, self.m_button_print_pdfOnButtonClick )
@@ -2710,10 +2720,10 @@ class ISTUtama ( wx.Frame ):
 	def m_button_norma_usia( self, event ):
 		event.Skip()
 
-	def m_button20_norma_pekerjaan( self, event ):
+	def m_button_norma_pekerjaan( self, event ):
 		event.Skip()
 
-	def m_button21_norma_sendiri( self, event ):
+	def m_button_norma_sendiri( self, event ):
 		event.Skip()
 
 	def m_button_rincian_biodata_on_buttonclick( self, event ):
@@ -2756,6 +2766,190 @@ class ISTUtama ( wx.Frame ):
 		event.Skip()
 
 	def m_menu_bantuanOnMenuSelection( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class Norma
+###########################################################################
+
+class Norma ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer33 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_panel23 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer34 = wx.BoxSizer( wx.VERTICAL )
+
+		fgSizer21 = wx.FlexGridSizer( 0, 4, 0, 0 )
+		fgSizer21.SetFlexibleDirection( wx.BOTH )
+		fgSizer21.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.m_button22 = wx.Button( self.m_panel23, wx.ID_ANY, u"Pilih", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer21.Add( self.m_button22, 0, wx.ALL, 5 )
+
+		self.m_button_buat_tabel_norma = wx.Button( self.m_panel23, wx.ID_ANY, u"Buat", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer21.Add( self.m_button_buat_tabel_norma, 0, wx.ALL, 5 )
+
+		self.m_button24 = wx.Button( self.m_panel23, wx.ID_ANY, u"Edit", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer21.Add( self.m_button24, 0, wx.ALL, 5 )
+
+		self.m_button25 = wx.Button( self.m_panel23, wx.ID_ANY, u"Hapus", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer21.Add( self.m_button25, 0, wx.ALL, 5 )
+
+
+		bSizer34.Add( fgSizer21, 0, wx.EXPAND, 5 )
+
+		self.m_dataViewListCtrl3 = wx.dataview.DataViewListCtrl( self.m_panel23, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_dataViewListColumn9 = self.m_dataViewListCtrl3.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn8 = self.m_dataViewListCtrl3.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn10 = self.m_dataViewListCtrl3.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		bSizer34.Add( self.m_dataViewListCtrl3, 1, wx.ALL|wx.EXPAND, 5 )
+
+
+		self.m_panel23.SetSizer( bSizer34 )
+		self.m_panel23.Layout()
+		bSizer34.Fit( self.m_panel23 )
+		bSizer33.Add( self.m_panel23, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer33 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.m_button_buat_tabel_norma.Bind( wx.EVT_BUTTON, self.m_button_buat_tabel_normaOnButtonClick )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def m_button_buat_tabel_normaOnButtonClick( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class TabelNorma
+###########################################################################
+
+class TabelNorma ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Binakarir", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer35 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_panel24 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer36 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_dataViewListCtrl4 = wx.dataview.DataViewListCtrl( self.m_panel24, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.No = self.m_dataViewListCtrl4.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn12 = self.m_dataViewListCtrl4.AppendTextColumn( u"RS", wx.dataview.DATAVIEW_CELL_INERT, 75, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn13 = self.m_dataViewListCtrl4.AppendTextColumn( u"SE", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn14 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn15 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn16 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn17 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn18 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn19 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn20 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn21 = self.m_dataViewListCtrl4.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		bSizer36.Add( self.m_dataViewListCtrl4, 1, wx.ALL|wx.EXPAND, 5 )
+
+
+		self.m_panel24.SetSizer( bSizer36 )
+		self.m_panel24.Layout()
+		bSizer36.Fit( self.m_panel24 )
+		bSizer35.Add( self.m_panel24, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer35 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+	def __del__( self ):
+		pass
+
+
+###########################################################################
+## Class FrameRow
+###########################################################################
+
+class FrameRow ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Binakarir", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer37 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_panel25 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer38 = wx.BoxSizer( wx.VERTICAL )
+
+		fgSizer22 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer22.SetFlexibleDirection( wx.BOTH )
+		fgSizer22.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.m_staticText260 = wx.StaticText( self.m_panel25, wx.ID_ANY, u"Jumlah Baris Maksimal", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText260.Wrap( -1 )
+
+		fgSizer22.Add( self.m_staticText260, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.m_spinCtrl11 = wx.SpinCtrl( self.m_panel25, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 10, 0 )
+		fgSizer22.Add( self.m_spinCtrl11, 0, wx.ALL|wx.ALIGN_BOTTOM|wx.ALIGN_RIGHT, 5 )
+
+
+		fgSizer22.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		bSizer39 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.m_button_batal_baris = wx.Button( self.m_panel25, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer39.Add( self.m_button_batal_baris, 0, wx.ALL, 5 )
+
+		self.m_button_ok_baris = wx.Button( self.m_panel25, wx.ID_ANY, u"Ok", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer39.Add( self.m_button_ok_baris, 0, wx.ALL, 5 )
+
+
+		fgSizer22.Add( bSizer39, 1, wx.EXPAND, 5 )
+
+
+		bSizer38.Add( fgSizer22, 1, wx.EXPAND, 5 )
+
+
+		self.m_panel25.SetSizer( bSizer38 )
+		self.m_panel25.Layout()
+		bSizer38.Fit( self.m_panel25 )
+		bSizer37.Add( self.m_panel25, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer37 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.m_button_batal_baris.Bind( wx.EVT_BUTTON, self.m_button_batal_barisOnButtonClick )
+		self.m_button_ok_baris.Bind( wx.EVT_BUTTON, self.m_button_ok_barisOnButtonClick )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def m_button_batal_barisOnButtonClick( self, event ):
+		event.Skip()
+
+	def m_button_ok_barisOnButtonClick( self, event ):
 		event.Skip()
 
 

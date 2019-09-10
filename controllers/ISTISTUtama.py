@@ -10,6 +10,7 @@ class ISTISTUtama( ISTInheritedProperties ):
 		self.m_simplebook1.SetSelection(0)
 		self.properties_tamp = PropertiesTampilan(self)
 		self.properties_tamp.logo_show()
+		self.properties_tamp.tabel_show()
 		# print (self.properties_listcontrol.list_an)
 		# for listtext in self.properties_listcontrol.list_an :
 		# 	print (listtext.SetValue("A"))

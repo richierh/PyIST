@@ -7,12 +7,12 @@ import os
 import wx
 import wx.dataview
 
-from views.istcore import ISTUtama
+from views.istcore import ISTUtama,Norma,TabelNorma,FrameRow
 from models.query import SqliteDB
 from pathlib import Path
 from views.dataview import RWSWScore, PanggilDataView,PanggilGrid,PanggilInputTotal
 from controllers.ist_calculation import KalkulasiNilai
-from views.grafik_ist import GrafikLayout,GrafikHasil
+from views.grafik_ist import GrafikLayout,GrafikHasil,GrafikProfesi
 from controllers.biodata import Biodata
 from controllers.database_control import DataKonversiGE,DatabaseConnect,TableDataKelompokUmurConnect\
 ,DataBaseInput
@@ -74,10 +74,47 @@ class GrafikHasilLayoutInherited(GrafikHasil):
         print ("lewat sini nggak")
         return self.figure.savefig(self.path,dpi='figure')
 
+class FrameRowInherited(FrameRow):
 
+    def __init__(self,parent):
+        super().__init__(parent)
+    
+
+    def m_button_ok_barisOnButtonClick(self,event):
+        self.buka_tabel_norma = TabelNorma(self)
+        self.buka_tabel_norma.Show()     
+        self.Hide()
+        pass
+
+    def m_button_batal_barisOnButtonClick(self,event):
+        self.Close()
+
+        pass
+
+class NormaInherited(Norma):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.m_button_buat_tabel_norma.Bind( wx.EVT_BUTTON, self.m_button_buat_tabel_normaOnButtonClick )
+
+    def m_button_buat_tabel_normaOnButtonClick(self,event):
+        self.buka_row = FrameRowInherited(self)
+        self.buka_row.Show()
+        # self.buka_tabel_norma = TabelNorma(self)
+        # self.buka_tabel_norma.Show()
+        pass
+
+
+class TabelNormaInherited(TabelNorma):
+
+
+    def __init__(self,parent):
+        super().__init__(parent)
+
+    
+    
 
 class DataView(ISTUtama):
-
 
     def __init__(self,parent):
         super().__init__(parent)
@@ -137,7 +174,6 @@ class HalamanEventControl(CekDB):
         self.m_panel15.Layout()
         event.Skip()
 
-
     def m_kembali_ke_awalOnButtonClick(self,event):
         # print("klik kembali ke awal")
         self.m_simplebook1.SetSelection(0)
@@ -146,9 +182,6 @@ class HalamanEventControl(CekDB):
         self.m_kembali_ke_awal.Disable()
         pass
     
-
-
-
     def m_sebelumnyaOnButtonClick(self,event):
         # print("klik sebelumnya")
         self.getSel = self.m_simplebook1.GetSelection()
@@ -202,7 +235,8 @@ class HalamanEventControl(CekDB):
             self.grafik_hasil.draw(self.grafik_y)
             
             pass
-
+        elif self.getSel == 6 :
+            self.m_selanjutnya.Enable()
         else :
             # self.m_button3.Enable()
             pass
@@ -249,6 +283,8 @@ class HalamanEventControl(CekDB):
         self.grafik.save_figure()
         # print (self.nilai_ge[3])
         self.hasil_hal3 = RWSWScore(self)
+        self.m_selanjutnya.Enable()        
+
         pass
 
     def m_button_norma_pekerjaan(self,event):
@@ -256,21 +292,25 @@ class HalamanEventControl(CekDB):
         self.getSel = self.m_simplebook1.GetSelection()
         self.getSel = self.getSel+1
         self.m_simplebook1.SetSelection(self.getSel)
+        self.m_selanjutnya.Enable()        
 
         pass
 
     def m_button_norma_sendiri(self,event):
         self.pilih_norma = 3
+        print ("norma sendiri")
         self.getSel = self.m_simplebook1.GetSelection()
         self.getSel = self.getSel+1
-        self.m_simplebook1.SetSelection(self.getSel)
-
+        # self.m_simplebook1.SetSelection(self.getSel)
+        self.buka_jendela_norma = NormaInherited(self)
+        self.buka_jendela_norma.Show()
         pass
 
     def m_selanjutnyaOnButtonClick(self,event):
         # print("klik Selanjutnya")
         self.getSel = self.m_simplebook1.GetSelection()
         self.getSel = self.getSel+1
+
         # print (self.getSel)
         # self.getSel = self.m_simplebook1.GetSelection()
 
@@ -314,6 +354,7 @@ class HalamanEventControl(CekDB):
             pass
 
         elif self.getSel == 5:
+
             # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
             global bsizer12
             # self.properties_tamp.tabel_show()
@@ -373,8 +414,14 @@ class HalamanEventControl(CekDB):
                     self.get_biodata()[9]
                 ]
 
-            pass
+            self.grafik_profesi = GrafikProfesi(self)
+            self.grafik_profesi.draw()
 
+            pass
+        
+        elif self.getSel ==  7 :
+            self.m_selanjutnya.Disable()
+            pass
         else :
             # self.m_button3.Enable()
             print ("masuk halaman 5")
@@ -382,8 +429,9 @@ class HalamanEventControl(CekDB):
         
         self.m_simplebook1.SetSelection(self.getSel)
         print ("kesini nggak")
-
         pass
+
+        
 
     def m_input_manualOnButtonClick(self,event):
         self.select_input = 1
@@ -408,7 +456,6 @@ class HalamanEventControl(CekDB):
         self.m_selanjutnya.Enable()        
         self.m_kembali_ke_awal.Enable()
         pass
-
 
     def m_button_rincian_biodata_on_buttonclick(self,event):
         self.tampilkan_rincian_biodata = Biodata(self)

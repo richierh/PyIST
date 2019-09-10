@@ -359,7 +359,6 @@ class TableDataKelompokUmur(SqliteDB):
         self.parent = parent
         self.parent.tipe_biodata
     
-
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
 
@@ -384,7 +383,6 @@ class TableDataKelompokUmur(SqliteDB):
                 """
 
             elif self.kelompok_umur == 15 :
-
                 self.sql_cmd = """ 
                 SELECT RW, SE, WA, AN, GE, ME, RA, ZR, FA, WU
                 FROM TableDataKelompokUmur15;
@@ -452,9 +450,7 @@ class TableDataKelompokUmur(SqliteDB):
 
         self.cursorexe.execute(self.sql_cmd,(self.nilai_total_rw,))
         self.getdatas = self.cursorexe.fetchall()
-        
         self.close_db()
-
         return self.getdatas
 
 
@@ -487,7 +483,6 @@ class BidangKeilmuan(SqliteDB):
     
     def __repr__(self):
         return True
-
     
     def query_keilmuan(self,nilai_id):
         self.id = nilai_id
@@ -521,7 +516,6 @@ class BidangKeilmuan(SqliteDB):
 
 
 def insert_input_peserta(values):
-   
     conne = connect_db()
     cursorexe = conne.cursor()
     
@@ -552,10 +546,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);    """
     conne.close()
 
 
-
-    
 def cek_id_peserta_terakhir():
-    
     conne = connect_db()
     cursorexe = conne.cursor()
     sqlcmd = """SELECT idpeserta

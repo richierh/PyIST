@@ -123,6 +123,67 @@ class GrafikHasil():
                     ha='left', va='center')
 
 
+
+class GrafikProfesi():
+
+    def __init__(self,parent):
+        self.parent = parent
+        # self.figure = Figure(figsize=(3,5))
+        self.figure = Figure(figsize=(5,5))
+        # self.figure.subplots_adjust(left=0.2)
+
+        self.axes = self.figure.add_subplot(111)
+
+        self.canvas = FigureCanvas(self.parent.m_panel26, -1, self.figure)
+        # self.canvas = FigureCanvas(self, -1, self.figure)
+
+        self.sizer = wx.BoxSizer(wx.VERTICAL)
+        self.sizer.Add(self.canvas, 0, wx.CENTER | wx.TOP | wx.GROW)
+
+        self.parent.m_panel26.SetSizer(self.sizer)
+
+        self.parent.m_panel26.Layout()
+        self.parent.m_panel9.Layout()
+        # self.Fit()
+
+        # self.parent.m_panel18.Layout()
+        # self.SetSizer(self.sizer)
+        # self.Fit()
+
+    def draw(self,nilai_grafik = None):
+        self.grafik = nilai_grafik
+        # print (t)
+        y = ["a","b","c",
+            "d","e", "f", "g"]
+        self.y = arange(len(y))
+        x = [130,136,79,125,128,146,128]
+        self.rects = self.axes.bar(x,y,color='green')
+        # self.axes.invert_yaxis()
+        self.axes.set_xlim(left=50,right=150)
+        self.axes.set_yticks(self.y)
+        self.axes.set_title("PROFIL KEUNGGULAN")
+        self.autolabel()
+
+
+
+    def autolabel(self):
+
+        """
+        Attach a text label above each bar displaying its height
+        """
+        print ("kesini nggak")
+        for rect in self.rects:
+            width = rect.get_width()
+            frac_height = width/5
+            if frac_height > 0.95 :
+                label_position = width - (0.07 * width)
+            else :
+                label_position = width + (0.01 * width)
+            self.axes.text(label_position,rect.get_y() + rect.get_height()/2.,
+                    '{}' .format(round(width,2)),color = "black",fontweight='bold',
+                    ha='left', va='center')
+
+
 if __name__ == "__main__":
     app = wx.PySimpleApp()
     fr = wx.Frame(None, title='test')

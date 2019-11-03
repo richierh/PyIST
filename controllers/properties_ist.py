@@ -6,16 +6,19 @@ Created on Feb 15, 2019
 import wx
 import pathlib
 from shutil import copyfile
+
 from controllers.halaman_event import HalamanEventControl
+from controllers.grafik_tabel import *
+
 from views.menubar_tentang import TentangAplikasiInherited
 from views.buka_filter_db import FrameFilterDatabase
 from views.dialog_save import DialogSavePDF
-from controllers.database_control import DatabaseBioData
-
+from views.istcore import TabelDataPeserta
+# from controllers.ISTISTUtama import NormaAllInherited
+# from controllers.ISTISTUtama import NormaInherited
 
 # Ini adalah class untuk mengatur control input
 # Semua Control text di atur disini
-
 
 
 class BukaFilter(FrameFilterDatabase):
@@ -37,22 +40,50 @@ class BukaFilter(FrameFilterDatabase):
     def m_buttonKlikFilterTanggalOnButtonClick(self,event):
         print ("click by tanggal")
 
+class TabelDataPesertaIn(TabelDataPeserta):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+    
+    def tutup_data_peserta(self,event):
+
+        self.Close()
 
 
 class MenuBarInherited(HalamanEventControl):
 
-
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
+        self.parent = parent
 
-    def m_menu_keluarOnMenuSelection(self,event):
+    def m_menu_keluarOnMenuSelection(self, event):
         self.Close()
         event.Skip()
 
-    def m_menu_bantuanOnMenuSelection(self,event):
+    def m_menu_bantuanOnMenuSelection(self, event):
         self.TentangAplikasi = TentangAplikasiInherited(self)
         self.TentangAplikasi.Show()
         event.Skip()
+
+    def m_menuItem_daftar_tabel_normaOnMenuSelection(self, event):
+        print('buka menu item')
+
+        self.buka_tabel_norma = NormaInherited(self)
+        self.buka_tabel_norma.Show() 
+
+    # def m_menuItem_lihat_tabel_normaOnMenuSelection(self, event):
+    #     # self.buka_tabel_norma = NormaInherited(self)
+    #     # self.buka_tabel_norma.Show()
+    #     # self.buka_jendela_norma.Close()
+    #     self.buka_jendela_norma = NormaInherited(self)
+    #     self.buka_jendela_norma.Show()
+
+    #     print('buka lihat tabel')
+
+    def menubar_lihat_data_peserta(self,event):
+        self.lihat_data_peserta = TabelDataPesertaIn(self)
+        self.lihat_data_peserta.Show()
+        self.lihat_data_peserta.Maximize()
 
 class PropertiesInput(MenuBarInherited):
 
@@ -64,8 +95,26 @@ class PropertiesInput(MenuBarInherited):
     def get_biodata(self):
         # menentukan tipe_biodata yang dipilih , apakah pendidikan ataukah pekerjaan
         # self.tipe_biodata = 1 adalah tipe pendidikan , self.tipe_biodata =2 adalah tipe pekerjaan
+        self.tipe_biodata = 0
 
-        if self.tipe_biodata == 1:
+        if self.tipe_biodata == 0 :
+            self.biodata = [self.m_textCtrl_no_tes.GetValue(),
+            self.m_datePicker_tanggal_tes1.GetValue().Format("%d/%m/%Y"),
+            self.m_textCtrl_nama.GetValue(),
+            self.m_choice_jenis_kelamin.GetString(self.m_choice_jenis_kelamin.GetSelection()),
+            self.m_datePicker_tanggal_lahir.GetValue().Format("%d/%m/%Y"),
+            self.m_spinCtrl_usia.GetValue(),
+            self.m_textCtrl_asal_sekolah_universitas.GetValue(),
+            self.m_choice_pendidikan_terakhir.GetString(self.m_choice_pendidikan_terakhir.GetSelection()),
+            self.m_textCtrl_jurusan.GetValue(),
+            self.m_textCtrl_posisi_pekerjaan.GetValue(),
+            self.m_textCtrl_perusahaan.GetValue(),
+            self.m_textCtrl_keterangan.GetValue()
+            ]
+            pass
+
+
+        elif self.tipe_biodata == 1:
             # print ("Tipe pendidikan")
         
             self.biodata = [self.m_textCtrl_nama.GetValue(),
@@ -75,7 +124,7 @@ class PropertiesInput(MenuBarInherited):
             self.m_datePicker_tanggal_lahir.GetValue().Format("%d/%m/%Y"),
             self.m_textCtrl_asal_sekolah.GetValue(),
             self.m_textCtrl_jurusan_sekolah.GetValue(),
-            self.m_textCtrl_asal_universitas.GetValue(),
+            "self.m_textCtrl_asal_universitas.GetValue()",
             self.m_textCtrl_jurusan_universitas.GetValue(),
             self.m_textCtrl_kota.GetValue(),
             self.m_textCtrl_hobi.GetValue(),
@@ -140,7 +189,6 @@ class BukaDialogSimpanPDF(DialogSavePDF):
         print (self.panggilgrid.getdata())
 
         event.Skip()
-
 
 
 class ISTInheritedProperties(PropertiesInput):
@@ -529,6 +577,7 @@ class ISTInheritedProperties(PropertiesInput):
 
     def m_button_reset_1OnButtonClick(self,event):
         print ("reset halaman 4 ")
+
 
 
 if __name__ == '__main__':

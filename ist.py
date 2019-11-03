@@ -24,8 +24,8 @@ os.chdir(str(pathwd))
 
 
 class VerifyKey():
-    
-    
+
+
     def __init__(self, parent):
         self.value = parent
         pass

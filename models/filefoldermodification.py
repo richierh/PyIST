@@ -24,8 +24,8 @@ class ModifFile():
 
 if __name__ == '__main__':
     os.chdir("..")
-    pathsrc = pathlib.Path.cwd()/"models/ist-master"
-    pathdst = pathlib.Path.cwd()/"models/ist"
+    pathsrc = pathlib.Path.cwd()/"models/istcore-master"
+    pathdst = pathlib.Path.cwd()/"models/istcore"
 
     runshutil = ModifFile(shutil)
     runshutil.copy(pathsrc,pathdst)

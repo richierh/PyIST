@@ -53,8 +53,8 @@ if __name__ == "__main__":
     a = DataIST()
     # print (a.datase)
     run = ISTCore(**data)
-    # ist.nilaise()
-    # print (ist.nilaise())
+    # istcore.nilaise()
+    # print (istcore.nilaise())
     # print ("sukses")
     # print (run)
     if run == "134" :

@@ -215,10 +215,10 @@ class QueryTabel():
 if __name__ == '__main__':
 
     # d =os.chdir("..")
-    pathloc = pathlib.Path.cwd()/"models/ist"
+    pathloc = pathlib.Path.cwd()/"models/istcore"
     # print (pathloc)
     run = QueryTabel(pathloc)
 #     Table.pathloc = pathloc
-#     ist.delete_file()
+#     istcore.delete_file()
     # object.query_option("nama kolom","nilai mentah","kelompokusia")
     # print (run.query_option("SE","4",12))

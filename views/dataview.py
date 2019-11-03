@@ -59,7 +59,7 @@ class RWSWScore(ISTUtama):
         self.parent.m_textCtrl_nilai_IQ.SetValue(str(self.parent.iq))
 
         print ("tes")
-        
+
 
 class PanggilInputTotal(ISTUtama):
 

@@ -153,15 +153,15 @@ class GrafikProfesi():
     def draw(self,nilai_grafik = None):
         self.grafik = nilai_grafik
         # print (t)
-        y = ["a","b","c",
+        x = ["a","b","c",
             "d","e", "f", "g"]
-        self.y = arange(len(y))
-        x = [130,136,79,125,128,146,128]
+        self.x = arange(len(x))
+        y = [130,136,79,125,128,146,128]
         self.rects = self.axes.bar(x,y,color='green')
         # self.axes.invert_yaxis()
-        self.axes.set_xlim(left=50,right=150)
-        self.axes.set_yticks(self.y)
-        self.axes.set_title("PROFIL KEUNGGULAN")
+        self.axes.set_ylim(bottom=50,top=150)
+        self.axes.set_xticks(self.x)
+        self.axes.set_title("PROFESI JURUSAN")
         self.autolabel()
 
 
@@ -173,15 +173,16 @@ class GrafikProfesi():
         """
         print ("kesini nggak")
         for rect in self.rects:
-            width = rect.get_width()
-            frac_height = width/5
+            print (rect)
+            height = rect.get_height()
+            frac_height = height/5
             if frac_height > 0.95 :
-                label_position = width - (0.07 * width)
+                label_position = height - (0.07 * height)
             else :
-                label_position = width + (0.01 * width)
-            self.axes.text(label_position,rect.get_y() + rect.get_height()/2.,
-                    '{}' .format(round(width,2)),color = "black",fontweight='bold',
-                    ha='left', va='center')
+                label_position = height + (0.01 * height)
+            self.axes.text(rect.get_x() + rect.get_width()/2.,label_position,
+                    '{}' .format(round(height,2)),color = "black",fontweight='bold',
+                    ha='center', va='center')
 
 
 if __name__ == "__main__":

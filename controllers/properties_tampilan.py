@@ -26,6 +26,7 @@ class PropertiesTampilan():
         self.pathpict = pathlib.Path.cwd()/"resources/images/binadata.png"
         print (self.pathpict)
         self.image = wx.Image(str(self.pathpict))
+        print (self.image)
         self.re_image = self.image.Rescale(300,150)
         self.parent.m_logo_binakarir.SetBitmap(wx.Bitmap(self.re_image))
 
@@ -35,7 +36,7 @@ class PropertiesTampilan():
 #         self.index = 0
 #         self.listheaderlistCtrl1 = [
 #             ["No","50",wx.LIST_FORMAT_CENTER],
-#             ["Aspek Analisa Skor ist","200",wx.LIST_FORMAT_LEFT],
+#             ["Aspek Analisa Skor istcore","200",wx.LIST_FORMAT_LEFT],
 #             ["Kelemahan","100",wx.LIST_FORMAT_LEFT],
 #             ["Keunggulan","100",wx.LIST_FORMAT_LEFT]
 #             ]

@@ -1,17 +1,19 @@
 import wx
 
+
 class MainWindow(wx.Frame):
+
     def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title, size=(300,200))
+        wx.Frame.__init__(self, parent, id, title, size=(300, 200))
 
         self.panel = wx.Panel(self, -1)
 
-        button = wx.Button(self.panel,-1,"Button")
+        button = wx.Button(self.panel, -1, "Button")
 
         self.vbox = wx.BoxSizer(wx.VERTICAL)
         self.vbox.Add(button)
 
-        add_btn = wx.Button(self.panel,-1,"Add")
+        add_btn = wx.Button(self.panel, -1, "Add")
         add_btn.Bind(wx.EVT_BUTTON, self.add)
 
         hbox = wx.BoxSizer(wx.HORIZONTAL)
@@ -27,9 +29,10 @@ class MainWindow(wx.Frame):
         self.Show(True)
         self.Layout()
 
-    def add(self,event):
-        self.vbox.Add((wx.Button(self.panel,-1,"Button")))
+    def add(self, event):
+        self.vbox.Add((wx.Button(self.panel, -1, "Button")))
         self.panel.Layout()
+
 
 if __name__ == "__main__":
     app = wx.App()

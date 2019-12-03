@@ -2693,7 +2693,7 @@ class Norma ( wx.Frame ):
 		self.m_dataViewListColumn42 = self.m_dataViewListCtrl9.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn43 = self.m_dataViewListCtrl9.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn44 = self.m_dataViewListCtrl9.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn48 = self.m_dataViewListCtrl9.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn48 = self.m_dataViewListCtrl9.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer34.Add( self.m_dataViewListCtrl9, 1, wx.ALL|wx.EXPAND, 5 )
 
 		self.text_norma_sendiri = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Sendiri", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2725,8 +2725,9 @@ class Norma ( wx.Frame ):
 		# Connect Events
 		self.m_button_buat_tabel_norma.Bind( wx.EVT_BUTTON, self.m_button_buat_tabel_normaOnButtonClick )
 		self.m_button_tutup_norma.Bind( wx.EVT_BUTTON, self.m_button_tutup_normaOnButtonClick )
-		self.m_dataViewListCtrl8.Bind( wx.dataview.EVT_DATAVIEW_ITEM_EDITING_DONE, self.m_dataViewListCtrl8OnDataViewListCtrlItemEditingDone, id = wx.ID_ANY )
 		self.m_dataViewListCtrl8.Bind( wx.dataview.EVT_DATAVIEW_ITEM_VALUE_CHANGED, self.m_dataViewListCtrl8OnDataViewListCtrlItemValueChanged, id = wx.ID_ANY )
+		self.m_dataViewListCtrl9.Bind( wx.dataview.EVT_DATAVIEW_ITEM_VALUE_CHANGED, self.m_dataViewListCtrl9OnDataViewListCtrlItemValueChanged, id = wx.ID_ANY )
+		self.m_dataViewListCtrl3.Bind( wx.dataview.EVT_DATAVIEW_ITEM_VALUE_CHANGED, self.m_dataViewListCtrl3OnDataViewListCtrlItemValueChanged, id = wx.ID_ANY )
 
 	def __del__( self ):
 		pass
@@ -2739,10 +2740,13 @@ class Norma ( wx.Frame ):
 	def m_button_tutup_normaOnButtonClick( self, event ):
 		event.Skip()
 
-	def m_dataViewListCtrl8OnDataViewListCtrlItemEditingDone( self, event ):
+	def m_dataViewListCtrl8OnDataViewListCtrlItemValueChanged( self, event ):
 		event.Skip()
 
-	def m_dataViewListCtrl8OnDataViewListCtrlItemValueChanged( self, event ):
+	def m_dataViewListCtrl9OnDataViewListCtrlItemValueChanged( self, event ):
+		event.Skip()
+
+	def m_dataViewListCtrl3OnDataViewListCtrlItemValueChanged( self, event ):
 		event.Skip()
 
 

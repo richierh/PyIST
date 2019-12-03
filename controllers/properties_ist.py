@@ -24,28 +24,29 @@ from views.istcore import TabelDataPeserta
 class BukaFilter(FrameFilterDatabase):
     "this is class inherited from buka_filter_db.py"
 
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
     
-    def m_buttonFilterBatalOnButtonClick(self,event):
+    def m_buttonFilterBatalOnButtonClick(self, event):
         print ("klik batal")
         self.Close()
     
-    def m_buttonKlikFilterNoTesOnButtonClick(self,event):
+    def m_buttonKlikFilterNoTesOnButtonClick(self, event):
         print ("click by no test")
     
-    def m_buttonKlikFilterOrangOnButtonClick(self,event):
+    def m_buttonKlikFilterOrangOnButtonClick(self, event):
         print("click by person name")
 
-    def m_buttonKlikFilterTanggalOnButtonClick(self,event):
+    def m_buttonKlikFilterTanggalOnButtonClick(self, event):
         print ("click by tanggal")
+
 
 class TabelDataPesertaIn(TabelDataPeserta):
 
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
     
-    def tutup_data_peserta(self,event):
+    def tutup_data_peserta(self, event):
 
         self.Close()
 
@@ -80,15 +81,15 @@ class MenuBarInherited(HalamanEventControl):
 
     #     print('buka lihat tabel')
 
-    def menubar_lihat_data_peserta(self,event):
+    def menubar_lihat_data_peserta(self, event):
         self.lihat_data_peserta = TabelDataPesertaIn(self)
         self.lihat_data_peserta.Show()
         self.lihat_data_peserta.Maximize()
 
+
 class PropertiesInput(MenuBarInherited):
 
-
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
         
@@ -112,7 +113,6 @@ class PropertiesInput(MenuBarInherited):
             self.m_textCtrl_keterangan.GetValue()
             ]
             pass
-
 
         elif self.tipe_biodata == 1:
             # print ("Tipe pendidikan")
@@ -154,7 +154,6 @@ class PropertiesInput(MenuBarInherited):
         
         return self.biodata
 
-
     def set_biodata_to_panel(self):
         
         pass
@@ -162,29 +161,27 @@ class PropertiesInput(MenuBarInherited):
 
 class BukaDialogSimpanPDF(DialogSavePDF):
 
-
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
 
-
-    def m_button_simpanPDFFile( self, event ):
+    def m_button_simpanPDFFile(self, event):
         print ("simpan pdf")
         # path = pathlib.Path()
-        self.src = pathlib.Path.cwd()#/"controllers/reporting/tuto1d.pdf"
-        self.src = self.src.parents[0]/"controllers/reporting/tuto1d.pdf"
+        self.src = pathlib.Path.cwd()  # /"controllers/reporting/tuto1d.pdf"
+        self.src = self.src.parents[0] / "controllers/reporting/tuto1d.pdf"
         print (self.src)
-        self.simpan_file_pdf = str(pathlib.Path(self.m_direktori_pdf.GetPath()+"/"+self.m_filepdf.GetValue()+".pdf"))
-        copyfile(self.src,self.simpan_file_pdf)
+        self.simpan_file_pdf = str(pathlib.Path(self.m_direktori_pdf.GetPath() + "/" + self.m_filepdf.GetValue() + ".pdf"))
+        copyfile(self.src, self.simpan_file_pdf)
         self.Close()
 
         event.Skip()
 
-    def m_button_batal_simpanPDF( self, event ):
+    def m_button_batal_simpanPDF(self, event):
         print ("close")
         self.Close()
         event.Skip()
     
-    def m_button_cek_validitas_input( self, event ):
+    def m_button_cek_validitas_input(self, event):
         print("cek validitas")
         print (self.panggilgrid.getdata())
 
@@ -193,9 +190,8 @@ class BukaDialogSimpanPDF(DialogSavePDF):
 
 class ISTInheritedProperties(PropertiesInput):
     
-    
-    def __init__(self,parent,*args,**kwds):
-        super().__init__(parent,*args,**kwds)
+    def __init__(self, parent, *args, **kwds):
+        super().__init__(parent, *args, **kwds)
         self.parent = parent
         # print ("sukses")
         # self.list_se = [
@@ -481,108 +477,104 @@ class ISTInheritedProperties(PropertiesInput):
     def biodata(self):
         # Ini adalah object untuk tarik data
         print ("lewat sini tak")
-        return self.m_textCtrl_nama,self.m_textCtrlNomor,\
-            self.m_textCtrlUsia,self.m_textCtrlKelas,\
+        return self.m_textCtrl_nama, self.m_textCtrlNomor, \
+            self.m_textCtrlUsia, self.m_textCtrlKelas, \
             self.m_textCtrlAsalSekolah
-    def m_textCtrl_namaOnLeftUp( self, event ):
+
+    def m_textCtrl_namaOnLeftUp(self, event):
         event.Skip()
 
-    def m_buttonInput_JawabanOnButtonClick( self, event ):
+    def m_buttonInput_JawabanOnButtonClick(self, event):
         event.Skip()
 
-    def m_textCtrl6OnText( self, event ):
+    def m_textCtrl6OnText(self, event):
         event.Skip()
 
-    def m_textCtrl47OnText( self, event ):
+    def m_textCtrl47OnText(self, event):
         event.Skip()
 
-    def m_textCtrl7OnText( self, event ):
+    def m_textCtrl7OnText(self, event):
         event.Skip()
 
-    def m_textCtrl48OnText( self, event ):
+    def m_textCtrl48OnText(self, event):
         event.Skip()
 
-    def m_textCtrl71OnText( self, event ):
+    def m_textCtrl71OnText(self, event):
         event.Skip()
 
-    def m_textCtrl481OnText( self, event ):
+    def m_textCtrl481OnText(self, event):
         event.Skip()
 
-    def m_textCtrl303OnText( self, event ):
+    def m_textCtrl303OnText(self, event):
         event.Skip()
 
-    def m_textCtrl181OnText( self, event ):
+    def m_textCtrl181OnText(self, event):
         event.Skip()
 
-    def m_textCtrl100OnText( self, event ):
+    def m_textCtrl100OnText(self, event):
         event.Skip()
 
-    def m_textCtrl196OnText( self, event ):
+    def m_textCtrl196OnText(self, event):
         event.Skip()
 
-    def m_textCtrl74OnText( self, event ):
+    def m_textCtrl74OnText(self, event):
         event.Skip()
 
-    def m_textCtrl484OnText( self, event ):
+    def m_textCtrl484OnText(self, event):
         event.Skip()
 
-    def m_textCtrl75OnText( self, event ):
+    def m_textCtrl75OnText(self, event):
         event.Skip()
 
-    def m_textCtrl485OnText( self, event ):
+    def m_textCtrl485OnText(self, event):
         event.Skip()
 
-    def m_textCtrl76OnText( self, event ):
+    def m_textCtrl76OnText(self, event):
         event.Skip()
 
-    def m_textCtrl486OnText( self, event ):
+    def m_textCtrl486OnText(self, event):
         event.Skip()
 
-    def m_button6OnButtonClick( self, event ):
+    def m_button6OnButtonClick(self, event):
         event.Skip()
 
-
-    def m_button_hapus_onclick( self, event ):
+    def m_button_hapus_onclick(self, event):
         print ("hapus data")
         event.Skip()
 
-    def m_button_filter_onclick( self, event ):
+    def m_button_filter_onclick(self, event):
         print ("you have click 'Filter'")
         self.openfilter = BukaFilter(self)
         self.openfilter.Show()
         event.Skip()
 
-    def m_button_lihat_dari_database_onclick( self, event ):
+    def m_button_lihat_dari_database_onclick(self, event):
         print ("lihat dari database")
 
         self.run = DatabaseBioData(self.connect_db)
         print (self.run.lihat_data_kandidat_baru())
 
-
-    def m_button_reset_onclick( self, event ):
+    def m_button_reset_onclick(self, event):
         print ("bersihkan data")
         event.Skip()
 
-    def m_button_save_as_pdfOnButtonClick(self,event):
+    def m_button_save_as_pdfOnButtonClick(self, event):
         print("save to pdf file")
         self.a = BukaDialogSimpanPDF(self)
         self.a.Show()
 
-    def m_button_print_pdfOnButtonClick(self,event):
+    def m_button_print_pdfOnButtonClick(self, event):
         print("print pdf file")
     
-    def m_button_simpanOnButtonClick(self,event):
+    def m_button_simpanOnButtonClick(self, event):
         print ("simpan hasil")
 
-
-    def m_button_reset_1OnButtonClick(self,event):
+    def m_button_reset_1OnButtonClick(self, event):
         print ("reset halaman 4 ")
-
 
 
 if __name__ == '__main__':
     run = ListControlProperties(None)
     # print (run.list_an)
-        
     
         

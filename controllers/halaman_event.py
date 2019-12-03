@@ -1,4 +1,3 @@
-#! usr/bin/env python
 from numpy import arange, sin, pi
 from statistics import mean
 import pathlib
@@ -8,7 +7,7 @@ import wx.dataview
 from views.istcore import ISTUtama
 from models.query import SqliteDB
 from pathlib import Path
-from views.dataview import RWSWScore, PanggilDataView, PanggilGrid,\
+from views.dataview import RWSWScore, PanggilDataView, PanggilGrid, \
     PanggilInputTotal
 from controllers.ist_calculation import KalkulasiNilai
 # from views.grafik_ist import GrafikLayout,GrafikHasil,GrafikProfesi
@@ -16,36 +15,34 @@ from controllers.biodata import Biodata
 from controllers.grafik_tabel import *
 
 
+
 class DataView(ISTUtama):
 
-
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
+        self.parent = parent
         # self.panggildataview = PanggilDataView(self)
         self.panggilgrid = PanggilGrid(self)
         self.panggil_nilai_total = PanggilInputTotal(self)
         # bsizerdataview = wx.BoxSizer(wx.VERTICAL)
         self.m_panel3.Layout()
         self.m_panel_input.Layout()
-
+        # import pdb; pdb.set_trace()
+        
         pass
         # MenuBar Selected
 
-    def MenuTabelPendidikanOnMenuSelection(self,event):
+    def MenuTabelPendidikanOnMenuSelection(self, event):
         self.buka_tabel_norma_pekerjaan = TabelNormaLihatInherited(self)
         self.buka_tabel_norma_pekerjaan.Show()
         pass
 
-
-
-
-    def TabelNormaPendidikanOnMenuSelection(self,event):
+    def TabelNormaPendidikanOnMenuSelection(self, event):
         # self.buka_tabel_norma = NormaInherited(self)
         # self.buka_tabel_norma.Show()
         # self.buka_jendela_norma.Close()
         self.buka_jendela_norma = NormaInherited(self)
         self.buka_jendela_norma.Show()
-        
 
     #     # self.m_dataViewListCtrl1 = wx.dataview.DataViewListCtrl( self.m_panel_input, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
     #     # self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
@@ -54,12 +51,10 @@ class DataView(ISTUtama):
     #     # bsizerdataview.Add( self.m_dataViewListCtrl1, 1, wx.ALL|wx.EXPAND, 5 )
     #     pass
 
-
         # Menu
 
 
 class CekDB(DataView):
-
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -67,9 +62,7 @@ class CekDB(DataView):
         self.connect_db = SqliteDB("istcore")
 
 
-
 class HalamanEventControl(CekDB):
-
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -77,24 +70,26 @@ class HalamanEventControl(CekDB):
         self.parent = parent
         self.m_sebelumnya.Disable()
         self.m_kembali_ke_awal.Disable()
-        self.pathpict = pathlib.Path.cwd()/"icons/menubar/man.png"
+        self.pathpict = pathlib.Path.cwd() / "icons/menubar/man.png"
 
         print (str(self.pathpict))
         self.image2 = wx.Image(str(self.pathpict))
         print (self.image2)
-        self.re_image2 = self.image2.Rescale(200,200)
-        self.m_menuItem5.SetBitmap(wx.Bitmap(self.re_image2 ))
+        self.re_image2 = self.image2.Rescale(200, 200)
+        self.m_menuItem5.SetBitmap(wx.Bitmap(self.re_image2))
 
       #  print (f"Setting Tipe Biodata atau Radio Button ke
         #  {self.m_radioBox_biodata.SetSelection(0)}")
         self.tipe_biodata = 1
+        # import pdb
+
+        # pdb.set_trace()
 
         pass
 
     # def m_menuItem8OnMenuSelection(self,event):
     #     print ("hhh")
     #     pass
-
 
     def m_radiobox_biodata_on_click(self, event):
         if self.m_radioBox_biodata.GetSelection() == 0:
@@ -161,12 +156,12 @@ class HalamanEventControl(CekDB):
             # self.properties_tamp.tabel_show()
             self.grafik_y = {}
 
-            self.grafik_y["Kemampuan Berhitung"]=mean([self.input_peserta_rw_sw[5][1]\
+            self.grafik_y["Kemampuan Berhitung"] = mean([self.input_peserta_rw_sw[5][1]\
                , self.input_peserta_rw_sw[6][1]])
             self.grafik_y["Daya Ingat dan Konsentrasi"] = self.input_peserta_rw_sw[4][1]
-            self.grafik_y["Kreatifitas"] =  mean([self.input_peserta_rw_sw[7][1], self.input_peserta_rw_sw[8][1]])
+            self.grafik_y["Kreatifitas"] = mean([self.input_peserta_rw_sw[7][1], self.input_peserta_rw_sw[8][1]])
             self.grafik_y["Ketelitian"] = self.input_peserta_rw_sw[5][1]
-            self.grafik_y["Judgement"]  = self.input_peserta_rw_sw[0][1]
+            self.grafik_y["Judgement"] = self.input_peserta_rw_sw[0][1]
             self.grafik_y["Daya Analisis"] = mean([self.input_peserta_rw_sw[2][1], self.input_peserta_rw_sw[8][1]])
             self.grafik_y["Pengembalian Keputusan"] = mean([self.input_peserta_rw_sw[0][1], self.input_peserta_rw_sw[6][1], self.input_peserta_rw_sw[8][1]])
             self.grafik_y["Kemampuan Berbahasa"] = mean([self.input_peserta_rw_sw[1][1], self.input_peserta_rw_sw[3][1]])
@@ -177,7 +172,7 @@ class HalamanEventControl(CekDB):
 
         elif self.getSel == 6:
             self.m_selanjutnya.Enable()
-
+        
         else:
             # self.m_button3.Enable()
             pass
@@ -185,7 +180,7 @@ class HalamanEventControl(CekDB):
     def m_button_norma_usia(self, event):
         self.pilih_norma = 1
         self.getSel = self.m_simplebook1.GetSelection()
-        self.getSel = self.getSel+1
+        self.getSel = self.getSel + 1
         self.kelompok_usia = self.m_spinCtrl_usia.GetValue()
         self.input_peserta = self.panggilgrid.getdata()
         # print (f"tipe {type(self.input_peserta[3][0])}
@@ -236,7 +231,7 @@ class HalamanEventControl(CekDB):
         self.pilih_norma = 2
 
         self.getSel = self.m_simplebook1.GetSelection()
-        self.getSel = self.getSel+1
+        self.getSel = self.getSel + 1
         self.m_simplebook1.SetSelection(self.getSel)
         self.m_selanjutnya.Enable()
         self.m_textCtrl_biodata.SetValue(self.m_textCtrl_nama.GetValue())
@@ -260,14 +255,14 @@ class HalamanEventControl(CekDB):
 
         # print ("norma sendiri")
         self.getSel = self.m_simplebook1.GetSelection()
-        self.getSel = self.getSel+1
+        self.getSel = self.getSel + 1
         # self.m_simplebook1.SetSelection(self.getSel)
         pass
 
     def m_selanjutnyaOnButtonClick(self, event):
         # print("klik Selanjutnya")
         self.getSel = self.m_simplebook1.GetSelection()
-        self.getSel = self.getSel+1
+        self.getSel = self.getSel + 1
         # print (self.getSel)
         # self.getSel = self.m_simplebook1.GetSelection()
         if self.getSel == 1:
@@ -280,8 +275,7 @@ class HalamanEventControl(CekDB):
         elif self.getSel == 3:
             # self.m_textCtrl_biodata.SetValue(self.biodata[2])
             self.m_selanjutnya.Disable()
-            self.m_choice3.SetItems(["0","2"])
-
+            self.m_choice3.SetItems(["0", "2"])
 
             if self.pilih == 0:
                 pass
@@ -329,9 +323,9 @@ class HalamanEventControl(CekDB):
             self.grafik_y["Kemampuan Berhitung"] = mean([self.input_peserta_rw_sw[5][1]\
                , self.input_peserta_rw_sw[6][1]])
             self.grafik_y["Daya Ingat dan Konsentrasi"] = self.input_peserta_rw_sw[4][1]
-            self.grafik_y["Kreatifitas"] =  mean([self.input_peserta_rw_sw[7][1], self.input_peserta_rw_sw[8][1]])
+            self.grafik_y["Kreatifitas"] = mean([self.input_peserta_rw_sw[7][1], self.input_peserta_rw_sw[8][1]])
             self.grafik_y["Ketelitian"] = self.input_peserta_rw_sw[5][1]
-            self.grafik_y["Judgement"]  = self.input_peserta_rw_sw[0][1]
+            self.grafik_y["Judgement"] = self.input_peserta_rw_sw[0][1]
             self.grafik_y["Daya Analisis"] = mean([self.input_peserta_rw_sw[2][1], self.input_peserta_rw_sw[8][1]])
             self.grafik_y["Pengembalian Keputusan"] = mean([self.input_peserta_rw_sw[0][1], self.input_peserta_rw_sw[6][1], self.input_peserta_rw_sw[8][1]])
             self.grafik_y["Kemampuan Berbahasa"] = mean([self.input_peserta_rw_sw[1][1], self.input_peserta_rw_sw[3][1]])
@@ -339,7 +333,7 @@ class HalamanEventControl(CekDB):
             self.grafik_hasil = GrafikHasilLayoutInherited(self)
             self.grafik_hasil.draw(self.grafik_y)
 
-            self.m_dataViewListCtrl1.InsertItem(0,["df","dfs","sdf"])
+            self.m_dataViewListCtrl1.InsertItem(0, ["df", "dfs", "sdf"])
             # self.m_staticText_berpikir.SetValue()
             pass
 
@@ -358,7 +352,7 @@ class HalamanEventControl(CekDB):
                     self.get_biodata()[3],
                     self.get_biodata()[4]
                 ]
-                self.biodata_kandidat_tamb1=[
+                self.biodata_kandidat_tamb1 = [
                     self.get_biodata()[5],
                     self.get_biodata()[6],
                     self.get_biodata()[7],
@@ -378,7 +372,7 @@ class HalamanEventControl(CekDB):
                     self.get_biodata()[3],
                     self.get_biodata()[4]
                 ]
-                self.biodata_kandidat_tamb2=[
+                self.biodata_kandidat_tamb2 = [
                     self.get_biodata()[5],
                     self.get_biodata()[6],
                     self.get_biodata()[7],

@@ -67,7 +67,7 @@ class FrameWarningKey (wx.Frame):
 		self.m_staticText146 = wx.StaticText(self.m_panel27, wx.ID_ANY, u"status validasi :", wx.DefaultPosition, wx.DefaultSize, 0)
 		self.m_staticText146.Wrap(-1)
 
-		bSizer3.Add(self.m_staticText146, 0, wx.ALL | wx.EXPAND |  wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_LEFT, 5)
+		bSizer3.Add(self.m_staticText146, 0, wx.ALL | wx.EXPAND | wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_LEFT, 5)
 
 		self.m_staticText6 = wx.StaticText(self.m_panel27, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, 0)
 		self.m_staticText6.Wrap(-1)
@@ -80,7 +80,7 @@ class FrameWarningKey (wx.Frame):
 		self.m_staticText146 = wx.StaticText(self.m_panel27, wx.ID_ANY, u"            ", wx.DefaultPosition, wx.DefaultSize, 0)
 		self.m_staticText146.Wrap(-1)
 
-		bSizer3.Add(self.m_staticText146, 0, wx.ALL | wx.EXPAND |  wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_LEFT, 5)
+		bSizer3.Add(self.m_staticText146, 0, wx.ALL | wx.EXPAND | wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_LEFT, 5)
 
 		fgSizer36.Add(bSizer3, 1, wx.ALIGN_RIGHT, 5)
 
@@ -97,7 +97,7 @@ class FrameWarningKey (wx.Frame):
 		fgSizer37.Add(self.m_button39, 0, wx.ALL | wx.ALIGN_BOTTOM | wx.ALIGN_RIGHT, 5)
 		
 		self.m_button40 = wx.Button(self.m_panel27, wx.ID_ANY, u"Tutup", wx.DefaultPosition, wx.DefaultSize, 0)
-		fgSizer37.Add(self.m_button40,0 , wx.ALL|wx.ALIGN_BOTTOM | wx.ALIGN_RIGHT, 5)
+		fgSizer37.Add(self.m_button40, 0 , wx.ALL | wx.ALIGN_BOTTOM | wx.ALIGN_RIGHT, 5)
 		
 		bSizer57.Add(fgSizer37, 0, wx.ALIGN_RIGHT, 5)
 
@@ -121,7 +121,7 @@ class FrameWarningKey (wx.Frame):
 		pass
 
 	# Virtual event handlers, overide them in your derived class
-	def m_button40OnButtonClick(self,event):
+	def m_button40OnButtonClick(self, event):
 		event.Skip()
 	
 	def m_textCtrl49OnText(self, event):
@@ -132,5 +132,4 @@ class FrameWarningKey (wx.Frame):
 
 	def m_button39OnButtonClick(self, event):
 		event.Skip()
-
 

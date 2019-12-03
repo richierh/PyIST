@@ -1,8 +1,5 @@
 {
     "python.pythonPath": "/home/cireng/miniconda3/envs/wxpython/bin/python",
     "python.linting.pylintEnabled": true,
-    "python.linting.flake8Enabled": false,
-    "python.linting.enabled": true,
-    "python.linting.pycodestyleEnabled": false,
-    "python.formatting.provider": "black"
+    "python.linting.enabled": true
 }

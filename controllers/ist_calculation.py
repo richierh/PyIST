@@ -1,10 +1,8 @@
 
 
-
 class KalkulasiNilai():
 
-
-    def __init__(self,parent):
+    def __init__(self, parent):
         self.parent = parent
         # print (self.parent.panggilgrid.getdata())
         # print (self.parent.get_biodata())
@@ -16,12 +14,9 @@ class KalkulasiNilai():
 
     def method_hitung(self):
 
-
         pass
 
-
-
-    def konversi_nilai_ge(self,values):
+    def konversi_nilai_ge(self, values):
         self.value = values
         print (f"ini nilai GE {self.value}")
         pass

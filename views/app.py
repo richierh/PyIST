@@ -14,7 +14,6 @@ from controllers.ISTISTUtama import ISTISTUtama
 
 class MyApp(wx.App):
 
-
     def OnInit(self):
         self.frame = ISTISTUtama(None)
         self.SetTopWindow(self.frame)

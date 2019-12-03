@@ -25,7 +25,6 @@ os.chdir(str(pathwd))
 
 class VerifyKey():
 
-
     def __init__(self, parent):
         self.value = parent
         pass
@@ -43,12 +42,14 @@ def openWindows():
     run.MainLoop()  
     return None
 
+
 def close():
     from views.authenticationFrameWarningKey import authenticationFrameWarningKey
     
     start = authenticationFrameWarningKey(None)
     start.Show()
     return None
+
 
 if platform.system() == "Windows":
 #     print (platform.system())
@@ -66,7 +67,6 @@ if platform.system() == "Windows":
             openWindows()
         else :
             close()
-
 
 elif platform.system() == "Linux" :
     print (platform.system())

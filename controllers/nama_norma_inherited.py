@@ -2,17 +2,20 @@
 
 import wx
 from views.nama_norma import NamaNorma
+
+
 # Implementing NamaNorma
-class NamaNormaInherited( NamaNorma ):
-    def __init__( self, parent ):
-        super().__init__( parent )
+class NamaNormaInherited(NamaNorma):
+
+    def __init__(self, parent):
+        super().__init__(parent)
         self.parent = parent
         self.databasekon = self.parent.parent.parent.databasekon
 
-        self.SetSize((500,200))
+        self.SetSize((500, 200))
 
     # Handlers for NamaNorma events.
-    def m_button_okOnButtonClick( self, event ):
+    def m_button_okOnButtonClick(self, event):
         # TODO: Implement m_button_okOnButtonClick
         self.nama_norma = self.m_textCtrl_nama_norma.GetValue()
         self.keterangan_norma = self.m_textCtrl_keterangan.GetValue()
@@ -21,20 +24,19 @@ class NamaNormaInherited( NamaNorma ):
         # 	print("harus buat baru")
         # else :
         # 	print("nggak harus buat baru")
-        self.parent.m_dataViewListCtrl4.GetValue(0,0)
+        self.parent.m_dataViewListCtrl4.GetValue(0, 0)
         self.parent.parent.m_dataViewListCtrl3.GetItemCount()
         self.GetLastRow = int(self.parent.parent.m_dataViewListCtrl3.GetValue(\
-            self.parent.parent.m_dataViewListCtrl3.GetItemCount()-1,0))
+            self.parent.parent.m_dataViewListCtrl3.GetItemCount() - 1, 0))
 
         self.parent.parent.m_dataViewListCtrl3.AppendItem(\
-            [str(self.GetLastRow+1),\
-            str(self.parent.parent.m_dataViewListCtrl3.GetItemCount()+1),\
-            self.nama_norma,\
+            [str(self.GetLastRow + 1), \
+            str(self.parent.parent.m_dataViewListCtrl3.GetItemCount() + 1), \
+            self.nama_norma, \
             self.keterangan_norma])
 
-
         self.tabel_norma_sendiri = TabelNormaSendiriConnect(self.databasekon)
-        self.tabel_norma_sendiri.insert_nama_norma([self.nama_norma,self.keterangan_norma])
+        self.tabel_norma_sendiri.insert_nama_norma([self.nama_norma, self.keterangan_norma])
         
         self.data_norma = []
         for datarow in range(0, self.parent.m_dataViewListCtrl4.GetItemCount()):
@@ -78,7 +80,7 @@ class NamaNormaInherited( NamaNorma ):
         self.parent.Close()
         pass
 
-    def m_button_batalOnButtonClick( self, event ):
+    def m_button_batalOnButtonClick(self, event):
         # TODO: Implement m_button_batalOnButtonClick
         self.Close()
         pass

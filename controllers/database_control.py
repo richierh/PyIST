@@ -6,7 +6,7 @@ import pathlib
 # sys.path.append(chg_folder)
 # # nama_file = str(pathlib.Path(chg_folder+"/models/istcore"))
 
-    KonversiGE, TableDataKelompokUmur, NormaSendiri,Peserta
+    KonversiGE, TableDataKelompokUmur, NormaSendiri, Peserta
 from numpy import arange, sin, pi
 
 
@@ -25,6 +25,7 @@ class DatabaseConnect():
 
     def __repr__(self):
         return self.nama_file
+
 
 class DatabaseBioData(DatabaseConnect):
 
@@ -56,7 +57,7 @@ class DatabaseBioData(DatabaseConnect):
             self.db.insert_database_kandidat_tambahan1(self.data2)
         elif self.tipe_kandidat == 2 :
             self.data3 = args[2]
-            self.data3.insert(0,self.get_last_id)
+            self.data3.insert(0, self.get_last_id)
             # id_kand,asal_sekolah,jurusan,asal_universitas,jurusan,kota,hoby,prestasi_akademik,prestasi_non_akademik,
             # ekskul yang pernah diikuti
             self.db.insert_database_kandidat_tambahan2(self.data3)     
@@ -71,6 +72,7 @@ class DatabaseBioData(DatabaseConnect):
 
         return self.lihat_data
 
+
 class PesertaData(DatabaseConnect):
 
     def __init__(self, parent):
@@ -83,6 +85,7 @@ class PesertaData(DatabaseConnect):
     def get_data_peserta(self):
         self.getdata = self.db.select_data()
         return self.getdata
+
 
 class DataBaseInput(DatabaseConnect):
 
@@ -149,7 +152,7 @@ class TableDataKelompokUmurConnect(DataKonversiGE):
             for nilai_sw in self.nilai_sw:
                 if input == nilai_sw[0]:
                     print("okay")
-                    c.append([input, nilai_sw[self.inputs.index(input)+1]])
+                    c.append([input, nilai_sw[self.inputs.index(input) + 1]])
         print(c)
         data_sum_rw = []
         for data in c:
@@ -223,12 +226,13 @@ class TabelNormaSendiriConnect(TableDataKelompokUmurConnect):
         self.query_last_row = self.db.query_last_row()
         return self.query_last_row
 
+
 if __name__ == "__main__":
     print(pathlib.Path.cwd())
     nama_file = "istcore"
     # print (nama_file)
     run = DatabaseControl(nama_file)
     # [tipe_kandidat,nama_kandidat,tgl tes, jenis kelamin, tanggal lahir]
-    data = [2,"Alif","2019/10/23","Laki-Laki","2002/12/04"]
-    data2 = [2,3,4,6]
+    data = [2, "Alif", "2019/10/23", "Laki-Laki", "2002/12/04"]
+    data2 = [2, 3, 4, 6]
     run.insert_biodata(data, data2)

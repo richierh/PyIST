@@ -5,11 +5,10 @@ from controllers.properties_tampilan import PropertiesTampilan, AddTextCtrlPrope
 # Implementing ISTUtama
 
 
-class ISTISTUtama( ISTInheritedProperties ):
+class ISTISTUtama(ISTInheritedProperties):
 
-
-	def __init__( self, parent ,*args,**kwds):
-		super().__init__(parent,*args,**kwds)
+	def __init__(self, parent , *args, **kwds):
+		super().__init__(parent, *args, **kwds)
 		self.m_simplebook1.SetSelection(0)
 		self.properties_tamp = PropertiesTampilan(self)
 		self.properties_tamp.logo_show()
@@ -18,12 +17,8 @@ class ISTISTUtama( ISTInheritedProperties ):
 		# for listtext in self.properties_listcontrol.list_an :
 		# 	print (listtext.SetValue("A"))
 
-
 		self.Maximize()
 		pass
-	
-
-	
 	
 	# def m_button_hapus_onclick( self, event ):
 	# 	print ("hapus dari database")
@@ -42,8 +37,6 @@ class ISTISTUtama( ISTInheritedProperties ):
 	# def m_button_reset_onclick( self, event ):
 	# 	print ("reset dari halaman terakhir")
 	# 	event.Skip()
-
-
 	
 	def m_buttonInput_JawabanOnButtonClick(self, event):
 		self.m_notebook1.SetSelection(1)
@@ -99,7 +92,7 @@ class ISTISTUtama( ISTInheritedProperties ):
 		self.control.enabledisablecontrolra()
 		pass
 	
-	def m_textCtrl30OnText( self, event ):
+	def m_textCtrl30OnText(self, event):
 		print ("respon on 'input jawaban'")
 		self.control = AddTextCtrlProperties(self)
 		self.control.enabledisablecontrolratotal()
@@ -129,44 +122,42 @@ class ISTISTUtama( ISTInheritedProperties ):
 		self.control.enabledisablecontrolfatotal()
 		pass
 
-	def m_textCtrl75OnText(self,event):
+	def m_textCtrl75OnText(self, event):
 		print ("respon on 'input jawaban'")
 
 		self.control = AddTextCtrlProperties(self)
 		self.control.enabledisablecontrolwutotal()
 		pass
 	
-	def m_textCtrl485OnText(self,event):
+	def m_textCtrl485OnText(self, event):
 		print ("respon on 'input jawaban a'")
 		self.control = AddTextCtrlProperties(self)
 		self.control.enabledisablecontrolwu()
 		pass
 
-	def m_textCtrl76OnText(self,event):
+	def m_textCtrl76OnText(self, event):
 		print ("respon on 'input jawaban'")
 
 		self.control = AddTextCtrlProperties(self)
 		self.control.enabledisablecontrolmetotal()
 		pass
 	
-	def m_textCtrl486OnText(self,event):
+	def m_textCtrl486OnText(self, event):
 		print ("respon on 'input jawaban a'")
 		self.control = AddTextCtrlProperties(self)
 		self.control.enabledisablecontrolme()
 		pass
 	
-	def m_button6OnButtonClick(self,event):
+	def m_button6OnButtonClick(self, event):
 		# Klik for calculating \
 		print ("over here")
 		self.run_calculate = ListControlProperties(self)
 		
 		pass
-
 	
-	def m_textCtrl_namaOnLeftUp(self,event):
+	def m_textCtrl_namaOnLeftUp(self, event):
 
-
-		if self.m_textCtrl_nama.GetValue()=="Ketik Nama Anda":
+		if self.m_textCtrl_nama.GetValue() == "Ketik Nama Anda":
 			# event.SetString("")
 			self.m_textCtrl_nama.SetValue("")
 			print ("lewat sini")
@@ -176,5 +167,4 @@ class ISTISTUtama( ISTInheritedProperties ):
 			pass
 		print ("okay")
 		pass
-
 

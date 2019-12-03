@@ -9,15 +9,13 @@ from views.istcore import Biodata
 
 class BiodataPeserta(Biodata):
 
-
     def __init__(self, parent):
         super().__init__()
 
 
-class Biodata( Biodata ):
-
+class Biodata(Biodata):
     
-    def __init__( self, parent ):
+    def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
         self.parent.tipe_biodata 
@@ -49,7 +47,6 @@ class Biodata( Biodata ):
         self.m_textCtrl_kota2.Disable()
         self.m_textCtrl_perusahaan_instansi2.Disable()
         self.m_textCtrl_posisi_jabatan2.Disable()
-
 
         self.parent.tipe_biodata == 0
         if self.parent.select_input == 1:
@@ -85,7 +82,7 @@ class Biodata( Biodata ):
                 self.m_textCtrl_prestasi_non_akademik.SetValue(self.parent.biodata[12])
                 self.m_textCtrl_ekskul_yang_diikuti.SetValue(self.parent.biodata[13])	
 
-                self.SetSize(wx.Size(500,500))
+                self.SetSize(wx.Size(500, 500))
 
             elif self.parent.tipe_biodata == 2 :
                 self.m_panel17.Show()
@@ -100,8 +97,7 @@ class Biodata( Biodata ):
                 self.m_textCtrl_kota2.SetValue(self.parent.biodata[7])
                 self.m_textCtrl_perusahaan_instansi2.SetValue(self.parent.biodata[8])
                 self.m_textCtrl_posisi_jabatan2.SetValue(self.parent.biodata[9])
-                self.SetSize(wx.Size(500,500))
-
+                self.SetSize(wx.Size(500, 500))
 
         elif self.parent.select_input == 2 :
             pass
@@ -110,6 +106,6 @@ class Biodata( Biodata ):
         pass
 
     # Handlers for Biodata events.
-    def m_textCtrl_namaOnLeftUp( self, event ):
+    def m_textCtrl_namaOnLeftUp(self, event):
         # TODO: Implement m_textCtrl_namaOnLeftUp
         pass

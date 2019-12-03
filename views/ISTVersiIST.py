@@ -3,10 +3,12 @@
 import views.istcore as istcore 
 from views.properties_tampilan_versi import PropertiesTampilanVersi
 
+
 # Implementing VersiIST
-class ISTVersiIST( istcore.VersiIST ):
-	def __init__( self, parent ):
-		istcore.VersiIST.__init__( self, parent )
+class ISTVersiIST(istcore.VersiIST):
+
+	def __init__(self, parent):
+		istcore.VersiIST.__init__(self, parent)
 		self.__properties()
 		
 	def __properties(self):
@@ -17,7 +19,7 @@ class ISTVersiIST( istcore.VersiIST ):
 			# print ("Masuk Versi Seleksi")
 			pass
 
-		elif self.m_radioBoxVersiIST.GetSelection()== 1 :
+		elif self.m_radioBoxVersiIST.GetSelection() == 1 :
 			# print ("Masuk Versi Binakarir")
 			pass
 	

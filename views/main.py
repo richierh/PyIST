@@ -12,6 +12,7 @@ class run(I):
 
 	pass
 
+
 root = wx.App()
 start = run(None)
 start.Show()

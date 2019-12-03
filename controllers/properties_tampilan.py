@@ -9,27 +9,24 @@ import pathlib
 
 class PropertiesTampilan():
     
-    def __init__(self,parent):
+    def __init__(self, parent):
         self.parent = parent
 
         # print ("properties diaktifkan")
         pass
     
-    
     def tabel_show(self):
-        self.parent.m_dataViewListColumn12 = self.parent.m_dataViewListCtrl9.AppendTextColumn( u"CAS", wx.DATAVIEW_CELL_INERT, 75, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE )
+        self.parent.m_dataViewListColumn12 = self.parent.m_dataViewListCtrl9.AppendTextColumn(u"CAS", wx.DATAVIEW_CELL_INERT, 75, wx.ALIGN_CENTER | wx.ALIGN_LEFT, wx.DATAVIEW_COL_RESIZABLE)
 
         pass
 
-
     def logo_show(self):
-        self.pathpict = pathlib.Path.cwd()/"resources/images/binadata.png"
+        self.pathpict = pathlib.Path.cwd() / "resources/images/binadata.png"
         print (self.pathpict)
         self.image = wx.Image(str(self.pathpict))
         print (self.image)
-        self.re_image = self.image.Rescale(300,150)
+        self.re_image = self.image.Rescale(300, 150)
         self.parent.m_logo_binakarir.SetBitmap(wx.Bitmap(self.re_image))
-
 
     def tabel_show(self):
         
@@ -62,8 +59,6 @@ class PropertiesTampilan():
 #             index = self.parent.m_listCtrl1.InsertItem(0, str(i[0])) 
 #             self.parent.m_listCtrl1.SetItem(index, 1, str(i[1])) 
 # #             self.parent.m_listCtrl1.SetStringItem(index, 2, i[1]) 
- 
- 
       
 #         self.listheaderlistCtrl2 = [
 #             ["Flexibilitas Berpikir",300,wx.LIST_FORMAT_CENTER],
@@ -81,9 +76,8 @@ class PropertiesTampilan():
 
 class AddTextCtrlProperties():
     
-    def __init__(self,parent):
+    def __init__(self, parent):
         self.parent = parent
-        
     
     def enabledisablecontrolse(self):
         if self.parent.m_textCtrl47.GetValue() != "":
@@ -136,7 +130,6 @@ class AddTextCtrlProperties():
             self.parent.m_textCtrl47.Enable(False)    
         else :
             self.parent.m_textCtrl47.Enable(True)
-            
             
     def enabledisablecontrolwa(self):
         
@@ -297,7 +290,7 @@ class AddTextCtrlProperties():
             self.parent.m_textCtrl181.Enable(True)      
             
     def enabledisablecontrolzr(self):       
-        if self.parent.m_textCtrl196.GetValue()!= "":
+        if self.parent.m_textCtrl196.GetValue() != "":
             print ("tidak nol")
             self.parent.m_textCtrl10.Enable(False)
             self.parent.m_textCtrl11.Enable(False)   
@@ -349,7 +342,7 @@ class AddTextCtrlProperties():
             self.parent.m_textCtrl196.Enable(True)      
 
     def enabledisablecontrolfa(self):       
-        if self.parent.m_textCtrl484.GetValue()!= "":
+        if self.parent.m_textCtrl484.GetValue() != "":
             print ("tidak nol")
             for listfa in self.parent.properties_listcontrol.list_fa:
                 listfa.Enable(False)
@@ -365,7 +358,7 @@ class AddTextCtrlProperties():
             self.parent.m_textCtrl484.Enable(True)      
 
     def enabledisablecontrolwu(self):       
-        if self.parent.m_textCtrl485.GetValue()!= "":
+        if self.parent.m_textCtrl485.GetValue() != "":
             print ("tidak nol")
             for listfa in self.parent.properties_listcontrol.list_wu:
                 listfa.Enable(False)
@@ -381,7 +374,7 @@ class AddTextCtrlProperties():
             self.parent.m_textCtrl485.Enable(True)     
 
     def enabledisablecontrolme(self):       
-        if self.parent.m_textCtrl486.GetValue()!= "":
+        if self.parent.m_textCtrl486.GetValue() != "":
             print ("tidak nol")
             for listfa in self.parent.properties_listcontrol.list_me:
                 listfa.Enable(False)

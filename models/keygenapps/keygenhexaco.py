@@ -79,8 +79,7 @@ if __name__ == "__main__":
 # 	lisensi = (int(lisensi_total) -)/4
 
 	lastdigit = int(repr(int(lisensi_total))[0:4])
-	lisensi = int(lastdigit/4)
-	
+	lisensi = int(lastdigit / 4)
 
 # 	lisensi = 1830
 # 	print (Key.verify(lisensi))

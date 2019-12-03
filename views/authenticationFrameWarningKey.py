@@ -11,16 +11,15 @@ from views.tempelfile import TempelFile
 
 class authenticationFrameWarningKey(FrameKey.FrameWarningKey):
 
-
 	def __init__(self, parent):
 		FrameKey.FrameWarningKey.__init__(self, parent)
-		self.SetSize((450,300))
+		self.SetSize((450, 300))
 		self.m_staticText6.SetLabel("")
 		
 		self.nilai = random.randint(1700, 1900)
-		self.acak = random.randint(10000,99999)
+		self.acak = random.randint(10000, 99999)
 
-		self.lisennombor =  str(self.nilai * 4) + str(self.acak)
+		self.lisennombor = str(self.nilai * 4) + str(self.acak)
 		n = int(self.lisennombor)
 	
 		self.lastdigit = int(repr(n)[0:4])
@@ -53,7 +52,7 @@ class authenticationFrameWarningKey(FrameKey.FrameWarningKey):
 
 		self.keynumber = self.m_textCtrl49.GetValue()
 		print (self.keynumber)
-		lisensi = round(self.lastdigit/4)
+		lisensi = round(self.lastdigit / 4)
 		print (lisensi)
 		self.gen = Key(self.keynumber)
 		print ("aneh")
@@ -69,12 +68,11 @@ class authenticationFrameWarningKey(FrameKey.FrameWarningKey):
 			self.m_staticText6.SetLabel("Tidak Valid")
 		else : 
 			print ("gagal")
-
 			
 		# self.m_staticText6.SetLabel("Tidak Valid")
 		pass
 		
-		if self.m_staticText6.GetLabel()== "tervalidasi":
+		if self.m_staticText6.GetLabel() == "tervalidasi":
 			self.Close()
 			print ("Berhasil")
 			
@@ -83,9 +81,9 @@ class authenticationFrameWarningKey(FrameKey.FrameWarningKey):
 	def m_button40OnButtonClick(self, event):
 		print ("tutup")
 		self.Close()
-
 		
 		pass
+
 
 root = wx.App()
 RunApp = authenticationFrameWarningKey(None)

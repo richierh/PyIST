@@ -1,19 +1,21 @@
 
+
 class DataIST():
 
-    def __init__(self,usia):
+    def __init__(self, usia):
         self.datafunc()
 
 
 class ISTCore(object):
 
-    def __init__(self,**kwds):
+    def __init__(self, **kwds):
         self.data = kwds
         # print (self.data)
 
         self.data.get("20")
         # print (self.data.get("20"))
         self.nilaise()
+
     def nilaise(self):
 
         return self.data.get("20")
@@ -21,9 +23,6 @@ class ISTCore(object):
     def __str__(self):
 
         return str(self.data.get("20"))
-
-
-
 
 
 if __name__ == "__main__":
@@ -45,8 +44,8 @@ if __name__ == "__main__":
         "6" : 98,
         "5" : 94,
         "4" : 90,
-        "3" : 86, 
-        "2" : 82, 
+        "3" : 86,
+        "2" : 82,
         "1" : 78,
         "0" : 74
     }

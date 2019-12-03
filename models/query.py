@@ -15,9 +15,9 @@ class SqliteDB(object):
 
     def __init__(self, nama_file):
         self.nama_file = nama_file
-        self.current_path = pathlib.Path.cwd()/""
+        self.current_path = pathlib.Path.cwd() / ""
         self.path_db = pathlib.\
-            Path(self.current_path.parent/f"models/{self.nama_file}")
+            Path(self.current_path.parent / f"models/{self.nama_file}")
         # # self.path_db = 
         # pathlib.Path(self.current_path/f"models/{self.nama_file}")
         # print(self.path_db)
@@ -146,7 +146,6 @@ class SqliteDB(object):
 
             return True
 
-
     def insert_database_kandidat_tambahan2(self, values):
 
             self.values = values
@@ -228,14 +227,15 @@ class SqliteDB(object):
 
         return self.results
 
+
 class NormaSarjana(SqliteDB):
 
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
-        self.parent =  parent
+        self.parent = parent
 
-    def get_score(self,value):
-        self.value = [str(value),str(value)]
+    def get_score(self, value):
+        self.value = [str(value), str(value)]
         # self.value = [str(2),str(2)]
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
@@ -245,19 +245,20 @@ class NormaSarjana(SqliteDB):
         WHERE 
         SUBSTR(SE,1,3) <= ? AND SUBSTR(SE,-3) >= ?
         """
-        getdata  = self.cursorexe.execute(self.sql_cmd,self.value).fetchone()
+        getdata = self.cursorexe.execute(self.sql_cmd, self.value).fetchone()
         self.close_db()
         return getdata
+
 
 class DataPeserta(SqliteDB) :
     
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
-        self.parent =  parent
+        self.parent = parent
 
-    def insert_data_peserta(self,value):
+    def insert_data_peserta(self, value):
 
-        self.value = [str(value),str(value)]
+        self.value = [str(value), str(value)]
         # self.value = [str(2),str(2)]
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
@@ -267,9 +268,11 @@ class DataPeserta(SqliteDB) :
         WHERE 
         SUBSTR(SE,1,3) <= ? AND SUBSTR(SE,-3) >= ?
         """
-        getdata  = self.cursorexe.execute(self.sql_cmd,self.value).fetchone()
+        getdata = self.cursorexe.execute(self.sql_cmd, self.value).fetchone()
         self.close_db()
         return getdata
+
+
 class NormaSendiri(SqliteDB):
 
     def __init__(self, parent):
@@ -374,7 +377,7 @@ FROM norma_sendiri ORDER BY id_norma DESC LIMIT 1
         DELETE FROM norma_sendiri
         WHERE "no" = ?
         """
-        self.cursorexe.execute(self.sql_cmd, (self.values, ))
+        self.cursorexe.execute(self.sql_cmd, (self.values,))
         self.conn.commit()
         self.close_db()
         return True
@@ -601,7 +604,7 @@ class TableDataKelompokUmur(SqliteDB):
         else:
             pass
 
-        self.cursorexe.execute(self.sql_cmd)#,[(self.values,)])
+        self.cursorexe.execute(self.sql_cmd)  # ,[(self.values,)])
         self.getdatas = self.cursorexe.fetchall()
         self.close_db()
 
@@ -671,7 +674,7 @@ class TableDataKelompokUmur(SqliteDB):
             """
             pass
 
-        self.cursorexe.execute(self.sql_cmd)#,[(self.values,)])
+        self.cursorexe.execute(self.sql_cmd)  # ,[(self.values,)])
         self.getdatas = self.cursorexe.fetchall()
         self.close_db()
 
@@ -757,19 +760,21 @@ class BidangKeilmuan(SqliteDB):
 
         self.close_db()
 
-        return self.getdatas\
+        return self.getdatas
+
+
 
 class JenisNorma(SqliteDB):
 
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
 
-    def select_data_norma_pekerjaan(self,id):
+    def select_data_norma_pekerjaan(self, id):
         self.id = str(id)
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
-        self.sql_cmd ="""
+        self.sql_cmd = """
         SELECT NormaID,
         [Jenis Norma],
         [Keterangan],
@@ -777,7 +782,7 @@ class JenisNorma(SqliteDB):
         FROM [Jenis Norma]
         WHERE NormaID = ?;
         """
-        self.cursorexe.execute(self.sql_cmd,self.id)
+        self.cursorexe.execute(self.sql_cmd, self.id)
         self.getdatas = self.cursorexe.fetchall()
         for data in self.getdatas:
             print (data)
@@ -785,11 +790,11 @@ class JenisNorma(SqliteDB):
         self.close_db()
         return self.getdatas
     
-    def select_data_norma_usia(self,id):
+    def select_data_norma_pendidikan(self, id):
         self.id = str(id)
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
-        self.sql_cmd ="""
+        self.sql_cmd = """
         SELECT [Norma Pendidikan].NormaPendidikanID,
             [Norma Pendidikan]."Nama Norma",
             [Norma Pendidikan].Usia,
@@ -798,13 +803,51 @@ class JenisNorma(SqliteDB):
         LEFT JOIN  [Norma Pendidikan] ON [Norma Pendidikan].NormaID = [Jenis Norma].NormaID
         WHERE [Norma Pendidikan].NormaID = ?;       
         """
-        self.cursorexe.execute(self.sql_cmd,self.id)
+        self.cursorexe.execute(self.sql_cmd, self.id)
         self.getdatas = self.cursorexe.fetchall()
         for data in self.getdatas:
             print (data)
 
         self.close_db()
         return self.getdatas        
+
+    def update_data_norma_pendidikan(self,value,id):
+        self.value = value
+        self.id = str(id)
+
+        self.conn = self.connect_db()
+
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        UPDATE [Norma Pendidikan]
+        SET Keterangan = ?
+        WHERE  NormaPendidikanID = ?;
+        """
+        self.cursorexe.execute(self.sql_cmd,[self.value,self.id])
+        self.conn.commit()
+        self.close_db()
+        # import pdb ; pdb.set_trace()
+
+        return True
+
+    def update_data_norma_pendidikan(self,value,id):
+        self.value = value
+        self.id = str(id)
+
+        self.conn = self.connect_db()
+
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        UPDATE [Jenis Norma]
+        SET Keterangan = ?
+        WHERE NormaID = ? ;
+        """
+        self.cursorexe.execute(self.sql_cmd,[self.value,self.id])
+        self.conn.commit()
+        self.close_db()
+        # import pdb ; pdb.set_trace()
+
+        return True
 
 class Peserta(SqliteDB):
 
@@ -840,6 +883,7 @@ class Peserta(SqliteDB):
         self.close_db()
         return self.getdatas
 
+
 def insert_input_peserta(values):
     conne = connect_db()
     cursorexe = conne.cursor()
@@ -852,7 +896,7 @@ def insert_input_peserta(values):
                     DESC limit 1), ?);
     """
 
-    cursorexe.executemany(sql_cmd,values)
+    cursorexe.executemany(sql_cmd, values)
     conne.commit()
     conne.close
     print("insert data done")
@@ -1022,7 +1066,7 @@ def query_tabel_data_peserta(value):
                     FROM "Rincian Data Peserta"
                     WHERE "No Tes" = ?;
                 """
-        cursorexe.execute(sql_cmd,((value[1],)))
+        cursorexe.execute(sql_cmd, ((value[1],)))
 
     elif value[4] == "tanggal":
         sql_cmd = """
@@ -1073,7 +1117,7 @@ def hapus_data_input_peserta(values):
     conne.close
 
 
-def update_jawaban(values,id_pes):
+def update_jawaban(values, id_pes):
     #     Menampilkan data dari Input Peserta
     conne = connect_db()
     cursorexe = conne.cursor()
@@ -1120,7 +1164,6 @@ def update_rincian_data_peserta(values, id_pes):
     conne.commit()
     conne.close
 
-
 # if __name__ == "__main__":
 
 #     path = pathlib.Path.cwd() / "hexacodb"
@@ -1130,6 +1173,7 @@ def update_rincian_data_peserta(values, id_pes):
 #     insert_input_peserta(values)
 #     query_tabel_data_peserta("OFI SUNASTRI")
 #     print(query_tabel_data_peserta("OFI SUNASTRI"))
+
 
 if __name__ == "__main__":
     file_db = "istcore"

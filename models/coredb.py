@@ -13,13 +13,13 @@ class Table():
     
     # pathloc  = []
     
-    def __init__(self,parent):
+    def __init__(self, parent):
         # print (pathloc)
         self.pathloc = parent
-        self.parent     = parent
-        self.conn       = sqlite3.connect(self.pathloc)
-        self.cur        = self.conn.cursor()
-        self.sql_create_table1 =  """
+        self.parent = parent
+        self.conn = sqlite3.connect(self.pathloc)
+        self.cur = self.conn.cursor()
+        self.sql_create_table1 = """
             CREATE TABLE IF NOT EXISTS [Jawaban Peserta] (
                 [Id Jawaban Peserta] INTEGER PRIMARY KEY AUTOINCREMENT
                                              NOT NULL,
@@ -87,26 +87,26 @@ class Table():
         return os.remove(pathloc)
 
     def insert_name(self):
-        self.sqlinsertname ="""
+        self.sqlinsertname = """
         
         
         """
         pass
+
     
 class QueryTabel():
 
     # pathloc  = []
     
-    def __init__(self,parent):
+    def __init__(self, parent):
         self.pathloc = parent
         # print (pathloc)
-        self.parent     = parent
-        self.conn       = sqlite3.connect(self.pathloc)
-        self.cur        = self.conn.cursor()
+        self.parent = parent
+        self.conn = sqlite3.connect(self.pathloc)
+        self.cur = self.conn.cursor()
    
     def connect_table(self):
         pass
-    
     
     def create_table(self):
         # self.cur.execute(self.sql_create_table1)
@@ -118,7 +118,7 @@ class QueryTabel():
         return os.remove(pathloc)
 
     def insert_name(self):
-        self.sqlinsertname ="""
+        self.sqlinsertname = """
        
         """
         pass
@@ -150,52 +150,51 @@ class QueryTabel():
             self.tableumur = "TableDataKelompokUmur19"        
         return self.tableumur
 
+    def query_option(self, column, rawscore, kelompokusia):
 
-    def query_option(self,column,rawscore,kelompokusia):
-
-        self.column         = column
-        self.rawscore       = rawscore
-        self.kelompokusia   = kelompokusia
+        self.column = column
+        self.rawscore = rawscore
+        self.kelompokusia = kelompokusia
 
         self.tableumur = self.__kelompokusia()
         self.column = column
 
-        self.sql_query_table =  """
+        self.sql_query_table = """
         SELECT {}
         FROM {} 
         WHERE RW = ?        
-        """.format(self.column,self.tableumur)
+        """.format(self.column, self.tableumur)
 
         if self.kelompokusia == 12 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
 
         elif self.kelompokusia == 13 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
         
         elif self.kelompokusia == 14 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
  
         elif self.kelompokusia == 15 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
 
         elif self.kelompokusia == 16 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
 
         elif self.kelompokusia == 17 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
 
         elif self.kelompokusia == 18 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
 
         elif self.kelompokusia == 19 :
-            self.cur.execute(self.sql_query_table,(self.rawscore,))
+            self.cur.execute(self.sql_query_table, (self.rawscore,))
             self.getdata = self.cur.fetchone()
 
         # self.datascore = self.getdata
@@ -210,12 +209,10 @@ class QueryTabel():
         return self.nilaiScore
 
 
-
-
 if __name__ == '__main__':
 
     # d =os.chdir("..")
-    pathloc = pathlib.Path.cwd()/"models/istcore"
+    pathloc = pathlib.Path.cwd() / "models/istcore"
     # print (pathloc)
     run = QueryTabel(pathloc)
 #     Table.pathloc = pathloc

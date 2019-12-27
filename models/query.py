@@ -39,8 +39,8 @@ class SqliteDB(object):
         # print (self.values)
 
         self.sql_cmd = """
-        SELECT Count(*) FROM {self.values}
-               """
+        SELECT Count(*) FROM '{}'
+               """.format(self.values)
 
         self.results = self.conn.execute(self.sql_cmd).fetchone()
 
@@ -433,9 +433,9 @@ class KonversiGE(SqliteDB):
         self.cursorexe = self.conn.cursor()
         self.values = values
         self.sql_cmd = """
-        SELECT idge, no, nilai, konversi_ge
-        FROM konversi_nilai_ge
-        WHERE nilai=?
+        SELECT idGE,No,RW,GE
+        FROM 'Konversi GE'
+        WHERE RW=?
         """
         self.cursorexe.execute(self.sql_cmd, [self.values, ])
         getdatas = self.cursorexe.fetchone()
@@ -443,7 +443,7 @@ class KonversiGE(SqliteDB):
         #     # print (data)
         #     pass
         self.close_db()
-        if self.values >= 32:
+        if self.values > 32:
             getdatas = [33, 33, 33, 20]
 
         elif self.values is None:
@@ -513,6 +513,36 @@ class TabelJawaban(SqliteDB):
         self.getdatas = self.cursorexe.fetchall()
         self.close_db()
         return self.getdatas
+
+class InputJawaban(SqliteDB):
+
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+    
+    def insert_data(self,values = None):
+        self.conn = self.connect_db()
+        self.values = values
+
+        self.sql_cmd = """ INSERT INTO [Input Jawaban] (
+                                TipeInputId,
+                                id,
+                                SE,
+                                WA,
+                                AN,
+                                GE,
+                                RA,
+                                ZR,
+                                FA,
+                                WU,
+                                ME,KSE,KWA,KAN,KGE,KRA,KZR,KFA,KWU,KME
+                            )
+                            VALUES ((SELECT TipeInputId  FROM [Tipe Input] WHERE [Jenis Input] = ?),(SELECT id FROM [Data Peserta] WHERE [no tes] = ?),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); """
+
+        self.conn.executemany(self.sql_cmd,self.values)
+        self.conn.commit()
+        self.close_db()
+
 
 
 class TableDataKelompokUmur(SqliteDB):
@@ -883,6 +913,34 @@ class Peserta(SqliteDB):
         self.close_db()
         return self.getdatas
 
+    def insert_data_peserta(self,values):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+
+        self.sqlcmd = """INSERT INTO [Data Peserta] (
+                                [no tes],
+                                nama,
+                                [tanggal tes],
+                                [jenis kelamin],
+                                [tanggal lahir],
+                                usia,
+                                [asal sekolah],
+                                [pendidikan terakhir],
+                                jurusan,
+                                [posisi pekerjaan],
+                                perusahaan,
+                                keterangan,
+                                TipeNormaID
+                            )
+                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?
+                            );
+        """
+
+        self.cursorexe.execute(self.sqlcmd, self.values)
+        self.conn.commit()
+        self.close_db()
+
 
 def insert_input_peserta(values):
     conne = connect_db()
@@ -902,17 +960,6 @@ def insert_input_peserta(values):
     print("insert data done")
 
 
-def insert_data_peserta(values):
-    conne = connect_db()
-    cursorexe = conne.cursor()
-
-    sqlcmd = """INSERT INTO "Rincian Data Peserta"
-    (idtipesoal,"No Tes", "Tanggal Tes", "Nama Kandidat", "Jenis Kelamin", "Tanggal Lahir", "Pendidikan Terakhir", "Jurusan Pendidikan", Kota, "Perusahaan / Instansi", "Posisi / Jabatan")
-    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);    """
-
-    cursorexe.execute(sqlcmd, values)
-    conne.commit()
-    conne.close()
 
 
 def cek_id_peserta_terakhir():

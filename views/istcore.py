@@ -49,13 +49,6 @@ class ISTUtama ( wx.Frame ):
 		self.m_staticline2 = wx.StaticLine( self.m_panel15, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		bSizer5.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
 
-		m_radioBox_biodataChoices = [ u"Pendidikan", u"Pekerjaan" ]
-		self.m_radioBox_biodata = wx.RadioBox( self.m_panel15, wx.ID_ANY, u"Biodata ", wx.DefaultPosition, wx.DefaultSize, m_radioBox_biodataChoices, 2, wx.RA_SPECIFY_COLS )
-		self.m_radioBox_biodata.SetSelection( 0 )
-		self.m_radioBox_biodata.Hide()
-
-		bSizer5.Add( self.m_radioBox_biodata, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
-
 		bSizer19 = wx.BoxSizer( wx.HORIZONTAL )
 
 
@@ -168,7 +161,7 @@ class ISTUtama ( wx.Frame ):
 
 		m_choice_pendidikan_terakhir1Choices = [ u"SD", u"SMP", u"SMA", u"D3", u"S1", u"S2", u"S3" ]
 		self.m_choice_pendidikan_terakhir1 = wx.Choice( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice_pendidikan_terakhir1Choices, 0 )
-		self.m_choice_pendidikan_terakhir1.SetSelection( 3 )
+		self.m_choice_pendidikan_terakhir1.SetSelection( 6 )
 		fgSizer21.Add( self.m_choice_pendidikan_terakhir1, 0, wx.ALL, 5 )
 
 		self.m_staticText22821 = wx.StaticText( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, u"Jurusan", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2449,7 +2442,6 @@ class ISTUtama ( wx.Frame ):
 		self.Centre( wx.BOTH )
 
 		# Connect Events
-		self.m_radioBox_biodata.Bind( wx.EVT_RADIOBOX, self.m_radiobox_biodata_on_click )
 		self.m_textCtrl_nama.Bind( wx.EVT_LEFT_UP, self.m_textCtrl_namaOnLeftUp )
 		self.m_input_manual.Bind( wx.EVT_BUTTON, self.m_input_manualOnButtonClick )
 		self.m_input_total.Bind( wx.EVT_BUTTON, self.m_input_totalOnButtonClick )
@@ -2498,9 +2490,6 @@ class ISTUtama ( wx.Frame ):
 
 
 	# Virtual event handlers, overide them in your derived class
-	def m_radiobox_biodata_on_click( self, event ):
-		event.Skip()
-
 	def m_textCtrl_namaOnLeftUp( self, event ):
 		event.Skip()
 

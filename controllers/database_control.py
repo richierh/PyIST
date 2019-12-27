@@ -5,8 +5,7 @@ import pathlib
 # chg_folder  = str(pathlib.Path(parent_folder))
 # sys.path.append(chg_folder)
 # # nama_file = str(pathlib.Path(chg_folder+"/models/istcore"))
-
-    KonversiGE, TableDataKelompokUmur, NormaSendiri, Peserta
+from models.query import SqliteDB
 from numpy import arange, sin, pi
 
 

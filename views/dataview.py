@@ -145,7 +145,7 @@ class PanggilGrid():
                     self.parent.m_grid2.SetCellBackgroundColour(i, l, "grey")
                     self.parent.m_grid2.SetReadOnly(i, l)
 
-    def getdata(self):
+    def getdata2(self):
         self.data = []
 
         for l in range(0, 18):
@@ -177,6 +177,20 @@ class PanggilGrid():
  
                 self.data.append(self.datapertama)
                 
+        return self.data
+
+    def getdata(self):
+        self.data = []
+
+        for i in range (0,20):
+            self.datapertama = []
+            for l in range(0,18):
+                if l % 2:
+                    self.a = self.parent.m_grid2.GetCellValue(i, l)
+                    self.datapertama.append(self.a)
+
+            self.data.append(self.datapertama)
+
         return self.data
 
     def getdata_arrange(self):

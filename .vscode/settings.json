@@ -1,5 +1,3 @@
 {
-    "python.pythonPath": "/home/cireng/miniconda3/envs/wxpython/bin/python",
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
+    "python.pythonPath": "/home/cireng/miniconda3/envs/wxpython/bin/python"
 }

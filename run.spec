@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['run.py'],
-             pathex=['Z:\\home\\cireng\\Projects\\pyist'],
+             pathex=['/home/cireng/Projects/pyist'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=False )
+          console=True )

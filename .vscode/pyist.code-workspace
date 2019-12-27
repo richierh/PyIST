@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "/home/cireng/Projects/pyist"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"database": "/home/cireng/Projects/pyist/models/istcore",
+				"dialect": "SQLite",
+				"name": "Sqlite"
+			}
+		],
+		"sqltools.useNodeRuntime": true
+	}
+}

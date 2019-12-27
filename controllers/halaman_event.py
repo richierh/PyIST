@@ -1,11 +1,12 @@
-from numpy import arange, sin, pi
+from numpy import arange, sin, pi,array
 from statistics import mean
 import pathlib
 import os
 import wx
 import wx.dataview
 from views.istcore import ISTUtama
-from models.query import SqliteDB
+from models.query import SqliteDB,KonversiGE,TabelJawaban, \
+    InputJawaban,Peserta
 from pathlib import Path
 from views.dataview import RWSWScore, PanggilDataView, PanggilGrid, \
     PanggilInputTotal
@@ -14,6 +15,7 @@ from controllers.ist_calculation import KalkulasiNilai
 from controllers.biodata import Biodata
 from controllers.grafik_tabel import *
 
+from controllers.database_control import DatabaseConnect
 
 
 class DataView(ISTUtama):
@@ -27,10 +29,8 @@ class DataView(ISTUtama):
         # bsizerdataview = wx.BoxSizer(wx.VERTICAL)
         self.m_panel3.Layout()
         self.m_panel_input.Layout()
-        # import pdb; pdb.set_trace()
-        
+       
         pass
-        # MenuBar Selected
 
     def MenuTabelPendidikanOnMenuSelection(self, event):
         self.buka_tabel_norma_pekerjaan = TabelNormaLihatInherited(self)
@@ -44,12 +44,12 @@ class DataView(ISTUtama):
         self.buka_jendela_norma = NormaInherited(self)
         self.buka_jendela_norma.Show()
 
-    #     # self.m_dataViewListCtrl1 = wx.dataview.DataViewListCtrl( self.m_panel_input, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-    #     # self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-    #     # self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-    #     # self.m_dataViewListColumn3 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-    #     # bsizerdataview.Add( self.m_dataViewListCtrl1, 1, wx.ALL|wx.EXPAND, 5 )
-    #     pass
+        # self.m_dataViewListCtrl1 = wx.dataview.DataViewListCtrl( self.m_panel_input, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+        # self.m_dataViewListColumn1 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+        # self.m_dataViewListColumn2 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+        # self.m_dataViewListColumn3 = self.m_dataViewListCtrl1.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+        # bsizerdataview.Add( self.m_dataViewListCtrl1, 1, wx.ALL|wx.EXPAND, 5 )
+        pass
 
         # Menu
 
@@ -78,38 +78,16 @@ class HalamanEventControl(CekDB):
         self.re_image2 = self.image2.Rescale(200, 200)
         self.m_menuItem5.SetBitmap(wx.Bitmap(self.re_image2))
 
-      #  print (f"Setting Tipe Biodata atau Radio Button ke
-        #  {self.m_radioBox_biodata.SetSelection(0)}")
-        self.tipe_biodata = 1
-        # import pdb
+        #  print (f"Setting Tipe Biodata atau Radio Button ke
+        # {self.m_radioBox_biodata.SetSelection(0)}")
+        self.tipe_biodata = 0
 
-        # pdb.set_trace()
 
         pass
 
     # def m_menuItem8OnMenuSelection(self,event):
     #     print ("hhh")
     #     pass
-
-    def m_radiobox_biodata_on_click(self, event):
-        if self.m_radioBox_biodata.GetSelection() == 0:
-            # print ("Tipe Pendidikan")
-            self.tipe_biodata = 1
-            self.m_panel16.Show()
-            self.m_panel17.Hide()
-
-        elif self.m_radioBox_biodata.GetSelection() == 1:
-            # print ("Tipe Pekerjaan")
-            self.tipe_biodata = 2
-            self.m_panel17.Show()
-            self.m_panel16.Hide()
-
-        else:
-            print ("Ada kesalahan di opsi tipe biodata")
-        self.m_panel16.Layout()
-        self.m_panel17.Layout()
-        self.m_panel15.Layout()
-        event.Skip()
 
     def m_kembali_ke_awalOnButtonClick(self, event):
         # print("klik kembali ke awal")
@@ -178,32 +156,78 @@ class HalamanEventControl(CekDB):
             pass
 
     def m_button_norma_usia(self, event):
+
         self.pilih_norma = 1
         self.getSel = self.m_simplebook1.GetSelection()
         self.getSel = self.getSel + 1
         self.kelompok_usia = self.m_spinCtrl_usia.GetValue()
         self.input_peserta = self.panggilgrid.getdata()
-        # print (f"tipe {type(self.input_peserta[3][0])}
-        #  adalah {self.input_peserta[3][0]}")
-        if self.input_peserta[3][0] == 0 or self.input_peserta[3][0] == "":
+
+
+        if self.input_peserta[0][5] == 0 or self.input_peserta[0][5] == "":
             self.ge = 0
-            # print ("lewat sini kah")
         else:
-            self.ge = self.input_peserta[3][0]
-        self.databasekon = DatabaseConnect(self.nama_file)
-        # konversi nilai GE, hasil akhirnya adalah self.nilai_ge
-        # self.nilai_ge adalah hasil input yang telah dikonversi kedalam GE
-        self.con_datakonversi_ge = DataKonversiGE(self.databasekon)
-        self.nilai_ge = self.con_datakonversi_ge.konversi_ge(self.ge)
-        self.nilai_ge = self.nilai_ge[3]
+            self.ge = self.input_peserta[5][0]
+
+        if self.select_input == "Input Manual" :
+            self.input_peserta 
+            # kode kalkulasi nilai jawaban benar dan salah dibawah ini
+        
+        elif self.select_input == "Input Total":
+            self.panggil_input_total = PanggilInputTotal(self)
+            self.input_peserta = [self.panggil_nilai_total.getdata()]
+            self.ge = self.input_peserta[0][3]
+
+            # self.input_peserseta.insert(0,self.data_peserta.get_biodata()[0])
+            # self.input_peserta.insert(0,self.select_input)
+
+        for data in self.input_peserta:
+            data.insert(0,self.data_peserta.get_biodata()[0])
+            data.insert(0,self.select_input)
+
+        # Ambil data peserta dari form awal data peserta menggunakan method get_biodata()
+        # Format column No tes , tanggal tes, nama , jenis kelamin ,
+        # tanggal lahir, usia ,asal sekolah, pendidikan , jurusan,
+        # posisi pekerjaan, perusahaan, keterangan, tipe norma = 1 (tetap) 
+        self.data_peserta.get_biodata()[0]
+        self.data_peserta = self.data_peserta.get_biodata()
+        self.data_peserta.append(1)
+
+        self.databasepeserta = Peserta(self.connect_db)
+        self.databasepeserta.insert_data_peserta(self.data_peserta)
+
         # Ambil Data dari database kunci jawaban peserta untuk mencocokan dengan
-        # jawaban peserta
-        self.jawaban = DataBaseInput(self.databasekon)
-        self.jawaban.query_data_jawaban()
+        # jawaban dari peserta
+        self.jawaban = TabelJawaban(self.connect_db)
+        self.jawaban.query_kunci_jawaban()
+        self.jawab_tambah =  self.jawaban.query_kunci_jawaban()
+        self.jawaban_list = [data[2:] for data in self.jawab_tambah]
+        self.gab = []
+        for data in self.input_peserta:
+            self.gab.append([*data,*self.jawaban_list[self.input_peserta.index(data)]])
+
+        self.column_name = ["SE","WA","AN",'GE','RA','ZR','FA','WU','ME']
+        self.column_name_kunci_jawaban = ["KSE","KWA","KAN","KGE","KRA","KZR","KFA","KWU","KME"]
+
+        # self.data = [1,2,2,2,2,2,2,2,2,2,2]
+        self.input_jawaban = InputJawaban(self.connect_db)
+        self.input_jawaban.insert_data(self.gab)
+
+
+        
+        
         # self.input_peserta adalah input peserta (contoh di bawah adalah 
         # self.input_peserta = self.panggilgrid.getdata_arrange()) dari 
         # GUI GRID yang kemudian di hitung menghasilkan 
         # bentuk output yang diterima oleh proses selanjutnya, yakni menghitung SW
+
+        # konversi nilai GE, hasil akhirnya adalah self.nilai_ge
+        # self.nilai_ge adalah hasil input yang telah dikonversi kedalam GE
+        self.con_datakonversi_ge = KonversiGE(self.connect_db)
+        self.list_konversi_ge = self.con_datakonversi_ge.query_konversi(self.ge)
+        self.nilai_ge = self.list_konversi_ge[3]
+
+
         self.input_peserta = self.panggilgrid.getdata_arrange()
         self.m_simplebook1.SetSelection(self.getSel)
         # class untuk menghitung Nilai
@@ -263,14 +287,26 @@ class HalamanEventControl(CekDB):
         # print("klik Selanjutnya")
         self.getSel = self.m_simplebook1.GetSelection()
         self.getSel = self.getSel + 1
-        # print (self.getSel)
-        # self.getSel = self.m_simplebook1.GetSelection()
+
         if self.getSel == 1:
             self.m_selanjutnya.Disable()        
             self.m_sebelumnya.Enable()
-            # self.getBiodata = PesertaData(self.databasekon)
-            # self.getBiodata.get_data_peserta()
+            if self.m_textCtrl_no_tes.GetValue() == "":
+                from views.required_field import RequiredField
+                self.buka_required_not_complete = RequiredField(self)
+                self.buka_required_not_complete.Show()
+                self.getSel = self.getSel - 1
+                self.m_selanjutnya.Disable()        
+                self.m_sebelumnya.Disable()\
+
+            else :
+                pass
             pass
+
+        elif self.getSel == 2 :
+            print ("heello")
+            pass
+
 
         elif self.getSel == 3:
             # self.m_textCtrl_biodata.SetValue(self.biodata[2])
@@ -284,7 +320,9 @@ class HalamanEventControl(CekDB):
 
                 # self.m_panel221.Layout()
                 pass
-            # print ("disini kita")
+            
+            # Tempat memasukkan data input total atau input manual
+
             pass
 
         elif self.getSel == 4:
@@ -398,7 +436,7 @@ class HalamanEventControl(CekDB):
         pass
 
     def m_input_manualOnButtonClick(self, event):
-        self.select_input = 1
+        self.select_input = "Input Manual"
         # print (self.get_biodata())
         self.m_panel_input.Show()
         self.m_panel_input_total.Hide()
@@ -411,7 +449,7 @@ class HalamanEventControl(CekDB):
         pass
 
     def m_input_totalOnButtonClick(self, event):
-        self.select_input = 2
+        self.select_input = "Input Total"
         # print (self.get_biodata())
         self.m_panel_input.Hide()
         self.m_panel_input_total.Show()
@@ -419,6 +457,10 @@ class HalamanEventControl(CekDB):
         self.m_simplebook1.SetSelection(2)
         self.m_selanjutnya.Enable()        
         self.m_kembali_ke_awal.Enable()
+
+
+
+
         pass
 
     def m_button_rincian_biodata_on_buttonclick(self, event):

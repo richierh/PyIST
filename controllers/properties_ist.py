@@ -7,9 +7,9 @@ import wx
 import pathlib
 from shutil import copyfile
 
-from controllers.halaman_event import HalamanEventControl
+# from controllers.halaman_event import HalamanEventControl
 from controllers.grafik_tabel import *
-
+from controllers.halaman_event import HalamanEventControl
 from views.menubar_tentang import TentangAplikasiInherited
 from views.buka_filter_db import FrameFilterDatabase
 from views.dialog_save import DialogSavePDF
@@ -97,61 +97,22 @@ class PropertiesInput(MenuBarInherited):
         # menentukan tipe_biodata yang dipilih , apakah pendidikan ataukah pekerjaan
         # self.tipe_biodata = 1 adalah tipe pendidikan , self.tipe_biodata =2 adalah tipe pekerjaan
         self.tipe_biodata = 0
+        print("tes")
 
-        if self.tipe_biodata == 0 :
-            self.biodata = [self.m_textCtrl_no_tes.GetValue(),
-            self.m_datePicker_tanggal_tes1.GetValue().Format("%d/%m/%Y"),
-            self.m_textCtrl_nama.GetValue(),
-            self.m_choice_jenis_kelamin.GetString(self.m_choice_jenis_kelamin.GetSelection()),
-            self.m_datePicker_tanggal_lahir.GetValue().Format("%d/%m/%Y"),
-            self.m_spinCtrl_usia.GetValue(),
-            self.m_textCtrl_asal_sekolah_universitas.GetValue(),
-            self.m_choice_pendidikan_terakhir.GetString(self.m_choice_pendidikan_terakhir.GetSelection()),
-            self.m_textCtrl_jurusan.GetValue(),
-            self.m_textCtrl_posisi_pekerjaan.GetValue(),
-            self.m_textCtrl_perusahaan.GetValue(),
-            self.m_textCtrl_keterangan.GetValue()
-            ]
-            pass
+        self.biodata = [self.parent.m_textCtrl_no_tes.GetValue(),
+        self.parent.m_datePicker_tanggal_tes1.GetValue().Format("%d/%m/%Y"),
+        self.parent.m_textCtrl_nama.GetValue(),
+        self.parent.m_choice_jenis_kelamin.GetString(self.parent.m_choice_jenis_kelamin.GetSelection()),
+        self.parent.m_datePicker_tanggal_lahir.GetValue().Format("%d/%m/%Y"),
+        self.parent.m_spinCtrl_usia.GetValue(),
+        self.parent.m_textCtrl_asal_sekolah_universitas.GetValue(),
+        self.parent.m_choice_pendidikan_terakhir1.GetString(self.parent.m_choice_pendidikan_terakhir1.GetSelection()),
+        self.parent.m_textCtrl_jurusan.GetValue(),
+        self.parent.m_textCtrl_posisi_pekerjaan.GetValue(),
+        self.parent.m_textCtrl_perusahaan.GetValue(),
+        self.parent.m_textCtrl_keterangan.GetValue()
+        ]
 
-        elif self.tipe_biodata == 1:
-            # print ("Tipe pendidikan")
-        
-            self.biodata = [self.m_textCtrl_nama.GetValue(),
-            self.m_datePicker_tanggal_tes1.GetValue().Format("%d/%m/%Y"),
-            self.m_spinCtrl_usia.GetValue(),
-            self.m_choice_jenis_kelamin.GetString(self.m_choice_jenis_kelamin.GetSelection()),
-            self.m_datePicker_tanggal_lahir.GetValue().Format("%d/%m/%Y"),
-            self.m_textCtrl_asal_sekolah.GetValue(),
-            self.m_textCtrl_jurusan_sekolah.GetValue(),
-            "self.m_textCtrl_asal_universitas.GetValue()",
-            self.m_textCtrl_jurusan_universitas.GetValue(),
-            self.m_textCtrl_kota.GetValue(),
-            self.m_textCtrl_hobi.GetValue(),
-            self.m_textCtrl_prestasi_akademik.GetValue(),
-            self.m_textCtrl_prestasi_non_akademik.GetValue(),
-            self.m_textCtrl_ekskul_yang_diikuti.GetValue()
-            ]
-        
-        elif self.tipe_biodata == 2 : 
-            # print ("Tipe Pekerjaan")
-            self.biodata = [
-            self.m_textCtrl_no_tes.GetValue(),
-            self.m_datePicker_tanggal_tes2.GetValue().Format("%d/%m/%Y"),
-            self.m_textCtrl_nama2.GetValue(),
-            self.m_choice_jenis_kelamin2.GetString(self.m_choice_jenis_kelamin2.GetSelection()),
-            self.m_datePicker_tanggal_lahir2.GetValue().Format("%d/%m/%Y"),
-            self.m_choice_pendidikan_terakhir2.GetString(self.m_choice_pendidikan_terakhir2.GetSelection()),
-            self.m_textCtrl_jurusan_pendidikan2.GetValue(),
-            self.m_textCtrl_kota2.GetValue(),
-            self.m_textCtrl_perusahaan_instansi2.GetValue(),
-            self.m_textCtrl_posisi_jabatan2.GetValue()
-            ]
-
-        else :
-            # print ("data belum ada")
-            pass
-        
         return self.biodata
 
     def set_biodata_to_panel(self):

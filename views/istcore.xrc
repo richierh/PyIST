@@ -34,6 +34,7 @@
 							<object class="wxButton" name="m_kembali_ke_awal">
 								<label>Ke Awal</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -45,6 +46,7 @@
 							<object class="wxButton" name="m_sebelumnya">
 								<label>Sebelumnya</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -56,6 +58,7 @@
 							<object class="wxButton" name="m_selanjutnya">
 								<label>Selanjutnya</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -137,6 +140,7 @@
 							<object class="wxButton" name="m_button22">
 								<label>Pilih</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -148,6 +152,7 @@
 							<object class="wxButton" name="m_button_buat_tabel_norma">
 								<label>Buat</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -159,6 +164,7 @@
 							<object class="wxButton" name="m_button24">
 								<label>Edit</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -170,6 +176,7 @@
 							<object class="wxButton" name="m_button25">
 								<label>Hapus</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -181,6 +188,7 @@
 							<object class="wxButton" name="m_button_tutup_norma">
 								<label>Tutup</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -284,6 +292,7 @@
 							<object class="wxButton" name="m_button22">
 								<label>Pilih</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -295,6 +304,7 @@
 							<object class="wxButton" name="m_button_buat_tabel_norma">
 								<label>Buat</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -306,6 +316,7 @@
 							<object class="wxButton" name="m_button24">
 								<label>Edit</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -317,6 +328,7 @@
 							<object class="wxButton" name="m_button25">
 								<label>Hapus</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -328,6 +340,7 @@
 							<object class="wxButton" name="m_button_tutup_norma">
 								<label>Tutup</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -383,6 +396,7 @@
 							<object class="wxButton" name="m_button_pilih_norma_all">
 								<label>Pilih</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -394,6 +408,7 @@
 							<object class="wxButton" name="m_button_tutup_normaAll">
 								<label>Tutup</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -405,6 +420,62 @@
 					<flag>wxALL|wxEXPAND</flag>
 					<border>5</border>
 					<object class="unknown" name="m_dataViewListCtrl3" />
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxFrame" name="NormaSendiri">
+		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
+		<size>500,300</size>
+		<title>Norma Sendiri</title>
+		<centered>1</centered>
+		<aui_managed>0</aui_managed>
+		<object class="wxPanel" name="m_panel23">
+			<style>wxTAB_TRAVERSAL</style>
+			<object class="wxBoxSizer">
+				<orient>wxVERTICAL</orient>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxEXPAND</flag>
+					<border>5</border>
+					<object class="wxFlexGridSizer">
+						<rows>0</rows>
+						<cols>4</cols>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols>1</growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxButton" name="m_pilih_norma_sendiri_1">
+								<label>Pilih</label>
+								<default>0</default>
+								<auth_needed>0</auth_needed>
+								<markup>0</markup>
+								<bitmap />
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_RIGHT</flag>
+							<border>5</border>
+							<object class="wxButton" name="m_tutup_norma_sendiri_1">
+								<label>Tutup</label>
+								<default>0</default>
+								<auth_needed>0</auth_needed>
+								<markup>0</markup>
+								<bitmap />
+							</object>
+						</object>
+					</object>
+				</object>
+				<object class="sizeritem">
+					<option>1</option>
+					<flag>wxALL|wxEXPAND</flag>
+					<border>5</border>
+					<object class="unknown" name="m_dataViewListCtrl30" />
 				</object>
 			</object>
 		</object>
@@ -437,6 +508,7 @@
 							<object class="wxButton" name="m_button_ok_tabel_norma">
 								<label>Ok</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -448,6 +520,7 @@
 							<object class="wxButton" name="m_button_batal_tabel_norma">
 								<label>Batal</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -491,6 +564,7 @@
 							<object class="wxButton" name="m_button_ok_tabel_norma">
 								<label>Ok</label>
 								<default>0</default>
+								<auth_needed>0</auth_needed>
 								<markup>0</markup>
 								<bitmap />
 							</object>
@@ -566,6 +640,7 @@
 									<object class="wxButton" name="m_button_batal_baris">
 										<label>Batal</label>
 										<default>0</default>
+										<auth_needed>0</auth_needed>
 										<markup>0</markup>
 										<bitmap />
 									</object>
@@ -577,6 +652,7 @@
 									<object class="wxButton" name="m_button_ok_baris">
 										<label>Ok</label>
 										<default>0</default>
+										<auth_needed>0</auth_needed>
 										<markup>0</markup>
 										<bitmap />
 									</object>

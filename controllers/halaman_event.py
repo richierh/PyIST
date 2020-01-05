@@ -4,7 +4,7 @@ import pathlib
 import os
 import wx
 import wx.dataview
-from views.istcore import ISTUtama
+from views.istcore import ISTUtama,NormaSendiri
 from models.query import SqliteDB,KonversiGE,TabelJawaban, \
     InputJawaban,Peserta
 from pathlib import Path
@@ -16,6 +16,21 @@ from controllers.biodata import Biodata
 from controllers.grafik_tabel import *
 
 from controllers.database_control import DatabaseConnect
+
+class NormaSendiriInherited(NormaSendiri):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+
+
+    def m_button_tutup_normaAllOnButtonClick(self,event):
+        print ('lew')
+        self.Close()
+        
+
+    def m_button_pilih_norma_allOnButtonClick(self,event):
+        print (sadfasdfs)
 
 
 class DataView(ISTUtama):
@@ -283,6 +298,15 @@ class HalamanEventControl(CekDB):
         # self.m_simplebook1.SetSelection(self.getSel)
         pass
 
+    def m_buka_pilih_norma(self,event):
+        self.buka_jendela_norma_sendiri = NormaSendiriInherited(self)
+        Data = ["0","0","0","0"]
+        self.buka_jendela_norma_sendiri.m_dataViewListCtrl30.AppendItem(Data)
+
+
+        self.buka_jendela_norma_sendiri.Show()
+
+
     def m_selanjutnyaOnButtonClick(self, event):
         # print("klik Selanjutnya")
         self.getSel = self.m_simplebook1.GetSelection()
@@ -294,18 +318,15 @@ class HalamanEventControl(CekDB):
                 from views.required_field import RequiredField
                 self.buka_required_not_complete = RequiredField(self)
                 self.buka_required_not_complete.Show()
-                self.getSel = self.getSel - 1
                 self.m_selanjutnya.Disable()        
                 self.m_sebelumnya.Disable()
-
             else :
                 self.getSel = self.getSel + 1
             pass
 
         elif self.getSel == 2 :
-            print ("heello")
+            self.getSel = self.getSel + 1
             pass
-
 
         elif self.getSel == 3:
             # self.m_textCtrl_biodata.SetValue(self.biodata[2])

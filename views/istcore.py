@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Nov  2 2019)
+## Python code generated with wxFormBuilder (version 3.9.0 Jan  5 2020)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
@@ -161,7 +161,7 @@ class ISTUtama ( wx.Frame ):
 
 		m_choice_pendidikan_terakhir1Choices = [ u"SD", u"SMP", u"SMA", u"D3", u"S1", u"S2", u"S3" ]
 		self.m_choice_pendidikan_terakhir1 = wx.Choice( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice_pendidikan_terakhir1Choices, 0 )
-		self.m_choice_pendidikan_terakhir1.SetSelection( 6 )
+		self.m_choice_pendidikan_terakhir1.SetSelection( 4 )
 		fgSizer21.Add( self.m_choice_pendidikan_terakhir1, 0, wx.ALL, 5 )
 
 		self.m_staticText22821 = wx.StaticText( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, u"Jurusan", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2026,16 +2026,12 @@ class ISTUtama ( wx.Frame ):
 		self.m_button21 = wx.Button( self.m_panel221, wx.ID_ANY, u"Norma Sendiri", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer26.Add( self.m_button21, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		m_choice3Choices = []
-		self.m_choice3 = wx.Choice( self.m_panel221, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice3Choices, 0 )
-		self.m_choice3.SetSelection( 0 )
-		fgSizer26.Add( self.m_choice3, 0, wx.ALL, 5 )
+		self.m_staticText265 = wx.StaticText( self.m_panel221, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		self.m_staticText265.Wrap( -1 )
 
-		m_comboBox1Choices = []
-		self.m_comboBox1 = wx.ComboBox( self.m_panel221, wx.ID_ANY, u"Combo!", wx.DefaultPosition, wx.DefaultSize, m_comboBox1Choices, 0 )
-		fgSizer26.Add( self.m_comboBox1, 0, wx.ALL, 5 )
+		fgSizer26.Add( self.m_staticText265, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_button32 = wx.Button( self.m_panel221, wx.ID_ANY, u"Refresh", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button32 = wx.Button( self.m_panel221, wx.ID_ANY, u"Buka Pilih", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer26.Add( self.m_button32, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
@@ -2466,6 +2462,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_button.Bind( wx.EVT_BUTTON, self.m_button_norma_usia )
 		self.m_button20.Bind( wx.EVT_BUTTON, self.m_button_norma_pekerjaan )
 		self.m_button21.Bind( wx.EVT_BUTTON, self.m_button_norma_sendiri )
+		self.m_button32.Bind( wx.EVT_BUTTON, self.m_buka_pilih_norma )
 		self.m_button_rincian_biodata.Bind( wx.EVT_BUTTON, self.m_button_rincian_biodata_on_buttonclick )
 		self.m_button_save_as_pdf.Bind( wx.EVT_BUTTON, self.m_button_save_as_pdfOnButtonClick )
 		self.m_button_print_pdf.Bind( wx.EVT_BUTTON, self.m_button_print_pdfOnButtonClick )
@@ -2560,6 +2557,9 @@ class ISTUtama ( wx.Frame ):
 		event.Skip()
 
 	def m_button_norma_sendiri( self, event ):
+		event.Skip()
+
+	def m_buka_pilih_norma( self, event ):
 		event.Skip()
 
 	def m_button_rincian_biodata_on_buttonclick( self, event ):
@@ -2892,6 +2892,71 @@ class NormaAll ( wx.Frame ):
 		# Connect Events
 		self.m_button_pilih_norma_all.Bind( wx.EVT_BUTTON, self.m_button_pilih_norma_allOnButtonClick )
 		self.m_button_tutup_normaAll.Bind( wx.EVT_BUTTON, self.m_button_tutup_normaAllOnButtonClick )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def m_button_pilih_norma_allOnButtonClick( self, event ):
+		event.Skip()
+
+	def m_button_tutup_normaAllOnButtonClick( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class NormaSendiri
+###########################################################################
+
+class NormaSendiri ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Norma Sendiri", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer33 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_panel23 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer34 = wx.BoxSizer( wx.VERTICAL )
+
+		fgSizer21 = wx.FlexGridSizer( 0, 4, 0, 0 )
+		fgSizer21.AddGrowableCol( 1 )
+		fgSizer21.SetFlexibleDirection( wx.BOTH )
+		fgSizer21.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.m_pilih_norma_sendiri_1 = wx.Button( self.m_panel23, wx.ID_ANY, u"Pilih", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer21.Add( self.m_pilih_norma_sendiri_1, 0, wx.ALL, 5 )
+
+		self.m_tutup_norma_sendiri_1 = wx.Button( self.m_panel23, wx.ID_ANY, u"Tutup", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer21.Add( self.m_tutup_norma_sendiri_1, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+
+		bSizer34.Add( fgSizer21, 0, wx.EXPAND, 5 )
+
+		self.m_dataViewListCtrl30 = wx.dataview.DataViewListCtrl( self.m_panel23, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_dataViewListColumn30 = self.m_dataViewListCtrl30.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn31 = self.m_dataViewListCtrl30.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn32 = self.m_dataViewListCtrl30.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn33 = self.m_dataViewListCtrl30.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		bSizer34.Add( self.m_dataViewListCtrl30, 1, wx.ALL|wx.EXPAND, 5 )
+
+
+		self.m_panel23.SetSizer( bSizer34 )
+		self.m_panel23.Layout()
+		bSizer34.Fit( self.m_panel23 )
+		bSizer33.Add( self.m_panel23, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer33 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.m_pilih_norma_sendiri_1.Bind( wx.EVT_BUTTON, self.m_button_pilih_norma_allOnButtonClick )
+		self.m_tutup_norma_sendiri_1.Bind( wx.EVT_BUTTON, self.m_button_tutup_normaAllOnButtonClick )
 
 	def __del__( self ):
 		pass

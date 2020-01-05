@@ -12,7 +12,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Python: Current File",
+            "name": "Python: IST",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/ist.py",

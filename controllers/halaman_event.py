@@ -286,9 +286,8 @@ class HalamanEventControl(CekDB):
     def m_selanjutnyaOnButtonClick(self, event):
         # print("klik Selanjutnya")
         self.getSel = self.m_simplebook1.GetSelection()
-        self.getSel = self.getSel + 1
 
-        if self.getSel == 1:
+        if self.getSel == 0 :
             self.m_selanjutnya.Disable()        
             self.m_sebelumnya.Enable()
             if self.m_textCtrl_no_tes.GetValue() == "":
@@ -297,10 +296,10 @@ class HalamanEventControl(CekDB):
                 self.buka_required_not_complete.Show()
                 self.getSel = self.getSel - 1
                 self.m_selanjutnya.Disable()        
-                self.m_sebelumnya.Disable()\
+                self.m_sebelumnya.Disable()
 
             else :
-                pass
+                self.getSel = self.getSel + 1
             pass
 
         elif self.getSel == 2 :

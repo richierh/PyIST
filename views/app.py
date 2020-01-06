@@ -17,6 +17,7 @@ class MyApp(wx.App):
     def OnInit(self):
         self.frame = ISTISTUtama(None)
         self.SetTopWindow(self.frame)
+        self.locale = wx.Locale(wx.LANGUAGE_ENGLISH)
         self.frame.Show()
         return True
 

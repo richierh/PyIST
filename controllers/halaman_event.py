@@ -30,7 +30,7 @@ class NormaSendiriInherited(NormaSendiri):
         
 
     def m_button_pilih_norma_allOnButtonClick(self,event):
-        print (sadfasdfs)
+        print ("sadfasdfs")
 
 
 class DataView(ISTUtama):

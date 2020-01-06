@@ -8,7 +8,8 @@ from oscheck import *
 import@author: cireng
 
 '''
-
+import locale
+locale.setlocale(locale.LC_ALL, 'C')
 import gettext
 import os
 import pathlib

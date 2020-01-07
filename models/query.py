@@ -15,6 +15,7 @@ class SqliteDB(object):
 
     def __init__(self, nama_file):
         self.nama_file = nama_file
+        print (self.nama_file)
         self.current_path = pathlib.Path.cwd() / ""
         self.path_db = pathlib.\
             Path(self.current_path.parent / f"models/{self.nama_file}")
@@ -48,7 +49,7 @@ class SqliteDB(object):
         return self.results
 
     def connect_db(self):
-        print("Connecting to {}.db".format(self.path_db))
+        print("Connecting to {}".format(str(self.path_db)))
         print("...Processing....")
         print("Database di buka")
         conne = sqlite3.connect(str(self.path_db))
@@ -543,6 +544,23 @@ class InputJawaban(SqliteDB):
         self.conn.commit()
         self.close_db()
 
+class TabelNormaSendiri(SqliteDB):
+
+    def __init__(self,parent = None):
+        super().__init__(parent)
+        self.parent = parent
+        pass
+
+    def select_data(self,values = None):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values  = values
+
+        self.sql_cmd = """SELECT *
+        FROM [Norma];        """
+        self.result = self.cursorexe.execute(self.sql_cmd).fetchall()
+        self.close_db()
+        return self.result
 
 
 class TableDataKelompokUmur(SqliteDB):

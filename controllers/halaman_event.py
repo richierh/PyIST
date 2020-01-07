@@ -23,6 +23,14 @@ class NormaSendiriInherited(NormaSendiri):
         super().__init__(parent)
         self.parent = parent
 
+        self.__generate()
+    
+    def __generate(self):
+        from models.query import TabelNormaSendiri
+        self.run_data = TabelNormaSendiri(self.parent.connect_db)
+        self.run_data.select_data()
+
+
 
     def m_button_tutup_normaAllOnButtonClick(self,event):
         print ('lew')
@@ -75,6 +83,7 @@ class CekDB(DataView):
         super().__init__(parent)
         self.nama_file = "istcore"
         self.connect_db = SqliteDB("istcore")
+        self.connect_db.connect_db()
 
 
 class HalamanEventControl(CekDB):

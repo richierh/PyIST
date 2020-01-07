@@ -2,7 +2,7 @@ import wx
 from numpy import arange, sin, pi
 
 from views.grafik_ist import GrafikLayout, GrafikHasil, GrafikProfesi
-from views.istcore import Norma, TabelNorma, FrameRow, NormaAll, TabelNormaLihat
+from views.istcore import Norma, TabelNorma, FrameRow, NormaAll, TabelNormaLihat,BuatNormaSendiri
 from controllers.nama_norma_inherited import NamaNormaInherited
 from controllers.warning_inherited import WarningFrameInherited
 from models.query import JenisNorma
@@ -202,18 +202,20 @@ class NormaInherited(Norma):
         #         print (data[3])
         #     self.m_dataViewListCtrl3.AppendItem([str(11+data[1]),str(self.no),str(data[2]),str(data[3])])
         #     self.no += 1
-        self.m_button_buat_tabel_norma.Bind(wx.EVT_BUTTON, self.m_button_buat_tabel_normaOnButtonClick)
+        self.m_button_buat_tabel_norma.Bind(wx.EVT_BUTTON, self.buat_data_peserta)
         self.m_button22.Bind(wx.EVT_BUTTON, self.m_button_pilih_tabel_normaOnButtonClick)
         self.m_button24.Bind(wx.EVT_BUTTON, self.m_button_edit_tabel_normaOnButtonClick)
         self.m_button25.Bind(wx.EVT_BUTTON, self.m_button_hapus_tabel_normaOnButtonClick)
         pass
 
-    def m_button_buat_tabel_normaOnButtonClick(self, event):
+    def buat_data_peserta(self, event):
         # self.buka_row = FrameRowInherited(self)
         # self.buka_row.Show()
         # self.buat_baru_norma = 1
-        self.buka_tabel_norma = TabelNormaInherited(self)
-        self.buka_tabel_norma.Show()
+        # self.buka_tabel_norma = TabelNormaInherited(self)
+        # self.buka_tabel_norma.Show()
+        self.buka_norma_sendiri = BuatNormaSendiri(self)
+        self.buka_norma_sendiri.Show()
         pass
 
     def m_button_edit_tabel_normaOnButtonClick(self, event):

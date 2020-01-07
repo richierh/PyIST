@@ -2841,6 +2841,99 @@ class TabelDataPeserta ( wx.Frame ):
 
 
 ###########################################################################
+## Class BuatNormaSendiri
+###########################################################################
+
+class BuatNormaSendiri ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer48 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_panel30 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer49 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_staticText267 = wx.StaticText( self.m_panel30, wx.ID_ANY, u"Buat Norma Sendiri", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText267.Wrap( -1 )
+
+		bSizer49.Add( self.m_staticText267, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+		self.m_panel31 = wx.Panel( self.m_panel30, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer51 = wx.BoxSizer( wx.VERTICAL )
+
+		fgSizer29 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer29.AddGrowableCol( 1 )
+		fgSizer29.SetFlexibleDirection( wx.BOTH )
+		fgSizer29.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.m_staticText265 = wx.StaticText( self.m_panel31, wx.ID_ANY, u"Nama Norma", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText265.Wrap( -1 )
+
+		fgSizer29.Add( self.m_staticText265, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+		self.m_textCtrl235 = wx.TextCtrl( self.m_panel31, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( -1,-1 ), 0 )
+		fgSizer29.Add( self.m_textCtrl235, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+
+		self.m_staticText266 = wx.StaticText( self.m_panel31, wx.ID_ANY, u"Keterangan", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText266.Wrap( -1 )
+
+		fgSizer29.Add( self.m_staticText266, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+		self.m_textCtrl236 = wx.TextCtrl( self.m_panel31, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
+		fgSizer29.Add( self.m_textCtrl236, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+
+
+		bSizer51.Add( fgSizer29, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+
+
+		self.m_panel31.SetSizer( bSizer51 )
+		self.m_panel31.Layout()
+		bSizer51.Fit( self.m_panel31 )
+		bSizer49.Add( self.m_panel31, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+
+		bSizer50 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.m_button40 = wx.Button( self.m_panel30, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer50.Add( self.m_button40, 0, wx.ALL, 5 )
+
+		self.m_button41 = wx.Button( self.m_panel30, wx.ID_ANY, u"Lanjut", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer50.Add( self.m_button41, 0, wx.ALL|wx.ALIGN_BOTTOM, 5 )
+
+
+		bSizer49.Add( bSizer50, 0, wx.ALIGN_RIGHT, 5 )
+
+
+		self.m_panel30.SetSizer( bSizer49 )
+		self.m_panel30.Layout()
+		bSizer49.Fit( self.m_panel30 )
+		bSizer48.Add( self.m_panel30, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+
+
+		self.SetSizer( bSizer48 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.m_button40.Bind( wx.EVT_BUTTON, self.batal_simpan_norma_sendiri )
+		self.m_button41.Bind( wx.EVT_BUTTON, self.lanjut_simpan_norma_sendiri )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def batal_simpan_norma_sendiri( self, event ):
+		event.Skip()
+
+	def lanjut_simpan_norma_sendiri( self, event ):
+		event.Skip()
+
+
+###########################################################################
 ## Class NormaAll
 ###########################################################################
 
@@ -2936,10 +3029,11 @@ class NormaSendiri ( wx.Frame ):
 		bSizer34.Add( fgSizer21, 0, wx.EXPAND, 5 )
 
 		self.m_dataViewListCtrl30 = wx.dataview.DataViewListCtrl( self.m_panel23, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_dataViewListColumn30 = self.m_dataViewListCtrl30.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn31 = self.m_dataViewListCtrl30.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn56 = self.m_dataViewListCtrl30.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn31 = self.m_dataViewListCtrl30.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn32 = self.m_dataViewListCtrl30.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn33 = self.m_dataViewListCtrl30.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn55 = self.m_dataViewListCtrl30.AppendTextColumn( u"Name", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer34.Add( self.m_dataViewListCtrl30, 1, wx.ALL|wx.EXPAND, 5 )
 
 
@@ -2957,6 +3051,7 @@ class NormaSendiri ( wx.Frame ):
 		# Connect Events
 		self.m_pilih_norma_sendiri_1.Bind( wx.EVT_BUTTON, self.m_button_pilih_norma_allOnButtonClick )
 		self.m_tutup_norma_sendiri_1.Bind( wx.EVT_BUTTON, self.m_button_tutup_normaAllOnButtonClick )
+		self.m_dataViewListCtrl30.Bind( wx.dataview.EVT_DATAVIEW_ITEM_ACTIVATED, self.m_data_aktif_tabel_norma_sendiri, id = wx.ID_ANY )
 
 	def __del__( self ):
 		pass
@@ -2967,6 +3062,9 @@ class NormaSendiri ( wx.Frame ):
 		event.Skip()
 
 	def m_button_tutup_normaAllOnButtonClick( self, event ):
+		event.Skip()
+
+	def m_data_aktif_tabel_norma_sendiri( self, event ):
 		event.Skip()
 
 

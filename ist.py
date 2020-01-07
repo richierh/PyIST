@@ -9,12 +9,17 @@ import@author: cireng
 
 '''
 import locale
-locale.setlocale(locale.LC_ALL, 'C')
 import gettext
 import os
 import pathlib
 import sys
 import platform
+
+if platform.system() == "Windows":
+    locale.setlocale(locale.LC_ALL, 'C')
+else :
+    pass 
+
 from views.app import MyApp
 from pathlib import Path
 

@@ -4,7 +4,7 @@ import pathlib
 import os
 import wx
 import wx.dataview
-from views.istcore import ISTUtama,NormaSendiri
+from views.istcore import ISTUtama,NormaSendiri,TabelDataPeserta,BuatNormaSendiri
 from models.query import SqliteDB,KonversiGE,TabelJawaban, \
     InputJawaban,Peserta
 from pathlib import Path
@@ -17,6 +17,25 @@ from controllers.grafik_tabel import *
 
 from controllers.database_control import DatabaseConnect
 
+class TabelDataPesertaInherited(TabelDataPeserta):
+
+    # class attribut
+    __tabel__ = "Tabel Data Peserta"
+    
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+
+    
+    def buat_data_peserta(self,event):
+        self.buka_norma_sendiri = BuatNormaSendiri(self)
+        self.buka_norma_sendiri.Show()
+
+
+    
+
+
+
 class NormaSendiriInherited(NormaSendiri):
 
     def __init__(self,parent):
@@ -28,9 +47,20 @@ class NormaSendiriInherited(NormaSendiri):
     def __generate(self):
         from models.query import TabelNormaSendiri
         self.run_data = TabelNormaSendiri(self.parent.connect_db)
-        self.run_data.select_data()
+        self.data = self.run_data.select_data()
+        self.data_str =[]
+
+        # ubah data tabel norma sendiri kedalama bentuk string semua
+        for data in self.data :
+            self.data_str.append([str(self.data.index(data)+1),str(data[0]),str(data[1]),str(data[2]),str(data[3])])
+
+        # menampilkan data tabel sendiri kedalam aplikasi GUI
+        for data in self.data_str:
+            self.m_dataViewListCtrl30.AppendItem(data)
 
 
+    def m_data_aktif_tabel_norma_sendiri(self,event):
+        print ("nyala")
 
     def m_button_tutup_normaAllOnButtonClick(self,event):
         print ('lew')
@@ -309,10 +339,6 @@ class HalamanEventControl(CekDB):
 
     def m_buka_pilih_norma(self,event):
         self.buka_jendela_norma_sendiri = NormaSendiriInherited(self)
-        Data = ["0","0","0","0"]
-        self.buka_jendela_norma_sendiri.m_dataViewListCtrl30.AppendItem(Data)
-
-
         self.buka_jendela_norma_sendiri.Show()
 
 

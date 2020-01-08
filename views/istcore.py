@@ -2693,10 +2693,11 @@ class Norma ( wx.Frame ):
 		bSizer34.Add( self.text_norma_sendiri, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		self.m_dataViewListCtrl3 = wx.dataview.DataViewListCtrl( self.m_panel23, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_dataViewListColumn9 = self.m_dataViewListCtrl3.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn8 = self.m_dataViewListCtrl3.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn9 = self.m_dataViewListCtrl3.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn56 = self.m_dataViewListCtrl3.AppendTextColumn( u"IdNorma", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn10 = self.m_dataViewListCtrl3.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn36 = self.m_dataViewListCtrl3.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn57 = self.m_dataViewListCtrl3.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn8 = self.m_dataViewListCtrl3.AppendTextColumn( u"NormaId", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer34.Add( self.m_dataViewListCtrl3, 3, wx.ALL|wx.EXPAND, 5 )
 
 
@@ -2713,9 +2714,11 @@ class Norma ( wx.Frame ):
 
 		# Connect Events
 		self.m_button_buat_tabel_norma.Bind( wx.EVT_BUTTON, self.m_button_buat_tabel_normaOnButtonClick )
+		self.m_button25.Bind( wx.EVT_BUTTON, self.hapus_data_peserta )
 		self.m_button_tutup_norma.Bind( wx.EVT_BUTTON, self.m_button_tutup_normaOnButtonClick )
 		self.m_dataViewListCtrl8.Bind( wx.dataview.EVT_DATAVIEW_ITEM_VALUE_CHANGED, self.m_dataViewListCtrl8OnDataViewListCtrlItemValueChanged, id = wx.ID_ANY )
 		self.m_dataViewListCtrl9.Bind( wx.dataview.EVT_DATAVIEW_ITEM_VALUE_CHANGED, self.m_dataViewListCtrl9OnDataViewListCtrlItemValueChanged, id = wx.ID_ANY )
+		self.m_dataViewListCtrl3.Bind( wx.dataview.EVT_DATAVIEW_ITEM_ACTIVATED, self.m_dataViewListCtrl3OnDataViewListCtrlItemActivated, id = wx.ID_ANY )
 		self.m_dataViewListCtrl3.Bind( wx.dataview.EVT_DATAVIEW_ITEM_VALUE_CHANGED, self.m_dataViewListCtrl3OnDataViewListCtrlItemValueChanged, id = wx.ID_ANY )
 
 	def __del__( self ):
@@ -2726,6 +2729,9 @@ class Norma ( wx.Frame ):
 	def m_button_buat_tabel_normaOnButtonClick( self, event ):
 		event.Skip()
 
+	def hapus_data_peserta( self, event ):
+		event.Skip()
+
 	def m_button_tutup_normaOnButtonClick( self, event ):
 		event.Skip()
 
@@ -2733,6 +2739,9 @@ class Norma ( wx.Frame ):
 		event.Skip()
 
 	def m_dataViewListCtrl9OnDataViewListCtrlItemValueChanged( self, event ):
+		event.Skip()
+
+	def m_dataViewListCtrl3OnDataViewListCtrlItemActivated( self, event ):
 		event.Skip()
 
 	def m_dataViewListCtrl3OnDataViewListCtrlItemValueChanged( self, event ):
@@ -2874,16 +2883,16 @@ class BuatNormaSendiri ( wx.Frame ):
 
 		fgSizer29.Add( self.m_staticText265, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
-		self.m_textCtrl235 = wx.TextCtrl( self.m_panel31, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( -1,-1 ), 0 )
-		fgSizer29.Add( self.m_textCtrl235, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+		self.m_nama_norma_sendiri = wx.TextCtrl( self.m_panel31, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( -1,-1 ), 0 )
+		fgSizer29.Add( self.m_nama_norma_sendiri, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
 
 		self.m_staticText266 = wx.StaticText( self.m_panel31, wx.ID_ANY, u"Keterangan", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText266.Wrap( -1 )
 
 		fgSizer29.Add( self.m_staticText266, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
-		self.m_textCtrl236 = wx.TextCtrl( self.m_panel31, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
-		fgSizer29.Add( self.m_textCtrl236, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+		self.m_keterangan_norma_sendiri = wx.TextCtrl( self.m_panel31, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
+		fgSizer29.Add( self.m_keterangan_norma_sendiri, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
 
 
 		bSizer51.Add( fgSizer29, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
@@ -2896,11 +2905,11 @@ class BuatNormaSendiri ( wx.Frame ):
 
 		bSizer50 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.m_button40 = wx.Button( self.m_panel30, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer50.Add( self.m_button40, 0, wx.ALL, 5 )
+		self.button_batal = wx.Button( self.m_panel30, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer50.Add( self.button_batal, 0, wx.ALL, 5 )
 
-		self.m_button41 = wx.Button( self.m_panel30, wx.ID_ANY, u"Lanjut", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer50.Add( self.m_button41, 0, wx.ALL|wx.ALIGN_BOTTOM, 5 )
+		self.m_lanjut = wx.Button( self.m_panel30, wx.ID_ANY, u"Lanjut", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer50.Add( self.m_lanjut, 0, wx.ALL|wx.ALIGN_BOTTOM, 5 )
 
 
 		bSizer49.Add( bSizer50, 0, wx.ALIGN_RIGHT, 5 )
@@ -2918,15 +2927,15 @@ class BuatNormaSendiri ( wx.Frame ):
 		self.Centre( wx.BOTH )
 
 		# Connect Events
-		self.m_button40.Bind( wx.EVT_BUTTON, self.batal_simpan_norma_sendiri )
-		self.m_button41.Bind( wx.EVT_BUTTON, self.lanjut_simpan_norma_sendiri )
+		self.button_batal.Bind( wx.EVT_BUTTON, self.batal_norma_sendiri )
+		self.m_lanjut.Bind( wx.EVT_BUTTON, self.lanjut_simpan_norma_sendiri )
 
 	def __del__( self ):
 		pass
 
 
 	# Virtual event handlers, overide them in your derived class
-	def batal_simpan_norma_sendiri( self, event ):
+	def batal_norma_sendiri( self, event ):
 		event.Skip()
 
 	def lanjut_simpan_norma_sendiri( self, event ):

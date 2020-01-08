@@ -515,6 +515,70 @@ class TabelJawaban(SqliteDB):
         self.close_db()
         return self.getdatas
 
+class TabelJawabanNormaSendiri(SqliteDB):
+
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+
+    
+    def insert_data(self,values = None):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+        self.sql_cmd = """
+        INSERT INTO NormaSendiri ([No],RS,SE,WA,AN,GE,RA, ZE, FA, WU, ME )
+                         VALUES (
+                             'No',
+                             'RS',
+                             'SE',
+                             'WA',
+                             'AN',
+                             'GE',
+                             'RA',
+                             'ZE',
+                             'FA',
+                             'WU',
+                             'ME',
+                             'IdNorma'
+                         );
+INSERT INTO NormaSendiri (
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?
+                         )
+                         VALUES (
+                             'No',
+                             'RS',
+                             'SE',
+                             'WA',
+                             'AN',
+                             'GE',
+                             'RA',
+                             'ZE',
+                             'FA',
+                             'WU',
+                             'ME'
+                         );
+
+
+        """
+        self.cursorexe.execute(self.sql_cmd,self.values)
+        self.conn.commit()
+        self.close_db()
+
+
+
 class InputJawaban(SqliteDB):
 
     def __init__(self,parent=None):
@@ -551,6 +615,19 @@ class TabelNormaSendiri(SqliteDB):
         self.parent = parent
         pass
 
+    def select_from(self,values):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values  = values
+
+        self.sql_cmd = """SELECT IdNorma
+        FROM [Norma] 
+        WHERE [Nama Norma] = ? ;        """
+        self.result = self.cursorexe.execute(self.sql_cmd,(self.values,)).fetchone()
+        self.close_db()
+        return self.result
+
+
     def select_data(self,values = None):
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
@@ -561,6 +638,28 @@ class TabelNormaSendiri(SqliteDB):
         self.result = self.cursorexe.execute(self.sql_cmd).fetchall()
         self.close_db()
         return self.result
+
+    def insert_data(self,values = None):
+        self.conn=self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+        self.sql_cmd = """
+        INSERT INTO Norma (
+                      [Nama Norma],
+                      Keterangan,
+                      NormaID
+                  )
+                  VALUES (                      
+                      ?,
+                      ?,
+                      3);
+"""
+        self.cursorexe.execute(self.sql_cmd,(self.values))
+        self.conn.commit()
+        self.close_db()
+
+
+
 
 
 class TableDataKelompokUmur(SqliteDB):

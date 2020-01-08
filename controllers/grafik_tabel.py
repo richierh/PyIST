@@ -5,13 +5,58 @@ from views.grafik_ist import GrafikLayout, GrafikHasil, GrafikProfesi
 from views.istcore import Norma, TabelNorma, FrameRow, NormaAll, TabelNormaLihat,BuatNormaSendiri
 from controllers.nama_norma_inherited import NamaNormaInherited
 from controllers.warning_inherited import WarningFrameInherited
-from models.query import JenisNorma
+from models.query import JenisNorma,TabelNormaSendiri
 
+class TabelNormaSendiriInherited(TabelNorma):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.connect_db = self.parent.parent.parent.connect_db
+        for data in range(1,21):
+            self.m_dataViewListCtrl4.AppendItem([str(data),"","","","","","","","","",""])
+        # self.nama_file = "istcore"
+        # self.connect_db = SqliteDB("istcore")
+        # self.connect_db.connect_db()
+        pass
+
+    def m_button_ok_tabel_normaOnButtonClick(self,event):
+        self.insertDataNorma = TabelNormaSendiri(self.connect_db)
+        self.data = [self.parent.m_nama_norma_sendiri.GetValue(),self.parent.m_keterangan_norma_sendiri.GetValue()]
+        self.insertDataNorma.insert_data(self.data)
+        self.selectNorma = TabelNormaSendiri(self.connect_db)
+        # memperoleh nilai IdNorma
+        self.selectNorma.select_from(self.parent.m_nama_norma_sendiri.GetValue())
+
+
+        pass
+    
+    def m_button_batal_tabel_normaOnButtonClick(self,event):
+        self.Close()
+        pass
+
+class BuatNormaSendiriInherited(BuatNormaSendiri):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+
+    def batal_norma_sendiri(self,event):
+        self.Close()
+
+    def lanjut_simpan_norma_sendiri(self,event):
+        self.buka_tabel_norma_sendiri = TabelNormaSendiriInherited(self)
+        self.buka_tabel_norma_sendiri.Show()
+        self.buka_tabel_norma_sendiri.Maximize(True)
+        self.Hide()
+
+        pass
 
 class GrafikLayoutInherited(GrafikLayout):
 
     def __init__(self, parent):
         super().__init__(parent)
+        self.parent = parent
 
     def save_figure(self):
         import pathlib
@@ -179,8 +224,24 @@ class NormaInherited(Norma):
         for data in self.re_datanormausia:
             self.m_dataViewListCtrl8.AppendItem(data)
 
-
         self.m_dataViewListCtrl9.AppendItem(self.datanormapekerjaan)
+        self.m_dataViewListCtrl3.SetId(188989)
+
+
+        from models.query import TabelNormaSendiri
+        self.run_data = TabelNormaSendiri(self.parent.connect_db)
+        self.data = self.run_data.select_data()
+        self.data_str =[]
+
+        # ubah data tabel norma sendiri kedalama bentuk string semua
+        for data in self.data :
+            self.data_str.append([str(self.data.index(data)+1),str(data[0]),str(data[1]),str(data[2]),str(data[3])])
+
+        # menampilkan data tabel sendiri kedalam aplikasi GUI
+        for data in self.data_str:
+            self.m_dataViewListCtrl3.AppendItem(data)
+
+
         # self.m_dataViewListCtrl3.AppendItem(["1","1","Norma Pekerjaan",""])
         # self.m_dataViewListCtrl3.AppendItem(["2","2","Norma Pendidikan Usia 12 Thn",""])
         # self.m_dataViewListCtrl3.AppendItem(["3","3","Norma Pendidikan Usia 13 Thn",""])
@@ -205,7 +266,7 @@ class NormaInherited(Norma):
         self.m_button_buat_tabel_norma.Bind(wx.EVT_BUTTON, self.buat_data_peserta)
         self.m_button22.Bind(wx.EVT_BUTTON, self.m_button_pilih_tabel_normaOnButtonClick)
         self.m_button24.Bind(wx.EVT_BUTTON, self.m_button_edit_tabel_normaOnButtonClick)
-        self.m_button25.Bind(wx.EVT_BUTTON, self.m_button_hapus_tabel_normaOnButtonClick)
+        self.m_button25.Bind(wx.EVT_BUTTON, self.hapus_data_peserta)
         pass
 
     def buat_data_peserta(self, event):
@@ -214,7 +275,7 @@ class NormaInherited(Norma):
         # self.buat_baru_norma = 1
         # self.buka_tabel_norma = TabelNormaInherited(self)
         # self.buka_tabel_norma.Show()
-        self.buka_norma_sendiri = BuatNormaSendiri(self)
+        self.buka_norma_sendiri = BuatNormaSendiriInherited(self)
         self.buka_norma_sendiri.Show()
         pass
 
@@ -248,31 +309,43 @@ class NormaInherited(Norma):
         self.buka_tabel_norma.set_data()
         self.buka_tabel_norma.Show()
 
-    def m_button_hapus_tabel_normaOnButtonClick(self, event):
-        # self.m_dataViewListCtrl3.GetSelectedRow() == -1 apabila tidak ada yang dipilih
-        if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
-            print ("lewat sini")
-            self.getV = 0
-        else :
-            self.getV = self.m_dataViewListCtrl3.GetSelectedRow()
-        self.getdata = []
-        
-        for data in range(0, 3):
-            # print(self.m_dataViewListCtrl3.GetValue(self.getV,1))
-            self.getdata.append(self.m_dataViewListCtrl3.GetValue(self.getV, data))
+    def hapus_data_peserta(self, event):
 
-        if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
-            pass
-        elif int(self.getdata[0]) <= 11 :
-            # data tidak bisa dihapus
-            self.warning = WarningFrameInherited(self)
-            self.warning.Show()
+        print('hello')
+        # self.m_dataViewListCtrl3.GetSelectedRow() == -1 apabila tidak ada yang dipilih
+        # if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
+        #     print ("lewat sini")
+        #     self.getV = 0
+        # else :
+        #     self.getV = self.m_dataViewListCtrl3.GetSelectedRow()
+        # self.getdata = []
+        
+        # for data in range(0, 3):
+        #     # print(self.m_dataViewListCtrl3.GetValue(self.getV,1))
+        #     self.getdata.append(self.m_dataViewListCtrl3.GetValue(self.getV, data))
+
+        # if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
+        #     pass
+        # elif int(self.getdata[0]) <= 11 :
+        #     # data tidak bisa dihapus
+        #     self.warning = WarningFrameInherited(self)
+        #     self.warning.Show()
+        # else :
+        #     # Menghapus data di tabel GUI
+        #     self.m_dataViewListCtrl3.DeleteItem(self.getV)
+        #     self.tabel_norma_sendiri = TabelNormaSendiriConnect(self.parent.databasekon)
+        #     self.tabel_norma_sendiri.delete_nama_norma(self.getdata[0])
+        if self.m_dataViewListCtrl3.GetId() == 12345:
+            print ('hello lewat sini')
         else :
-            # Menghapus data di tabel GUI
-            self.m_dataViewListCtrl3.DeleteItem(self.getV)
-            self.tabel_norma_sendiri = TabelNormaSendiriConnect(self.parent.databasekon)
-            self.tabel_norma_sendiri.delete_nama_norma(self.getdata[0])
-            pass
+            print('nggak lewat sisni')
+        pass   
+    
+    def m_dataViewListCtrl3OnDataViewListCtrlItemActivated(self,event):
+        self.m_dataViewListCtrl3.SetId(12345)
+        
+        pass
+
 
     def m_button_pilih_tabel_normaOnButtonClick(self, event):
         self.parent.pilih = 1

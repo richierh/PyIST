@@ -627,6 +627,19 @@ class TabelNormaSendiri(SqliteDB):
         self.close_db()
         return self.result
 
+    def hapus_data(self,values):
+        self.values = values
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        DELETE FROM Norma
+        WHERE IdNorma = ?
+        
+        """
+        self.cursorexe.execute(self.sql_cmd,(self.values,))
+        self.conn.commit()
+        self.close_db()
+        
 
     def select_data(self,values = None):
         self.conn = self.connect_db()

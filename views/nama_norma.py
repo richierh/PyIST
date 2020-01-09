@@ -86,3 +86,9 @@ class NamaNorma (wx.Frame):
 	def m_button_batalOnButtonClick(self, event):
 		event.Skip()
 
+
+
+if __name__=="__main__":
+	root = wx.App()
+	frame = NamaNorma(None).Show()
+	root.MainLoop()

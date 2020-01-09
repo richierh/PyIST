@@ -4,7 +4,6 @@ from numpy import arange, sin, pi
 from views.grafik_ist import GrafikLayout, GrafikHasil, GrafikProfesi
 from views.istcore import Norma, TabelNorma, FrameRow, NormaAll, TabelNormaLihat,BuatNormaSendiri
 from controllers.nama_norma_inherited import NamaNormaInherited
-from controllers.warning_inherited import WarningFrameInherited
 from models.query import JenisNorma,TabelNormaSendiri
 
 class TabelNormaSendiriInherited(TabelNorma):
@@ -27,8 +26,41 @@ class TabelNormaSendiriInherited(TabelNorma):
         self.selectNorma = TabelNormaSendiri(self.connect_db)
         # memperoleh nilai IdNorma
         self.selectNorma.select_from(self.parent.m_nama_norma_sendiri.GetValue())
+        self.parent.parent.m_dataViewListCtrl3.DeleteAllItems()
 
 
+        self.data = self.selectNorma.select_data()
+        self.data_str =[]
+
+        # ubah data tabel norma sendiri kedalama bentuk string semua
+        for data in self.data :
+            self.data_str.append([str(self.data.index(data)+1),str(data[0]),str(data[1]),str(data[2]),str(data[3])])
+
+        # menampilkan data tabel sendiri kedalam aplikasi GUI
+        for data in self.data_str:
+            self.parent.parent.m_dataViewListCtrl3.AppendItem(data)
+
+
+        self.data_norma_sendiri = []
+        for data in range(0,self.m_dataViewListCtrl4.GetItemCount()):
+            self.datainput= [
+            self.m_dataViewListCtrl4.GetTextValue(data,0),
+            self.m_dataViewListCtrl4.GetTextValue(data,1),
+            self.m_dataViewListCtrl4.GetTextValue(data,2),
+            self.m_dataViewListCtrl4.GetTextValue(data,3),
+            self.m_dataViewListCtrl4.GetTextValue(data,4),
+            self.m_dataViewListCtrl4.GetTextValue(data,5),
+            self.m_dataViewListCtrl4.GetTextValue(data,6),
+            self.m_dataViewListCtrl4.GetTextValue(data,7),
+            self.m_dataViewListCtrl4.GetTextValue(data,8),
+            self.m_dataViewListCtrl4.GetTextValue(data,9),
+            self.m_dataViewListCtrl4.GetTextValue(data,10),
+
+            ]
+            self.data_norma_sendiri.append(self.datainput)
+
+
+        self.Close()
         pass
     
     def m_button_batal_tabel_normaOnButtonClick(self,event):
@@ -337,6 +369,14 @@ class NormaInherited(Norma):
         #     self.tabel_norma_sendiri.delete_nama_norma(self.getdata[0])
         if self.m_dataViewListCtrl3.GetId() == 12345:
             print ('hello lewat sini')
+            self.m_dataViewListCtrl3.SetId(22344)
+            self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
+                self.m_dataViewListCtrl3.GetSelectedRow(),1)
+            self.run_data.hapus_data(self.IdNorma)
+            self.m_dataViewListCtrl3.DeleteItem(\
+                self.m_dataViewListCtrl3.GetSelectedRow())
+            
+
         else :
             print('nggak lewat sisni')
         pass   

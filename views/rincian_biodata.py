@@ -23,3 +23,9 @@ class RincianBiodata (wx.Frame):
 
     def __del__(self):
         pass
+
+
+if __name__=="__main__":
+    root = wx.App()
+    frame = RincianBiodata(None,None).Show()
+    root.MainLoop()

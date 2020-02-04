@@ -14,6 +14,7 @@ from views.menubar_tentang import TentangAplikasiInherited
 from views.buka_filter_db import FrameFilterDatabase
 from views.dialog_save import DialogSavePDF
 from views.istcore import TabelDataPeserta
+from controllers.halaman_event import PilihTabelInherited
 # from controllers.ISTISTUtama import NormaAllInherited
 # from controllers.ISTISTUtama import NormaInherited
 
@@ -69,8 +70,13 @@ class MenuBarInherited(HalamanEventControl):
     def m_menuItem_daftar_tabel_normaOnMenuSelection(self, event):
         print('buka menu item')
 
-        self.buka_tabel_norma = NormaInherited(self)
-        self.buka_tabel_norma.Show() 
+        self.pilih_tabel = PilihTabelInherited(self)
+        self.pilih_tabel.Show()
+ 
+
+        # jangan dihapus 
+        # self.buka_tabel_norma = NormaInherited(self)
+        # self.buka_tabel_norma.Show() 
 
     # def m_menuItem_lihat_tabel_normaOnMenuSelection(self, event):
     #     # self.buka_tabel_norma = NormaInherited(self)

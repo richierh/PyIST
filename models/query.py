@@ -672,9 +672,6 @@ class TabelNormaSendiri(SqliteDB):
         self.close_db()
 
 
-
-
-
 class TableDataKelompokUmur(SqliteDB):
 
     def __init__(self, parent=None):

@@ -367,19 +367,31 @@ class NormaInherited(Norma):
         #     self.m_dataViewListCtrl3.DeleteItem(self.getV)
         #     self.tabel_norma_sendiri = TabelNormaSendiriConnect(self.parent.databasekon)
         #     self.tabel_norma_sendiri.delete_nama_norma(self.getdata[0])
-        if self.m_dataViewListCtrl3.GetId() == 12345:
-            print ('hello lewat sini')
-            self.m_dataViewListCtrl3.SetId(22344)
-            self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
-                self.m_dataViewListCtrl3.GetSelectedRow(),1)
-            self.run_data.hapus_data(self.IdNorma)
-            self.m_dataViewListCtrl3.DeleteItem(\
-                self.m_dataViewListCtrl3.GetSelectedRow())
+        self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
+            self.m_dataViewListCtrl3.GetSelectedRow(),1)
+        self.run_data.hapus_data(self.IdNorma)
+        self.m_dataViewListCtrl3.DeleteItem(\
+            self.m_dataViewListCtrl3.GetSelectedRow())       
+       
+        # if self.m_dataViewListCtrl3.GetId() == 12345:
+        #     print ('hello lewat sini')
+        #     self.m_dataViewListCtrl3.SetId(12345)
+        #     self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
+        #         self.m_dataViewListCtrl3.GetSelectedRow(),1)
+        #     self.run_data.hapus_data(self.IdNorma)
+        #     self.m_dataViewListCtrl3.DeleteItem(\
+        #         self.m_dataViewListCtrl3.GetSelectedRow())
             
-
-        else :
-            print('nggak lewat sisni')
-        pass   
+        # else :
+        #     print('nggak lewat sisni')
+        #     print ('hello lewat sini')
+        #     self.m_dataViewListCtrl3.SetId(12345)
+        #     self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
+        #         self.m_dataViewListCtrl3.GetSelectedRow(),1)
+        #     self.run_data.hapus_data(self.IdNorma)
+        #     self.m_dataViewListCtrl3.DeleteItem(\
+        #         self.m_dataViewListCtrl3.GetSelectedRow())
+        # pass   
     
     def m_dataViewListCtrl3OnDataViewListCtrlItemActivated(self,event):
         self.m_dataViewListCtrl3.SetId(12345)
@@ -420,7 +432,6 @@ class NormaInherited(Norma):
             self.tabelumur = 19
         elif int(self.getdata[0]) == 11:
             self.tabelumur = 20
-        
         else :
             self.tabelumur = "0"
         

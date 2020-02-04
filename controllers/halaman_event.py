@@ -14,7 +14,7 @@ from controllers.ist_calculation import KalkulasiNilai
 # from views.grafik_ist import GrafikLayout,GrafikHasil,GrafikProfesi
 from controllers.biodata import Biodata
 from controllers.grafik_tabel import *
-
+from views.pilih_tabel_norma import PilihTabel
 from controllers.database_control import DatabaseConnect
 
 class TabelDataPesertaInherited(TabelDataPeserta):
@@ -32,8 +32,57 @@ class TabelDataPesertaInherited(TabelDataPeserta):
         self.buka_norma_sendiri.Show()
 
 
+class PilihTabelInherited(PilihTabel):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+    
+    def normapendidikanOnButtonClick(self,event):
+        
+        self.buka_tabel_norma = NormaInherited(self.parent)
+        self.buka_tabel_norma.m_dataViewListCtrl8.Show()
+        self.buka_tabel_norma.m_dataViewListCtrl9.Hide()
+        self.buka_tabel_norma.m_dataViewListCtrl3.Hide()
+        self.buka_tabel_norma.text_norma_pendidikan.Show()
+        self.buka_tabel_norma.text_norma_pekerjaan.Hide()
+        self.buka_tabel_norma.text_norma_sendiri.Hide()
+        self.buka_tabel_norma.Layout()
+        self.buka_tabel_norma.Show() 
+        pass
+
+
+    def normapekerjaanOnButtonClick(self,event):
+
+        self.buka_tabel_norma = NormaInherited(self.parent)
+        self.buka_tabel_norma.m_dataViewListCtrl8.Hide()
+        self.buka_tabel_norma.m_dataViewListCtrl9.Show()
+        self.buka_tabel_norma.m_dataViewListCtrl3.Hide()
+        self.buka_tabel_norma.text_norma_pendidikan.Hide()
+        self.buka_tabel_norma.text_norma_pekerjaan.Show()
+        self.buka_tabel_norma.text_norma_sendiri.Hide()
+        self.buka_tabel_norma.Layout()
+        self.buka_tabel_norma.Show() 
+
+        pass
     
 
+    def normasendiriOnButtonClick( self, event ):
+        self.buka_tabel_norma = NormaInherited(self.parent)
+        self.buka_tabel_norma.m_dataViewListCtrl8.Hide()
+        self.buka_tabel_norma.m_dataViewListCtrl9.Hide()
+        self.buka_tabel_norma.m_dataViewListCtrl3.Show()
+        self.buka_tabel_norma.text_norma_pendidikan.Hide()
+        self.buka_tabel_norma.text_norma_pekerjaan.Hide()
+        self.buka_tabel_norma.text_norma_sendiri.Show()
+        self.buka_tabel_norma.Layout()
+        self.buka_tabel_norma.Show() 
+
+ 
+        pass
+
+    def normatabelclose(self,event):
+        self.Close()
 
 
 class NormaSendiriInherited(NormaSendiri):
@@ -111,8 +160,8 @@ class CekDB(DataView):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self.nama_file = "istcore"
-        self.connect_db = SqliteDB("istcore")
+        self.nama_file = "istcore.sqlite"
+        self.connect_db = SqliteDB("istcore.sqlite")
         self.connect_db.connect_db()
 
 

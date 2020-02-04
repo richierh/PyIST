@@ -228,7 +228,7 @@ class TabelNormaSendiriConnect(TableDataKelompokUmurConnect):
 
 if __name__ == "__main__":
     print(pathlib.Path.cwd())
-    nama_file = "istcore"
+    nama_file = "istcore.sqlite"
     # print (nama_file)
     run = DatabaseControl(nama_file)
     # [tipe_kandidat,nama_kandidat,tgl tes, jenis kelamin, tanggal lahir]

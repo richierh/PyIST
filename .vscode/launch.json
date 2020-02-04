@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: SchemaCrawler",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/models/schemacrawler.py",
+            "console": "integratedTerminal"
+        },
+  
+        {
             "name": "Python: ERD",
             "type": "python",
             "request": "launch",

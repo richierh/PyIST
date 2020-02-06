@@ -75,7 +75,7 @@ if __name__ == "__main__":
 	# key = Key('')
 	# global lisensi
 	lisensi = 1813
-	lisensi = input("Silahkan memasukkan No Aplikasi Hexaco \n")
+	lisensi = input("Silahkan memasukkan No Aplikasi IST \n")
 	n = int(lisensi)
 	lastdigit = int(repr(n)[0:4])
 	print (lastdigit)

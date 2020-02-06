@@ -7,7 +7,7 @@
             "label": "windows build",
             "type": "shell",
             "linux":{
-                "command": "wine cmd.exe /C pyinstaller --onefile run.py",
+                "command": "wine cmd.exe /C pyinstaller --onefile ist.py",
             },
             "group": {
                 "kind": "build",
@@ -18,7 +18,7 @@
             "label": "linux build",
             "type": "shell",
             "linux":{
-                "command": "pyinstaller --onefile run.py",
+                "command": "pyinstaller --onefile ist.py.py",
             },
             "group": {
                 "kind": "build",

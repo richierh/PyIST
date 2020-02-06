@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['run.py'],
-             pathex=['/home/cireng/Projects/pyist'],
+             pathex=['Z:\\home\\pmc\\Projects\\pyist'],
              binaries=[],
              datas=[],
              hiddenimports=[],

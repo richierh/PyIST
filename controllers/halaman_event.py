@@ -50,6 +50,8 @@ class PilihTabelInherited(PilihTabel):
         self.buka_tabel_norma.text_norma_pendidikan.Show()
         self.buka_tabel_norma.text_norma_pekerjaan.Hide()
         self.buka_tabel_norma.text_norma_sendiri.Hide()
+        self.buka_tabel_norma.m_button24.Disable()
+        self.buka_tabel_norma.m_button25.Disable()
         self.buka_tabel_norma.Layout()
         self.buka_tabel_norma.Show() 
         pass
@@ -64,6 +66,8 @@ class PilihTabelInherited(PilihTabel):
         self.buka_tabel_norma.text_norma_pendidikan.Hide()
         self.buka_tabel_norma.text_norma_pekerjaan.Show()
         self.buka_tabel_norma.text_norma_sendiri.Hide()
+        self.buka_tabel_norma.m_button24.Disable()
+        self.buka_tabel_norma.m_button25.Disable()
         self.buka_tabel_norma.Layout()
         self.buka_tabel_norma.Show() 
 
@@ -78,6 +82,8 @@ class PilihTabelInherited(PilihTabel):
         self.buka_tabel_norma.text_norma_pendidikan.Hide()
         self.buka_tabel_norma.text_norma_pekerjaan.Hide()
         self.buka_tabel_norma.text_norma_sendiri.Show()
+        self.buka_tabel_norma.m_button24.Enable()
+        self.buka_tabel_norma.m_button25.Enable()
         self.buka_tabel_norma.Layout()
         self.buka_tabel_norma.Show() 
 

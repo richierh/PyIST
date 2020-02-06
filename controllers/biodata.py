@@ -20,7 +20,6 @@ class Biodata(Biodata):
         self.parent = parent
         self.parent.tipe_biodata 
         self.parent.select_input
-        self.parent.biodata
 
         self.m_textCtrl_nama.Disable()
         self.m_textCtrl_tanggal_tes.Disable()

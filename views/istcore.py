@@ -2409,20 +2409,11 @@ class ISTUtama ( wx.Frame ):
 
 		self.MenuTabelNorma.AppendSeparator()
 
-		self.TabelNormaPendidikan = wx.MenuItem( self.MenuTabelNorma, wx.ID_ANY, u"Tabel Norma Pendidikan", wx.EmptyString, wx.ITEM_NORMAL )
-		self.MenuTabelNorma.Append( self.TabelNormaPendidikan )
-
-		self.MenuTabelPendidikan = wx.MenuItem( self.MenuTabelNorma, wx.ID_ANY, u"Tabel Pekerjaan", wx.EmptyString, wx.ITEM_NORMAL )
-		self.MenuTabelNorma.Append( self.MenuTabelPendidikan )
-
-		self.m_menu3.AppendSubMenu( self.MenuTabelNorma, u"Tabel Norma" )
-
-		self.m_menu11 = wx.Menu()
-		self.m_menuItem5 = wx.MenuItem( self.m_menu11, wx.ID_ANY, u"Lihat Data Peserta", wx.EmptyString, wx.ITEM_NORMAL )
+		self.m_menuItem5 = wx.MenuItem( self.MenuTabelNorma, wx.ID_ANY, u"Lihat Data Peserta", wx.EmptyString, wx.ITEM_NORMAL )
 		self.m_menuItem5.SetBitmap( wx.Bitmap( u"icons/menubar/man.png", wx.BITMAP_TYPE_ANY ) )
-		self.m_menu11.Append( self.m_menuItem5 )
+		self.MenuTabelNorma.Append( self.m_menuItem5 )
 
-		self.m_menu3.AppendSubMenu( self.m_menu11, u"Data Peserta" )
+		self.m_menu3.AppendSubMenu( self.MenuTabelNorma, u"Data" )
 
 		self.m_menubar1.Append( self.m_menu3, u"Pengaturan" )
 
@@ -2477,8 +2468,6 @@ class ISTUtama ( wx.Frame ):
 		self.m_selanjutnya.Bind( wx.EVT_BUTTON, self.m_selanjutnyaOnButtonClick )
 		self.Bind( wx.EVT_MENU, self.m_menu_keluarOnMenuSelection, id = self.m_menu_keluar.GetId() )
 		self.Bind( wx.EVT_MENU, self.m_menuItem_daftar_tabel_normaOnMenuSelection, id = self.m_menuItem_daftar_tabel_norma.GetId() )
-		self.Bind( wx.EVT_MENU, self.TabelNormaPendidikanOnMenuSelection, id = self.TabelNormaPendidikan.GetId() )
-		self.Bind( wx.EVT_MENU, self.MenuTabelPendidikanOnMenuSelection, id = self.MenuTabelPendidikan.GetId() )
 		self.Bind( wx.EVT_MENU, self.menubar_lihat_data_peserta, id = self.m_menuItem5.GetId() )
 		self.Bind( wx.EVT_MENU, self.m_menu_bantuanOnMenuSelection, id = self.m_menu_bantuan.GetId() )
 
@@ -2602,12 +2591,6 @@ class ISTUtama ( wx.Frame ):
 		event.Skip()
 
 	def m_menuItem_daftar_tabel_normaOnMenuSelection( self, event ):
-		event.Skip()
-
-	def TabelNormaPendidikanOnMenuSelection( self, event ):
-		event.Skip()
-
-	def MenuTabelPendidikanOnMenuSelection( self, event ):
 		event.Skip()
 
 	def menubar_lihat_data_peserta( self, event ):
@@ -3292,11 +3275,25 @@ class FrameRow ( wx.Frame ):
 class Biodata ( wx.Frame ):
 
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 388,460 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 388,500 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
 		bSizer29 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_panel34 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer52 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_staticText268 = wx.StaticText( self.m_panel34, wx.ID_ANY, u"Biodata Peserta", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText268.Wrap( -1 )
+
+		bSizer52.Add( self.m_staticText268, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+		self.m_panel34.SetSizer( bSizer52 )
+		self.m_panel34.Layout()
+		bSizer52.Fit( self.m_panel34 )
+		bSizer29.Add( self.m_panel34, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
 
 		self.m_panel19 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer27 = wx.BoxSizer( wx.VERTICAL )
@@ -3703,6 +3700,20 @@ class Biodata ( wx.Frame ):
 		bSizer27.Fit( self.m_panel19 )
 		bSizer29.Add( self.m_panel19, 1, wx.EXPAND |wx.ALL, 5 )
 
+		self.m_panel32 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		fgSizer30 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer30.SetFlexibleDirection( wx.BOTH )
+		fgSizer30.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.m_button42 = wx.Button( self.m_panel32, wx.ID_ANY, u"Tutup", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer30.Add( self.m_button42, 0, wx.ALL, 5 )
+
+
+		self.m_panel32.SetSizer( fgSizer30 )
+		self.m_panel32.Layout()
+		fgSizer30.Fit( self.m_panel32 )
+		bSizer29.Add( self.m_panel32, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
 
 		self.SetSizer( bSizer29 )
 		self.Layout()
@@ -3712,6 +3723,7 @@ class Biodata ( wx.Frame ):
 		# Connect Events
 		self.m_textCtrl_nama.Bind( wx.EVT_LEFT_UP, self.m_textCtrl_namaOnLeftUp )
 		self.m_textCtrl_nama1.Bind( wx.EVT_LEFT_UP, self.m_textCtrl_namaOnLeftUp )
+		self.m_button42.Bind( wx.EVT_BUTTON, self.m_tutup_biodataOnClick )
 
 	def __del__( self ):
 		pass
@@ -3721,5 +3733,8 @@ class Biodata ( wx.Frame ):
 	def m_textCtrl_namaOnLeftUp( self, event ):
 		event.Skip()
 
+
+	def m_tutup_biodataOnClick( self, event ):
+		event.Skip()
 
 

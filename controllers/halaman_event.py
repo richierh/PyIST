@@ -17,6 +17,9 @@ from controllers.grafik_tabel import *
 from views.pilih_tabel_norma import PilihTabel
 from controllers.database_control import DatabaseConnect
 
+
+
+
 class TabelDataPesertaInherited(TabelDataPeserta):
 
     # class attribut
@@ -180,7 +183,6 @@ class HalamanEventControl(CekDB):
         print (self.image2)
         self.re_image2 = self.image2.Rescale(200, 200)
         self.m_menuItem5.SetBitmap(wx.Bitmap(self.re_image2))
-
         #  print (f"Setting Tipe Biodata atau Radio Button ke
         # {self.m_radioBox_biodata.SetSelection(0)}")
         self.tipe_biodata = 0
@@ -410,12 +412,14 @@ class HalamanEventControl(CekDB):
 
         elif self.getSel == 2 :
             self.getSel = self.getSel + 1
-            pass
-
-        elif self.getSel == 3:
-            # self.m_textCtrl_biodata.SetValue(self.biodata[2])
             self.m_selanjutnya.Disable()
-            self.m_choice3.SetItems(["0", "2"])
+
+            pass
+        
+
+        elif self.getSel == 4:
+            # self.m_textCtrl_biodata.SetValue(self.biodata[2])
+            # self.m_choice3.SetItems(["0", "2"])
 
             if self.pilih == 0:
                 pass
@@ -426,10 +430,11 @@ class HalamanEventControl(CekDB):
                 pass
             
             # Tempat memasukkan data input total atau input manual
+            self.getSel = self.getSel +1
 
             pass
 
-        elif self.getSel == 4:
+        elif self.getSel == 5:
 
             # 'Proses hitung dimulai ketika halaman 3, atau pada saat penyajian grafik'
             # print("penyajian grafik proses hitung")
@@ -453,10 +458,11 @@ class HalamanEventControl(CekDB):
             # else:
             #     error_text == "select input tidak terdefinisikan"
             #     return error_text
+            self.getSel = self.getSel +1
 
             pass
 
-        elif self.getSel == 5:
+        elif self.getSel == 6:
 
             # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
             global bsizer12
@@ -477,9 +483,10 @@ class HalamanEventControl(CekDB):
 
             self.m_dataViewListCtrl1.InsertItem(0, ["df", "dfs", "sdf"])
             # self.m_staticText_berpikir.SetValue()
+            self.getSel = self.getSel +1
             pass
 
-        elif self.getSel == 6:
+        elif self.getSel == 7:
             # if self.tipe_biodata == 0:
             #     self.grafik_profesi = GrafikProfesi(self)
             #     self.grafik_profesi.draw()
@@ -527,7 +534,7 @@ class HalamanEventControl(CekDB):
 
             pass
 
-        elif self.getSel == 7:
+        elif self.getSel == 8:
             self.m_selanjutnya.Disable()
             pass
 
@@ -568,7 +575,34 @@ class HalamanEventControl(CekDB):
         pass
 
     def m_button_rincian_biodata_on_buttonclick(self, event):
-        self.tampilkan_rincian_biodata = Biodata(self)
+        # from controllers.properties_ist import PropertiesInput
+        # self.data_peserta = PropertiesInput(self)
+        self.tampilkan_rincian_biodata = BiodataInherited(self)
         self.tampilkan_rincian_biodata.Show()
+
+
         # print ("lihat rincian biodata")
         pass
+
+
+class BiodataInherited(Biodata):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.m_textCtrl_no_tes1.SetValue(self.parent.data_peserta.get_biodata()[0])
+        self.m_textCtrl_tanggal_tes1.SetValue(self.parent.data_peserta.get_biodata()[1])
+        self.m_textCtrl_nama1.SetValue(self.parent.data_peserta.get_biodata()[2])
+        self.m_textCtrl_jenis_kelamin1.SetValue(self.parent.data_peserta.get_biodata()[3])
+        self.m_textCtrl_tanggal_lahir1.SetValue(self.parent.data_peserta.get_biodata()[4])
+        self.m_textCtrl_usia1.SetValue(str(self.parent.data_peserta.get_biodata()[5]))
+        self.m_textCtrl_asal_sekolah_universitas.SetValue(self.parent.data_peserta.get_biodata()[6])
+        self.m_textCtrl_pendidikan_terakhir1.SetValue(self.parent.data_peserta.get_biodata()[7])
+        self.m_textCtrl_jurusan.SetValue(self.parent.data_peserta.get_biodata()[8])
+        self.m_textCtrl_posisi_pekerjaan.SetValue(self.parent.data_peserta.get_biodata()[9])
+        self.m_textCtrl_perusahaan.SetValue(self.parent.data_peserta.get_biodata()[10])
+        self.m_textCtrl_keterangan.SetValue(self.parent.data_peserta.get_biodata()[11])
+        
+
+    def m_tutup_biodataOnClick(self,event) :
+        self.Close()

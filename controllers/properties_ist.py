@@ -92,7 +92,6 @@ class MenuBarInherited(HalamanEventControl):
         self.lihat_data_peserta.Show()
         self.lihat_data_peserta.Maximize()
 
-
 class PropertiesInput(MenuBarInherited):
 
     def __init__(self, parent):
@@ -441,12 +440,12 @@ class ISTInheritedProperties(PropertiesInput):
         
         return self.m_textCtrl486.GetValue()
 
-    def biodata(self):
-        # Ini adalah object untuk tarik data
-        print ("lewat sini tak")
-        return self.m_textCtrl_nama, self.m_textCtrlNomor, \
-            self.m_textCtrlUsia, self.m_textCtrlKelas, \
-            self.m_textCtrlAsalSekolah
+    # def biodata(self):
+    #     # Ini adalah object untuk tarik data
+    #     print ("lewat sini tak")
+    #     return self.m_textCtrl_nama, self.m_textCtrlNomor, \
+    #         self.m_textCtrlUsia, self.m_textCtrlKelas, \
+    #         self.m_textCtrlAsalSekolah
 
     def m_textCtrl_namaOnLeftUp(self, event):
         event.Skip()

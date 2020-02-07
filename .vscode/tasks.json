@@ -7,23 +7,38 @@
             "label": "windows build",
             "type": "shell",
             "linux":{
-                "command": "wine cmd.exe /C pyinstaller --onefile ist.py",
-            },
+                "command": "wine cmd.exe /C pyinstaller --onefile ${workspaceFolder}/run.py"/*  */
+                    },
             "group": {
                 "kind": "build",
-                "isDefault": false
-            }
+                "isDefault": true
+                    }
+        },
+
+        {
+            "label"     : "linux build",
+            "type"      : "shell",
+            "command"   : "bash",
+            "args"      : ["-c","pyinstaller --onefile ${workspaceFolder}/run.py"],
+            // "linux":{
+            //     "command": ".${workspaceFolder}/run"
+            //         },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+                    }
         },
         {
-            "label": "linux build",
-            "type": "shell",
-            "linux":{
-                "command": "pyinstaller --onefile ist.py.py",
-            },
+            "label" : "Schemacrawler",
+            "type"  : "shell",
+            "linux" :{
+                "command": "schemacrawler --server sqlite --database $HOME/Projects/pyist/models/istcore.sqlite --info-level=maximum --password= --command schema -o $HOME/Projects/pyist/models/diagram.png"
+                    },
             "group": {
                 "kind": "build",
-                "isDefault": false
-            }
+                "isDefault": true
+             
         }
-    ]
+
+       ]
 },

@@ -1,9 +1,0 @@
-recovery-pacman() {
-    sudo pacman "$@"  \
-    --log /dev/null   \
-    --noscriptlet     \
-    --dbonly          \
-    --force           \
-    --nodeps          \
-    --needed
-}

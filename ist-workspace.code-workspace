@@ -4,20 +4,5 @@
 			"path": "."
 		}
 	],
-	"settings": {
-		"sqltools.connections": [
-			{
-				"database": "${workspaceFolder:pyist}/models/istcore.sqlite",
-				"dialect": "SQLite",
-				"name": "istcoreconn"
-			},
-			{
-				"database": "${workspaceFolder:pyist}/models/istcore.sqlite",
-				"dialect": "SQLite",
-				"isActive": true,
-				"isConnected": true,
-				"name": "istcoreconn"
-			}
-		]
-	}
+	"settings": {}
 }

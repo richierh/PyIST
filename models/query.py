@@ -229,6 +229,8 @@ class SqliteDB(object):
         return self.results
 
 
+
+
 class NormaSarjana(SqliteDB):
 
     def __init__(self, parent):
@@ -251,27 +253,7 @@ class NormaSarjana(SqliteDB):
         return getdata
 
 
-class DataPeserta(SqliteDB) :
-    
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.parent = parent
 
-    def insert_data_peserta(self, value):
-
-        self.value = [str(value), str(value)]
-        # self.value = [str(2),str(2)]
-        self.conn = self.connect_db()
-        self.cursorexe = self.conn.cursor()
-        self.sql_cmd = """
-        SELECT *,SUBSTR(SE,-3)
-        FROM NormaSarjana
-        WHERE 
-        SUBSTR(SE,1,3) <= ? AND SUBSTR(SE,-3) >= ?
-        """
-        getdata = self.cursorexe.execute(self.sql_cmd, self.value).fetchone()
-        self.close_db()
-        return getdata
 
 
 class NormaSendiri(SqliteDB):
@@ -319,6 +301,7 @@ FROM norma_sendiri ORDER BY id_norma DESC LIMIT 1
         print("leeeee")
         self.sql_cmd = """
         SELECT
+            no,
             rs,
             se,
             wa,
@@ -329,10 +312,8 @@ FROM norma_sendiri ORDER BY id_norma DESC LIMIT 1
             fa,
             wu,
             me
-        FROM norma_sendiri_kunci
-        LEFT JOIN norma_sendiri
-        ON norma_sendiri.id_norma = norma_sendiri_kunci.id_norma
-        WHERE norma_sendiri.id_norma = ?
+        FROM NormaSendiri
+        WHERE IdNorma = ?
                 ;
         """
         self.cursorexe.execute(self.sql_cmd, [self.values, ])
@@ -370,13 +351,13 @@ FROM norma_sendiri ORDER BY id_norma DESC LIMIT 1
         # print(getdatas)
         return True
 
-    def delete_norma_sendiri(self, values):
+    def delete(self, values):
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
         self.values = values
         self.sql_cmd = """
-        DELETE FROM norma_sendiri
-        WHERE "no" = ?
+        DELETE FROM NormaSendiri
+        WHERE IdNorma = ?;
         """
         self.cursorexe.execute(self.sql_cmd, (self.values,))
         self.conn.commit()
@@ -528,7 +509,7 @@ class TabelJawabanNormaSendiri(SqliteDB):
         self.cursorexe = self.conn.cursor()
         self.values = values
         self.sql_cmd = """
-        INSERT INTO NormaSendiri ([No],RS,SE,WA,AN,GE,RA, ZE, FA, WU, ME )
+        INSERT INTO NormaSendiri ([No],RS,SE,WA,AN,GE,RA, zr, FA, WU, ME )
                          VALUES (
                              'No',
                              'RS',
@@ -537,7 +518,7 @@ class TabelJawabanNormaSendiri(SqliteDB):
                              'AN',
                              'GE',
                              'RA',
-                             'ZE',
+                             'ZR',
                              'FA',
                              'WU',
                              'ME',
@@ -565,7 +546,7 @@ INSERT INTO NormaSendiri (
                              'AN',
                              'GE',
                              'RA',
-                             'ZE',
+                             'ZR',
                              'FA',
                              'WU',
                              'ME'
@@ -607,6 +588,42 @@ class InputJawaban(SqliteDB):
         self.conn.executemany(self.sql_cmd,self.values)
         self.conn.commit()
         self.close_db()
+
+class TabelNormaPendidikan(SqliteDB):
+
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+        pass
+
+    def query(self , values = None) :
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+
+        self.sql_cmd ="""
+        SELECT *
+        FROM NormaPendidikanUSIA
+        WHERE NormaPendidikanID = ?
+        """
+
+        self.getdatas = self.cursorexe.execute(self.sql_cmd, [self.values,]).fetchall()
+        self.close_db()
+        return self.getdatas
+
+    def insert_data_keterangan(self,values=None):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+        self.sql_cmd = """
+        UPDATE [Norma Pendidikan]
+        SET Keterangan = ?
+        WHERE NormaPendidikanID = ?
+        """
+        self.cursorexe.execute(self.sql_cmd,(self.values))
+        self.conn.commit()        
+        self.close_db()
+
 
 class TabelNormaSendiri(SqliteDB):
 
@@ -671,6 +688,44 @@ class TabelNormaSendiri(SqliteDB):
         self.conn.commit()
         self.close_db()
 
+    def insert_data_sendiri_tabel(self,values = None):
+        self.conn=self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+        self.sql_cmd = """
+INSERT INTO NormaSendiri (
+                             [No],
+                             RS,
+                             SE,
+                             WA,
+                             AN,
+                             GE,
+                             RA,
+                             ZR,
+                             FA,
+                             WU,
+                             ME,
+                             IdNorma
+                         )
+                         VALUES (
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?,
+                             ?
+                         );
+
+"""
+        self.cursorexe.executemany(self.sql_cmd,self.values)
+        self.conn.commit()
+        self.close_db()
 
 class TableDataKelompokUmur(SqliteDB):
 
@@ -920,12 +975,45 @@ class BidangKeilmuan(SqliteDB):
         return self.getdatas
 
 
+class TabelNormaPekerjaan(SqliteDB) :
+
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+    
+    def query(self,values = None):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+        self.sql_cmd = """
+        SELECT *
+        FROM TabelNormaPekerjaan
+        WHERE NormaPekerjaanID = ?
+        """
+        self.getdatas = self.cursorexe.execute(self.sql_cmd,[self.values,]).fetchall()
+        self.close_db()
+
+        return self.getdatas
+
 
 class JenisNorma(SqliteDB):
 
     def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
+
+    def select_all_jenis_norma(self):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT *
+        FROM [Jenis Norma]
+        """
+        self.cursorexe.execute(self.sql_cmd)
+        self.getdatas = self.cursorexe.fetchall()
+        self.close_db()
+        return self.getdatas
 
     def select_data_norma_pekerjaan(self, id):
         self.id = str(id)
@@ -947,6 +1035,27 @@ class JenisNorma(SqliteDB):
         self.close_db()
         return self.getdatas
     
+    def querytb_jenisnorma(self, value = None):
+        self.nama_norma = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT *,
+                CASE  
+                WHEN [Jenis Norma].[Jenis Norma] = "Norma Pendidikan"
+                THEN "Norma Pendidikan"
+                WHEN [Jenis Norma].[Jenis Norma] = "Norma Pekerjaan"
+                THEN "Norma Pekerjaan"
+                ELSE [Norma].[Nama Norma]
+                END 
+        FROM [Jenis Norma]
+        LEFT JOIN 'Norma' ON 'Jenis Norma'.NormaID =  'Norma'.NormaID
+        WHERE [Jenis Norma].[Jenis Norma] = '{}'      
+        """.format(self.nama_norma)
+        self.getdatas = self.cursorexe.execute(self.sql_cmd).fetchall()
+        self.close_db()
+        return self.getdatas
+
     def select_data_norma_pendidikan(self, id):
         self.id = str(id)
         self.conn = self.connect_db()
@@ -1006,6 +1115,39 @@ class JenisNorma(SqliteDB):
 
         return True
 
+class TabelTipeNorma(SqliteDB):
+
+    def __init__(self,parent =None):
+        super().__init__(parent)
+        self.parent = parent
+    
+    def query_all(self,value=None):
+        self.value = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd ="""
+        SELECT *
+        FROM [Tipe Norma]
+        LEFT JOIN 'Jenis Norma' ON 'Jenis Norma'.TipeNormaID =  'Tipe Norma'.TipeNormaID
+        """
+        getdata = self.cursorexe.execute(self.sql_cmd).fetchall()
+        self.close_db
+        return getdata
+
+    def query_all_cond(self,value=None):
+        self.value = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd ="""
+        SELECT *
+        FROM [Tipe Norma]
+        LEFT JOIN 'Jenis Norma' ON 'Jenis Norma'.TipeNormaID =  'Tipe Norma'.TipeNormaID
+        WHERE [Tipe Norma].[Jenis Norma] = ? 
+        """
+        getdata = self.cursorexe.execute(self.sql_cmd,(self.value,)).fetchall()
+        self.close_db
+        return getdata
+
 class Peserta(SqliteDB):
 
     def __init__(self, parent=None):
@@ -1013,32 +1155,87 @@ class Peserta(SqliteDB):
         self.parent = parent
         pass
 
-    def select_data(self):
+    def query_select_lj_datapeserta_tipenorma(self,value=None):
+        self.value = value
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
         self.sql_cmd = """
-        SELECT id_kand,
-            "nomor peserta",
-            "tanggal tes",
-            "nama peserta",
-            "jenis kelamin",
-            "tanggal lahir",
-            "usia",
-            "asal sekolah",
-            "pendidikan terakhir",
-            "jurusan",
-            "posisi pekerjaan",
-            "perusahaan"
-        FROM data_peserta;
-
+        SELECT *
+        FROM [Data Peserta]
+        LEFT JOIN [Tipe Norma] ON  [Tipe Norma].TipeNormaID=[Data Peserta].TipeNormaID 
+        LEFT JOIN [Jenis Norma] ON  [Tipe Norma].TipeNormaID=[Jenis Norma].TipeNormaID
+        WHERE id = ?
         """
-        self.cursorexe.execute(self.sql_cmd)
-        self.getdatas = self.cursorexe.fetchall()
-        for data in self.getdatas:
-            print (data)
 
-        self.close_db()
-        return self.getdatas
+        getdata = self.cursorexe.execute(self.sql_cmd,(self.value,)).fetchone()
+        self.close_db
+        return getdata
+
+    def query_data_peserta(self,value=None):
+        self.value = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT *
+        FROM [Data Peserta];
+        """
+        getdata = self.cursorexe.execute(self.sql_cmd).fetchall()
+        self.close_db
+        return getdata
+
+    def query_select_data_peserta(self,value=None):
+        self.value = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT *
+        FROM [Data Peserta]
+        WHERE id =?;
+        """
+        getdata = self.cursorexe.execute(self.sql_cmd,(self.value,)).fetchone()
+        self.close_db
+        return getdata
+
+
+    def hapus_peserta(self,value=None):
+        self.value = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+            DELETE FROM [Data Peserta]
+            WHERE id = ? 
+        """
+        self.cursorexe.execute(self.sql_cmd,(self.value,))
+        self.conn.commit()
+        self.close_db
+        return True
+
+    def edit_peserta(self,value =None):
+        self.value = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        UPDATE [Data Peserta]
+        SET [no tes] = ?,
+       [tanggal tes] = ?,
+       nama = ?,
+       [jenis kelamin] = ?,
+       [tanggal lahir] = ?,
+       usia = ?,
+       [asal sekolah] = ?,
+       [pendidikan terakhir] = ?,
+       jurusan = ?,
+       [posisi pekerjaan] = ?,
+       perusahaan = ?,
+       keterangan = ?,
+       TipeNormaID = ?
+        WHERE id = 'id'
+        """
+        self.cursorexe.execute(self.sql_cmd,self.value)
+        self.conn.commit()
+        self.close_db
+        return True
+       
 
     def insert_data_peserta(self,values):
         self.conn = self.connect_db()
@@ -1047,8 +1244,8 @@ class Peserta(SqliteDB):
 
         self.sqlcmd = """INSERT INTO [Data Peserta] (
                                 [no tes],
-                                nama,
                                 [tanggal tes],
+                                nama,
                                 [jenis kelamin],
                                 [tanggal lahir],
                                 usia,

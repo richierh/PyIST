@@ -18,7 +18,7 @@ import platform
 if platform.system() == "Windows":
     locale.setlocale(locale.LC_ALL, 'C')
 else :
-    pass 
+    pass
 
 from views.app import MyApp
 from pathlib import Path
@@ -34,7 +34,7 @@ class VerifyKey():
     def __init__(self, parent):
         self.value = parent
         pass
-    
+
     def Verify(self):
         return self.value
 
@@ -45,13 +45,13 @@ class VerifyKey():
 def openWindows():
     gettext.install("myApp")
     run = MyApp(0)
-    run.MainLoop()  
+    run.MainLoop()
     return None
 
 
 def close():
     from views.authenticationFrameWarningKey import authenticationFrameWarningKey
-    
+
     start = authenticationFrameWarningKey(None)
     start.Show()
     return None
@@ -64,7 +64,7 @@ if platform.system() == "Windows":
     if my_file.is_file():
         # print ("file ada")
         openWindows()
-    else : 
+    else :
         # print ("file tidak ada")
         KeyVerification = VerifyKey("2")
         # print (KeyVerification.Verify())
@@ -83,7 +83,7 @@ elif platform.system() == "Linux" :
         print ("file ada")
         openWindows()
         # print ("Berakhir")
-    else : 
+    else :
         # print ("file tidak ada")
         KeyVerification = VerifyKey("2")
         # print (KeyVerification.Verify())

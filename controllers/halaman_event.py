@@ -17,30 +17,15 @@ from controllers.grafik_tabel import *
 from views.pilih_tabel_norma import PilihTabel
 from controllers.database_control import DatabaseConnect
 
-
-
-
-class TabelDataPesertaInherited(TabelDataPeserta):
-
-    # class attribut
-    __tabel__ = "Tabel Data Peserta"
-    
-    def __init__(self,parent):
-        super().__init__(parent)
-        self.parent = parent
-
-    
-    def buat_data_peserta(self,event):
-        self.buka_norma_sendiri = BuatNormaSendiri(self)
-        self.buka_norma_sendiri.Show()
-
-
 class PilihTabelInherited(PilihTabel):
 
     def __init__(self,parent):
         super().__init__(parent)
+
         self.parent = parent
-    
+        self.SetTitle("Pilih Norma")
+
+
     def normapendidikanOnButtonClick(self,event):
         
         self.buka_tabel_norma = NormaInherited(self.parent)
@@ -99,7 +84,7 @@ class NormaSendiriInherited(NormaSendiri):
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
-
+        
         self.__generate()
     
     def __generate(self):
@@ -378,12 +363,27 @@ class HalamanEventControl(CekDB):
         self.m_textCtrl_biodata.SetValue(self.m_textCtrl_nama.GetValue())
 
         if self.pilih == 1:
+
+            #  Disini perhitungannya dimulai 
             print(self.buka_jendela_norma.getdata)
             print(self.buka_jendela_norma.data_norma)
             
         else:
             self.buka_jendela_norma = NormaInherited(self)
             self.buka_jendela_norma.Show()
+            self.buka_jendela_norma.m_dataViewListCtrl8.Hide()
+            self.buka_jendela_norma.m_dataViewListCtrl9.Hide()
+            self.buka_jendela_norma.m_dataViewListCtrl3.Show()
+            self.buka_jendela_norma.text_norma_pendidikan.Hide()
+            self.buka_jendela_norma.text_norma_pekerjaan.Hide()
+            self.buka_jendela_norma.text_norma_sendiri.Show()
+            self.buka_jendela_norma.m_button24.Enable()
+            self.buka_jendela_norma.m_button25.Enable()
+            self.buka_jendela_norma.Layout()
+            self.buka_jendela_norma.Show() 
+
+
+
             # self.m_staticText_pilih_norma_sendir.SetLabel(self.buka_jendela_norma.getdata[2])
             # self.m_panel29.Layout()
             # self.m_panel221.Layout()
@@ -395,8 +395,19 @@ class HalamanEventControl(CekDB):
         pass
 
     def m_buka_pilih_norma(self,event):
-        self.buka_jendela_norma_sendiri = NormaSendiriInherited(self)
-        self.buka_jendela_norma_sendiri.Show()
+        self.buka_jendela_norma = NormaInherited(self)
+        self.buka_jendela_norma.Show()
+        self.buka_jendela_norma.m_dataViewListCtrl8.Hide()
+        self.buka_jendela_norma.m_dataViewListCtrl9.Hide()
+        self.buka_jendela_norma.m_dataViewListCtrl3.Show()
+        self.buka_jendela_norma.text_norma_pendidikan.Hide()
+        self.buka_jendela_norma.text_norma_pekerjaan.Hide()
+        self.buka_jendela_norma.text_norma_sendiri.Show()
+        self.buka_jendela_norma.m_button24.Enable()
+        self.buka_jendela_norma.m_button25.Enable()
+        self.buka_jendela_norma.Layout()
+        self.buka_jendela_norma.Show() 
+
 
 
     def m_selanjutnyaOnButtonClick(self, event):

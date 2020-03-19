@@ -4,7 +4,8 @@ from numpy import arange, sin, pi
 from views.grafik_ist import GrafikLayout, GrafikHasil, GrafikProfesi
 from views.istcore import Norma, TabelNorma, FrameRow, NormaAll, TabelNormaLihat,BuatNormaSendiri
 from controllers.nama_norma_inherited import NamaNormaInherited
-from models.query import JenisNorma,TabelNormaSendiri
+from models.query import JenisNorma,TabelNormaSendiri,TabelNormaPendidikan,NormaSendiri\
+    ,TabelNormaPekerjaan
 
 class TabelNormaSendiriInherited(TabelNorma):
 
@@ -12,11 +13,31 @@ class TabelNormaSendiriInherited(TabelNorma):
         super().__init__(parent)
         self.parent = parent
         self.connect_db = self.parent.parent.parent.connect_db
-        for data in range(1,21):
-            self.m_dataViewListCtrl4.AppendItem([str(data),"","","","","","","","","",""])
-        # self.nama_file = "istcore"
-        # self.connect_db = SqliteDB("istcore")
-        # self.connect_db.connect_db()
+        
+        self.m_dataViewListCtrl3 = self.parent.parent.m_dataViewListCtrl3
+        self.m_dataViewListCtrl8 = self.parent.parent.m_dataViewListCtrl8
+        self.m_dataViewListCtrl9 = self.parent.parent.m_dataViewListCtrl9
+
+
+        if self.m_dataViewListCtrl3.IsShown() == True :
+            print ("kesini")
+            for data in range(1,34):
+                self.m_dataViewListCtrl4.AppendItem([str(data),"","","","","","","","","",""])
+
+        elif self.m_dataViewListCtrl8.IsShown() == True :
+            # Berdasarkan kelompok umur 
+            self.getRow = self.m_dataViewListCtrl8.GetSelectedRow
+            self.NormaID = self.m_dataViewListCtrl8.GetTextValue(self.getRow,0)
+            
+            pass        
+
+        elif self.m_dataViewListCtrl9.IsShown() == True :
+            pass
+
+
+        else :
+            print ("tidak ada pilihan")
+
         pass
 
     def m_button_ok_tabel_normaOnButtonClick(self,event):
@@ -55,12 +76,14 @@ class TabelNormaSendiriInherited(TabelNorma):
             self.m_dataViewListCtrl4.GetTextValue(data,8),
             self.m_dataViewListCtrl4.GetTextValue(data,9),
             self.m_dataViewListCtrl4.GetTextValue(data,10),
-
+            self.selectNorma.select_from(self.parent.m_nama_norma_sendiri.GetValue())[0]
             ]
             self.data_norma_sendiri.append(self.datainput)
 
 
+        self.insertDataNorma.insert_data_sendiri_tabel(self.data_norma_sendiri)   
         self.Close()
+    
         pass
     
     def m_button_batal_tabel_normaOnButtonClick(self,event):
@@ -72,6 +95,7 @@ class BuatNormaSendiriInherited(BuatNormaSendiri):
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
+        pass
 
     def batal_norma_sendiri(self,event):
         self.Close()
@@ -81,6 +105,8 @@ class BuatNormaSendiriInherited(BuatNormaSendiri):
         self.buka_tabel_norma_sendiri.Show()
         self.buka_tabel_norma_sendiri.Maximize(True)
         self.Hide()
+        self.data_norma = [self.m_nama_norma_sendiri.GetValue(),\
+            self.m_keterangan_norma_sendiri.GetValue()]
 
         pass
 
@@ -302,24 +328,37 @@ class NormaInherited(Norma):
         pass
 
     def buat_data_peserta(self, event):
-        # self.buka_row = FrameRowInherited(self)
-        # self.buka_row.Show()
-        # self.buat_baru_norma = 1
-        # self.buka_tabel_norma = TabelNormaInherited(self)
-        # self.buka_tabel_norma.Show()
-        self.buka_norma_sendiri = BuatNormaSendiriInherited(self)
-        self.buka_norma_sendiri.Show()
-        pass
+        if self.m_dataViewListCtrl8.GetSelectedRow() != -1 or self.m_dataViewListCtrl8.IsShown == True :
+            self.getRow = self.m_dataViewListCtrl8.GetSelectedRow()
+            self.IdNorma = self.m_dataViewListCtrl8.GetTextValue(self.getRow,0)
+            self.buka_norma_sendiri = BuatNormaSendiriInherited(self)
+            self.buka_norma_sendiri.Show()
+
+        elif self.m_dataViewListCtrl9.GetSelectedRow() != -1 or self.m_dataViewListCtrl9.IsShown == True :             
+            self.getRow = self.m_dataViewListCtrl9.GetSelectedRow()
+            self.IdNorma = self.m_dataViewListCtrl9.GetTextValue(self.getRow,0)
+            self.buka_norma_sendiri = BuatNormaSendiriInherited(self)
+            self.buka_norma_sendiri.Show()
+
+        elif self.m_dataViewListCtrl3.GetSelectedRow() != -1 :
+            self.getRow = self.m_dataViewListCtrl3.GetSelectedRow()
+            self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(self.getRow,0)
+            self.buka_norma_sendiri = BuatNormaSendiriInherited(self)
+            self.buka_norma_sendiri.Show()
+        
+        elif self.m_dataViewListCtrl3.IsShown() == True:
+            self.buka_norma_sendiri = BuatNormaSendiriInherited(self)
+            self.buka_norma_sendiri.Show()
+
+    
 
     def m_button_edit_tabel_normaOnButtonClick(self, event):
-
         if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
             # print ("lewat sini")
             self.getV = 0
         else :
             self.getV = self.m_dataViewListCtrl3.GetSelectedRow()
             # print("kkee")
-
         self.getdata = []
         
         for data in range(0, 4):
@@ -336,138 +375,97 @@ class NormaInherited(Norma):
             # yang bisa di edit adalah norma yang dibuat sendiri
             self.buat_baru_norma = 0
 
-        self.buka_tabel_norma = TabelNormaInherited(self)
-        # method set_data() adalah menyajikan tabel yang sudah ada kedalam gui tabel
-        self.buka_tabel_norma.set_data()
-        self.buka_tabel_norma.Show()
+        if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
+            self.buka_tabel_norma = TabelNormaInherited(self)
+            # method set_data() adalah menyajikan tabel yang sudah ada kedalam gui tabel
+            self.buka_tabel_norma.set_data()
+            self.buka_tabel_norma.Show()
 
     def hapus_data_peserta(self, event):
-
-        print('hello')
-        # self.m_dataViewListCtrl3.GetSelectedRow() == -1 apabila tidak ada yang dipilih
-        # if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
-        #     print ("lewat sini")
-        #     self.getV = 0
-        # else :
-        #     self.getV = self.m_dataViewListCtrl3.GetSelectedRow()
-        # self.getdata = []
+        if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
+            self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
+                self.m_dataViewListCtrl3.GetSelectedRow(),1)
+            self.run_data.hapus_data(self.IdNorma)
+            self.m_dataViewListCtrl3.DeleteItem(\
+                self.m_dataViewListCtrl3.GetSelectedRow())
+            self.delete_norma_sendiri = NormaSendiri(self.parent.connect_db)
+            self.delete_norma_sendiri.delete(self.IdNorma)
         
-        # for data in range(0, 3):
-        #     # print(self.m_dataViewListCtrl3.GetValue(self.getV,1))
-        #     self.getdata.append(self.m_dataViewListCtrl3.GetValue(self.getV, data))
-
-        # if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
-        #     pass
-        # elif int(self.getdata[0]) <= 11 :
-        #     # data tidak bisa dihapus
-        #     self.warning = WarningFrameInherited(self)
-        #     self.warning.Show()
-        # else :
-        #     # Menghapus data di tabel GUI
-        #     self.m_dataViewListCtrl3.DeleteItem(self.getV)
-        #     self.tabel_norma_sendiri = TabelNormaSendiriConnect(self.parent.databasekon)
-        #     self.tabel_norma_sendiri.delete_nama_norma(self.getdata[0])
-        self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
-            self.m_dataViewListCtrl3.GetSelectedRow(),1)
-        self.run_data.hapus_data(self.IdNorma)
-        self.m_dataViewListCtrl3.DeleteItem(\
-            self.m_dataViewListCtrl3.GetSelectedRow())       
-       
-        # if self.m_dataViewListCtrl3.GetId() == 12345:
-        #     print ('hello lewat sini')
-        #     self.m_dataViewListCtrl3.SetId(12345)
-        #     self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
-        #         self.m_dataViewListCtrl3.GetSelectedRow(),1)
-        #     self.run_data.hapus_data(self.IdNorma)
-        #     self.m_dataViewListCtrl3.DeleteItem(\
-        #         self.m_dataViewListCtrl3.GetSelectedRow())
-            
-        # else :
-        #     print('nggak lewat sisni')
-        #     print ('hello lewat sini')
-        #     self.m_dataViewListCtrl3.SetId(12345)
-        #     self.IdNorma = self.m_dataViewListCtrl3.GetTextValue(\
-        #         self.m_dataViewListCtrl3.GetSelectedRow(),1)
-        #     self.run_data.hapus_data(self.IdNorma)
-        #     self.m_dataViewListCtrl3.DeleteItem(\
-        #         self.m_dataViewListCtrl3.GetSelectedRow())
-        # pass   
-    
     def m_dataViewListCtrl3OnDataViewListCtrlItemActivated(self,event):
         self.m_dataViewListCtrl3.SetId(12345)
-        
         pass
-
 
     def m_button_pilih_tabel_normaOnButtonClick(self, event):
         self.parent.pilih = 1
-        if self.m_dataViewListCtrl3.GetSelectedRow() == -1:
-            print ("lewat sini")
-            self.getV = int(self.m_dataViewListCtrl3.GetSelectedRow()) + 1
-        else :
-            self.getV = self.m_dataViewListCtrl3.GetSelectedRow()
-        self.getdata = []
+        if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
+            self.getRow = self.m_dataViewListCtrl3.GetSelectedRow()
+            self.getdata = []
         
-        for data in range(0, 3):
-            # print(self.m_dataViewListCtrl3.GetValue(self.getV,1))
-            self.getdata.append(self.m_dataViewListCtrl3.GetValue(self.getV, data))
-        # print (self.getdata)
-        if int(self.getdata[0]) == 2 :
-            self.tabelumur = 12
-        elif int(self.getdata[0]) == 3:
-            self.tabelumur = 13
-        elif int(self.getdata[0]) == 4:
-            self.tabelumur = 13
-        elif int(self.getdata[0]) == 5:
-            self.tabelumur = 14
-        elif int(self.getdata[0]) == 6:
-            self.tabelumur = 15
-        elif int(self.getdata[0]) == 7:
-            self.tabelumur = 16
-        elif int(self.getdata[0]) == 8:
-            self.tabelumur = 17
-        elif int(self.getdata[0]) == 9:
-            self.tabelumur = 18
-        elif int(self.getdata[0]) == 10:
-            self.tabelumur = 19
-        elif int(self.getdata[0]) == 11:
-            self.tabelumur = 20
-        else :
-            self.tabelumur = "0"
+            self.getdata.append(self.m_dataViewListCtrl3.GetTextValue(self.getRow, 0))
+            self.getdata.append(self.m_dataViewListCtrl3.GetTextValue(self.getRow, 1))
+            self.getdata.append(self.m_dataViewListCtrl3.GetTextValue(self.getRow, 2))
+            self.getdata.append(self.m_dataViewListCtrl3.GetTextValue(self.getRow, 3))
+
+            self.IdNorma = self.getdata[1]
+            self.query_data = NormaSendiri(self.parent.connect_db)
+            self.data_norma = self.query_data.query_all(self.IdNorma)
+
+            self.saji_tabel = []
+            for data in self.data_norma :
+                self.saji_tabel.append(data[0:10])
+
+            print (self.saji_tabel)
+            self.parent.LNormaSendiri.SetLabel(self.getdata[2])
+    
+            pass
+            
+        elif self.m_dataViewListCtrl8.GetSelectedRow() != -1 :
+            self.getRow = self.m_dataViewListCtrl8.GetSelectedRow()
+            self.getdata = []
         
-        if int(self.getdata[0]) <= 11:
-            print (self.getdata[0])
-            print ("lewat")
-            self.query_data = TableDataKelompokUmurConnect(self.parent.databasekon)
-            self.query_data.query_all(self.tabelumur)
+            self.getdata.append(self.m_dataViewListCtrl8.GetTextValue(self.getRow, 0))
+            self.getdata.append(self.m_dataViewListCtrl8.GetTextValue(self.getRow, 1))
+            self.getdata.append(self.m_dataViewListCtrl8.GetTextValue(self.getRow, 2))
+            self.getdata.append(self.m_dataViewListCtrl8.GetTextValue(self.getRow, 3))
 
-        else :
-            self.query_data = TabelNormaSendiriConnect(self.parent.databasekon)
-            # print (self.query_data)
-            self.tabelumur = 3
-            print ("kkasdk")
-            self.query_data.query_all(self.tabelumur)
-            print (self.tabelumur)
+            self.NormaPendidikanID = self.getdata[1]
+            self.query_data = TabelNormaPendidikan(self.parent.connect_db)
+            self.data_norma = self.query_data.query(self.NormaPendidikanID)
 
-        # self.lihat_tabel_norma = TabelNormaLihatInherited(self)
-        # self.lihat_tabel_norma.Maximize()
-        # self.lihat_tabel_norma.Show()
-        self.data_norma = []
-        for i in range(0, len(self.query_data.query_all(self.tabelumur))):
-            self.query_list = list(map(str, self.query_data.query_all(self.tabelumur)[i]))
-            self.query_list.insert(0, str(i))
-            print (self.query_list)
-            self.data_norma.append(self.query_list)
-            # self.lihat_tabel_norma.m_dataViewListCtrl4.InsertItem(i,self.query_list)
-        # print(self.data_norma)
-        self.parent.m_staticText_pilih_norma_sendir.SetLabel(self.getdata[2])
+            self.saji_tabel = []
+            for data in self.data_norma :
+                self.saji_tabel.append(data[0:10])
+
+            print (self.saji_tabel)
+            pass
+
+        elif self.m_dataViewListCtrl9.GetSelectedRow() != -1 :
+            self.getRow = self.m_dataViewListCtrl9.GetSelectedRow()
+            self.getdata = []
+        
+            self.getdata.append(self.m_dataViewListCtrl9.GetTextValue(self.getRow, 0))
+            self.getdata.append(self.m_dataViewListCtrl9.GetTextValue(self.getRow, 1))
+            self.getdata.append(self.m_dataViewListCtrl9.GetTextValue(self.getRow, 2))
+            self.getdata.append(self.m_dataViewListCtrl9.GetTextValue(self.getRow, 3))
+
+            self.NormaPekerjaanID = self.getdata[1]
+            self.query_data = TabelNormaPekerjaan(self.parent.connect_db)
+            
+            self.data_norma = self.query_data.query(self.NormaPekerjaanID)
+
+            self.saji_tabel = []
+            for data in self.data_norma :
+                self.saji_tabel.append(data[0:10])
+
+            print (self.saji_tabel)
+            pass
+
         self.Close()
+
         return self.getdata, self.data_norma
 
     def m_button_tutup_normaOnButtonClick(self, event):
         self.Close()
-
-
 
     def m_dataViewListCtrl8OnDataViewListCtrlItemValueChanged(self,event):
         print ("kkk")
@@ -491,8 +489,9 @@ class NormaInherited(Norma):
 
         self.id = self.m_dataViewListCtrl8.GetValue(self.m_dataViewListCtrl8.GetSelectedRow(),0)
 
-        self.update_norma_pendidikan = JenisNorma(self.parent.connect_db)
-        self.update_norma_pendidikan.update_data_norma_pendidikan(self.value,self.id)
+        self.update_norma_pendidikan = TabelNormaPendidikan(self.parent.connect_db)
+        self.list_value = [self.value,self.id]
+        self.update_norma_pendidikan.insert_data_keterangan(self.list_value)
         # import pdb ; pdb.set_trace()
 
     def m_dataViewListCtrl9OnDataViewListCtrlItemValueChanged(self,event):
@@ -522,7 +521,7 @@ class TabelNormaInherited(TabelNorma):
 
         self.Maximize(True)
         no = 1
-        for tes in range(20, 0, -1):
+        for tes in range(33, 0, -1):
             self.m_dataViewListCtrl4.AppendItem([str(no), str(tes), "", "", "", "", "", "", "", "", ""])
             no += 1
         print(self.m_dataViewListCtrl4.GetValue(1, 0))
@@ -542,46 +541,11 @@ class TabelNormaInherited(TabelNorma):
             # print(self.m_dataViewListCtrl3.GetValue(self.getV,1))
             self.getdata.append(self.parent.m_dataViewListCtrl3.GetValue(self.getV, data))
         print ("kkasdk")
-
-        # print (self.getdata)
-        if int(self.getdata[0]) == 2 :
-            self.tabelumur = 12
-        elif int(self.getdata[0]) == 3:
-            self.tabelumur = 13
-        elif int(self.getdata[0]) == 4:
-            self.tabelumur = 13
-        elif int(self.getdata[0]) == 5:
-            self.tabelumur = 14
-        elif int(self.getdata[0]) == 6:
-            self.tabelumur = 15
-        elif int(self.getdata[0]) == 7:
-            self.tabelumur = 16
-        elif int(self.getdata[0]) == 8:
-            self.tabelumur = 17
-        elif int(self.getdata[0]) == 9:
-            self.tabelumur = 18
-        elif int(self.getdata[0]) == 10:
-            self.tabelumur = 19
-        elif int(self.getdata[0]) == 11:
-            self.tabelumur = 20
-        
-        else :
-            self.tabelumur = "0"
         print("hhh")
-        if int(self.getdata[0]) <= 11:
-            print (self.getdata[0])
-            print ("lewat")
-            self.query_data = TableDataKelompokUmurConnect(self.parent.parent.databasekon)
-            self.query_data.query_all(self.tabelumur)
-
-        else :
-            print ("kkasdk")
-
-            self.query_data = TabelNormaSendiriConnect(self.parent.parent.databasekon)
-            # print (self.query_data)
-            self.tabelumur = '0'
-            self.query_data.query_all(self.tabelumur)
-            print (self.tabelumur)
+        print (self.getdata[0])
+        print ("lewat")
+        self.query_data = NormaSendiri(self.parent.parent.connect_db)
+        self.data_norma_sendiri = self.query_data.query_all(self.getdata[1])
 
         # self.lihat_tabel_norma = TabelNormaLihatInherited(self)
         # self.lihat_tabel_norma.Maximize()
@@ -589,15 +553,16 @@ class TabelNormaInherited(TabelNorma):
         self.m_dataViewListCtrl4.DeleteAllItems()
 
         self.data_norma = []
-        for i in range(0, len(self.query_data.query_all(self.tabelumur))):
-            self.query_list = list(map(str, self.query_data.query_all(self.tabelumur)[i]))
-            self.query_list.insert(0, str(i))
+        for i in range(0, len(self.data_norma_sendiri)):
+            self.query_list = list(map(str, self.data_norma_sendiri[i]))
+            self.query_list.insert(0, str(i+1))
+            # self.query_list.insert(11, str(i+1))
+
             print (self.query_list)
             self.data_norma.append(self.query_list)
             self.m_dataViewListCtrl4.AppendItem(self.query_list)
         # print(self.data_norma)
    
-        print(self.m_dataViewListCtrl4.GetValue(1, 0))        
 
     def m_button_ok_tabel_normaOnButtonClick(self, event):
         if self.parent.edit == 0 :

@@ -7,19 +7,15 @@ import wx
 import pathlib
 from shutil import copyfile
 
-# from controllers.halaman_event import HalamanEventControl
 from controllers.grafik_tabel import *
 from controllers.halaman_event import HalamanEventControl
 from views.menubar_tentang import TentangAplikasiInherited
 from views.buka_filter_db import FrameFilterDatabase
 from views.dialog_save import DialogSavePDF
-from views.istcore import TabelDataPeserta
+from views.istcore import TabelDataPeserta,Biodata,TipeNorma
 from controllers.halaman_event import PilihTabelInherited
-# from controllers.ISTISTUtama import NormaAllInherited
-# from controllers.ISTISTUtama import NormaInherited
+from models.query import Peserta,TabelTipeNorma,JenisNorma
 
-# Ini adalah class untuk mengatur control input
-# Semua Control text di atur disini
 
 
 class BukaFilter(FrameFilterDatabase):
@@ -41,16 +37,232 @@ class BukaFilter(FrameFilterDatabase):
     def m_buttonKlikFilterTanggalOnButtonClick(self, event):
         print ("click by tanggal")
 
+class BuatBiodata(Biodata):
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.tanggal_tes.Show()
+        self.tanggal_lahir.Show()
+        self.usia.Show()
+        self.jenis_kelamin.Show()
+        
+        self.m_textCtrl_tanggal_tes1.Hide()
+        self.m_textCtrl_tanggal_lahir1.Hide()
+        self.m_textCtrl_usia1.Hide()
+        self.m_textCtrl_jenis_kelamin1.Hide()
+        
+        
+
+
+    def m_lanjut_biodataOnClick(self,event):
+        self.datapeserta = [self.m_textCtrl_no_tes1.GetValue(),
+        self.tanggal_tes.GetValue().Format("%d/%m/%Y"),
+        self.m_textCtrl_nama1.GetValue(),
+        self.m_textCtrl_jenis_kelamin1.GetValue(),
+        self.tanggal_lahir.GetValue().Format("%d/%m/%Y"),
+        self.m_textCtrl_usia1.GetValue(),
+        self.m_textCtrl_asal_sekolah_universitas.GetValue(),
+        self.m_textCtrl_pendidikan_terakhir1.GetValue(),
+        self.m_textCtrl_jurusan.GetValue(),
+        self.m_textCtrl_posisi_pekerjaan.GetValue(),
+        self.m_textCtrl_perusahaan.GetValue(),
+        self.m_textCtrl_keterangan.GetValue(),1]
+        self.bio = self.parent.data_peserta.insert_data_peserta(self.datapeserta)
+        self.data_peserta = Peserta(self.parent.parent.connect_db)
+        self.data_list =[]
+        self.parent.m_dataViewListCtrl3.DeleteAllItems()
+        for data in self.parent.data_peserta.query_data_peserta():
+            index =  self.parent.data_peserta.query_data_peserta().index(data)+1
+            self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
+        for data in self.data_list:
+            self.parent.m_dataViewListCtrl3.AppendItem(data)
+        self.Close()
+        pass
+
+    def m_tutup_biodata(self,event):
+        self.Close()
+        pass
+
+class EditBiodata(Biodata):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.tanggal_tes.Show()
+        self.tanggal_lahir.Show()
+        self.usia.Show()
+        self.jenis_kelamin.Show()
+        
+        self.m_textCtrl_tanggal_tes1.Hide()
+        self.m_textCtrl_tanggal_lahir1.Hide()
+        self.m_textCtrl_usia1.Hide()
+        self.m_textCtrl_jenis_kelamin1.Hide()
+
+
+    def m_lanjut_biodataOnClick(self,event):
+        self.Hide()
+        self.window_editnorma = TipeNormaInherited(self)
+        self.window_editnorma.Show()
+        pass
+
+    def m_tutup_biodata(self,event):
+        self.Close()
+        pass
+
+
+class TipeNormaInherited(TipeNorma):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.connect_db = self.parent.parent.parent.connect_db
+        self.tabledb_tipenorma=TabelTipeNorma(self.connect_db)
+        self.tabledb_jenisnorma = JenisNorma(self.connect_db)
+        self.m_choice4.Disable()
+        self.m_choice5.Disable()
+
+
+        # Setting data di m_choice default
+        self.tipenorma = []
+        for data in self.tabledb_tipenorma.query_all():
+            self.tipenorma.append(data[1])
+        self.m_choice3.AppendItems(self.tipenorma)
+
+        self.jenisnorma = []
+        for data in self.tabledb_jenisnorma.select_all_jenis_norma():
+            self.jenisnorma.append(data[1])
+        self.m_choice4.AppendItems(self.jenisnorma)
+        self.m_choice5.AppendItems(["",""])
+        self.__edit_data()
+
+
+    def __edit_data(self):
+        self.id_peserta = self.parent.parent.bio[0]
+        self.data_peserta_q =self.parent.parent.data_peserta.query_select_lj_datapeserta_tipenorma(self.id_peserta)
+        print (self.data_peserta_q)
+        self.data_norma = []
+        self.data_norma.append([self.data_peserta_q[15],self.data_peserta_q[17]])
+        print(self.data_norma)
+
+
+    def m_tipe_norma_event(self,event):
+        self.tipenorma = self.m_choice3.GetStringSelection()
+        self.tabledb_tipenorma.query_all_cond(self.tipenorma)
+        self.m_choice4.Enable()
+
+        print ("hello")
+        self.indexdata = []
+        self.indexdata.append(self.m_choice4.GetCount())
+        for data in reversed(range(self.indexdata[0])):
+            self.m_choice4.Delete(data)
+
+        self.jenisnorma = []
+        for data in self.tabledb_tipenorma.query_all_cond(self.tipenorma):
+            self.jenisnorma.append(data[3])
+        self.m_choice4.AppendItems(self.jenisnorma)
+        self.m_choice5.Disable()
+        pass
+
+    def m_jenisnorma_event(self,event):
+        self.jenisnorma = self.m_choice4.GetStringSelection()
+        self.tabledb_jenisnorma.querytb_jenisnorma(self.jenisnorma)
+        self.m_choice5.Enable()
+        print ("hello")
+        self.indexdata = []
+        self.indexdata.append(self.m_choice5.GetCount())
+        for data in reversed(range(self.indexdata[0])):
+            # self.m_choice4.SetSelection(data)
+            self.m_choice5.Delete(data)
+        self.jenis_norma = []
+        for data in self.tabledb_jenisnorma.querytb_jenisnorma(self.jenisnorma):
+            self.jenis_norma.append(data[8])
+        self.m_choice5.AppendItems(self.jenis_norma)
+        pass
+    
+    def m_batal_tipe_normaOnButtonClick(self,event):
+        self.Close()
+        self.parent.Close()
+        pass
+
+    def m_simpan_tipe_normaOnButtonClick(self,event):
+        self.Close()
+        self.parent.Close()
+        pass
 
 class TabelDataPesertaIn(TabelDataPeserta):
 
     def __init__(self, parent):
         super().__init__(parent)
-    
+        self.parent = parent
+
+        
+        self.data_peserta = Peserta(self.parent.connect_db)
+        self.data_list =[]
+        for data in self.data_peserta.query_data_peserta():
+            index =  self.data_peserta.query_data_peserta().index(data)+1
+            self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
+        for data in self.data_list:
+            self.m_dataViewListCtrl3.AppendItem(data)
+        pass    
+
+
     def tutup_data_peserta(self, event):
-
         self.Close()
+        pass
 
+    def buat_data_peserta(self, event):
+        print ("hello")
+        self.biodata = BuatBiodata(self)
+        self.biodata.Show()
+
+
+    def hapus_data_peserta(self, event):
+        print ("hello")
+        if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
+            self.data = self.m_dataViewListCtrl3.GetValue(self.m_dataViewListCtrl3.GetSelectedRow(),1)
+
+            self.m_dataViewListCtrl3.DeleteItem(self.m_dataViewListCtrl3.GetSelectedRow())
+            # print(self.data)
+            self.data_peserta.hapus_peserta(self.data)
+        pass
+
+    def edit_data_peserta(self, event) :
+        if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
+            
+            self.data = self.m_dataViewListCtrl3.GetValue(self.m_dataViewListCtrl3.GetSelectedRow(),1)
+            self.biodata = EditBiodata(self)
+            self.biodata.Show()
+            self.bio = self.data_peserta.query_select_data_peserta(self.data)
+            self.day,self.month,self.year = self.bio[2].split("/")
+            self.day2,self.month2,self.year2 = self.bio[5].split("/")
+
+            self.date = wx.DateTimeFromDMY(int(self.day),int(self.month)-1,int(self.year))  
+            self.date2 = wx.DateTimeFromDMY(int(self.day2),int(self.month2)-1,int(self.year2))  
+
+            self.biodata.m_textCtrl_no_tes1.SetValue(str(self.bio[1]))
+            self.biodata.tanggal_tes.SetValue(self.date)
+            self.biodata.m_textCtrl_nama1.SetValue(str(self.bio[3]))
+            self.biodata.m_textCtrl_jenis_kelamin1.SetValue(str(self.bio[4]))
+            self.biodata.tanggal_lahir.SetValue(self.date2)
+            self.biodata.m_textCtrl_usia1.SetValue(str(self.bio[6]))
+            self.biodata.m_textCtrl_asal_sekolah_universitas.SetValue(str(self.bio[7]))
+            self.biodata.m_textCtrl_pendidikan_terakhir1.SetValue(str(self.bio[8]))
+            self.biodata.m_textCtrl_jurusan.SetValue(str(self.bio[9]))
+            self.biodata.m_textCtrl_posisi_pekerjaan.SetValue(str(self.bio[10]))
+            self.biodata.m_textCtrl_perusahaan.SetValue(str(self.bio[11]))
+            self.biodata.m_textCtrl_keterangan.SetValue(str(self.bio[12]))
+
+
+            # self.data =[]
+            # for i in range(9):
+            #     self.data.append(self.m_dataViewListCtrl3.GetValue(self.m_dataViewListCtrl3.GetSelectedRow(),i))
+
+            # print(self.data)
+            # self.data_peserta.(self.data)
+       
+        
+        # self.Close()
+        pass
 
 class MenuBarInherited(HalamanEventControl):
 
@@ -72,7 +284,6 @@ class MenuBarInherited(HalamanEventControl):
 
         self.pilih_tabel = PilihTabelInherited(self)
         self.pilih_tabel.Show()
- 
 
         # jangan dihapus 
         # self.buka_tabel_norma = NormaInherited(self)
@@ -124,7 +335,6 @@ class PropertiesInput(MenuBarInherited):
         
         pass
 
-
 class BukaDialogSimpanPDF(DialogSavePDF):
 
     def __init__(self, parent):
@@ -152,7 +362,6 @@ class BukaDialogSimpanPDF(DialogSavePDF):
         print (self.panggilgrid.getdata())
 
         event.Skip()
-
 
 class ISTInheritedProperties(PropertiesInput):
     
@@ -542,5 +751,3 @@ class ISTInheritedProperties(PropertiesInput):
 if __name__ == '__main__':
     run = ListControlProperties(None)
     # print (run.list_an)
-    
-        

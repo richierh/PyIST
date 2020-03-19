@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.2.1 on Min Jan 12 18:21:37 2020
+-- File generated with SQLiteStudio v3.2.1 on Sel Mar 3 00:07:28 2020
 --
 -- Text encoding used: UTF-8
 --
@@ -7,37 +7,44 @@ PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
 
 -- Table: Data Peserta
-CREATE TABLE "Data Peserta" (
-	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
-	"no tes"	INTEGER,
-	"nama"	TEXT,
-	"jenis kelamin"	TEXT,
-	"tanggal lahir"	TEXT,
-	"usia"	TEXT,
-	"asal sekolah"	TEXT,
-	"pendidikan terakhir"	TEXT,
-	"jurusan"	TEXT,
-	"posisi pekerjaan"	TEXT,
-	"perusahaan"	TEXT,
-	"TipeNormaID"	INTEGER,
-	FOREIGN KEY("TipeNormaID") REFERENCES "Tipe Norma"("TipeNormaID")
-);
-INSERT INTO "Data Peserta" (id, "no tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, TipeNormaID) VALUES (1, 1, 'Suaeb', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+DROP TABLE IF EXISTS "Data Peserta";
+CREATE TABLE "Data Peserta" (id INTEGER PRIMARY KEY AUTOINCREMENT, "no tes" INTEGER, "tanggal tes" DATE, nama TEXT, "jenis kelamin" TEXT, "tanggal lahir" TEXT, usia TEXT, "asal sekolah" TEXT, "pendidikan terakhir" TEXT, jurusan TEXT, "posisi pekerjaan" TEXT, perusahaan TEXT, keterangan TEXT, TipeNormaID INTEGER, FOREIGN KEY (TipeNormaID) REFERENCES "Tipe Norma" (TipeNormaID));
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (1, 1, NULL, 'Suaeb', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'vbfgh', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (3, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (4, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (14, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (15, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (16, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (17, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (18, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (19, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (21, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (22, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (23, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (25, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (26, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (27, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (28, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
+INSERT INTO "Data Peserta" (id, "no tes", "tanggal tes", nama, "jenis kelamin", "tanggal lahir", usia, "asal sekolah", "pendidikan terakhir", jurusan, "posisi pekerjaan", perusahaan, keterangan, TipeNormaID) VALUES (29, 'no tes', 'tanggal tes', 'nama', 'jenis kelamin', 'tanggal lahir', 'usia', 'asal sekolah', 'pendidikan terakhir', 'jurusan', 'posisi pekerjaan', 'perusahaan', 'keterangan', 1);
 
 -- Table: Input Jawaban
+DROP TABLE IF EXISTS "Input Jawaban";
 CREATE TABLE "Input Jawaban" ("id manual" INTEGER PRIMARY KEY ASC AUTOINCREMENT, SE INT, WA INT, AN INT, GE INT, RA INT, ZR INT, FA INT, WU INT, ME INT, TipeInputId INTEGER, id INTEGER, FOREIGN KEY (id) REFERENCES "Data Peserta" (id), FOREIGN KEY (TipeInputId) REFERENCES "Tipe Input" (TipeInputId));
 INSERT INTO "Input Jawaban" ("id manual", SE, WA, AN, GE, RA, ZR, FA, WU, ME, TipeInputId, id) VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1);
 
 -- Table: Jawaban Norma
+DROP TABLE IF EXISTS "Jawaban Norma";
 CREATE TABLE "Jawaban Norma" (JawabanNormaID INTEGER PRIMARY KEY AUTOINCREMENT, id INTEGER, FOREIGN KEY (id) REFERENCES "Data Peserta" (id));
 
 -- Table: Jenis Norma
+DROP TABLE IF EXISTS "Jenis Norma";
 CREATE TABLE "Jenis Norma" (NormaID INTEGER PRIMARY KEY AUTOINCREMENT, "Jenis Norma" TEXT, Keterangan TEXT, TipeNormaID INTEGER, FOREIGN KEY (TipeNormaID) REFERENCES "Tipe Norma" (TipeNormaID));
 INSERT INTO "Jenis Norma" (NormaID, "Jenis Norma", Keterangan, TipeNormaID) VALUES (1, 'Norma Pendidikan', NULL, 1);
 INSERT INTO "Jenis Norma" (NormaID, "Jenis Norma", Keterangan, TipeNormaID) VALUES (2, 'Norma Pekerjaan', 'tess', 1);
 INSERT INTO "Jenis Norma" (NormaID, "Jenis Norma", Keterangan, TipeNormaID) VALUES (3, 'Norma Sendiri', 'None', 2);
 
 -- Table: jumlah
+DROP TABLE IF EXISTS jumlah;
 CREATE TABLE "jumlah" (
 	"RS"	VARCHAR,
 	"SW"	INTEGER
@@ -107,25 +114,40 @@ INSERT INTO jumlah (RS, SW) VALUES ('149-150', 131);
 INSERT INTO jumlah (RS, SW) VALUES ('151-152', 132);
 
 -- Table: Konversi GE
+DROP TABLE IF EXISTS "Konversi GE";
 CREATE TABLE "Konversi GE" (idGE INTEGER PRIMARY KEY AUTOINCREMENT, "No" TEXT, RW TEXT, GE TEXT);
 
+-- Table: Kunci Jawaban
+DROP TABLE IF EXISTS "Kunci Jawaban";
+CREATE TABLE "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me);
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (1, 'E', 'B', 'C', 'Bunga', '35', '27', 'A', 'A', 'D');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (2, 'C', 'B', 'E', 'Indera', '280', '25', 'C', 'C', 'E');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (3, 'D', 'D', 'D', 'Manis', 250, '27', 'B', 'D', 'B');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (4, 'D', 'C', 'D', 'Cuaca', 26, '15', 'A', 'E', 'A');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (5, 'D', 'C', 'D', 'Komunikasi', '30', 46, 'D', 'A', 'C');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (6, 'B', 'C', 'B', 'Lensa', '70', '10', 'B', 'C', 'A');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (7, 'C', 'C', 'D', 'Organ Pencernaan', '45', 24, 'C', 'D', 'D');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (8, 'A', 'D', 'B', 'Jumlah', 50, 7, 'E', 'C', 'E');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (9, 'E', 'D', 'E', 'Perkembangbiakan', 48, 5, 'E', 'E', 'C');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (10, 'B', 'A', 'D', 'Lambung', 78, 14, 'D', 'A', 'B');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (11, 'C', 'E', 'C', 'Rantai Makanan', 19, '8', 'E', 'B', 'B');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (12, 'D', 'A', 'C', 'Wadah', 6, 14, 'B', 'D', 'A');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (13, 'D', 'A', 'C', 'Tujuan', 57, 45, 'D', 'E', 'E');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (14, 'E', 'B', 'C', 'Penggunaan', 90, 36, 'C', 'B', 'C');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (15, 'C', 'C', 'D', 'Perdagangan', 120, 12, 'B', 'D', 'D');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (16, 'A', 'A', 'C', 'Gerak', 17, 80, 'A', 'B', 'B');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (17, 'B', 'D', 'C', '', 24, 14, 'B', 'A', 'E');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (18, 'B', 'E', 'E', '', 5, 12, 'D', 'E', 'A');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (19, 'C', 'B', 'E', '', 48, 36, 'C', 'B', 'C');
+INSERT INTO "Kunci Jawaban" ("No", se, wa, an, ge, ra, zr, fa, wu, me) VALUES (20, 'B', 'C', 'E', '', 3, 10, 'C', 'C', 'D');
+
 -- Table: Norma
+DROP TABLE IF EXISTS Norma;
 CREATE TABLE Norma (IdNorma INTEGER PRIMARY KEY AUTOINCREMENT, "Nama Norma" TEXT, Keterangan TEXT, NormaID TEXT, FOREIGN KEY (NormaID) REFERENCES "Jenis Norma" (NormaID));
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (17, 'sadf', 'dhdhfdghh', '3');
 INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (19, 'xcv', 'vnbvcb', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (20, 'sdf', 'sgsg', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (21, 'cxvxz', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (22, 'asdf', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (23, 'asdf', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (24, 'asdf', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (25, 'sdf', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (26, 'asdf', 'sadfsaf', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (27, 'sdf', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (28, 'fsaf', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (29, 'sdfg', '', '3');
-INSERT INTO Norma (IdNorma, "Nama Norma", Keterangan, NormaID) VALUES (30, 'asd', '', '3');
 
 -- Table: NORMA IST IQ
+DROP TABLE IF EXISTS "NORMA IST IQ";
 CREATE TABLE "NORMA IST IQ" (SW INTEGER, IQ INTEGER, "%" INTEGER);
 INSERT INTO "NORMA IST IQ" (SW, IQ, "%") VALUES (140, 160, 100);
 INSERT INTO "NORMA IST IQ" (SW, IQ, "%") VALUES (138, 157, 100);
@@ -199,6 +221,7 @@ INSERT INTO "NORMA IST IQ" (SW, IQ, "%") VALUES (60, 40, 0);
 INSERT INTO "NORMA IST IQ" (SW, IQ, "%") VALUES (58, 37, 0);
 
 -- Table: Norma Pendidikan
+DROP TABLE IF EXISTS "Norma Pendidikan";
 CREATE TABLE "Norma Pendidikan" (NormaPendidikanID INTEGER PRIMARY KEY AUTOINCREMENT, Usia INT, "Nama Norma" TEXT, Keterangan TEXT, NormaID INTEGER, FOREIGN KEY (NormaID) REFERENCES "Jenis Norma" (NormaID));
 INSERT INTO "Norma Pendidikan" (NormaPendidikanID, Usia, "Nama Norma", Keterangan, NormaID) VALUES (1, 12, 'Norma Usia 12 Tahun', 'Keterangandfsdf', 1);
 INSERT INTO "Norma Pendidikan" (NormaPendidikanID, Usia, "Nama Norma", Keterangan, NormaID) VALUES (2, 13, 'Norma Usia 13 Tahun', 'tess', 1);
@@ -210,6 +233,7 @@ INSERT INTO "Norma Pendidikan" (NormaPendidikanID, Usia, "Nama Norma", Keteranga
 INSERT INTO "Norma Pendidikan" (NormaPendidikanID, Usia, "Nama Norma", Keterangan, NormaID) VALUES (8, 19, 'Norma Usia 19 Tahun', 'None', 1);
 
 -- Table: NormaISTSMA,D3,S1
+DROP TABLE IF EXISTS "NormaISTSMA,D3,S1";
 CREATE TABLE "NormaISTSMA,D3,S1" (RS INTEGER, "01 SE" INTEGER, "02 WA" INTEGER, "03 AN" INTEGER, "04 GE" INTEGER, "05 RA" INTEGER, "06 ZR" INTEGER, "07 FA" INTEGER, "08 WU" INTEGER, "09 ME" INTEGER);
 INSERT INTO "NormaISTSMA,D3,S1" (RS, "01 SE", "02 WA", "03 AN", "04 GE", "05 RA", "06 ZR", "07 FA", "08 WU", "09 ME") VALUES (0, 71, 67, 79, 70, 79, 85, 69, 75, 74);
 INSERT INTO "NormaISTSMA,D3,S1" (RS, "01 SE", "02 WA", "03 AN", "04 GE", "05 RA", "06 ZR", "07 FA", "08 WU", "09 ME") VALUES (1, 75, 71, 83, 72, 82, 87, 73, 78, 76);
@@ -246,6 +270,7 @@ INSERT INTO "NormaISTSMA,D3,S1" (RS, "01 SE", "02 WA", "03 AN", "04 GE", "05 RA"
 INSERT INTO "NormaISTSMA,D3,S1" (RS, "01 SE", "02 WA", "03 AN", "04 GE", "05 RA", "06 ZR", "07 FA", "08 WU", "09 ME") VALUES (32, NULL, NULL, NULL, 142, NULL, NULL, NULL, NULL, NULL);
 
 -- Table: NormaSarjana
+DROP TABLE IF EXISTS NormaSarjana;
 CREATE TABLE NormaSarjana (Norma INTEGER, SE INTEGER, WA INTEGER, AN INTEGER, GE INTEGER, ME INTEGER, RA INTEGER, ZR INTEGER, FA INTEGER, WU INTEGER, TOTAL INTEGER, Ket INTEGER);
 INSERT INTO NormaSarjana (Norma, SE, WA, AN, GE, ME, RA, ZR, FA, WU, TOTAL, Ket) VALUES (5, '136<', '122<', '166<', '126<', '137<', '133<', '137<', '126<', '132<', '127<', 'Superior');
 INSERT INTO NormaSarjana (Norma, SE, WA, AN, GE, ME, RA, ZR, FA, WU, TOTAL, Ket) VALUES (4, '122-135', '109-121', '137-165', '114-125', '118-136', '116-132', '119-136', '110-125', '114-131', '117-126', 'Diatas rata-rata');
@@ -254,9 +279,11 @@ INSERT INTO NormaSarjana (Norma, SE, WA, AN, GE, ME, RA, ZR, FA, WU, TOTAL, Ket)
 INSERT INTO NormaSarjana (Norma, SE, WA, AN, GE, ME, RA, ZR, FA, WU, TOTAL, Ket) VALUES (1, '<94', ',<83', '<78', '<90', '<81', '<82', '<83', '<76', '<77', '<96', 'Rata-rata bawah');
 
 -- Table: NormaSendiri
+DROP TABLE IF EXISTS NormaSendiri;
 CREATE TABLE NormaSendiri ("No" INT, RS INT, SE INT, WA INT, AN INT, GE INT, RA INT, ZE INT, FA INT, WU INT, ME INT, IdNorma INT, FOREIGN KEY (IdNorma) REFERENCES Norma (IdNorma) ON DELETE SET DEFAULT);
 
 -- Table: NormaSLTA/STM
+DROP TABLE IF EXISTS "NormaSLTA/STM";
 CREATE TABLE "NormaSLTA/STM" (Norma VARCHAR, SE VARCHAR, AN VARCHAR, GE VARCHAR, WA VARCHAR, ME VARCHAR, RA VARCHAR, ZR VARCHAR, FA VARCHAR, WU VARCHAR, TOTAL VARCHAR, Ket VARCHAR);
 INSERT INTO "NormaSLTA/STM" (Norma, SE, AN, GE, WA, ME, RA, ZR, FA, WU, TOTAL, Ket) VALUES ('5', '113<', '117<', '118<', '118<', '108<', '114<', '119<', '114<', '119<', '116<', 'Superior');
 INSERT INTO "NormaSLTA/STM" (Norma, SE, AN, GE, WA, ME, RA, ZR, FA, WU, TOTAL, Ket) VALUES ('4', '105-112', '137-165', '109-116', '109-117', '99-107', '104-113', '110-118', '106-113', '109-118', '107-115', 'Diatas rata-rata');
@@ -265,11 +292,13 @@ INSERT INTO "NormaSLTA/STM" (Norma, SE, AN, GE, WA, ME, RA, ZR, FA, WU, TOTAL, K
 INSERT INTO "NormaSLTA/STM" (Norma, SE, AN, GE, WA, ME, RA, ZR, FA, WU, TOTAL, Ket) VALUES ('1', '<87', '<92', '<85', '<90', '<80', '<85', '<94', '<91', '<89', '<86', 'Rata-rata bawah');
 
 -- Table: Tipe Input
+DROP TABLE IF EXISTS "Tipe Input";
 CREATE TABLE "Tipe Input" (TipeInputId INTEGER PRIMARY KEY AUTOINCREMENT, "Jenis Input" TEXT);
 INSERT INTO "Tipe Input" (TipeInputId, "Jenis Input") VALUES (1, 'Input Manual');
 INSERT INTO "Tipe Input" (TipeInputId, "Jenis Input") VALUES (2, 'Input Total');
 
 -- Table: Tipe Norma
+DROP TABLE IF EXISTS "Tipe Norma";
 CREATE TABLE "Tipe Norma" (TipeNormaID INTEGER PRIMARY KEY AUTOINCREMENT, "Jenis Norma" TEXT);
 INSERT INTO "Tipe Norma" (TipeNormaID, "Jenis Norma") VALUES (1, 'Tetap');
 INSERT INTO "Tipe Norma" (TipeNormaID, "Jenis Norma") VALUES (2, 'Tidak Tetap');

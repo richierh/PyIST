@@ -127,23 +127,32 @@ class PanggilGrid():
                 for i in range(0, 20):
                     stringval = i + 1
 
-                    if l == 6 and i >= 1 :
+                    if l == 6 and i >= 16 :
                         self.parent.m_grid2.SetCellValue(i, l, "")
                         self.parent.m_grid2.SetCellBackgroundColour(i, l, "grey")
                         self.parent.m_grid2.SetReadOnly(i, l)
 
                     else :
+                        # self.parent.m_grid2.SetCellBackgroundColour(i, l, "")
                         self.parent.m_grid2.SetCellValue(i, l, str(stringval))
+                        # font = wx.Font(30,wx.DEFAULT ,wx.NORMAL, wx.NORMAL,0,"Tw Cent MT")
+                        # self.parent.m_grid2.SetFont(font)
                         self.parent.m_grid2.SetCellAlignment(i, l, wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
                         self.parent.m_grid2.SetReadOnly(i, l)
 
-            elif l == 7 and i >= 1 :
+            elif l == 7 and i >= 16 :
                 for i in range(1, 20):
                     stringval = i + 1
 
-                    self.parent.m_grid2.SetCellValue(i, l, "")
-                    self.parent.m_grid2.SetCellBackgroundColour(i, l, "grey")
-                    self.parent.m_grid2.SetReadOnly(i, l)
+                    if l == 7 and i >= 16 :
+                        self.parent.m_grid2.SetCellValue(i, l, "")
+                        self.parent.m_grid2.SetCellBackgroundColour(i, l, "grey")
+                        self.parent.m_grid2.SetReadOnly(i, l)
+
+                    else :
+                        self.parent.m_grid2.SetCellValue(i, l, "")
+                        self.parent.m_grid2.SetCellAlignment(i, l, wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
+                        # self.parent.m_grid2.SetReadOnly(i, l)
 
     def getdata2(self):
         self.data = []

@@ -261,6 +261,13 @@
 		<aui_managed>0</aui_managed>
 		<object class="wxPanel" name="m_panel23">
 			<style>wxTAB_TRAVERSAL</style>
+			<font>
+				<size>14</size>
+				<style>normal</style>
+				<weight>normal</weight>
+				<underlined>0</underlined>
+				<face>Tw Cen MT</face>
+			</font>
 			<object class="wxBoxSizer">
 				<orient>wxVERTICAL</orient>
 				<object class="sizeritem">
@@ -341,18 +348,6 @@
 					<flag>wxALL|wxEXPAND</flag>
 					<border>5</border>
 					<object class="unknown" name="m_dataViewListCtrl3" />
-				</object>
-				<object class="sizeritem">
-					<option>1</option>
-					<flag>wxEXPAND | wxALL</flag>
-					<border>5</border>
-					<object class="unknown" name="m_treeListCtrl1" />
-				</object>
-				<object class="sizeritem">
-					<option>1</option>
-					<flag>wxALL|wxEXPAND</flag>
-					<border>5</border>
-					<object class="unknown" name="m_dataViewCtrl1" />
 				</object>
 			</object>
 		</object>
@@ -768,7 +763,7 @@
 	</object>
 	<object class="wxFrame" name="Biodata">
 		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
-		<size>388,500</size>
+		<size>600,500</size>
 		<title></title>
 		<centered>1</centered>
 		<aui_managed>0</aui_managed>
@@ -780,6 +775,13 @@
 				<border>5</border>
 				<object class="wxPanel" name="m_panel34">
 					<style>wxTAB_TRAVERSAL</style>
+					<font>
+						<size>14</size>
+						<style>normal</style>
+						<weight>normal</weight>
+						<underlined>0</underlined>
+						<face>Tw Cen MT</face>
+					</font>
 					<object class="wxBoxSizer">
 						<orient>wxVERTICAL</orient>
 						<object class="sizeritem">
@@ -1304,7 +1306,7 @@
 						</object>
 						<object class="sizeritem">
 							<option>1</option>
-							<flag>wxEXPAND | wxALL</flag>
+							<flag>wxALL|wxEXPAND</flag>
 							<border>5</border>
 							<object class="wxPanel" name="m_panel_data">
 								<style>wxTAB_TRAVERSAL</style>
@@ -1312,30 +1314,44 @@
 									<orient>wxVERTICAL</orient>
 									<object class="sizeritem">
 										<option>1</option>
-										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND</flag>
+										<flag>wxALL|wxEXPAND</flag>
 										<border>5</border>
 										<object class="wxScrolledWindow" name="m_scrolledpanel_pendidikan1">
 											<style>wxHSCROLL|wxVSCROLL</style>
+											<font>
+												<size>14</size>
+												<style>normal</style>
+												<weight>normal</weight>
+												<underlined>0</underlined>
+												<face>Tw Cen MT</face>
+											</font>
 											<scrollrate>5,5</scrollrate>
 											<object class="wxFlexGridSizer">
 												<rows>14</rows>
 												<cols>2</cols>
 												<vgap>0</vgap>
 												<hgap>0</hgap>
-												<growablecols>0,1</growablecols>
+												<growablecols>1</growablecols>
 												<growablerows>0,1,2,3,4,5,6,7,8,9,10,11,12,13</growablerows>
 												<object class="sizeritem">
 													<option>0</option>
 													<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxStaticText" name="m_staticText292">
+														<font>
+															<size>14</size>
+															<style>normal</style>
+															<weight>normal</weight>
+															<underlined>0</underlined>
+															<face>Tw Cen MT</face>
+														</font>
 														<label>No Tes</label>
 														<wrap>-1</wrap>
 													</object>
 												</object>
 												<object class="sizeritem">
 													<option>0</option>
-													<flag>wxALL</flag>
+													<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxTextCtrl" name="m_textCtrl_no_tes1">
 														<value></value>
@@ -1346,16 +1362,45 @@
 													<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxStaticText" name="m_staticText22631">
+														<font>
+															<size>14</size>
+															<style>normal</style>
+															<weight>normal</weight>
+															<underlined>0</underlined>
+															<face>Tw Cen MT</face>
+														</font>
 														<label>Tanggal Tes</label>
 														<wrap>-1</wrap>
 													</object>
 												</object>
 												<object class="sizeritem">
-													<option>0</option>
-													<flag>wxALL</flag>
+													<option>1</option>
+													<flag>wxEXPAND</flag>
 													<border>5</border>
-													<object class="wxTextCtrl" name="m_textCtrl_tanggal_tes1">
-														<value></value>
+													<object class="wxFlexGridSizer">
+														<rows>0</rows>
+														<cols>2</cols>
+														<vgap>0</vgap>
+														<hgap>0</hgap>
+														<growablecols></growablecols>
+														<growablerows></growablerows>
+														<object class="sizeritem">
+															<option>0</option>
+															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+															<border>5</border>
+															<object class="wxTextCtrl" name="m_textCtrl_tanggal_tes1">
+																<size>150,-1</size>
+																<value></value>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<option>0</option>
+															<flag>wxALL</flag>
+															<border>5</border>
+															<object class="wxDatePickerCtrl" name="tanggal_tes">
+																<style>wxDP_DEFAULT</style>
+															</object>
+														</object>
 													</object>
 												</object>
 												<object class="sizeritem">
@@ -1363,6 +1408,13 @@
 													<flag>wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT</flag>
 													<border>5</border>
 													<object class="wxStaticText" name="m_staticText_nama1">
+														<font>
+															<size>14</size>
+															<style>normal</style>
+															<weight>normal</weight>
+															<underlined>0</underlined>
+															<face>Tw Cen MT</face>
+														</font>
 														<label>Nama</label>
 														<wrap>-1</wrap>
 													</object>
@@ -1380,16 +1432,48 @@
 													<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxStaticText" name="m_staticTextKelas1">
+														<font>
+															<size>14</size>
+															<style>normal</style>
+															<weight>normal</weight>
+															<underlined>0</underlined>
+															<face>Tw Cen MT</face>
+														</font>
 														<label>Jenis Kelamin</label>
 														<wrap>-1</wrap>
 													</object>
 												</object>
 												<object class="sizeritem">
-													<option>0</option>
-													<flag>wxALL</flag>
+													<option>1</option>
+													<flag>wxEXPAND</flag>
 													<border>5</border>
-													<object class="wxTextCtrl" name="m_textCtrl_jenis_kelamin1">
-														<value></value>
+													<object class="wxFlexGridSizer">
+														<rows>0</rows>
+														<cols>2</cols>
+														<vgap>0</vgap>
+														<hgap>0</hgap>
+														<growablecols></growablecols>
+														<growablerows></growablerows>
+														<object class="sizeritem">
+															<option>0</option>
+															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+															<border>5</border>
+															<object class="wxTextCtrl" name="m_textCtrl_jenis_kelamin1">
+																<value></value>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<option>0</option>
+															<flag>wxALL</flag>
+															<border>5</border>
+															<object class="wxChoice" name="jenis_kelamin">
+																<selection>0</selection>
+																<content>
+																	<item>Laki-Laki</item>
+																	<item>Perempuan</item>
+																</content>
+															</object>
+														</object>
 													</object>
 												</object>
 												<object class="sizeritem">
@@ -1402,11 +1486,33 @@
 													</object>
 												</object>
 												<object class="sizeritem">
-													<option>0</option>
-													<flag>wxALL</flag>
+													<option>1</option>
+													<flag>wxEXPAND</flag>
 													<border>5</border>
-													<object class="wxTextCtrl" name="m_textCtrl_tanggal_lahir1">
-														<value></value>
+													<object class="wxFlexGridSizer">
+														<rows>0</rows>
+														<cols>2</cols>
+														<vgap>0</vgap>
+														<hgap>0</hgap>
+														<growablecols></growablecols>
+														<growablerows></growablerows>
+														<object class="sizeritem">
+															<option>0</option>
+															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+															<border>5</border>
+															<object class="wxTextCtrl" name="m_textCtrl_tanggal_lahir1">
+																<size>150,-1</size>
+																<value></value>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<option>0</option>
+															<flag>wxALL</flag>
+															<border>5</border>
+															<object class="wxDatePickerCtrl" name="tanggal_lahir">
+																<style>wxDP_DEFAULT</style>
+															</object>
+														</object>
 													</object>
 												</object>
 												<object class="sizeritem">
@@ -1426,10 +1532,44 @@
 														<orient>wxHORIZONTAL</orient>
 														<object class="sizeritem">
 															<option>0</option>
-															<flag>wxALL</flag>
+															<flag></flag>
 															<border>5</border>
-															<object class="wxTextCtrl" name="m_textCtrl_usia1">
-																<value></value>
+															<object class="wxFlexGridSizer">
+																<rows>0</rows>
+																<cols>2</cols>
+																<vgap>0</vgap>
+																<hgap>0</hgap>
+																<growablecols></growablecols>
+																<growablerows></growablerows>
+																<object class="sizeritem">
+																	<option>0</option>
+																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+																	<border>5</border>
+																	<object class="wxTextCtrl" name="m_textCtrl_usia1">
+																		<value></value>
+																	</object>
+																</object>
+																<object class="sizeritem">
+																	<option>0</option>
+																	<flag>wxALL</flag>
+																	<border>5</border>
+																	<object class="wxChoice" name="usia">
+																		<selection>0</selection>
+																		<content>
+																			<item>12</item>
+																			<item>13</item>
+																			<item>14</item>
+																			<item>15</item>
+																			<item>16</item>
+																			<item>17</item>
+																			<item>18</item>
+																			<item>19</item>
+																			<item></item>
+																			<item></item>
+																			<item></item>
+																		</content>
+																	</object>
+																</object>
 															</object>
 														</object>
 														<object class="sizeritem">
@@ -1440,7 +1580,7 @@
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
 																	<option>0</option>
-																	<flag>wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL</flag>
+																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>5</border>
 																	<object class="wxStaticText" name="m_staticText2181">
 																		<label>Thn</label>
@@ -1462,7 +1602,7 @@
 												</object>
 												<object class="sizeritem">
 													<option>0</option>
-													<flag>wxALL</flag>
+													<flag>wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxTextCtrl" name="m_textCtrl_asal_sekolah_universitas">
 														<size>135,-1</size>
@@ -1480,7 +1620,7 @@
 												</object>
 												<object class="sizeritem">
 													<option>0</option>
-													<flag>wxALL</flag>
+													<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxTextCtrl" name="m_textCtrl_pendidikan_terakhir1">
 														<value></value>
@@ -1497,7 +1637,7 @@
 												</object>
 												<object class="sizeritem">
 													<option>0</option>
-													<flag>wxALL</flag>
+													<flag>wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxTextCtrl" name="m_textCtrl_jurusan">
 														<size>145,-1</size>
@@ -1515,7 +1655,7 @@
 												</object>
 												<object class="sizeritem">
 													<option>0</option>
-													<flag>wxALL</flag>
+													<flag>wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxTextCtrl" name="m_textCtrl_posisi_pekerjaan">
 														<size>140,-1</size>
@@ -1533,7 +1673,7 @@
 												</object>
 												<object class="sizeritem">
 													<option>0</option>
-													<flag>wxALL</flag>
+													<flag>wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxTextCtrl" name="m_textCtrl_perusahaan">
 														<size>130,-1</size>
@@ -1551,7 +1691,7 @@
 												</object>
 												<object class="sizeritem">
 													<option>0</option>
-													<flag>wxALL</flag>
+													<flag>wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL</flag>
 													<border>5</border>
 													<object class="wxTextCtrl" name="m_textCtrl_keterangan">
 														<style>wxTE_MULTILINE</style>
@@ -1585,8 +1725,139 @@
 							<option>0</option>
 							<flag>wxALL</flag>
 							<border>5</border>
-							<object class="wxButton" name="m_button42">
+							<object class="wxButton" name="m_lanjut">
+								<label>Lanjut</label>
+								<default>0</default>
+								<auth_needed>0</auth_needed>
+								<markup>0</markup>
+								<bitmap />
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxButton" name="Tutup">
 								<label>Tutup</label>
+								<default>0</default>
+								<auth_needed>0</auth_needed>
+								<markup>0</markup>
+								<bitmap />
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxFrame" name="TipeNorma">
+		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
+		<size>500,300</size>
+		<title></title>
+		<centered>1</centered>
+		<aui_managed>0</aui_managed>
+		<object class="wxPanel" name="m_panel40">
+			<style>wxTAB_TRAVERSAL</style>
+			<object class="wxBoxSizer">
+				<orient>wxVERTICAL</orient>
+				<object class="sizeritem">
+					<option>1</option>
+					<flag>wxEXPAND</flag>
+					<border>5</border>
+					<object class="wxFlexGridSizer">
+						<rows>0</rows>
+						<cols>2</cols>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols>1</growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+							<border>5</border>
+							<object class="wxStaticText" name="m_staticText308">
+								<label>Tipe Norma</label>
+								<wrap>-1</wrap>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxChoice" name="m_choice3">
+								<selection>0</selection>
+								<content />
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+							<border>5</border>
+							<object class="wxStaticText" name="m_staticText309">
+								<label>Jenis Norma</label>
+								<wrap>-1</wrap>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxChoice" name="m_choice4">
+								<size>150,-1</size>
+								<selection>0</selection>
+								<content />
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+							<border>5</border>
+							<object class="wxStaticText" name="m_staticText310">
+								<label>Nama Norma</label>
+								<wrap>-1</wrap>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxChoice" name="m_choice5">
+								<size>150,-1</size>
+								<selection>0</selection>
+								<content />
+							</object>
+						</object>
+					</object>
+				</object>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxALIGN_RIGHT</flag>
+					<border>5</border>
+					<object class="wxFlexGridSizer">
+						<rows>0</rows>
+						<cols>2</cols>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols></growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxButton" name="m_batal_tipe_norma">
+								<label>Batal</label>
+								<default>0</default>
+								<auth_needed>0</auth_needed>
+								<markup>0</markup>
+								<bitmap />
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_RIGHT</flag>
+							<border>5</border>
+							<object class="wxButton" name="m_simpan_tipe_norma">
+								<label>Simpan</label>
 								<default>0</default>
 								<auth_needed>0</auth_needed>
 								<markup>0</markup>

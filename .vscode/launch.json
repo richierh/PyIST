@@ -23,7 +23,7 @@
             "name": "Python: IST",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/ist.py",
+            "program": "${workspaceFolder}/run.py",
             "console": "integratedTerminal"
         }
     ]

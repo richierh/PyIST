@@ -4,19 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Python: SchemaCrawler",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/models/schemacrawler.py",
-            "console": "integratedTerminal"
-        },
-  
-        {
-            "name": "Python: ERD",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/models/eral.py",
             "console": "integratedTerminal"
         },
         {
@@ -25,6 +18,19 @@
             "request": "launch",
             "program": "${workspaceFolder}/run.py",
             "console": "integratedTerminal"
-        }
+        },
+        {
+            "name": "Python: sql_cmd",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/models/sql_cmd.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: fb",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/cireng/Projects/fb/fb.py",
+            "console": "integratedTerminal"
     ]
 }

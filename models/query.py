@@ -19,6 +19,7 @@ class SqliteDB(object):
         self.current_path = pathlib.Path.cwd() / ""
         self.path_db = pathlib.\
             Path(self.current_path.parent / f"models/{self.nama_file}")
+
         # # self.path_db = 
         # pathlib.Path(self.current_path/f"models/{self.nama_file}")
         # print(self.path_db)
@@ -52,6 +53,7 @@ class SqliteDB(object):
         print("Connecting to {}".format(str(self.path_db)))
         print("...Processing....")
         print("Database di buka")
+
         conne = sqlite3.connect(str(self.path_db))
         return conne
 
@@ -60,35 +62,6 @@ class SqliteDB(object):
         print("Database ditutup")
         return self.conn.close()
 
-    def query_tabel_data_kelompok(self) :
-        self.conn = self.connect_db()
-        sql_cmd = """
-        SELECT TableDataKelompokUmur12.* ,
-            TableDataKelompokUmur13.* ,
-            TableDataKelompokUmur14.* ,
-            TableDataKelompokUmur15.* ,
-            TableDataKelompokUmur16.* ,
-            TableDataKelompokUmur17.* ,
-            TableDataKelompokUmur18.* ,
-            TableDataKelompokUmur19.*
-
-        FROM TableDataKelompokUmur12
-        LEFT JOIN TableDataKelompokUmur13 ,TableDataKelompokUmur14 , TableDataKelompokUmur15 ,
-                TableDataKelompokUmur16 ,TableDataKelompokUmur17 , TableDataKelompokUmur18 , 
-                TableDataKelompokUmur19
-
-        ON TableDataKelompokUmur12.RW = TableDataKelompokUmur13.RW
-        AND TableDataKelompokUmur12.RW = TableDataKelompokUmur14.RW
-        AND TableDataKelompokUmur12.RW = TableDataKelompokUmur15.RW
-        AND TableDataKelompokUmur12.RW = TableDataKelompokUmur16.RW
-        AND TableDataKelompokUmur12.RW = TableDataKelompokUmur17.RW
-        AND TableDataKelompokUmur12.RW = TableDataKelompokUmur18.RW
-        AND TableDataKelompokUmur12.RW = TableDataKelompokUmur19.RW
-         """
-        self.results = self.conn.execute(sql_cmd).fetchall()
-        self.close_db()
-
-        return self.results
 
     def insert_tabel_data_kandidat(self, values):
         self.values = values

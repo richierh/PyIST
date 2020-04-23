@@ -3714,8 +3714,20 @@ class Biodata ( wx.Frame ):
 
 		fgSizer21.Add( self.m_staticText22911, 0, wx.ALL|wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL, 5 )
 
+		fgSizer37 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer37.SetFlexibleDirection( wx.BOTH )
+		fgSizer37.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
 		self.m_textCtrl_pendidikan_terakhir1 = wx.TextCtrl( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer21.Add( self.m_textCtrl_pendidikan_terakhir1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		fgSizer37.Add( self.m_textCtrl_pendidikan_terakhir1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		Tpendidikan_terakhirChoices = []
+		self.Tpendidikan_terakhir = wx.Choice( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, Tpendidikan_terakhirChoices, 0 )
+		self.Tpendidikan_terakhir.SetSelection( 0 )
+		fgSizer37.Add( self.Tpendidikan_terakhir, 0, wx.ALL, 5 )
+
+
+		fgSizer21.Add( fgSizer37, 1, wx.EXPAND, 5 )
 
 		self.m_staticText22821 = wx.StaticText( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, u"Jurusan", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText22821.Wrap( -1 )
@@ -3912,6 +3924,52 @@ class TipeNorma ( wx.Frame ):
 		event.Skip()
 
 	def m_simpan_tipe_normaOnButtonClick( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class PilihInput
+###########################################################################
+
+class PilihInput ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer56 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_staticText272 = wx.StaticText( self, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText272.Wrap( -1 )
+
+		bSizer56.Add( self.m_staticText272, 0, wx.ALL, 5 )
+
+		self.Bpilih_input_manual = wx.Button( self, wx.ID_ANY, u"Input Manual", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer56.Add( self.Bpilih_input_manual, 0, wx.ALL, 5 )
+
+		self.Bpilih_input_total = wx.Button( self, wx.ID_ANY, u"Input Total", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer56.Add( self.Bpilih_input_total, 0, wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer56 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.Bpilih_input_manual.Bind( wx.EVT_BUTTON, self.pilih_input_manual )
+		self.Bpilih_input_total.Bind( wx.EVT_BUTTON, self.pilih_input_total )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def pilih_input_manual( self, event ):
+		event.Skip()
+
+	def pilih_input_total( self, event ):
 		event.Skip()
 
 

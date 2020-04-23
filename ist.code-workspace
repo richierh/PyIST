@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "/home/cireng/Projects/pyist"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"database": "${workspaceFolder:pyist}/models/istcore.sqlite",
+				"dialect": "SQLite",
+				"name": "istcore"
+			},
+			{
+				"database": "/home/cireng/Projects/pyist/models/istcore.sqlite",
+				"dialect": "SQLite",
+				"isActive": true,
+				"isConnected": true,
+				"name": "istcore"
+			}
+		]
+	}
+}

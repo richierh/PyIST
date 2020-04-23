@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['/home/pmc/Projects/pyist/run.py'],
-             pathex=['Z:\\home\\pmc\\Projects\\pyist'],
+a = Analysis(['/home/cireng/Projects/pyist/run.py'],
+             pathex=['/home/cireng/Projects/pyist'],
              binaries=[],
              datas=[],
              hiddenimports=[],

@@ -1,7 +1,18 @@
-from subprocess import call
-call(["python-3.7.4.exe"])
-call(["python", "-m", "pip", "install", "wxpython==4.0.6"])
-call(["python", "-m", "pip", "install", "matplotlib==3.0.1"])
-call(["python", "-m", "pip", "install", "numpy==1.15.0"])
-call(["python", "-m", "pip", "install", "fpdf==1.7.2"])
-# call(["python", "-m", "pip", "ins
+from cx_Freeze import setup, Executable
+
+# Dependencies are automatically detected, but it might need
+# fine tuning.
+buildOptions = dict(packages = [], excludes = [])
+
+import sys
+base = 'Win32GUI' if sys.platform=='win32' else None
+
+executables = [
+    Executable('run.py', base=base)
+]
+
+setup(name='Richie',
+      version = '1.0',
+      description = 'No',
+      options = dict(build_exe = buildOptions),
+      executables = executables)

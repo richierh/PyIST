@@ -12,10 +12,9 @@ from controllers.halaman_event import HalamanEventControl
 from views.menubar_tentang import TentangAplikasiInherited
 from views.buka_filter_db import FrameFilterDatabase
 from views.dialog_save import DialogSavePDF
-from views.istcore import TabelDataPeserta,Biodata,TipeNorma
+from views.istcore import TabelDataPeserta,Biodata,TipeNorma,PilihInput
 from controllers.halaman_event import PilihTabelInherited
 from models.query import Peserta,TabelTipeNorma,JenisNorma
-
 
 
 class BukaFilter(FrameFilterDatabase):
@@ -41,32 +40,42 @@ class BuatBiodata(Biodata):
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
+
+        self.Tpendidikan_terakhir.AppendItems(["SD","SMP","SMA","D3","S1","S2","S3"])    
+        self.Tpendidikan_terakhir.SetSelection(4)
+
+
         self.tanggal_tes.Show()
         self.tanggal_lahir.Show()
         self.usia.Show()
         self.jenis_kelamin.Show()
+        self.Tpendidikan_terakhir.Show()
+
         
         self.m_textCtrl_tanggal_tes1.Hide()
         self.m_textCtrl_tanggal_lahir1.Hide()
         self.m_textCtrl_usia1.Hide()
         self.m_textCtrl_jenis_kelamin1.Hide()
-        
+        self.m_textCtrl_pendidikan_terakhir1.Hide()
         
 
 
     def m_lanjut_biodataOnClick(self,event):
+
         self.datapeserta = [self.m_textCtrl_no_tes1.GetValue(),
         self.tanggal_tes.GetValue().Format("%d/%m/%Y"),
         self.m_textCtrl_nama1.GetValue(),
-        self.m_textCtrl_jenis_kelamin1.GetValue(),
+        self.jenis_kelamin.GetStringSelection(),
         self.tanggal_lahir.GetValue().Format("%d/%m/%Y"),
         self.m_textCtrl_usia1.GetValue(),
         self.m_textCtrl_asal_sekolah_universitas.GetValue(),
-        self.m_textCtrl_pendidikan_terakhir1.GetValue(),
+        self.Tpendidikan_terakhir.GetStringSelection(),
         self.m_textCtrl_jurusan.GetValue(),
         self.m_textCtrl_posisi_pekerjaan.GetValue(),
         self.m_textCtrl_perusahaan.GetValue(),
-        self.m_textCtrl_keterangan.GetValue(),1]
+        self.m_textCtrl_keterangan.GetValue(),
+        1]
+
         self.bio = self.parent.data_peserta.insert_data_peserta(self.datapeserta)
         self.data_peserta = Peserta(self.parent.parent.connect_db)
         self.data_list =[]
@@ -76,11 +85,31 @@ class BuatBiodata(Biodata):
             self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
         for data in self.data_list:
             self.parent.m_dataViewListCtrl3.AppendItem(data)
-        self.Close()
+        # Buka jendela input kunci jawaban 
+        self.buka_input = PilihInputInherited(self)
+        self.buka_input.Show()
         pass
 
     def m_tutup_biodata(self,event):
         self.Close()
+        pass
+
+class PilihInputInherited(PilihInput):
+
+
+    def __init__(self,parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.parent.Hide()
+    
+    def pilih_input_manual(self, event):
+
+        import pdb
+        pdb.set_trace()
+
+        pass
+
+    def pilih_input_total(self, event):
         pass
 
 class EditBiodata(Biodata):
@@ -88,21 +117,57 @@ class EditBiodata(Biodata):
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
+
+        self.Tpendidikan_terakhir.AppendItems(["SD","SMP","SMA","D3","S1","S2","S3"])    
+        self.Tpendidikan_terakhir.SetSelection(4)
+
         self.tanggal_tes.Show()
         self.tanggal_lahir.Show()
         self.usia.Show()
         self.jenis_kelamin.Show()
-        
+        self.Tpendidikan_terakhir.Show()
+
         self.m_textCtrl_tanggal_tes1.Hide()
         self.m_textCtrl_tanggal_lahir1.Hide()
         self.m_textCtrl_usia1.Hide()
         self.m_textCtrl_jenis_kelamin1.Hide()
+        self.m_textCtrl_pendidikan_terakhir1.Hide()
 
+        self.m_textCtrl_no_tes1.SetValue(str(self.parent.bio[1]))
+        self.tanggal_tes.SetValue(self.parent.date)
+        self.m_textCtrl_nama1.SetValue(str(self.parent.bio[3]))
+        self.jenis_kelamin.SetStringSelection(str(self.parent.bio[4]))
+        self.tanggal_lahir.SetValue(self.parent.date2)
+        self.m_textCtrl_usia1.SetValue(str(self.parent.bio[6]))
+        self.m_textCtrl_asal_sekolah_universitas.SetValue(str(self.parent.bio[7]))
+        self.Tpendidikan_terakhir.SetStringSelection(str(self.parent.bio[8]))
+        self.m_textCtrl_jurusan.SetValue(str(self.parent.bio[9]))
+        self.m_textCtrl_posisi_pekerjaan.SetValue(str(self.parent.bio[10]))
+        self.m_textCtrl_perusahaan.SetValue(str(self.parent.bio[11]))
+        self.m_textCtrl_keterangan.SetValue(str(self.parent.bio[12]))
 
     def m_lanjut_biodataOnClick(self,event):
         self.Hide()
+
+        self.m_textCtrl_no_tes1.GetValue()
+        self.tanggal_tes.GetValue().Format("%d/%m/%Y")
+        self.m_textCtrl_nama1.GetValue()
+        self.jenis_kelamin.GetStringSelection()
+        self.tanggal_lahir.GetValue().Format("%d/%m/%Y")
+        self.m_textCtrl_usia1.GetValue()
+        self.m_textCtrl_asal_sekolah_universitas.GetValue()
+        self.Tpendidikan_terakhir.GetStringSelection()
+        self.m_textCtrl_jurusan.GetValue()
+        self.m_textCtrl_posisi_pekerjaan.GetValue()
+        self.m_textCtrl_perusahaan.GetValue()
+        self.m_textCtrl_keterangan.GetValue()
+
         self.window_editnorma = TipeNormaInherited(self)
         self.window_editnorma.Show()
+
+        import pdb
+
+        pdb.set_trace()
         pass
 
     def m_tutup_biodata(self,event):
@@ -138,6 +203,7 @@ class TipeNormaInherited(TipeNorma):
 
     def __edit_data(self):
         self.id_peserta = self.parent.parent.bio[0]
+        print (self.parent.parent.bio)
         self.data_peserta_q =self.parent.parent.data_peserta.query_select_lj_datapeserta_tipenorma(self.id_peserta)
         print (self.data_peserta_q)
         self.data_norma = []
@@ -230,8 +296,6 @@ class TabelDataPesertaIn(TabelDataPeserta):
         if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
             
             self.data = self.m_dataViewListCtrl3.GetValue(self.m_dataViewListCtrl3.GetSelectedRow(),1)
-            self.biodata = EditBiodata(self)
-            self.biodata.Show()
             self.bio = self.data_peserta.query_select_data_peserta(self.data)
             self.day,self.month,self.year = self.bio[2].split("/")
             self.day2,self.month2,self.year2 = self.bio[5].split("/")
@@ -239,19 +303,8 @@ class TabelDataPesertaIn(TabelDataPeserta):
             self.date = wx.DateTimeFromDMY(int(self.day),int(self.month)-1,int(self.year))  
             self.date2 = wx.DateTimeFromDMY(int(self.day2),int(self.month2)-1,int(self.year2))  
 
-            self.biodata.m_textCtrl_no_tes1.SetValue(str(self.bio[1]))
-            self.biodata.tanggal_tes.SetValue(self.date)
-            self.biodata.m_textCtrl_nama1.SetValue(str(self.bio[3]))
-            self.biodata.m_textCtrl_jenis_kelamin1.SetValue(str(self.bio[4]))
-            self.biodata.tanggal_lahir.SetValue(self.date2)
-            self.biodata.m_textCtrl_usia1.SetValue(str(self.bio[6]))
-            self.biodata.m_textCtrl_asal_sekolah_universitas.SetValue(str(self.bio[7]))
-            self.biodata.m_textCtrl_pendidikan_terakhir1.SetValue(str(self.bio[8]))
-            self.biodata.m_textCtrl_jurusan.SetValue(str(self.bio[9]))
-            self.biodata.m_textCtrl_posisi_pekerjaan.SetValue(str(self.bio[10]))
-            self.biodata.m_textCtrl_perusahaan.SetValue(str(self.bio[11]))
-            self.biodata.m_textCtrl_keterangan.SetValue(str(self.bio[12]))
-
+            self.biodata = EditBiodata(self)
+            self.biodata.Show()
 
             # self.data =[]
             # for i in range(9):

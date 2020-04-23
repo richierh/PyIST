@@ -1,0 +1,9 @@
+INSERT INTO bidang_keilmuan (id, bidang_keilmuan) 
+
+VALUES (1, 'Ilmu Sains'),
+(2, 'Ilmu Pertanian'),
+(3, 'Ilmu Teknik'),
+(4, 'Ilmu Kesehatan'),
+(5, 'Ilmu Sastra & Budaya'),
+(6, 'Ilmu Seni'),
+(7, 'Ilmu Sosial');

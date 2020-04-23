@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<resource xmlns="http://www.wxwindows.org/wxxrc" version="2.3.0.1">
+	<object class="wxFrame" name="FrameActivator">
+		<style>wxCLOSE_BOX|wxSTAY_ON_TOP|wxTAB_TRAVERSAL</style>
+		<size>500,300</size>
+		<title></title>
+		<centered>1</centered>
+		<aui_managed>0</aui_managed>
+		<object class="wxPanel" name="m_panel1">
+			<style>wxTAB_TRAVERSAL</style>
+			<object class="wxBoxSizer">
+				<orient>wxVERTICAL</orient>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+					<border>5</border>
+					<object class="wxStaticText" name="m_staticText1">
+						<font>
+							<size>12</size>
+							<family>swiss</family>
+							<style>normal</style>
+							<weight>normal</weight>
+							<underlined>0</underlined>
+							<face>Sans</face>
+						</font>
+						<label>Silahkan untuk mengaktivasi Aplikasi terlebih dahulu</label>
+						<wrap>-1</wrap>
+					</object>
+				</object>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxALIGN_CENTER_HORIZONTAL</flag>
+					<border>5</border>
+					<object class="wxFlexGridSizer">
+						<rows>0</rows>
+						<cols>2</cols>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols></growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT</flag>
+							<border>5</border>
+							<object class="wxStaticText" name="m_staticText2">
+								<font>
+									<size>12</size>
+									<family>swiss</family>
+									<style>normal</style>
+									<weight>normal</weight>
+									<underlined>0</underlined>
+									<face>Sans</face>
+								</font>
+								<label>Nomor Lisensi</label>
+								<wrap>-1</wrap>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxTextCtrl" name="m_textCtrl1">
+								<font>
+									<size>12</size>
+									<family>swiss</family>
+									<style>normal</style>
+									<weight>normal</weight>
+									<underlined>0</underlined>
+									<face>Sans</face>
+								</font>
+								<value></value>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT</flag>
+							<border>5</border>
+							<object class="wxStaticText" name="m_staticText3">
+								<font>
+									<size>12</size>
+									<family>swiss</family>
+									<style>normal</style>
+									<weight>normal</weight>
+									<underlined>0</underlined>
+									<face>Sans</face>
+								</font>
+								<label>Sandi Produk</label>
+								<wrap>-1</wrap>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+							<border>5</border>
+							<object class="wxTextCtrl" name="m_textCtrl2">
+								<size>300,-1</size>
+								<font>
+									<size>12</size>
+									<family>swiss</family>
+									<style>normal</style>
+									<weight>normal</weight>
+									<underlined>0</underlined>
+									<face>Sans</face>
+								</font>
+								<value></value>
+							</object>
+						</object>
+					</object>
+				</object>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+					<border>5</border>
+					<object class="wxStaticText" name="m_staticText4">
+						<label></label>
+						<wrap>-1</wrap>
+					</object>
+				</object>
+				<object class="sizeritem">
+					<option>1</option>
+					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+					<border>5</border>
+					<object class="wxStaticBitmap" name="m_bitmap1">
+						<bitmap />
+					</object>
+				</object>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxALIGN_RIGHT</flag>
+					<border>5</border>
+					<object class="wxBoxSizer">
+						<orient>wxHORIZONTAL</orient>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL</flag>
+							<border>5</border>
+							<object class="wxButton" name="m_button1">
+								<font>
+									<size>12</size>
+									<family>swiss</family>
+									<style>normal</style>
+									<weight>normal</weight>
+									<underlined>0</underlined>
+									<face>Sans</face>
+								</font>
+								<label>Cancel</label>
+								<default>0</default>
+								<markup>0</markup>
+								<bitmap />
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+							<border>5</border>
+							<object class="wxButton" name="m_button2">
+								<font>
+									<size>12</size>
+									<family>swiss</family>
+									<style>normal</style>
+									<weight>normal</weight>
+									<underlined>0</underlined>
+									<face>Sans</face>
+								</font>
+								<label>Ok</label>
+								<default>0</default>
+								<markup>0</markup>
+								<bitmap />
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+</resource>

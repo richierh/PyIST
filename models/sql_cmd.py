@@ -9,8 +9,9 @@ class KunciJawaban(SqliteDB):
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
+        self.path_db='/home/cireng/Projects/pyist/models/istcore.sqlite'
         print(self.path_db)
-        self.path_db = "/home/pmc/Projects/pyist/models/istcore.sqlite"
+
         print(self.hitung_jumlah_row("Data Peserta"))
 
     def ambil_data(self,values=None):

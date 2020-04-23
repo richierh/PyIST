@@ -32,7 +32,7 @@
             "label" : "Schemacrawler",
             "type"  : "shell",
             "linux" :{
-                "command": "schemacrawler --server sqlite --database $HOME/Projects/pyist/models/istcore.sqlite --info-level=maximum --password= --command schema -o $HOME/Projects/pyist/models/diagram.png"
+                "command": "schemacrawler --server sqlite --database $HOME/Projects/pyist/models/istcore.sqlite --info-level=maximum --password= --command schema -o $HOME/Projects/pyist/models/diagram.png && viewnior /home/cireng/Projects/pyist/models/diagram.png"
                     },
             "group": {
                 "kind": "build",

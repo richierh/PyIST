@@ -206,7 +206,7 @@ class PanggilGrid():
         self.data_sum = []
         i = 0
         for data in self.data:
-            print (f"ini adalah total {sum(self.data[0])}")
+            # print (f"ini adalah total {sum(self.data[0])}")
             if i == 3 :
                 self.sum = int(self.parent.nilai_ge)
                 self.data_sum.append(self.sum)

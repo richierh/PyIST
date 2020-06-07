@@ -251,6 +251,8 @@ class HalamanEventControl(CekDB):
             # self.m_button3.Enable()
             pass
 
+
+    # pilihan norma usia
     def m_button_norma_usia(self, event):
 
         self.pilih_norma = 1
@@ -299,19 +301,21 @@ class HalamanEventControl(CekDB):
         self.jawab_tambah =  self.jawaban.query_kunci_jawaban()
         self.jawaban_list = [data[2:] for data in self.jawab_tambah]
         self.gab = []
+
+        self.i = 0
         for data in self.input_peserta:
-            self.gab.append([*data,*self.jawaban_list[self.input_peserta.index(data)]])
+            self.gab.append([*data,*self.jawaban_list[self.i]])
+            print (self.i)
+            self.i += 1
+        print (self.gab)
 
-        self.column_name = ["SE","WA","AN",'GE','RA','ZR','FA','WU','ME']
-        self.column_name_kunci_jawaban = ["KSE","KWA","KAN","KGE","KRA","KZR","KFA","KWU","KME"]
-
-        # self.data = [1,2,2,2,2,2,2,2,2,2,2]
         self.input_jawaban = InputJawaban(self.connect_db)
         self.input_jawaban.insert_data(self.gab)
+        # untuk menunjukkan data input_jawaban gunakan methode show_data()
+        self.input_jawaban.show_data()
 
-
-        
-        
+        import pdb
+        pdb.set_trace()
         # self.input_peserta adalah input peserta (contoh di bawah adalah 
         # self.input_peserta = self.panggilgrid.getdata_arrange()) dari 
         # GUI GRID yang kemudian di hitung menghasilkan 
@@ -324,9 +328,12 @@ class HalamanEventControl(CekDB):
         self.nilai_ge = self.list_konversi_ge[3]
 
 
-        self.input_peserta = self.panggilgrid.getdata_arrange()
+
+        # self.input_peserta = self.panggilgrid.getdata_arrange()
         self.m_simplebook1.SetSelection(self.getSel)
         # class untuk menghitung Nilai
+        import pdb
+        pdb.set_trace()
         self.nilai = KalkulasiNilai(self)
         self.hasil_sw = TableDataKelompokUmurConnect(self.databasekon, self)
         # self.hasil_sw.query_sw()

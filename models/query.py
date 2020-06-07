@@ -397,6 +397,7 @@ class KonversiGE(SqliteDB):
         # for data in getdatas:
         #     # print (data)
         #     pass
+        self.values = int(self.values)
         self.close_db()
         if self.values > 32:
             getdatas = [33, 33, 33, 20]
@@ -542,6 +543,7 @@ class InputJawaban(SqliteDB):
     def insert_data(self,values = None):
         self.conn = self.connect_db()
         self.values = values
+        self.cursorexe = self.conn.cursor()
 
         self.sql_cmd = """ INSERT INTO [Input Jawaban] (
                                 TipeInputId,
@@ -558,9 +560,18 @@ class InputJawaban(SqliteDB):
                             )
                             VALUES ((SELECT TipeInputId  FROM [Tipe Input] WHERE [Jenis Input] = ?),(SELECT id FROM [Data Peserta] WHERE [no tes] = ?),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); """
 
-        self.conn.executemany(self.sql_cmd,self.values)
+        self.result = self.cursorexe.executemany(self.sql_cmd,self.values)
         self.conn.commit()
         self.close_db()
+
+
+    def show_data(self):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """SELECT * FROM 'Input Jawaban'"""
+        self.result = self.cursorexe.execute(self.sql_cmd).fetchall()
+        self.close_db()
+        return self.result
 
 class TabelNormaPendidikan(SqliteDB):
 

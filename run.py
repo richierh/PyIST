@@ -26,7 +26,6 @@ from pathlib import Path
 
 pathwd = pathlib.Path.cwd() / "views"
 sys.path.append(str(pathwd))
-# print (sys.path)
 os.chdir(str(pathwd))
 
 
@@ -59,17 +58,11 @@ def close():
 
 
 if platform.system() == "Windows":
-#     print (platform.system())
     my_file = Path("C:\\ProgramData\\4251.txt")
-#     print (my_file)
     if my_file.is_file():
-        # print ("file ada")
         openWindows()
     else :
-        # print ("file tidak ada")
         KeyVerification = VerifyKey("2")
-        # print (KeyVerification.Verify())
-        # print (type(KeyVerification))
         if KeyVerification.Verify() == "1":
             openWindows()
         else :
@@ -79,16 +72,11 @@ elif platform.system() == "Linux" :
     print (platform.system())
     my_file = Path.home() / ".4251"
     print (my_file)
-    # print (my_file)
     if my_file.is_file():
         print ("file ada")
         openWindows()
-        # print ("Berakhir")
     else :
-        # print ("file tidak ada")
         KeyVerification = VerifyKey("2")
-        # print (KeyVerification.Verify())
-        # print (type(KeyVerification))
         if KeyVerification.Verify() == "1":
             openWindows()
         else :

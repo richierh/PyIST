@@ -573,6 +573,15 @@ class InputJawaban(SqliteDB):
         self.close_db()
         return self.result
 
+    def get_data_by_id(self,values):
+        self.values  = values
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """ SELECT * FROM 'Input Jawaban' WHERE id = ?"""
+        self.result = self.cursorexe.execute(self.sql_cmd,[self.values,]).fetchall()
+        self.close_db()
+        return self.result
+
 class TabelNormaPendidikan(SqliteDB):
 
     def __init__(self,parent=None):
@@ -1246,8 +1255,10 @@ class Peserta(SqliteDB):
         """
 
         self.cursorexe.execute(self.sqlcmd, self.values)
+        self.rowid = self.cursorexe.lastrowid
         self.conn.commit()
         self.close_db()
+        return self.rowid
 
 
 def insert_input_peserta(values):

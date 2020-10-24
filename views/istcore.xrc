@@ -68,7 +68,6 @@
 			</object>
 		</object>
 		<object class="wxMenuBar" name="m_menubar1">
-			<label>MyMenuBar</label>
 			<object class="wxMenu" name="m_menu1">
 				<label>Berkas</label>
 				<object class="wxMenuItem" name="m_menu_keluar">

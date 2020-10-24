@@ -11,7 +11,6 @@ from pathlib import Path
 from views.dataview import RWSWScore, PanggilDataView, PanggilGrid, \
     PanggilInputTotal
 from controllers.ist_calculation import KalkulasiNilai
-# from views.grafik_ist import GrafikLayout,GrafikHasil,GrafikProfesi
 from controllers.biodata import Biodata
 from controllers.grafik_tabel import *
 from views.pilih_tabel_norma import PilihTabel
@@ -178,15 +177,10 @@ class HalamanEventControl(CekDB):
         # {self.m_radioBox_biodata.SetSelection(0)}")
         self.tipe_biodata = 0
 
-
         pass
 
-    # def m_menuItem8OnMenuSelection(self,event):
-    #     print ("hhh")
-    #     pass
 
     def m_kembali_ke_awalOnButtonClick(self, event):
-        # print("klik kembali ke awal")
         self.m_simplebook1.SetSelection(0)
         self.m_sebelumnya.Disable()
         self.m_selanjutnya.Enable()
@@ -194,17 +188,14 @@ class HalamanEventControl(CekDB):
         pass
 
     def m_sebelumnyaOnButtonClick(self, event):
-        # print("klik sebelumnya")
         self.getSel = self.m_simplebook1.GetSelection()
         self.m_simplebook1.SetSelection(self.getSel - 1)
         self.getSel = self.m_simplebook1.GetSelection()
-        # print (self.getSel)
 
         if self.getSel == 0:
             self.m_selanjutnya.Enable()        
             self.m_sebelumnya.Disable()
             self.m_kembali_ke_awal.Disable()
-
             pass
 
         elif self.getSel == 1:
@@ -292,8 +283,11 @@ class HalamanEventControl(CekDB):
         self.data_peserta.append(1)
 
         self.databasepeserta = Peserta(self.connect_db)
-        self.databasepeserta.insert_data_peserta(self.data_peserta)
+        self.last_row_id = self.databasepeserta.insert_data_peserta(self.data_peserta)
+        print(self.last_row_id)
 
+        # import pdb 
+        # pdb.set_trace()
         # Ambil Data dari database kunci jawaban peserta untuk mencocokan dengan
         # jawaban dari peserta
         self.jawaban = TabelJawaban(self.connect_db)
@@ -313,9 +307,10 @@ class HalamanEventControl(CekDB):
         self.input_jawaban.insert_data(self.gab)
         # untuk menunjukkan data input_jawaban gunakan methode show_data()
         self.input_jawaban.show_data()
+        # mengambil data berdasarkan id terakhir yang diinput
+        self.input_jawaban.get_data_by_id(self.last_row_id)
 
-        import pdb
-        pdb.set_trace()
+
         # self.input_peserta adalah input peserta (contoh di bawah adalah 
         # self.input_peserta = self.panggilgrid.getdata_arrange()) dari 
         # GUI GRID yang kemudian di hitung menghasilkan 
@@ -327,13 +322,14 @@ class HalamanEventControl(CekDB):
         self.list_konversi_ge = self.con_datakonversi_ge.query_konversi(self.ge)
         self.nilai_ge = self.list_konversi_ge[3]
 
-
+        import pdb
+        pdb.set_trace()
 
         # self.input_peserta = self.panggilgrid.getdata_arrange()
         self.m_simplebook1.SetSelection(self.getSel)
         # class untuk menghitung Nilai
-        import pdb
-        pdb.set_trace()
+        # import pdb
+        # pdb.set_trace()
         self.nilai = KalkulasiNilai(self)
         self.hasil_sw = TableDataKelompokUmurConnect(self.databasekon, self)
         # self.hasil_sw.query_sw()
@@ -388,8 +384,6 @@ class HalamanEventControl(CekDB):
             self.buka_jendela_norma.m_button25.Enable()
             self.buka_jendela_norma.Layout()
             self.buka_jendela_norma.Show() 
-
-
 
             # self.m_staticText_pilih_norma_sendir.SetLabel(self.buka_jendela_norma.getdata[2])
             # self.m_panel29.Layout()
@@ -592,10 +586,6 @@ class HalamanEventControl(CekDB):
         self.m_simplebook1.SetSelection(2)
         self.m_selanjutnya.Enable()        
         self.m_kembali_ke_awal.Enable()
-
-
-
-
         pass
 
     def m_button_rincian_biodata_on_buttonclick(self, event):
@@ -614,18 +604,19 @@ class BiodataInherited(Biodata):
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
-        self.m_textCtrl_no_tes1.SetValue(self.parent.data_peserta.get_biodata()[0])
-        self.m_textCtrl_tanggal_tes1.SetValue(self.parent.data_peserta.get_biodata()[1])
-        self.m_textCtrl_nama1.SetValue(self.parent.data_peserta.get_biodata()[2])
-        self.m_textCtrl_jenis_kelamin1.SetValue(self.parent.data_peserta.get_biodata()[3])
-        self.m_textCtrl_tanggal_lahir1.SetValue(self.parent.data_peserta.get_biodata()[4])
-        self.m_textCtrl_usia1.SetValue(str(self.parent.data_peserta.get_biodata()[5]))
-        self.m_textCtrl_asal_sekolah_universitas.SetValue(self.parent.data_peserta.get_biodata()[6])
-        self.m_textCtrl_pendidikan_terakhir1.SetValue(self.parent.data_peserta.get_biodata()[7])
-        self.m_textCtrl_jurusan.SetValue(self.parent.data_peserta.get_biodata()[8])
-        self.m_textCtrl_posisi_pekerjaan.SetValue(self.parent.data_peserta.get_biodata()[9])
-        self.m_textCtrl_perusahaan.SetValue(self.parent.data_peserta.get_biodata()[10])
-        self.m_textCtrl_keterangan.SetValue(self.parent.data_peserta.get_biodata()[11])
+
+        self.m_textCtrl_no_tes1.SetValue(self.parent.data_peserta[0])
+        self.m_textCtrl_tanggal_tes1.SetValue(self.parent.data_peserta[1])
+        self.m_textCtrl_nama1.SetValue(self.parent.data_peserta[2])
+        self.m_textCtrl_jenis_kelamin1.SetValue(self.parent.data_peserta[3])
+        self.m_textCtrl_tanggal_lahir1.SetValue(self.parent.data_peserta[4])
+        self.m_textCtrl_usia1.SetValue(str(self.parent.data_peserta[5]))
+        self.m_textCtrl_asal_sekolah_universitas.SetValue(self.parent.data_peserta[6])
+        self.m_textCtrl_pendidikan_terakhir1.SetValue(self.parent.data_peserta[7])
+        self.m_textCtrl_jurusan.SetValue(self.parent.data_peserta[8])
+        self.m_textCtrl_posisi_pekerjaan.SetValue(self.parent.data_peserta[9])
+        self.m_textCtrl_perusahaan.SetValue(self.parent.data_peserta[10])
+        self.m_textCtrl_keterangan.SetValue(self.parent.data_peserta[11])
         
 
     def m_tutup_biodataOnClick(self,event) :

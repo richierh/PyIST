@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version 3.9.0 Jan 12 2020)
+## Python code generated with wxFormBuilder (version 3.9.0 Aug 27 2020)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
 ###########################################################################
 
+from views.grafik_wx import GrafikRWSW
 import wx
 import wx.xrc
 import wx.adv
@@ -112,7 +113,7 @@ class ISTUtama ( wx.Frame ):
 
 		m_choice_jenis_kelaminChoices = [ u"Laki-Laki", u"Perempuan" ]
 		self.m_choice_jenis_kelamin = wx.Choice( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice_jenis_kelaminChoices, 0 )
-		self.m_choice_jenis_kelamin.SetSelection( 1 )
+		self.m_choice_jenis_kelamin.SetSelection( 0 )
 		fgSizer21.Add( self.m_choice_jenis_kelamin, 0, wx.ALL, 5 )
 
 		self.m_staticText23211 = wx.StaticText( self.m_scrolledpanel_pendidikan1, wx.ID_ANY, u"Tanggal Lahir", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2094,13 +2095,13 @@ class ISTUtama ( wx.Frame ):
 		bSizer9.Add( fgSizer161, 0, 0, 5 )
 
 		self.m_panel18 = wx.Panel( self.m_panel6, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		bSizer10 = wx.BoxSizer( wx.HORIZONTAL )
+		bSizer10 = wx.BoxSizer( wx.VERTICAL )
 
 		self.m_scrolledWindow7 = wx.ScrolledWindow( self.m_panel18, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
 		self.m_scrolledWindow7.SetScrollRate( 5, 5 )
 		bSizer32 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.m_panel61 = wx.Panel( self.m_scrolledWindow7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_panel61 = GrafikRWSW( self.m_scrolledWindow7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer32.Add( self.m_panel61, 2, wx.EXPAND |wx.ALL, 5 )
 
 		fgSizer17 = wx.FlexGridSizer( 12, 3, 0, 0 )
@@ -2674,7 +2675,7 @@ class Norma ( wx.Frame ):
 		self.m_dataViewListColumn46 = self.m_dataViewListCtrl8.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
 		self.m_dataViewListColumn47 = self.m_dataViewListCtrl8.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
 		self.m_dataViewListColumn50 = self.m_dataViewListCtrl8.AppendTextColumn( u"Usia", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
-		self.m_dataViewListColumn49 = self.m_dataViewListCtrl8.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
+		self.m_dataViewListColumn49 = self.m_dataViewListCtrl8.AppendTextColumn( u"Keterangan", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
 		bSizer34.Add( self.m_dataViewListCtrl8, 3, wx.ALL|wx.EXPAND, 5 )
 
 		self.text_norma_pekerjaan = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Pekerjaan", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2688,7 +2689,7 @@ class Norma ( wx.Frame ):
 		self.m_dataViewListColumn42 = self.m_dataViewListCtrl9.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn43 = self.m_dataViewListCtrl9.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn44 = self.m_dataViewListCtrl9.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn48 = self.m_dataViewListCtrl9.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn48 = self.m_dataViewListCtrl9.AppendTextColumn( u"Keterangan", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer34.Add( self.m_dataViewListCtrl9, 1, wx.ALL|wx.EXPAND, 5 )
 
 		self.text_norma_sendiri = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Sendiri", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -3103,16 +3104,16 @@ class TabelNorma ( wx.Frame ):
 
 		self.m_dataViewListCtrl4 = wx.dataview.DataViewListCtrl( self.m_panel24, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.No = self.m_dataViewListCtrl4.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn12 = self.m_dataViewListCtrl4.AppendTextColumn( u"RS", wx.dataview.DATAVIEW_CELL_EDITABLE, 75, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn13 = self.m_dataViewListCtrl4.AppendTextColumn( u"SE", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn14 = self.m_dataViewListCtrl4.AppendTextColumn( u"WA", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn15 = self.m_dataViewListCtrl4.AppendTextColumn( u"AN", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn16 = self.m_dataViewListCtrl4.AppendTextColumn( u"GE", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn17 = self.m_dataViewListCtrl4.AppendTextColumn( u"RA", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn18 = self.m_dataViewListCtrl4.AppendTextColumn( u"ZR", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn19 = self.m_dataViewListCtrl4.AppendTextColumn( u"FA", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn20 = self.m_dataViewListCtrl4.AppendTextColumn( u"WU", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn21 = self.m_dataViewListCtrl4.AppendTextColumn( u"ME", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn12 = self.m_dataViewListCtrl4.AppendTextColumn( u"RS", wx.DATAVIEW_CELL_EDITABLE, 75, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn13 = self.m_dataViewListCtrl4.AppendTextColumn( u"SE", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn14 = self.m_dataViewListCtrl4.AppendTextColumn( u"WA", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn15 = self.m_dataViewListCtrl4.AppendTextColumn( u"AN", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn16 = self.m_dataViewListCtrl4.AppendTextColumn( u"GE", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn17 = self.m_dataViewListCtrl4.AppendTextColumn( u"RA", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn18 = self.m_dataViewListCtrl4.AppendTextColumn( u"ZR", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn19 = self.m_dataViewListCtrl4.AppendTextColumn( u"FA", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn20 = self.m_dataViewListCtrl4.AppendTextColumn( u"WU", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn21 = self.m_dataViewListCtrl4.AppendTextColumn( u"ME", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer36.Add( self.m_dataViewListCtrl4, 1, wx.ALL|wx.EXPAND, 5 )
 
 

@@ -22,4 +22,3 @@ class KalkulasiNilai():
         print (f"ini nilai GE {self.value}")
         pass
 
-    

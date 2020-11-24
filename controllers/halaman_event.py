@@ -1,3 +1,5 @@
+import pandas as pd
+import numpy as np
 from numpy import arange, sin, pi,array
 from statistics import mean
 import pathlib
@@ -6,7 +8,8 @@ import wx
 import wx.dataview
 from views.istcore import ISTUtama,NormaSendiri,TabelDataPeserta,BuatNormaSendiri
 from models.query import SqliteDB,KonversiGE,TabelJawaban, \
-    InputJawaban,Peserta
+    InputJawaban,Peserta,NoTes,HasilJawaban,\
+    KunciJawabanGE
 from pathlib import Path
 from views.dataview import RWSWScore, PanggilDataView, PanggilGrid, \
     PanggilInputTotal
@@ -235,7 +238,18 @@ class HalamanEventControl(CekDB):
             self.grafik_hasil.draw(self.grafik_y)
             pass
 
-        elif self.getSel == 6:
+        elif self.getSel == 5:
+            self.jawab_tambah =  self.jawaban.query_kunci_jawaban()
+            self.jawaban_list = [data[2:] for data in self.jawab_tambah]
+            self.gab = []
+
+            self.i = 0
+            for data in self.input_peserta:
+                self.gab.append([*data,*self.jawaban_list[self.i]])
+                print (self.i)
+                self.i += 1
+            print (self.gab)
+
             self.m_selanjutnya.Enable()
         
         else:
@@ -270,24 +284,64 @@ class HalamanEventControl(CekDB):
             # self.input_peserseta.insert(0,self.data_peserta.get_biodata()[0])
             # self.input_peserta.insert(0,self.select_input)
 
-        for data in self.input_peserta:
-            data.insert(0,self.data_peserta.get_biodata()[0])
-            data.insert(0,self.select_input)
+        self.peserta = self.data_peserta.get_biodata()[1]
+        self.peserta['Tipe Norma'] = '1'        
+
 
         # Ambil data peserta dari form awal data peserta menggunakan method get_biodata()
         # Format column No tes , tanggal tes, nama , jenis kelamin ,
         # tanggal lahir, usia ,asal sekolah, pendidikan , jurusan,
         # posisi pekerjaan, perusahaan, keterangan, tipe norma = 1 (tetap) 
-        self.data_peserta.get_biodata()[0]
-        self.data_peserta = self.data_peserta.get_biodata()
-        self.data_peserta.append(1)
-
+ 
         self.databasepeserta = Peserta(self.connect_db)
-        self.last_row_id = self.databasepeserta.insert_data_peserta(self.data_peserta)
-        print(self.last_row_id)
+        self.databasepeserta.insert_data_peserta(no_tes=self.peserta.get('No Tes'),
+        tanggal_tes = self.peserta.get('Tanggal Tes'),
+        nama = self.peserta.get('Nama'),
+        jenis_kelamin=self.peserta.get("Jenis Kelamin"),
+        tanggal_lahir = self.peserta.get('Tanggal Lahir'),
+        usia = self.peserta.get("Usia"),
+        asal_sekolah=self.peserta.get("Asal Sekolah"),
+        pendidikan_terakhir = self.peserta.get("Pendidikan Terakhir"),
+        jurusan = self.peserta.get("Jurusan"),
+        posisi_pekerjaan = self.peserta.get("Posisi Pekerjaan"),
+        perusahaan = self.peserta.get("Perusahaan"),
+        keterangan = self.peserta.get("Keterangan"),
+        tipe_norma = self.peserta.get("Tipe Norma")
+        )
+        for data in self.input_peserta:
+            data.insert(0,self.peserta.get('No Tes'))
+            data.insert(0,self.select_input)    
 
-        # import pdb 
+        self.No_Tes = NoTes(self.connect_db)
+        # self.get_id_tes = self.No_Tes.get_id_test(self.peserta.get('No Tes'))[0]
+        self.No_Tes.insert(self.peserta.get('No Tes'),self.databasepeserta.last_row())
+
+        self.get_id_tes = self.No_Tes.get_id_test(self.databasepeserta.last_row())[0]
+        print(self.get_id_tes)
+        self.get_jawaban = self.panggilgrid.getdata()
+ 
+            
+        self.data_panda = pd.DataFrame(self.get_jawaban)
+        self.no = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,7,18,19,20]
+        self.data_panda.insert(0,"No",self.no)
+        self.id_tes = []
+        for data in self.no :
+            self.id_tes.append(self.get_id_tes)
+
+
+        self.data_panda["id_tes"] = self.id_tes
+
+        self.data_panda["id_kunci_jawaban"] = self.no
+
+        self.data_numpy = pd.DataFrame.to_numpy(self.data_panda)
+        # self.data_numpy = np.char.upper(self.data_numpy)
+        self.data_jadi = self.data_numpy.tolist()
+
+
+        
+        # import pdb
         # pdb.set_trace()
+
         # Ambil Data dari database kunci jawaban peserta untuk mencocokan dengan
         # jawaban dari peserta
         self.jawaban = TabelJawaban(self.connect_db)
@@ -295,20 +349,52 @@ class HalamanEventControl(CekDB):
         self.jawab_tambah =  self.jawaban.query_kunci_jawaban()
         self.jawaban_list = [data[2:] for data in self.jawab_tambah]
         self.gab = []
-
-        self.i = 0
-        for data in self.input_peserta:
-            self.gab.append([*data,*self.jawaban_list[self.i]])
-            print (self.i)
-            self.i += 1
-        print (self.gab)
-
         self.input_jawaban = InputJawaban(self.connect_db)
-        self.input_jawaban.insert_data(self.gab)
-        # untuk menunjukkan data input_jawaban gunakan methode show_data()
-        self.input_jawaban.show_data()
-        # mengambil data berdasarkan id terakhir yang diinput
-        self.input_jawaban.get_data_by_id(self.last_row_id)
+        self.data_jadi =[tuple(x) for x in self.data_jadi ]
+
+
+        self.input_jawaban.insert_data(self.data_jadi)
+        
+        self.get_data = self.input_jawaban.join_table(self.get_id_tes)
+ 
+        # menghitung nilai dari input jawaban
+        self.np_data = np.array(self.get_data)
+        self.np_first = self.np_data[:,2:11]
+        self.np_second = self.np_data[:,15:24]
+        self.pengurangan = np.array([0,0,0,3,0,0,0,0,0])
+        self.data_hitung = self.np_first==self.np_second
+        self.jumlah = np.sum(self.data_hitung,axis=0)
+        self.total = np.subtract(self.jumlah,self.pengurangan)
+        self.id_tes = [self.get_id_tes]
+
+
+
+        self.total = np.append(self.total,self.id_tes,axis = 0)
+        
+
+        # mengambil kunci jawaban untuk diolah
+        from controllers.hitung_ge import GE
+
+
+        # mencocokan antara kunci jawaban ge dengan input oleh peserta
+        # lalu menempatkan jawaban ge yang sudah dicocokan tersebut ke total perhitungan
+        self.kunci_jwbn_ge = GE(self)
+        self.total[3]= self.kunci_jwbn_ge.result()
+        self.total = self.total.tolist()
+
+        # Melakukan konversi ge yang masih raw menjadi nilai ge yang sebenarnya
+
+
+
+        self.Jawaban = HasilJawaban(self.connect_db)
+        self.Jawaban.insert(self.total)
+        self.hasil_jawaban = self.Jawaban.query(self.id_tes)
+
+
+
+        self.GE_value = KonversiGE(self.connect_db)
+        self.ge = self.GE_value.convert_ge(self.hasil_jawaban[4])[3]
+        print (self.ge)
 
 
         # self.input_peserta adalah input peserta (contoh di bawah adalah 
@@ -316,38 +402,39 @@ class HalamanEventControl(CekDB):
         # GUI GRID yang kemudian di hitung menghasilkan 
         # bentuk output yang diterima oleh proses selanjutnya, yakni menghitung SW
 
-        # konversi nilai GE, hasil akhirnya adalah self.nilai_ge
-        # self.nilai_ge adalah hasil input yang telah dikonversi kedalam GE
-        self.con_datakonversi_ge = KonversiGE(self.connect_db)
-        self.list_konversi_ge = self.con_datakonversi_ge.query_konversi(self.ge)
-        self.nilai_ge = self.list_konversi_ge[3]
-
-        import pdb
-        pdb.set_trace()
 
         # self.input_peserta = self.panggilgrid.getdata_arrange()
         self.m_simplebook1.SetSelection(self.getSel)
         # class untuk menghitung Nilai
-        # import pdb
-        # pdb.set_trace()
-        self.nilai = KalkulasiNilai(self)
-        self.hasil_sw = TableDataKelompokUmurConnect(self.databasekon, self)
-        # self.hasil_sw.query_sw()
-        self.input_peserta_rw_sw, self.sum_rw = self.hasil_sw.get_value_sw(self.input_peserta)
+        # self.input_peserta_rw_sw, self.sum_rw = self.hasil_sw.get_value_sw(self.input_peserta)
         # print (self.sum_rw)
-        self.geasamt = self.hasil_sw.get_geasamt(self.sum_rw)
-        self.iq = self.hasil_sw.get_iq(self.geasamt)
+        # self.geasamt = self.hasil_sw.get_geasamt(self.sum_rw)
+        # self.iq = self.hasil_sw.get_iq(self.geasamt)
 
-        self.grafik = GrafikLayoutInherited(self)
-        self.grafik.draw(self.input_peserta_rw_sw)
-        self.grafik.save_figure()
-        # print (self.nilai_ge[3])
-        self.hasil_hal3 = RWSWScore(self)
-        self.m_selanjutnya.Enable()     
-        # print ("hhtet")   
+        # self.grafik = GrafikLayoutInherited(self)
+        # self.grafik.draw(self.input_peserta_rw_sw)
+        # self.grafik.save_figure()
+        # print (self.nilai_ge[3])_jawaban()
+        # self.jawab_tambah =  self.jawaban.query_kunci_jawaban()
+        # self.jawaban_list = [data[2:] for data in self.jawab_tambah]
+        # self.gab = []
+
+        # self.i = 0
+        # for data in self.input_peserta:
+            # self.gab.append([*data,*self.jawaban_list[self.i]])
+            # print (self.i)
+            # self.i += 1
+        # print (self.gab)
+
+        # self.input_jawaban 
         # self.m_textCtrl_biodata.SetValue(self.m_textCtrl_nama.GetValue()) 
         # Ini adalah nama yang ditampilkan di label halaman 5
-        self.m_textCtrl_biodata.SetValue(self.m_textCtrl_nama.GetValue())
+        self.databasepeserta.query_data_peserta()
+        self.nama = self.peserta.get('Nama')
+        
+
+        self.m_textCtrl_biodata.SetValue(self.nama)
+  
         pass
 
     def m_button_norma_pekerjaan(self, event):

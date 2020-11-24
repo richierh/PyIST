@@ -377,8 +377,22 @@ class PropertiesInput(MenuBarInherited):
         self.parent.m_textCtrl_perusahaan.GetValue(),
         self.parent.m_textCtrl_keterangan.GetValue()
         ]
-
-        return self.biodata
+        self.biodata_dict = {"No Tes":self.biodata[0],
+        "Tanggal Tes":self.biodata[1],
+        "Nama":self.biodata[2],
+        "Jenis Kelamin":self.biodata[3],
+        "Tanggal Lahir" : self.biodata[4],
+        "Usia":self.biodata[5],
+        "Asal Sekolah" : self.biodata[6],
+        "Pendidikan Terakhir":self.biodata[7],
+        "Jurusan":self.biodata[8],
+        "Posisi Pekerjaan":self.biodata[9],
+        "Perusahaan":self.biodata[10],
+        "Keterangan":self.biodata[11]
+        }
+        # import pdb
+        # pdb.set_trace()
+        return self.biodata,self.biodata_dict
 
     def set_biodata_to_panel(self):
         

@@ -53,7 +53,8 @@ class SqliteDB(object):
         print("Connecting to {}".format(str(self.path_db)))
         print("...Processing....")
         print("Database di buka")
-
+        # import pdb
+        # pdb.set_trace()
         conne = sqlite3.connect(str(self.path_db))
         return conne
 
@@ -383,10 +384,10 @@ class KonversiGE(SqliteDB):
         super().__init__(parent)
         pass
 
-    def query_konversi(self, values):
+    def convert_ge(self, values):
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
-        self.values = values
+        self.values = str(values)
         self.sql_cmd = """
         SELECT idGE,No,RW,GE
         FROM 'Konversi GE'
@@ -420,7 +421,7 @@ class TabelJawaban(SqliteDB):
 
     def insert_jawaban(self, values):
         self.conn = self.connect_db()
-
+ 
         self.values = values
         self.sql_cmd = """
         INSERT INTO jawaban_peserta (   
@@ -480,7 +481,6 @@ class TabelJawabanNormaSendiri(SqliteDB):
     
     def insert_data(self,values = None):
         self.conn = self.connect_db()
-        self.cursorexe = self.conn.cursor()
         self.values = values
         self.sql_cmd = """
         INSERT INTO NormaSendiri ([No],RS,SE,WA,AN,GE,RA, zr, FA, WU, ME )
@@ -532,7 +532,111 @@ INSERT INTO NormaSendiri (
         self.conn.commit()
         self.close_db()
 
+class NoTes(SqliteDB):
 
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+
+    def get_id_test(self,nomor_test):
+        self.conn = self.connect_db()
+
+        self.nomor_test = str(nomor_test)
+
+        # self.values = 1
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd ="""Select * from [No Tes] Where [id] = ?"""
+        self.cursorexe.execute(self.sql_cmd,[self.nomor_test,])
+        self.id_tes = self.cursorexe.fetchone()
+        self.conn.close()
+
+        return self.id_tes
+    def get_id(self,id_tes):
+        self.conn = self.connect_db()
+
+        self.id_tes = str(id_tes)
+
+        # self.values = 1
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd ="""Select * from [No Tes] Where [id_tes] = ?"""
+        self.cursorexe.execute(self.sql_cmd,[self.id_tes,])
+        self.id = self.cursorexe.fetchone()
+        self.conn.close()
+
+        return self.id
+
+
+    def insert(self,no_tes, id):
+        self.conn = self.connect_db()
+        self.id = [str(no_tes),int(id)]
+        # import pdb
+        # pdb.set_trace()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        Insert Into [No Tes] ([No tes],id)
+        Values (?,?);
+        """
+        self.cursorexe.execute(self.sql_cmd,self.id)
+
+        self.conn.commit()
+        self.close_db()
+
+class HasilJawaban(SqliteDB):
+
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+
+    def insert(self,values):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values = values
+
+        self.sql_cmd = """
+        INSERT INTO [Hasil Jawaban] (
+                                se,
+                                wa,
+                                an,
+                                ge,
+                                ra,
+                                zr,
+                                fa,
+                                wu,
+                                me,
+                                id_tes
+                            )
+                            VALUES (
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?
+                            );
+        
+        """
+
+        self.conn.execute(self.sql_cmd,self.values)
+        self.conn.commit()
+        self.close_db()
+
+    def query(self,values=None):
+        self.conn=self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values=values
+        self.sql_cmd ="""
+        SELECT *
+        FROM [Hasil Jawaban]
+        where id_tes=?;
+        """
+        self.cursorexe.execute(self.sql_cmd,self.values)
+        self.result = self.cursorexe.fetchone()
+        self.close_db()
+        return self.result
 
 class InputJawaban(SqliteDB):
 
@@ -540,27 +644,92 @@ class InputJawaban(SqliteDB):
         super().__init__(parent)
         self.parent = parent
     
+    def join_table(self,values):
+        self.conn = self.connect_db()
+
+        self.values = values
+    
+        # self.values = 1
+        self.nama_tabel = "Kunci Jawaban"
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd ="""
+        Select * from "Input Jawaban" 
+        Left Join "{}"
+        On "Input Jawaban".id_kunci = "Kunci Jawaban".id_kunci
+        where "Input Jawaban".id_tes = ?        
+        """.format(self.nama_tabel)
+
+        self.sql_cmd ="""Select  upper([Input Jawaban].id_input_jawaban) ,
+            upper([Input Jawaban].no) ,
+            upper([Input Jawaban].se) ,
+            upper([Input Jawaban].wa) ,
+            upper([Input Jawaban].an) ,
+            upper([Input Jawaban].ge) ,
+            upper([Input Jawaban].ra) ,
+            upper([Input Jawaban].zr) ,
+            upper([Input Jawaban].fa) ,
+            upper([Input Jawaban].wu) ,
+            upper([Input Jawaban].me) ,
+            upper([Input Jawaban].id_tes),
+            upper([Input Jawaban].id_kunci),
+            upper([Kunci Jawaban].id_kunci),
+            upper([Kunci Jawaban].No),
+            upper([Kunci Jawaban].se),
+            upper([Kunci Jawaban].wa),
+            upper([Kunci Jawaban].an),
+            upper([Kunci Jawaban].ge),
+            upper([Kunci Jawaban].ra),
+            upper([Kunci Jawaban].zr),
+            upper([Kunci Jawaban].fa),
+            upper([Kunci Jawaban].wu),
+            upper([Kunci Jawaban].me)
+                    from "Input Jawaban" 
+                    Left Join [Kunci Jawaban]
+                    On "Input Jawaban".id_kunci = "Kunci Jawaban".id_kunci
+                    where "Input Jawaban".id_tes = ?"""        
+        print (self.sql_cmd)
+
+        self.cursorexe.execute(self.sql_cmd,[self.values,])
+        self.result = self.cursorexe.fetchall()
+        self.close_db()
+        return self.result
+
     def insert_data(self,values = None):
         self.conn = self.connect_db()
         self.values = values
         self.cursorexe = self.conn.cursor()
-
-        self.sql_cmd = """ INSERT INTO [Input Jawaban] (
-                                TipeInputId,
-                                id,
-                                SE,
-                                WA,
-                                AN,
-                                GE,
-                                RA,
-                                ZR,
-                                FA,
-                                WU,
-                                ME,KSE,KWA,KAN,KGE,KRA,KZR,KFA,KWU,KME
+        self.sql_cmd = """ 
+        INSERT INTO [Input Jawaban] (
+                                [no],
+                                se,
+                                wa,
+                                an,
+                                ge,
+                                ra,
+                                zr,
+                                fa,
+                                wu,
+                                me,
+                                id_tes,
+                                id_kunci
                             )
-                            VALUES ((SELECT TipeInputId  FROM [Tipe Input] WHERE [Jenis Input] = ?),(SELECT id FROM [Data Peserta] WHERE [no tes] = ?),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); """
+                            VALUES (
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?,
+                                ?
+                            );
 
-        self.result = self.cursorexe.executemany(self.sql_cmd,self.values)
+        """
+        self.cursorexe.executemany(self.sql_cmd,self.values)
         self.conn.commit()
         self.close_db()
 
@@ -581,6 +750,27 @@ class InputJawaban(SqliteDB):
         self.result = self.cursorexe.execute(self.sql_cmd,[self.values,]).fetchall()
         self.close_db()
         return self.result
+
+class KunciJawabanGE(SqliteDB):
+
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+        pass
+
+    def query(self , values = None) :
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd ="""
+SELECT id_kunci_ge,
+       [No],
+       upper(replace(Jawaban,' ','')),
+       Nilai
+  FROM [Kunci Jawaban GE];"""
+
+        self.getdatas = self.cursorexe.execute(self.sql_cmd).fetchall() #, [self.values,]).fetchall()
+        self.close_db()
+        return self.getdatas
 
 class TabelNormaPendidikan(SqliteDB):
 
@@ -617,6 +807,15 @@ class TabelNormaPendidikan(SqliteDB):
         self.conn.commit()        
         self.close_db()
 
+class JumlahTesPerUser(SqliteDB):
+
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+    
+    def insert_test(self,*values):
+        # value = no test dan nama test
+        self.values = values
 
 class TabelNormaSendiri(SqliteDB):
 
@@ -1085,7 +1284,6 @@ class JenisNorma(SqliteDB):
         self.cursorexe.execute(self.sql_cmd,[self.value,self.id])
         self.conn.commit()
         self.close_db()
-        # import pdb ; pdb.set_trace()
 
         return True
 
@@ -1148,6 +1346,7 @@ class Peserta(SqliteDB):
         self.parent = parent
         pass
 
+
     def query_select_lj_datapeserta_tipenorma(self,value=None):
         self.value = value
         self.conn = self.connect_db()
@@ -1175,6 +1374,19 @@ class Peserta(SqliteDB):
         getdata = self.cursorexe.execute(self.sql_cmd).fetchall()
         self.close_db
         return getdata
+
+    def query_data_peserta_byid(self,value=None):
+        self.value = value
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT *
+        FROM [Data Peserta];
+        """
+        getdata = self.cursorexe.execute(self.sql_cmd,self.value).fetchone()
+        self.close_db
+        return getdata
+
 
     def query_select_data_peserta(self,value=None):
         self.value = value
@@ -1230,11 +1442,16 @@ class Peserta(SqliteDB):
         return True
        
 
-    def insert_data_peserta(self,values):
+    def insert_data_peserta(self,**values):
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
-        self.values = values
-
+        # dictionary data peserta
+        self.key_dict = values
+        self.values =[]
+        for key,values in self.key_dict.items():
+            self.values.append(values)
+        # import pdb
+        # pdb.set_trace()
         self.sqlcmd = """INSERT INTO [Data Peserta] (
                                 [no tes],
                                 [tanggal tes],
@@ -1260,7 +1477,8 @@ class Peserta(SqliteDB):
         self.close_db()
         return self.rowid
 
-
+    def last_row(self):
+        return self.rowid
 def insert_input_peserta(values):
     conne = connect_db()
     cursorexe = conne.cursor()

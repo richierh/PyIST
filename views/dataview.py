@@ -32,34 +32,31 @@ class RWSWScore(ISTUtama):
         self.parent = parent   
         # self.parent.kelompok_usia
         
-        self.parent.m_textCtrl_nilai_rw_se.SetValue(str(self.parent.input_peserta_rw_sw[0][0]))
-        self.parent.m_textCtrl_nilai_rw_wa.SetValue(str(self.parent.input_peserta_rw_sw[1][0]))
-        self.parent.m_textCtrl_nilai_rw_an.SetValue(str(self.parent.input_peserta_rw_sw[2][0]))
-        self.parent.m_textCtrl_nilai_rw_ge.SetValue(str(self.parent.input_peserta_rw_sw[3][0]))
-        self.parent.m_textCtrl_nilai_rw_me.SetValue(str(self.parent.input_peserta_rw_sw[4][0]))
-        self.parent.m_textCtrl_nilai_rw_ra.SetValue(str(self.parent.input_peserta_rw_sw[5][0]))
-        self.parent.m_textCtrl_nilai_rw_zr.SetValue(str(self.parent.input_peserta_rw_sw[6][0]))
-        self.parent.m_textCtrl_nilai_rw_fa.SetValue(str(self.parent.input_peserta_rw_sw[7][0]))
-        self.parent.m_textCtrl_nilai_rw_wu.SetValue(str(self.parent.input_peserta_rw_sw[8][0]))
+        self.parent.m_textCtrl_nilai_rw_se.SetValue(str(self.parent.rw[0]))
+        self.parent.m_textCtrl_nilai_rw_wa.SetValue(str(self.parent.rw[1]))
+        self.parent.m_textCtrl_nilai_rw_an.SetValue(str(self.parent.rw[2]))
+        self.parent.m_textCtrl_nilai_rw_ge.SetValue(str(self.parent.rw[3]))
+        self.parent.m_textCtrl_nilai_rw_me.SetValue(str(self.parent.rw[4]))
+        self.parent.m_textCtrl_nilai_rw_ra.SetValue(str(self.parent.rw[5]))
+        self.parent.m_textCtrl_nilai_rw_zr.SetValue(str(self.parent.rw[6]))
+        self.parent.m_textCtrl_nilai_rw_fa.SetValue(str(self.parent.rw[7]))
+        self.parent.m_textCtrl_nilai_rw_wu.SetValue(str(self.parent.rw[8]))
         self.parent.sum = []
 
-        for data in self.parent.input_peserta_rw_sw:
-            self.parent.sum.append(data[0])
+        self.parent.m_textCtrl_nilai_rw_jumlah.SetValue(str(sum(self.parent.rw)))
 
-        self.parent.m_textCtrl_nilai_rw_jumlah.SetValue(str(sum(self.parent.sum)))
+        self.parent.m_textCtrl_nilai_sw_se.SetValue(str(self.parent.sw[0]))
+        self.parent.m_textCtrl_nilai_sw_wa.SetValue(str(self.parent.sw[1]))
+        self.parent.m_textCtrl_nilai_sw_an.SetValue(str(self.parent.sw[2]))
+        self.parent.m_textCtrl_nilai_sw_ge.SetValue(str(self.parent.sw[3]))
+        self.parent.m_textCtrl_nilai_sw_me.SetValue(str(self.parent.sw[4]))
+        self.parent.m_textCtrl_nilai_sw_ra.SetValue(str(self.parent.sw[5]))
+        self.parent.m_textCtrl_nilai_sw_zr.SetValue(str(self.parent.sw[6]))
+        self.parent.m_textCtrl_nilai_sw_fa.SetValue(str(self.parent.sw[7]))
+        self.parent.m_textCtrl_nilai_sw_wu.SetValue(str(self.parent.sw[8]))
 
-        self.parent.m_textCtrl_nilai_sw_se.SetValue(str(self.parent.input_peserta_rw_sw[0][1]))
-        self.parent.m_textCtrl_nilai_sw_wa.SetValue(str(self.parent.input_peserta_rw_sw[1][1]))
-        self.parent.m_textCtrl_nilai_sw_an.SetValue(str(self.parent.input_peserta_rw_sw[2][1]))
-        self.parent.m_textCtrl_nilai_sw_ge.SetValue(str(self.parent.input_peserta_rw_sw[3][1]))
-        self.parent.m_textCtrl_nilai_sw_me.SetValue(str(self.parent.input_peserta_rw_sw[4][1]))
-        self.parent.m_textCtrl_nilai_sw_ra.SetValue(str(self.parent.input_peserta_rw_sw[5][1]))
-        self.parent.m_textCtrl_nilai_sw_zr.SetValue(str(self.parent.input_peserta_rw_sw[6][1]))
-        self.parent.m_textCtrl_nilai_sw_fa.SetValue(str(self.parent.input_peserta_rw_sw[7][1]))
-        self.parent.m_textCtrl_nilai_sw_wu.SetValue(str(self.parent.input_peserta_rw_sw[8][1]))
-
-        self.parent.m_textCtrl_nilai_total_sw.SetValue(str(self.parent.geasamt))
-        self.parent.m_textCtrl_nilai_IQ.SetValue(str(self.parent.iq))
+        self.parent.m_textCtrl_nilai_total_sw.SetValue(str(self.parent.nilai_geasamt))
+        self.parent.m_textCtrl_nilai_IQ.SetValue(str(self.parent.nilai_iq))
 
         print ("tes")
 

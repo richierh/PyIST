@@ -30,16 +30,11 @@ class GE():
     self.input_jwbn = self.input_jwbn.to_records(index=False).tolist()
     # print(self.input_jwbn)
     # print(self.read_pd2)
-    self.read = self.read_pd2[(self.read_pd2[2]=="BUNffGA")&(self.read_pd2[1]==1)]
-    self.read.empty
-    print(self.read.empty)
-
-
     # print (self.read_pd2.loc['ALATINDERA',:])
 
     self.dataku = []
     for data in self.input_jwbn:
-      self.read = self.read_pd2[(self.read_pd2[2]==data[1])&(self.read_pd2[1]==int(data[0]))]
+      self.read = self.read_pd2[(self.read_pd2[2]==data[1])&(self.read_pd2[1]==data[0])]
 
       if self.read.empty == True:
         pass
@@ -50,11 +45,16 @@ class GE():
         self.dataku.append(self.read)
     # print(self.dataku)
     self.dataku = [data for x in self.dataku for data in x]
-
  
-    self.datanp = np.array(self.dataku)
-    self.datanp=self.datanp[:,3].astype(int)
 
+    self.datanp = np.array(self.dataku)
+    if not self.dataku:
+      self.dataku.append(0)
+      self.datanp = np.array(self.dataku).astype(int)
+      pass
+    else:
+      self.datanp=self.datanp[:,3].astype(int)
+    
   
   def result(self):
     self.result = np.sum(self.datanp)

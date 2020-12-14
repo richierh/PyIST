@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version 3.9.0 Aug 27 2020)
+## Python code generated with wxFormBuilder (version 3.9.0 Nov 24 2020)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
 ###########################################################################
 
-from views.grafik_wx import GrafikRWSW
 import wx
 import wx.xrc
 import wx.adv
@@ -234,7 +233,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel1.SetSizer( bSizer22 )
 		self.m_panel1.Layout()
 		bSizer22.Fit( self.m_panel1 )
-		self.m_simplebook1.AddPage( self.m_panel1, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel1, u"Halaman Biodata", False )
 		self.m_panel2 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer20 = wx.BoxSizer( wx.VERTICAL )
 
@@ -268,7 +267,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel2.SetSizer( bSizer20 )
 		self.m_panel2.Layout()
 		bSizer20.Fit( self.m_panel2 )
-		self.m_simplebook1.AddPage( self.m_panel2, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel2, u"Pilihan Cara Input", False )
 		self.m_panel3 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer21 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2001,7 +2000,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel3.SetSizer( bSizer21 )
 		self.m_panel3.Layout()
 		bSizer21.Fit( self.m_panel3 )
-		self.m_simplebook1.AddPage( self.m_panel3, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel3, u"Jenis Input", False )
 		self.m_panel221 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer321 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2011,7 +2010,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_button = wx.Button( self.m_panel221, wx.ID_ANY, u"Norma Usia", wx.DefaultPosition, wx.Size( 250,75 ), 0 )
 		bSizer321.Add( self.m_button, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
-		self.m_button20 = wx.Button( self.m_panel221, wx.ID_ANY, u"Norma Pekerjaan", wx.DefaultPosition, wx.Size( 250,75 ), 0 )
+		self.m_button20 = wx.Button( self.m_panel221, wx.ID_ANY, u"Norma Pendidikan", wx.DefaultPosition, wx.Size( 250,75 ), 0 )
 		bSizer321.Add( self.m_button20, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		self.m_panel35 = wx.Panel( self.m_panel221, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
@@ -2072,7 +2071,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel221.SetSizer( bSizer321 )
 		self.m_panel221.Layout()
 		bSizer321.Fit( self.m_panel221 )
-		self.m_simplebook1.AddPage( self.m_panel221, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel221, u"Pilih Norma", False )
 		self.m_panel6 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer9 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2095,13 +2094,13 @@ class ISTUtama ( wx.Frame ):
 		bSizer9.Add( fgSizer161, 0, 0, 5 )
 
 		self.m_panel18 = wx.Panel( self.m_panel6, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		bSizer10 = wx.BoxSizer( wx.VERTICAL )
+		bSizer10 = wx.BoxSizer( wx.HORIZONTAL )
 
 		self.m_scrolledWindow7 = wx.ScrolledWindow( self.m_panel18, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
 		self.m_scrolledWindow7.SetScrollRate( 5, 5 )
 		bSizer32 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.m_panel61 = GrafikRWSW( self.m_scrolledWindow7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_panel61 = wx.Panel( self.m_scrolledWindow7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer32.Add( self.m_panel61, 2, wx.EXPAND |wx.ALL, 5 )
 
 		fgSizer17 = wx.FlexGridSizer( 12, 3, 0, 0 )
@@ -2148,10 +2147,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText208, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_an = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_an = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_an, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_an = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_an = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_an, 0, wx.ALL, 5 )
 
 		self.m_staticText209 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"GE", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2159,10 +2158,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText209, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_ge = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_ge = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_ge, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_ge = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_ge = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_ge, 0, wx.ALL, 5 )
 
 		self.m_staticText210 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"ME", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2170,10 +2169,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText210, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_me = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_me = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_me, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_me = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_me = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_me, 0, wx.ALL, 5 )
 
 		self.m_staticText211 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"RA", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2181,10 +2180,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText211, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_ra = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_ra = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_ra, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_ra = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_ra = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_ra, 0, wx.ALL, 5 )
 
 		self.m_staticText212 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"ZR", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2192,10 +2191,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText212, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_zr = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_zr = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_zr, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_zr = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_zr = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_zr, 0, wx.ALL, 5 )
 
 		self.m_staticText213 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"FA", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2203,10 +2202,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText213, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_fa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_fa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_fa, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_fa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_fa = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_fa, 0, wx.ALL, 5 )
 
 		self.m_staticText214 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"WU", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2214,10 +2213,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText214, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_wu = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_wu = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_wu, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_sw_wu = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_sw_wu = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_sw_wu, 0, wx.ALL, 5 )
 
 		self.m_staticText215 = wx.StaticText( self.m_scrolledWindow7, wx.ID_ANY, u"Jumlah", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -2225,10 +2224,10 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText215, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.m_textCtrl_nilai_rw_jumlah = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_rw_jumlah = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_rw_jumlah, 0, wx.ALL, 5 )
 
-		self.m_textCtrl_nilai_total_sw = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_total_sw = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_total_sw, 0, wx.ALL, 5 )
 
 
@@ -2239,7 +2238,7 @@ class ISTUtama ( wx.Frame ):
 
 		fgSizer17.Add( self.m_staticText216, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
 
-		self.m_textCtrl_nilai_IQ = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_textCtrl_nilai_IQ = wx.TextCtrl( self.m_scrolledWindow7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_CENTER )
 		fgSizer17.Add( self.m_textCtrl_nilai_IQ, 0, wx.ALL, 5 )
 
 
@@ -2261,7 +2260,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel6.SetSizer( bSizer9 )
 		self.m_panel6.Layout()
 		bSizer9.Fit( self.m_panel6 )
-		self.m_simplebook1.AddPage( self.m_panel6, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel6, u"Hasil Norma", False )
 		self.m_panel7 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer12 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2278,31 +2277,16 @@ class ISTUtama ( wx.Frame ):
 
 		bSizer12.Add( ( 0, 25), 0, 0, 5 )
 
-		self.m_staticText_berpikir = wx.StaticText( self.m_panel7, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText_berpikir.Wrap( -1 )
-
-		bSizer12.Add( self.m_staticText_berpikir, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
-
 		self.m_panel22 = wx.Panel( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer12.Add( self.m_panel22, 1, wx.EXPAND |wx.ALL, 5 )
 
 
 		bSizer12.Add( ( 0, 0), 1, wx.EXPAND, 5 )
 
-		self.m_listCtrl1 = wx.ListCtrl( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,225 ), wx.LC_REPORT )
-		self.m_listCtrl1.Hide()
-
-		bSizer12.Add( self.m_listCtrl1, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
-
-		self.m_listCtrl2 = wx.ListCtrl( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,50 ), wx.LC_REPORT )
-		self.m_listCtrl2.Hide()
-
-		bSizer12.Add( self.m_listCtrl2, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
-
 		self.m_staticText217 = wx.StaticText( self.m_panel7, wx.ID_ANY, u"Keunggulan akan terisi apabila subjek mendapat skor SW lebih dari 100 pada beberapa subtest", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText217.Wrap( -1 )
 
-		self.m_staticText217.Hide()
+		self.m_staticText217.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_WINDOWTEXT ) )
 
 		bSizer12.Add( self.m_staticText217, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
@@ -2310,7 +2294,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel7.SetSizer( bSizer12 )
 		self.m_panel7.Layout()
 		bSizer12.Fit( self.m_panel7 )
-		self.m_simplebook1.AddPage( self.m_panel7, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel7, u"Hasil Analisis IST", False )
 		self.m_panel9 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer14 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2348,7 +2332,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel9.SetSizer( bSizer14 )
 		self.m_panel9.Layout()
 		bSizer14.Fit( self.m_panel9 )
-		self.m_simplebook1.AddPage( self.m_panel9, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel9, u"Penjurusan", False )
 		self.m_panel10 = wx.Panel( self.m_simplebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer16 = wx.BoxSizer( wx.VERTICAL )
 
@@ -2395,7 +2379,7 @@ class ISTUtama ( wx.Frame ):
 		self.m_panel10.SetSizer( bSizer16 )
 		self.m_panel10.Layout()
 		bSizer16.Fit( self.m_panel10 )
-		self.m_simplebook1.AddPage( self.m_panel10, u"a page", False )
+		self.m_simplebook1.AddPage( self.m_panel10, u"Halaman Terakhir", False )
 
 		bSizer3.Add( self.m_simplebook1, 1, wx.EXPAND |wx.ALL, 5 )
 
@@ -2457,6 +2441,7 @@ class ISTUtama ( wx.Frame ):
 		self.Centre( wx.BOTH )
 
 		# Connect Events
+		self.m_textCtrl_no_tes.Bind( wx.EVT_TEXT, self.requiredclick )
 		self.m_textCtrl_nama.Bind( wx.EVT_LEFT_UP, self.m_textCtrl_namaOnLeftUp )
 		self.m_input_manual.Bind( wx.EVT_BUTTON, self.m_input_manualOnButtonClick )
 		self.m_input_total.Bind( wx.EVT_BUTTON, self.m_input_totalOnButtonClick )
@@ -2503,6 +2488,9 @@ class ISTUtama ( wx.Frame ):
 
 
 	# Virtual event handlers, overide them in your derived class
+	def requiredclick( self, event ):
+		event.Skip()
+
 	def m_textCtrl_namaOnLeftUp( self, event ):
 		event.Skip()
 
@@ -2663,7 +2651,7 @@ class Norma ( wx.Frame ):
 
 		bSizer34.Add( fgSizer21, 0, wx.EXPAND, 5 )
 
-		self.text_norma_pendidikan = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Pendidikan", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.text_norma_pendidikan = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Usia", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.text_norma_pendidikan.Wrap( -1 )
 
 		self.text_norma_pendidikan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
@@ -2671,14 +2659,14 @@ class Norma ( wx.Frame ):
 		bSizer34.Add( self.text_norma_pendidikan, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 		self.m_dataViewListCtrl8 = wx.dataview.DataViewListCtrl( self.m_panel23, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_dataViewListColumn45 = self.m_dataViewListCtrl8.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn46 = self.m_dataViewListCtrl8.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
+		self.m_dataViewListColumn45 = self.m_dataViewListCtrl8.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn46 = self.m_dataViewListCtrl8.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
 		self.m_dataViewListColumn47 = self.m_dataViewListCtrl8.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
-		self.m_dataViewListColumn50 = self.m_dataViewListCtrl8.AppendTextColumn( u"Usia", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
-		self.m_dataViewListColumn49 = self.m_dataViewListCtrl8.AppendTextColumn( u"Keterangan", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
+		self.m_dataViewListColumn50 = self.m_dataViewListCtrl8.AppendTextColumn( u"Usia", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
+		self.m_dataViewListColumn49 = self.m_dataViewListCtrl8.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_REORDERABLE|wx.dataview.DATAVIEW_COL_RESIZABLE|wx.dataview.DATAVIEW_COL_SORTABLE )
 		bSizer34.Add( self.m_dataViewListCtrl8, 3, wx.ALL|wx.EXPAND, 5 )
 
-		self.text_norma_pekerjaan = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Pekerjaan", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.text_norma_pekerjaan = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Pendidikan", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.text_norma_pekerjaan.Wrap( -1 )
 
 		self.text_norma_pekerjaan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
@@ -2689,7 +2677,7 @@ class Norma ( wx.Frame ):
 		self.m_dataViewListColumn42 = self.m_dataViewListCtrl9.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_HIDDEN|wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn43 = self.m_dataViewListCtrl9.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn44 = self.m_dataViewListCtrl9.AppendTextColumn( u"Nama Norma", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn48 = self.m_dataViewListCtrl9.AppendTextColumn( u"Keterangan", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn48 = self.m_dataViewListCtrl9.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer34.Add( self.m_dataViewListCtrl9, 1, wx.ALL|wx.EXPAND, 5 )
 
 		self.text_norma_sendiri = wx.StaticText( self.m_panel23, wx.ID_ANY, u"Norma Sendiri", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -3104,16 +3092,16 @@ class TabelNorma ( wx.Frame ):
 
 		self.m_dataViewListCtrl4 = wx.dataview.DataViewListCtrl( self.m_panel24, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.No = self.m_dataViewListCtrl4.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 50, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn12 = self.m_dataViewListCtrl4.AppendTextColumn( u"RS", wx.DATAVIEW_CELL_EDITABLE, 75, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn13 = self.m_dataViewListCtrl4.AppendTextColumn( u"SE", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn14 = self.m_dataViewListCtrl4.AppendTextColumn( u"WA", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn15 = self.m_dataViewListCtrl4.AppendTextColumn( u"AN", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn16 = self.m_dataViewListCtrl4.AppendTextColumn( u"GE", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn17 = self.m_dataViewListCtrl4.AppendTextColumn( u"RA", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn18 = self.m_dataViewListCtrl4.AppendTextColumn( u"ZR", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn19 = self.m_dataViewListCtrl4.AppendTextColumn( u"FA", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn20 = self.m_dataViewListCtrl4.AppendTextColumn( u"WU", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
-		self.m_dataViewListColumn21 = self.m_dataViewListCtrl4.AppendTextColumn( u"ME", wx.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn12 = self.m_dataViewListCtrl4.AppendTextColumn( u"RS", wx.dataview.DATAVIEW_CELL_EDITABLE, 75, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn13 = self.m_dataViewListCtrl4.AppendTextColumn( u"SE", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_CENTER|wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn14 = self.m_dataViewListCtrl4.AppendTextColumn( u"WA", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn15 = self.m_dataViewListCtrl4.AppendTextColumn( u"AN", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn16 = self.m_dataViewListCtrl4.AppendTextColumn( u"GE", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn21 = self.m_dataViewListCtrl4.AppendTextColumn( u"ME", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn17 = self.m_dataViewListCtrl4.AppendTextColumn( u"RA", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn18 = self.m_dataViewListCtrl4.AppendTextColumn( u"ZR", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn19 = self.m_dataViewListCtrl4.AppendTextColumn( u"FA", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn20 = self.m_dataViewListCtrl4.AppendTextColumn( u"WU", wx.dataview.DATAVIEW_CELL_EDITABLE, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer36.Add( self.m_dataViewListCtrl4, 1, wx.ALL|wx.EXPAND, 5 )
 
 
@@ -3805,6 +3793,7 @@ class Biodata ( wx.Frame ):
 
 		# Connect Events
 		self.m_textCtrl_nama.Bind( wx.EVT_LEFT_UP, self.m_textCtrl_namaOnLeftUp )
+		self.m_textCtrl_no_tes1.Bind( wx.EVT_TEXT, self.requiredtext )
 		self.m_textCtrl_nama1.Bind( wx.EVT_LEFT_UP, self.m_textCtrl_namaOnLeftUp )
 		self.m_lanjut.Bind( wx.EVT_BUTTON, self.m_lanjut_biodataOnClick )
 		self.Tutup.Bind( wx.EVT_BUTTON, self.m_tutup_biodata )
@@ -3815,6 +3804,9 @@ class Biodata ( wx.Frame ):
 
 	# Virtual event handlers, overide them in your derived class
 	def m_textCtrl_namaOnLeftUp( self, event ):
+		event.Skip()
+
+	def requiredtext( self, event ):
 		event.Skip()
 
 
@@ -3971,6 +3963,97 @@ class PilihInput ( wx.Frame ):
 		event.Skip()
 
 	def pilih_input_total( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class GridViewInputManual
+###########################################################################
+
+class GridViewInputManual ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Input Manual", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer63 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_panel41 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer64 = wx.BoxSizer( wx.VERTICAL )
+
+		self.m_grid2 = wx.grid.Grid( self.m_panel41, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+
+		# Grid
+		self.m_grid2.CreateGrid( 20, 18 )
+		self.m_grid2.EnableEditing( True )
+		self.m_grid2.EnableGridLines( True )
+		self.m_grid2.EnableDragGridSize( False )
+		self.m_grid2.SetMargins( 0, 0 )
+
+		# Columns
+		self.m_grid2.SetColSize( 0, 30 )
+		self.m_grid2.SetColSize( 1, 80 )
+		self.m_grid2.SetColSize( 2, 30 )
+		self.m_grid2.SetColSize( 3, 80 )
+		self.m_grid2.SetColSize( 4, 30 )
+		self.m_grid2.SetColSize( 5, 80 )
+		self.m_grid2.SetColSize( 6, 30 )
+		self.m_grid2.SetColSize( 7, 80 )
+		self.m_grid2.SetColSize( 8, 30 )
+		self.m_grid2.SetColSize( 9, 80 )
+		self.m_grid2.SetColSize( 10, 30 )
+		self.m_grid2.SetColSize( 11, 80 )
+		self.m_grid2.SetColSize( 12, 30 )
+		self.m_grid2.SetColSize( 13, 80 )
+		self.m_grid2.SetColSize( 14, 30 )
+		self.m_grid2.SetColSize( 15, 80 )
+		self.m_grid2.SetColSize( 16, 30 )
+		self.m_grid2.SetColSize( 17, 80 )
+		self.m_grid2.EnableDragColMove( False )
+		self.m_grid2.EnableDragColSize( False )
+		self.m_grid2.SetColLabelSize( 30 )
+		self.m_grid2.SetColLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Rows
+		self.m_grid2.EnableDragRowSize( False )
+		self.m_grid2.SetRowLabelSize( 1 )
+		self.m_grid2.SetRowLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Label Appearance
+		self.m_grid2.SetLabelFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
+
+		# Cell Defaults
+		self.m_grid2.SetDefaultCellFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
+		self.m_grid2.SetDefaultCellAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+		self.m_grid2.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
+
+		bSizer64.Add( self.m_grid2, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+		self.gridOk = wx.Button( self.m_panel41, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer64.Add( self.gridOk, 0, wx.ALL, 5 )
+
+
+		self.m_panel41.SetSizer( bSizer64 )
+		self.m_panel41.Layout()
+		bSizer64.Fit( self.m_panel41 )
+		bSizer63.Add( self.m_panel41, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer63 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.gridOk.Bind( wx.EVT_BUTTON, self.gridOkOnButtonClick )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def gridOkOnButtonClick( self, event ):
 		event.Skip()
 
 

@@ -68,7 +68,11 @@ class RequiredField(wx.Frame):
 
     # Virtual event handlers, overide them in your derived class
     def m_button1OnButtonClick( self, event ):
-        self.parent.m_selanjutnya.Enable()
+        try:
+            self.parent.m_selanjutnya.Enable()
+        except:
+            self.parent.m_lanjut.Enable()
+        # if self.parent.m_selanjutnya.
         self.Close()
         event.Skip()
 

@@ -1,6 +1,7 @@
 from numpy import arange, sin, pi
 import numpy as np
 import matplotlib
+import pandas as pd
 matplotlib.use('WXAgg')
 
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
@@ -15,11 +16,11 @@ class GrafikLayout():
     def __init__(self, parent):
         # super().__init__(parent)
         self.parent = parent
+        # self.canvas = FigureCanvas(self, -1, self.figure)
         self.figure = Figure()
         self.axes = self.figure.add_subplot(121)
         self.axes2 = self.figure.add_subplot(122)
         self.canvas = FigureCanvas(self.parent.m_panel61, -1, self.figure)
-        # self.canvas = FigureCanvas(self, -1, self.figure)
 
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.sizer.Add(self.canvas, 3, wx.LEFT | wx.TOP | wx.GROW)
@@ -27,39 +28,56 @@ class GrafikLayout():
         self.parent.m_panel61.SetSizer(self.sizer)
         self.parent.m_panel61.Layout()
         self.parent.m_panel18.Layout()
+ 
+
         # self.SetSizer(self.sizer)
         # self.Fit()
 
     def draw(self, nilai_rw_sw, rw=None, sw=None):
         self.rw_sw = nilai_rw_sw
-        self.rw = []
-        self.sw = []
-        print (self.rw_sw)
-        for data in self.rw_sw:
-            self.rw.append(data[0])
-            self.sw.append(data[1])
-
-        # self.rw = rw
-        # self.sw = sw
-        # print (t)
-        x = ["SE", "WA", "AN", "GE", "RA", "ZR", "FA", "WU", "ME"]
-        self.x = arange(len(x))
+        self.np = np.array(self.rw_sw)
+        self.pd = pd.DataFrame(self.np)
+        self.rw = self.pd[0].astype(int).tolist()
+        self.sw = self.pd[1].astype(int).tolist()
+        sumbu_x = ["SE", "WA", "AN", "GE", "RA", "ZR", "FA", "WU", "ME"]
+        self.x = arange(len(sumbu_x))
         
-        # self.rw = [1,5,7,5,2,6,8,2,1]
-        self.axes.plot(x, self.rw)
+        self.axes.plot(sumbu_x, self.rw)
+        for x,y in zip(sumbu_x,self.rw):
+
+            label = "{}".format(y)
+
+            self.axes.annotate(label, # this is the text
+                        (x,y), # this is the point to label
+                        textcoords="offset points", # how to position the text
+                        xytext=(0,10), # distance from text to points (x,y)
+                        ha='center')
+
+
         self.axes.set_xticks(self.x)
         self.axes.set_ylim(bottom=0, top=20)
         
         self.axes.set_title("Rw Score")
 
-        # self.sw = [100,75,87,95,92,96,98,82,91]
 
-        self.axes2.plot(x, self.sw)
+        self.axes2.plot(sumbu_x, self.sw)
+
+        for x,y in zip(sumbu_x,self.sw):
+
+            label = "{}".format(y)
+
+            self.axes2.annotate(label, # this is the text
+                        (x,y), # this is the point to label
+                        textcoords="offset points", # how to position the text
+                        xytext=(0,10), # distance from text to points (x,y)
+                        ha='center')
+
         self.axes2.set_xticks(self.x)
         self.axes2.set_ylim(bottom=0, top=150)
 
         self.axes2.set_title("Sw Score")
-
+        
+    
 
 class GrafikHasil():
 
@@ -88,19 +106,20 @@ class GrafikHasil():
         # self.SetSizer(self.sizer)
         # self.Fit()
 
-    def draw(self, nilai_grafik=None):
-        self.grafik = nilai_grafik
-        # print (t)
-        y = ["Kemampuan\nberhitung", "Daya ingat\ndan konsentrasi", "Kreatifitas",
-            "Ketelitian", "Judgement", "Daya\nanalisis", "Pengembalian\nkeputusan"]
-        self.y = arange(len(y))
-        x = [130, 136, 79, 125, 128, 146, 128]
-        self.rects = self.axes.barh(y, x, color='green')
-        # self.axes.invert_yaxis()
-        self.axes.set_xlim(left=50, right=150)
-        self.axes.set_yticks(self.y)
-        self.axes.set_title("PROFIL KEUNGGULAN")
-        self.autolabel()
+    # def draw(self, nilai_grafik=None):
+    #     self.grafik = nilai_grafik
+    #     # print (t)
+    #     y = ["Kemampuan\nberhitung", "Daya ingat\ndan konsentrasi", "Kreatifitas",
+    #         "Ketelitian", "Judgement", "Daya\nanalisis", "Pengembalian\nkeputusan"]
+    #     self.y = arange(len(y))
+    #     x = [130, 136, 79, 125, 128, 146, 128]
+    #     self.rects = self.axes.barh(y, x, color='green')
+    #     # self.axes.invert_yaxis()
+    #     self.axes.set_xlim(left=50, right=150)
+    #     self.axes.set_yticks(self.y)
+    #     self.axes.set_title("PROFIL KEUNGGULAN")
+    #     self.autolabel()
+        
 
     def autolabel(self):
 

@@ -195,7 +195,7 @@
 							<underlined>0</underlined>
 							<face>Tw Cen MT</face>
 						</font>
-						<label>Norma Pendidikan</label>
+						<label>Norma Usia</label>
 						<wrap>-1</wrap>
 					</object>
 				</object>
@@ -217,7 +217,7 @@
 							<underlined>0</underlined>
 							<face>Tw Cen MT</face>
 						</font>
-						<label>Norma Pekerjaan</label>
+						<label>Norma Pendidikan</label>
 						<wrap>-1</wrap>
 					</object>
 				</object>
@@ -1929,6 +1929,45 @@
 					<auth_needed>0</auth_needed>
 					<markup>0</markup>
 					<bitmap />
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxFrame" name="GridViewInputManual">
+		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
+		<size>500,300</size>
+		<title>Input Manual</title>
+		<centered>1</centered>
+		<aui_managed>0</aui_managed>
+		<object class="wxPanel" name="m_panel41">
+			<style>wxTAB_TRAVERSAL</style>
+			<object class="wxBoxSizer">
+				<orient>wxVERTICAL</orient>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+					<border>5</border>
+					<object class="wxGrid" name="m_grid2">
+						<font>
+							<size>14</size>
+							<style>normal</style>
+							<weight>normal</weight>
+							<underlined>0</underlined>
+							<face>Tw Cen MT</face>
+						</font>
+					</object>
+				</object>
+				<object class="sizeritem">
+					<option>0</option>
+					<flag>wxALL</flag>
+					<border>5</border>
+					<object class="wxButton" name="gridOk">
+						<label>MyButton</label>
+						<default>0</default>
+						<auth_needed>0</auth_needed>
+						<markup>0</markup>
+						<bitmap />
+					</object>
 				</object>
 			</object>
 		</object>

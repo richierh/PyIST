@@ -56,28 +56,28 @@ def close():
     start.Show()
     return None
 
+openWindows()
+# if platform.system() == "Windows":
+#     my_file = Path("C:\\ProgramData\\4251.txt")
+#     if my_file.is_file():
+#         openWindows()
+#     else :
+#         KeyVerification = VerifyKey("2")
+#         if KeyVerification.Verify() == "1":
+#             openWindows()
+#         else :
+#             close()
 
-if platform.system() == "Windows":
-    my_file = Path("C:\\ProgramData\\4251.txt")
-    if my_file.is_file():
-        openWindows()
-    else :
-        KeyVerification = VerifyKey("2")
-        if KeyVerification.Verify() == "1":
-            openWindows()
-        else :
-            close()
-
-elif platform.system() == "Linux" :
-    print (platform.system())
-    my_file = Path.home() / ".4251"
-    print (my_file)
-    if my_file.is_file():
-        print ("file ada")
-        openWindows()
-    else :
-        KeyVerification = VerifyKey("2")
-        if KeyVerification.Verify() == "1":
-            openWindows()
-        else :
-            close()
+# elif platform.system() == "Linux" :
+#     print (platform.system())
+#     my_file = Path.home() / ".4251"
+#     print (my_file)
+#     if my_file.is_file():
+#         print ("file ada")
+#         openWindows()
+#     else :
+#         KeyVerification = VerifyKey("2")
+#         if KeyVerification.Verify() == "1":
+#             openWindows()
+#         else :
+#             close()

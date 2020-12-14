@@ -6,7 +6,8 @@ Created on Feb 15, 2019
 import wx
 import pathlib
 from shutil import copyfile
-
+import numpy as np 
+import pandas as pd
 from controllers.grafik_tabel import *
 from controllers.halaman_event import HalamanEventControl
 from views.menubar_tentang import TentangAplikasiInherited
@@ -40,11 +41,13 @@ class BuatBiodata(Biodata):
     def __init__(self,parent):
         super().__init__(parent)
         self.parent = parent
+        self.data_peserta = self.parent.parent.data_peserta
+        self.connect_db = self.parent.parent.connect_db
 
         self.Tpendidikan_terakhir.AppendItems(["SD","SMP","SMA","D3","S1","S2","S3"])    
         self.Tpendidikan_terakhir.SetSelection(4)
 
-
+        self.m_lanjut.Disable()
         self.tanggal_tes.Show()
         self.tanggal_lahir.Show()
         self.usia.Show()
@@ -59,35 +62,57 @@ class BuatBiodata(Biodata):
         self.m_textCtrl_pendidikan_terakhir1.Hide()
         
 
+    def requiredtext(self,event):
+
+        if self.m_textCtrl_no_tes1.GetValue()=="":
+            self.m_lanjut.Disable()
+        else :
+            self.m_lanjut.Enable()
 
     def m_lanjut_biodataOnClick(self,event):
 
-        self.datapeserta = [self.m_textCtrl_no_tes1.GetValue(),
-        self.tanggal_tes.GetValue().Format("%d/%m/%Y"),
-        self.m_textCtrl_nama1.GetValue(),
-        self.jenis_kelamin.GetStringSelection(),
-        self.tanggal_lahir.GetValue().Format("%d/%m/%Y"),
-        self.m_textCtrl_usia1.GetValue(),
-        self.m_textCtrl_asal_sekolah_universitas.GetValue(),
-        self.Tpendidikan_terakhir.GetStringSelection(),
-        self.m_textCtrl_jurusan.GetValue(),
-        self.m_textCtrl_posisi_pekerjaan.GetValue(),
-        self.m_textCtrl_perusahaan.GetValue(),
-        self.m_textCtrl_keterangan.GetValue(),
-        1]
+        if self.m_textCtrl_no_tes1.GetValue() == "":
+            from views.required_field import RequiredField
+            self.buka_required_not_complete = RequiredField(self)
+            self.buka_required_not_complete.Show()
+            self.m_lanjut.Disable()
+            self.Tutup.Disable()
 
-        self.bio = self.parent.data_peserta.insert_data_peserta(self.datapeserta)
-        self.data_peserta = Peserta(self.parent.parent.connect_db)
-        self.data_list =[]
-        self.parent.m_dataViewListCtrl3.DeleteAllItems()
-        for data in self.parent.data_peserta.query_data_peserta():
-            index =  self.parent.data_peserta.query_data_peserta().index(data)+1
-            self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
-        for data in self.data_list:
-            self.parent.m_dataViewListCtrl3.AppendItem(data)
-        # Buka jendela input kunci jawaban 
-        self.buka_input = PilihInputInherited(self)
-        self.buka_input.Show()
+        else :
+            self.datapeserta = {"No Tes":self.m_textCtrl_no_tes1.GetValue(),
+            "Tanggal Tes":self.tanggal_tes.GetValue().Format("%d/%m/%Y"),
+            "Nama":self.m_textCtrl_nama1.GetValue(),
+            "Jenis Kelamin":self.jenis_kelamin.GetStringSelection(),
+            "Tanggal Lahir":self.tanggal_lahir.GetValue().Format("%d/%m/%Y"),
+            "Usia":self.m_textCtrl_usia1.GetValue(),
+            "Asal Sekolah":self.m_textCtrl_asal_sekolah_universitas.GetValue(),
+            "Pendidikan Terakhir":self.Tpendidikan_terakhir.GetStringSelection(),
+            "Jurusan":self.m_textCtrl_jurusan.GetValue(),
+            "Posisi Pekerjaan":self.m_textCtrl_posisi_pekerjaan.GetValue(),
+            "Perusahaan":self.m_textCtrl_perusahaan.GetValue(),
+            "Keterangan":self.m_textCtrl_keterangan.GetValue()}
+            from controllers.ISTISTUtama import GridViewInherited
+            self.buka_input_manual = GridViewInherited(self)
+            self.buka_input_manual.Maximize()
+            self.buka_input_manual.Show()
+            self.data_input_manual = self.buka_input_manual.getdata()
+            self.data_input_manual_np = np.array(self.data_input_manual)
+            self.data_input_manual_pd = pd.DataFrame(self.data_input_manual_np)
+            import pdb
+            pdb.set_trace()
+
+            # self.bio = self.data_peserta.insert_data_peserta(self.datapeserta)
+            # self.data_peserta = Peserta(self.connect_db)
+            # self.data_list =[]
+            # self.parent.m_dataViewListCtrl3.DeleteAllItems()
+            # for data in self.parent.data_peserta.query_data_peserta():
+            #     index =  self.parent.data_peserta.query_data_peserta().index(data)+1
+            #     self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
+            # for data in self.data_list:
+            #     self.parent.m_dataViewListCtrl3.AppendItem(data)
+            # # Buka jendela input kunci jawaban 
+            # self.buka_input = PilihInputInherited(self)
+            # self.buka_input.Show()
         pass
 
     def m_tutup_biodata(self,event):

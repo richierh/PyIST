@@ -3,7 +3,7 @@
 '''
 Created on May 4, 2019
 
-@author: cireng
+@author: ciren
 '''
 import sys
 import pathlib
@@ -202,9 +202,6 @@ class SqliteDB(object):
 
         return self.results
 
-
-
-
 class NormaSarjana(SqliteDB):
 
     def __init__(self, parent):
@@ -225,10 +222,6 @@ class NormaSarjana(SqliteDB):
         getdata = self.cursorexe.execute(self.sql_cmd, self.value).fetchone()
         self.close_db()
         return getdata
-
-
-
-
 
 class NormaSendiri(SqliteDB):
 
@@ -377,7 +370,6 @@ FROM norma_sendiri ORDER BY id_norma DESC LIMIT 1
         self.close_db()
         return True
 
-
 class KonversiGE(SqliteDB):
 
     def __init__(self, parent):
@@ -408,7 +400,6 @@ class KonversiGE(SqliteDB):
 
         print(getdatas)
         return getdatas
-
 
 class TabelJawaban(SqliteDB):
 
@@ -581,6 +572,126 @@ class NoTes(SqliteDB):
         self.conn.commit()
         self.close_db()
 
+class Usia(SqliteDB):
+
+    def __init__(self,parent = None):
+        super().__init__(parent)
+        self.parent = parent
+
+    def query(self,usia):
+        self.conn=self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.usia=str(usia)
+        self.sql_cmd ="""
+        SELECT *
+        FROM [Usia]
+        where usia=?;
+        """
+        self.cursorexe.execute(self.sql_cmd,[self.usia,])
+        self.result = self.cursorexe.fetchone()
+        self.close_db()
+        return self.result
+
+class NilaiNorma(SqliteDB):
+
+    def __init__(self,parent=None):
+        super().__init__(parent)
+        self.parent = parent
+
+    def query_by_norma_id(self,values):
+        self.conn=self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.values=values
+
+        self.sql_cmd ="""
+        SELECT *
+        FROM [Nilai Norma]
+        where NormaID=?;
+        """
+        self.cursorexe.execute(self.sql_cmd,[self.values,])
+        self.result = self.cursorexe.fetchall()
+        self.close_db()
+        return self.result
+
+    def update_nilai_norma(self,nilainorma,normaid=None):
+        self.conn=self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.nilainorma = nilainorma
+        self.normaid = normaid
+        # import pdb
+        # pdb.set_trace()
+        self.sql_cmd ="""
+             UPDATE [Nilai Norma]
+               SET 
+                   [No] = ?,
+                   RS = ?,
+                   SE = ?,
+                   WA = ?,
+                   AN = ?,
+                   GE = ?,
+                   ME = ?,
+                   RA = ?,
+                   ZR = ?,
+                   FA = ?,
+                   WU = ?
+             WHERE 
+                   NormaID = ? And No = ?;
+
+        """
+        for data in self.nilainorma:
+            # print (i)
+            # import pdb
+            # pdb.set_trace()
+            data.append(int(data[0]))
+            self.cursorexe.execute(self.sql_cmd,data)
+
+        self.lastrowid = self.cursorexe.lastrowid
+        self.conn.commit()
+        self.close_db()
+        return True
+        
+
+    def insert_nilai_norma(self,nilainorma):
+        self.conn=self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.nilainorma = nilainorma
+        self.sql_cmd ="""
+        INSERT INTO [Nilai Norma] (
+                              [No],
+                              RS,
+                              SE,
+                              WA,
+                              AN,
+                              GE,
+                              ME,
+                              RA,
+                              ZR,
+                              FA,
+                              WU,
+                              NormaID
+                          )
+                          VALUES (
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?,
+                              ?
+                          );
+
+        """
+        self.cursorexe.executemany(self.sql_cmd,self.nilainorma)
+        self.lastrowid = self.cursorexe.lastrowid
+        self.conn.commit()
+        self.close_db()
+        return True
+
 class HasilJawaban(SqliteDB):
 
     def __init__(self,parent=None):
@@ -659,30 +770,31 @@ class InputJawaban(SqliteDB):
         where "Input Jawaban".id_tes = ?        
         """.format(self.nama_tabel)
 
-        self.sql_cmd ="""Select  upper([Input Jawaban].id_input_jawaban) ,
-            upper([Input Jawaban].no) ,
-            upper([Input Jawaban].se) ,
-            upper([Input Jawaban].wa) ,
-            upper([Input Jawaban].an) ,
-            upper([Input Jawaban].ge) ,
-            upper([Input Jawaban].ra) ,
-            upper([Input Jawaban].zr) ,
-            upper([Input Jawaban].fa) ,
-            upper([Input Jawaban].wu) ,
-            upper([Input Jawaban].me) ,
+        self.sql_cmd ="""Select  
+            upper([Input Jawaban].id_input_jawaban),
+            upper([Input Jawaban].no),
+            upper(replace([Input Jawaban].se,' ','')),
+            upper(replace([Input Jawaban].wa,' ','')),
+            upper(replace([Input Jawaban].an,' ','')),
+            upper(replace([Input Jawaban].ge,' ','')),
+            upper(replace([Input Jawaban].ra,' ','')),
+            upper(replace([Input Jawaban].zr,' ','')),
+            upper(replace([Input Jawaban].fa,' ','')),
+            upper(replace([Input Jawaban].wu,' ','')),
+            upper(replace([Input Jawaban].me,' ','')),
             upper([Input Jawaban].id_tes),
             upper([Input Jawaban].id_kunci),
             upper([Kunci Jawaban].id_kunci),
             upper([Kunci Jawaban].No),
-            upper([Kunci Jawaban].se),
-            upper([Kunci Jawaban].wa),
-            upper([Kunci Jawaban].an),
-            upper([Kunci Jawaban].ge),
-            upper([Kunci Jawaban].ra),
-            upper([Kunci Jawaban].zr),
-            upper([Kunci Jawaban].fa),
-            upper([Kunci Jawaban].wu),
-            upper([Kunci Jawaban].me)
+            upper(replace([Kunci Jawaban].se,' ','')),
+            upper(replace([Kunci Jawaban].wa,' ','')),
+            upper(replace([Kunci Jawaban].an,' ','')),
+            upper(replace([Kunci Jawaban].ge,' ','')),
+            upper(replace([Kunci Jawaban].ra,' ','')),
+            upper(replace([Kunci Jawaban].zr,' ','')),
+            upper(replace([Kunci Jawaban].fa,' ','')),
+            upper(replace([Kunci Jawaban].wu,' ','')),
+            upper(replace([Kunci Jawaban].me,' ',''))
                     from "Input Jawaban" 
                     Left Join [Kunci Jawaban]
                     On "Input Jawaban".id_kunci = "Kunci Jawaban".id_kunci
@@ -762,11 +874,11 @@ class KunciJawabanGE(SqliteDB):
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
         self.sql_cmd ="""
-SELECT id_kunci_ge,
+        SELECT id_kunci_ge,
        [No],
        upper(replace(Jawaban,' ','')),
        Nilai
-  FROM [Kunci Jawaban GE];"""
+        FROM [Kunci Jawaban GE];"""
 
         self.getdatas = self.cursorexe.execute(self.sql_cmd).fetchall() #, [self.values,]).fetchall()
         self.close_db()
@@ -875,7 +987,7 @@ class TabelNormaSendiri(SqliteDB):
                       ?,
                       ?,
                       3);
-"""
+            """
         self.cursorexe.execute(self.sql_cmd,(self.values))
         self.conn.commit()
         self.close_db()
@@ -885,7 +997,7 @@ class TabelNormaSendiri(SqliteDB):
         self.cursorexe = self.conn.cursor()
         self.values = values
         self.sql_cmd = """
-INSERT INTO NormaSendiri (
+            INSERT INTO NormaSendiri (
                              [No],
                              RS,
                              SE,
@@ -914,12 +1026,11 @@ INSERT INTO NormaSendiri (
                              ?
                          );
 
-"""
+                    """
         self.cursorexe.executemany(self.sql_cmd,self.values)
         self.conn.commit()
         self.close_db()
 
-class TableDataKelompokUmur(SqliteDB):
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -1206,6 +1317,88 @@ class JenisNorma(SqliteDB):
         self.getdatas = self.cursorexe.fetchall()
         self.close_db()
         return self.getdatas
+    
+    def insert_norma_sendiri(self,norma_sendiri):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.norma_sendiri = norma_sendiri
+        
+        self.sql_cmd = """
+        INSERT INTO [Jenis Norma] (
+                              [Jenis Norma],
+                              Keterangan,
+                              TipeNormaID
+                          )
+                          VALUES (
+                              ?,
+                              ?,
+                              ?
+                          );
+
+        """
+        self.cursorexe.execute(self.sql_cmd,self.norma_sendiri)
+        self.get_lastrowid = self.cursorexe.lastrowid
+        self.conn.commit()
+        self.conn.close()
+        return 
+
+    def hapus_norma_sendiri(self,norma_id):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.norma_id = int(norma_id)
+        
+        self.sql_cmd = """
+        DELETE FROM [Jenis Norma]
+            WHERE NormaID = ?
+        """
+
+        self.sql_cmd2 = """
+        DELETE FROM [Nilai Norma]
+            WHERE NormaID = ?
+        """
+
+        self.cursorexe.execute(self.sql_cmd,[self.norma_id,])
+        self.cursorexe.execute(self.sql_cmd2,[self.norma_id,])
+
+        self.conn.commit()
+        self.close_db()
+        return 
+
+    def lastrowid(self):
+        return self.get_lastrowid
+
+
+    def get_data_by_tipenormaid(self,tipenormaid):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.tipenormaid = int(tipenormaid)
+        # import pdb
+        # pdb.set_trace()
+        self.sql_cmd = """
+        SELECT *
+        FROM [Jenis Norma]
+        WHERE [TipeNormaID] = ? ;
+        """
+        self.cursorexe.execute(self.sql_cmd,[self.tipenormaid,])
+        self.getdatas = self.cursorexe.fetchall()
+        self.close_db()
+        return self.getdatas
+
+    # def get_data_by_lastrowid(self,lastrowid):
+    #     self.conn = self.connect_db()
+    #     self.cursorexe = self.conn.cursor()
+    #     self.tipenormaid = int(tipenormaid)
+    #     # import pdb
+    #     # pdb.set_trace()
+    #     self.sql_cmd = """
+    #     SELECT *
+    #     FROM [Jenis Norma]
+    #     WHERE [NormaID] = ? ;
+    #     """
+    #     self.cursorexe.execute(self.sql_cmd,[self.tipenormaid,])
+    #     self.getdatas = self.cursorexe.fetchall()
+    #     self.close_db()
+
 
     def select_data_norma_pekerjaan(self, id):
         self.id = str(id)
@@ -1227,6 +1420,22 @@ class JenisNorma(SqliteDB):
         self.close_db()
         return self.getdatas
     
+    def query_norma_pendidikan(self):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT *
+          FROM [Jenis Norma]
+          WHERE NormaID <> 2 And NormaID <=11
+          ORDER BY [Jenis Norma] ASC
+        ;
+        """
+        self.cursorexe.execute(self.sql_cmd)
+        self.getdatas = self.cursorexe.fetchall()
+        self.close_db()
+        return self.getdatas
+
+
     def querytb_jenisnorma(self, value = None):
         self.nama_norma = value
         self.conn = self.connect_db()
@@ -1322,7 +1531,7 @@ class TabelTipeNorma(SqliteDB):
         LEFT JOIN 'Jenis Norma' ON 'Jenis Norma'.TipeNormaID =  'Tipe Norma'.TipeNormaID
         """
         getdata = self.cursorexe.execute(self.sql_cmd).fetchall()
-        self.close_db
+        self.close_db()
         return getdata
 
     def query_all_cond(self,value=None):
@@ -1336,7 +1545,7 @@ class TabelTipeNorma(SqliteDB):
         WHERE [Tipe Norma].[Jenis Norma] = ? 
         """
         getdata = self.cursorexe.execute(self.sql_cmd,(self.value,)).fetchall()
-        self.close_db
+        self.close_db()
         return getdata
 
 class Peserta(SqliteDB):
@@ -1349,6 +1558,7 @@ class Peserta(SqliteDB):
 
     def query_select_lj_datapeserta_tipenorma(self,value=None):
         self.value = value
+        
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
         self.sql_cmd = """
@@ -1360,7 +1570,7 @@ class Peserta(SqliteDB):
         """
 
         getdata = self.cursorexe.execute(self.sql_cmd,(self.value,)).fetchone()
-        self.close_db
+        self.close_db()
         return getdata
 
     def query_data_peserta(self,value=None):
@@ -1372,7 +1582,7 @@ class Peserta(SqliteDB):
         FROM [Data Peserta];
         """
         getdata = self.cursorexe.execute(self.sql_cmd).fetchall()
-        self.close_db
+        self.close_db()
         return getdata
 
     def query_data_peserta_byid(self,value=None):
@@ -1381,10 +1591,11 @@ class Peserta(SqliteDB):
         self.cursorexe = self.conn.cursor()
         self.sql_cmd = """
         SELECT *
-        FROM [Data Peserta];
+        FROM [Data Peserta]
+        WHERE id = ?;
         """
         getdata = self.cursorexe.execute(self.sql_cmd,self.value).fetchone()
-        self.close_db
+        self.close_db()
         return getdata
 
 
@@ -1398,7 +1609,7 @@ class Peserta(SqliteDB):
         WHERE id =?;
         """
         getdata = self.cursorexe.execute(self.sql_cmd,(self.value,)).fetchone()
-        self.close_db
+        self.close_db()
         return getdata
 
 
@@ -1406,13 +1617,46 @@ class Peserta(SqliteDB):
         self.value = value
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
+
         self.sql_cmd = """
+        SELECT id_tes
+        FROM [No Tes]
+        WHERE id = ? ;
+        """
+
+        self.sql_cmd2 ="""
+        DELETE FROM [Input Jawaban]
+        WHERE id_tes = ?
+        """
+
+        self.sql_cmd3 = """
+        DELETE FROM [Hasil Jawaban]
+        WHERE id_tes = ?;
+        """
+
+        self.sql_cmd4 = """
+        DELETE FROM [No Tes]
+        WHERE id = ?;
+        """
+
+        self.sql_cmd5 = """
             DELETE FROM [Data Peserta]
             WHERE id = ? 
         """
+
         self.cursorexe.execute(self.sql_cmd,(self.value,))
+        self.idtes = self.cursorexe.fetchall()
+        import itertools
+        self.idtes = list(itertools.chain.from_iterable(self.idtes))
+        for idtes in self.idtes:
+            self.cursorexe.execute(self.sql_cmd2,(idtes,))
+            self.cursorexe.execute(self.sql_cmd3,(idtes,))
+
+        self.cursorexe.execute(self.sql_cmd4,(self.value,))
+        self.cursorexe.execute(self.sql_cmd5,(self.value,))
+
         self.conn.commit()
-        self.close_db
+        self.close_db()
         return True
 
     def edit_peserta(self,value =None):
@@ -1438,7 +1682,7 @@ class Peserta(SqliteDB):
         """
         self.cursorexe.execute(self.sql_cmd,self.value)
         self.conn.commit()
-        self.close_db
+        self.close_db()
         return True
        
 
@@ -1479,285 +1723,52 @@ class Peserta(SqliteDB):
 
     def last_row(self):
         return self.rowid
-def insert_input_peserta(values):
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    sql_cmd = """
-    INSERT INTO Input_Data_Jawaban_Peserta
-    (NoSoal, JawabanPeserta, idTipeSoal, idpeserta, idDimensi)
-    VALUES(?,?,?, (SELECT idpeserta
-                    from 'Rincian Data Peserta'
-                    order by idpeserta
-                    DESC limit 1), ?);
-    """
 
-    cursorexe.executemany(sql_cmd, values)
-    conne.commit()
-    conne.close
-    print("insert data done")
+class Geasamt(SqliteDB):
 
-
-
-
-def cek_id_peserta_terakhir():
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    sqlcmd = """SELECT idpeserta
-                from 'Rincian Data Peserta'
-                order by idpeserta
-                DESC limit 1"""
-    cursorexe.execute(sqlcmd)
-    getid = cursorexe.fetchone()
-#     print (getid[0])
-    conne.close()
-    return getid[0]
-
-
-def query_input_peserta(values):
-    # Menampilkan data dari Input Peserta
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    #     values = ["select","select by"]
-    # print (values[0])
-    # print (values[1])
-
-    if values[0] == "idpeserta":
-        sqlcmd = """SELECT I.idinputpeserta,I.idpeserta,RDP."Nama Kandidat",I.NoSoal,I.JawabanPeserta,T.NamaSoal
-            FROM Input_Data_Jawaban_Peserta AS I
-            LEFT JOIN TipeSoal as T ON I.idTipeSoal = T.idTipeSoal
-            LEFT JOIN "Rincian Data Peserta" as RDP ON RDP.idpeserta = I.idpeserta
-            WHERE I.idpeserta = ?
-            """
-
-        cursorexe.execute(sqlcmd, (values[1],))
-    getdatas = cursorexe.fetchall()
-    datas = []
-    for data in getdatas:
-        datas.append(data)
-
-    conne.close
-    return datas
-
-    # SELECT idpeserta, idtipesoal, "No Tes", "Tanggal Tes", "Nama Kandidat", "Jenis Kelamin", "Tanggal Lahir", "Pendidikan Terakhir", "Jurusan Pendidikan", Kota, "Perusahaan / Instansi", "Posisi / Jabatan"
-    # FROM "Rincian Data Peserta"
-    # WHERE idpeserta = 2 ;
-
-
-def query_data_peserta():
-    #     Menampilkan data dari Input Peserta
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    sqlcmd = """SELECT I.idinputpeserta ,
-                I.NoSoal,I.JawabanPeserta,T.NamaSoal 
-                FROM Input_data_Jawaban_Peserta AS I
-                LEFT JOIN TipeSoal as T ON I.idTipeSoal \
-                =T.idTipeSoal"""
-    cursorexe.execute(sqlcmd)
-    getdatas = cursorexe.fetchall()
-    for data in getdatas:
-        # print (data)
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.parent = parent
         pass
+    
+    def query_by_rts(self,trs,usia):
+        self.trs = int(trs)
+        self.usia = int(usia)
+        if self.trs == 0 :
+            self.trs = 1
 
-    conne.close
-
-
-def query_referensi_dimensi():
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    sqlcmd = """SELECT* FROM 'Referensi Dimensi'
-    """
-    cursorexe.execute(sqlcmd)
-    getdatas = cursorexe.fetchall()
-    #     for data in getdatas:
-    #         print (data)
-
-    conne.close
-    return getdatas
-
-
-def query_kamus(nilai):
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    sqlcmd = """
-    SELECT [No], Dimensi, Referensi
-    FROM Kamus
-    WHERE Dimensi = ? ;
-    """
-    cursorexe.execute(sqlcmd, (nilai,))
-    getdatas = cursorexe.fetchone()
-    #     for data in getdatas:
-    #         print (data)
-
-    conne.close
-    return getdatas
-
-
-def query_data_jawaban(values):
-    #     Menampilkan data dari Input Peserta
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    #     values = ["select","select by"]
-    # print (values[0])
-    # print (values[1])
-
-    if values[0] == "idpeserta":
-        sqlcmd = """SELECT I.idinputpeserta,I.idpeserta,I.NoSoal,I.JawabanPeserta,
-            T.NamaSoal,
-            RDP."No Tes",RDP."Tanggal Tes",RDP."Nama Kandidat",
-            RDP."Jenis Kelamin",
-            RDP."Tanggal Lahir",RDP."Pendidikan Terakhir",RDP."
-            Jurusan Pendidikan",
-            RDP."Kota",RDP."Perusahaan / Instansi",RDP."Posisi / Jabatan"
-
-            FROM Input_Data_Jawaban_Peserta AS I
-            LEFT JOIN TipeSoal as T ON I.idTipeSoal = T.idTipeSoal
-            LEFT JOIN "Rincian Data Peserta" as
-            RDP ON RDP.idpeserta = I.idpeserta
-            WHERE I.idpeserta = ?
-            """
-
-        cursorexe.execute(sqlcmd, (values[1],))
-    getdatas = cursorexe.fetchall()
-    datas = []
-    for data in getdatas:
-        datas.append(data)
-
-    conne.close
-    return datas
-
-
-def query_tabel_data_peserta(value):
-    conne = connect_db()
-
-    # print (value[0],value[1],value[2],value[3])
-    # print ("ini value {},{},{},{}".format(value[0],value[1],value[2],value[3]))
-    cursorexe = conne.cursor()
-
-    if value[4] == "nama orang":
-        sql_cmd = """
-        SELECT idpeserta, idtipesoal, "No Tes", "Tanggal Tes",
-         "Nama Kandidat", "Jenis Kelamin", "Tanggal Lahir", "Pendidikan 
-         Terakhir", "Jurusan Pendidikan", Kota, "Perusahaan / Instansi",
-          "Posisi / Jabatan"
-        FROM "Rincian Data Peserta"
-        WHERE "Nama Kandidat" LIKE ?;
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.sql_cmd = """
+        SELECT *
+        FROM Geasamt
+        WHERE "Nilai Total RS" = ? AND id_usia = ?;
         """
-        cursorexe.execute(sql_cmd, (("{}%".format(value[0]),)))
+        self.cursorexe.execute(self.sql_cmd,[self.trs,self.usia,])
+        self.getdata = self.cursorexe.fetchone()
+        self.close_db()
+        return self.getdata
 
-    elif value[4] == "no tes":
-        sql_cmd = """
-                    SELECT idpeserta, idtipesoal, "No Tes", "Tanggal Tes", "Nama Kandidat", "Jenis Kelamin", "Tanggal Lahir", "Pendidikan Terakhir", "Jurusan Pendidikan", Kota, "Perusahaan / Instansi", "Posisi / Jabatan"
-                    FROM "Rincian Data Peserta"
-                    WHERE "No Tes" = ?;
-                """
-        cursorexe.execute(sql_cmd, ((value[1],)))
+class Iq(SqliteDB):
 
-    elif value[4] == "tanggal":
-        sql_cmd = """
-                    SELECT idpeserta, idtipesoal, "No Tes", "Tanggal Tes", "Nama Kandidat", "Jenis Kelamin", "Tanggal Lahir", "Pendidikan Terakhir", "Jurusan Pendidikan", Kota, "Perusahaan / Instansi", "Posisi / Jabatan"
-                    FROM "Rincian Data Peserta" 
-                    WHERE "Tanggal Tes" BETWEEN ? AND ?;
-                """
-        cursorexe.execute(sql_cmd, ((value[2], value[3])))
+    def __init__(self,parent):
+        super().__init__(parent)
 
-    elif value[4] == "idpeserta":
-        sql_cmd = """
-                    SELECT idpeserta, idtipesoal, "No Tes", "Tanggal Tes", "Nama Kandidat", "Jenis Kelamin", "Tanggal Lahir", "Pendidikan Terakhir", "Jurusan Pendidikan", Kota, "Perusahaan / Instansi", "Posisi / Jabatan"
-                    FROM "Rincian Data Peserta" 
-                    WHERE "idpeserta" = ?;
-                """
-        cursorexe.execute(sql_cmd, ((value[0],)))
-
-    getdatas = cursorexe.fetchall()
-    data_list = []
-    for data in getdatas:
-        data_list.append(data)
-    conne.close
-
-    return data_list
-
-
-def hapus_data_rincian_peserta(values):
-    conne = connect_db()
-
-    cursorexe = conne.cursor()
-    sql_cmd = """DELETE FROM "Rincian Data Peserta"
-    WHERE idpeserta=?;
+        self.parent = parent
+    
+    def query_by_geasamt(self,geasamt):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.geasamt = geasamt
+        self.sql_cmd = """
+        SELECT *
+        FROM [NORMA IST IQ]
+        WHERE [SW] = ?;
         """
-    cursorexe.execute(sql_cmd, (values),)
-    conne.commit()
-    conne.close
-
-
-def hapus_data_input_peserta(values):
-    conne = connect_db()
-
-    cursorexe = conne.cursor()
-    sql_cmd = """DELETE FROM "Input_Data_Jawaban_Peserta"
-        WHERE idpeserta=?;
-     """
-    cursorexe.execute(sql_cmd, (values),)
-    conne.commit()
-    conne.close
-
-
-def update_jawaban(values, id_pes):
-    #     Menampilkan data dari Input Peserta
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    #     values = ["select","select by"]
-    # print (values[0])
-    # print (values[1])
-    # print (values[2])
-
-    sql_cmd = """
-    UPDATE Input_Data_Jawaban_Peserta
-    SET JawabanPeserta = ?
-    WHERE NoSoal = ? AND IdPeserta=?;
-    """
-    cursorexe.execute(sql_cmd, (values[2], values[1], id_pes))
-    conne.commit()
-    conne.close
-
-
-def update_rincian_data_peserta(values, id_pes):
-    #     Menampilkan data dari Input Peserta
-    conne = connect_db()
-    cursorexe = conne.cursor()
-    #     values = ["select","select by"]
-    # print(values[0])
-    # print(values[1])
-    # print(values[2])
-
-    sql_cmd = """
-    UPDATE [Rincian Data Peserta]
-    SET [No Tes] = ? ,
-        [Tanggal Tes] = ?,
-        [Nama Kandidat] = ?,
-        [Jenis Kelamin] = ?,
-        [Tanggal Lahir] = ?,
-        [Pendidikan Terakhir] = ?,
-        [Jurusan Pendidikan] = ?,
-        Kota = ?,
-        [Perusahaan / Instansi] = ?,
-        [Posisi / Jabatan] = ?
-    WHERE idpeserta = ?    
-    """
-    cursorexe.execute(sql_cmd, (*values,
-                                id_pes))
-    conne.commit()
-    conne.close
-
-# if __name__ == "__main__":
-
-#     path = pathlib.Path.cwd() / "hexacodb"
-#     print (path)
-#     connect_db(path)
-#     values = [(1,1,1,2,1),(1,1,1,1,1)]
-#     insert_input_peserta(values)
-#     query_tabel_data_peserta("OFI SUNASTRI")
-#     print(query_tabel_data_peserta("OFI SUNASTRI"))
-
+        self.cursorexe.execute(self.sql_cmd,[self.geasamt,])
+        self.getdata = self.cursorexe.fetchone()
+        self.close_db()
+        return self.getdata
 
 if __name__ == "__main__":
     file_db = "istcore"

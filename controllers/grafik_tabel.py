@@ -214,11 +214,15 @@ class GrafikHasilLayoutInherited(GrafikHasil):
         #     print (value)
         #     nilai.append(int(value))
         print(nilai)
-        x = [130,136,79,125,128,146,128,155]
+        x = []
+        for key,value in self.parent.hasil_analisa_dict.items() :
+            x.append(value)
+            
+        # x = [130,136,79,125,128,146,128,155]
         # x = nilai
         self.rects = self.axes.barh(y, x, color='green')
         # self.axes.invert_yaxis()
-        self.axes.set_xlim(left=50, right=150)
+        self.axes.set_xlim(left=50, right=300)
         self.axes.set_yticks(self.y)
         self.axes.set_title("PROFIL KEUNGGULAN IST")
         self.autolabel()

@@ -55,7 +55,7 @@ class GrafikLayout():
 
 
         self.axes.set_xticks(self.x)
-        self.axes.set_ylim(bottom=0, top=20)
+        self.axes.set_ylim(bottom=0, top=25)
         
         self.axes.set_title("Rw Score")
 
@@ -73,7 +73,7 @@ class GrafikLayout():
                         ha='center')
 
         self.axes2.set_xticks(self.x)
-        self.axes2.set_ylim(bottom=0, top=150)
+        self.axes2.set_ylim(bottom=0, top=175)
 
         self.axes2.set_title("Sw Score")
         

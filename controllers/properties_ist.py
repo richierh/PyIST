@@ -304,14 +304,24 @@ class TabelDataPesertaIn(TabelDataPeserta):
 
 
     def hapus_data_peserta(self, event):
-        print ("hello")
+
         if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
             self.data = self.m_dataViewListCtrl3.GetValue(self.m_dataViewListCtrl3.GetSelectedRow(),1)
 
             self.m_dataViewListCtrl3.DeleteItem(self.m_dataViewListCtrl3.GetSelectedRow())
             # print(self.data)
             self.data_peserta.hapus_peserta(self.data)
-        pass
+
+            self.m_dataViewListCtrl3.DeleteAllItems()
+            self.data_peserta = Peserta(self.parent.connect_db)
+            self.data_list =[]
+            for data in self.data_peserta.query_data_peserta():
+                index =  self.data_peserta.query_data_peserta().index(data)+1
+                self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
+            for data in self.data_list:
+                self.m_dataViewListCtrl3.AppendItem(data)
+
+        return True
 
     def edit_data_peserta(self, event) :
         if self.m_dataViewListCtrl3.GetSelectedRow() != -1:

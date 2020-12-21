@@ -380,9 +380,14 @@ class KonversiGE(SqliteDB):
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
         self.values = str(values)
+        # import pdb
+        # pdb.set_trace()
         self.sql_cmd = """
-        SELECT idGE,No,RW,GE
-        FROM 'Konversi GE'
+        SELECT idGE,
+            [No],
+            RW,
+            GE
+        FROM [Konversi GE]
         WHERE RW=?
         """
         self.cursorexe.execute(self.sql_cmd, [self.values, ])
@@ -1602,6 +1607,7 @@ class Peserta(SqliteDB):
     def query_select_data_peserta(self,value=None):
         self.value = value
         self.conn = self.connect_db()
+        self.conn.isolation_level = None
         self.cursorexe = self.conn.cursor()
         self.sql_cmd = """
         SELECT *
@@ -1612,52 +1618,66 @@ class Peserta(SqliteDB):
         self.close_db()
         return getdata
 
-
-    def hapus_peserta(self,value=None):
+    def hapus_peserta(self,value = None):
         self.value = value
         self.conn = self.connect_db()
         self.cursorexe = self.conn.cursor()
 
-        self.sql_cmd = """
-        SELECT id_tes
-        FROM [No Tes]
-        WHERE id = ? ;
-        """
-
-        self.sql_cmd2 ="""
-        DELETE FROM [Input Jawaban]
-        WHERE id_tes = ?
-        """
-
-        self.sql_cmd3 = """
-        DELETE FROM [Hasil Jawaban]
-        WHERE id_tes = ?;
-        """
-
-        self.sql_cmd4 = """
-        DELETE FROM [No Tes]
-        WHERE id = ?;
-        """
-
-        self.sql_cmd5 = """
-            DELETE FROM [Data Peserta]
-            WHERE id = ? 
-        """
-
-        self.cursorexe.execute(self.sql_cmd,(self.value,))
-        self.idtes = self.cursorexe.fetchall()
-        import itertools
-        self.idtes = list(itertools.chain.from_iterable(self.idtes))
-        for idtes in self.idtes:
-            self.cursorexe.execute(self.sql_cmd2,(idtes,))
-            self.cursorexe.execute(self.sql_cmd3,(idtes,))
-
-        self.cursorexe.execute(self.sql_cmd4,(self.value,))
-        self.cursorexe.execute(self.sql_cmd5,(self.value,))
-
+        self.sql_cmd  = """PRAGMA foreign_keys = ON"""
+        self.sql_cmd2 = """
+                        DELETE FROM [Data Peserta]
+                        WHERE id = ? 
+                        """
+        self.cursorexe.execute(self.sql_cmd)
+        self.cursorexe.execute(self.sql_cmd2,(self.value,))
         self.conn.commit()
         self.close_db()
         return True
+    # def hapus_peserta(self,value=None):
+    #     self.value = value
+    #     self.conn = self.connect_db()
+    #     self.cursorexe = self.conn.cursor()
+
+    #     self.sql_cmd = """
+    #     SELECT id_tes
+    #     FROM [No Tes]
+    #     WHERE id = ? ;
+    #     """
+
+    #     self.sql_cmd2 ="""
+    #     DELETE FROM [Input Jawaban]
+    #     WHERE id_tes = ?
+    #     """
+
+    #     self.sql_cmd3 = """
+    #     DELETE FROM [Hasil Jawaban]
+    #     WHERE id_tes = ?;
+    #     """
+
+    #     self.sql_cmd4 = """
+    #     DELETE FROM [No Tes]
+    #     WHERE id = ?;
+    #     """
+
+    #     self.sql_cmd5 = """
+    #         DELETE FROM [Data Peserta]
+    #         WHERE id = ? 
+    #     """
+
+    #     self.cursorexe.execute(self.sql_cmd,(self.value,))
+    #     self.idtes = self.cursorexe.fetchall()
+    #     import itertools
+    #     self.idtes = list(itertools.chain.from_iterable(self.idtes))
+    #     for idtes in self.idtes:
+    #         self.cursorexe.execute(self.sql_cmd2,(idtes,))
+    #         self.cursorexe.execute(self.sql_cmd3,(idtes,))
+
+    #     self.cursorexe.execute(self.sql_cmd4,(self.value,))
+    #     self.cursorexe.execute(self.sql_cmd5,(self.value,))
+
+    #     self.conn.commit()
+    #     self.close_db()
+    #     return True
 
     def edit_peserta(self,value =None):
         self.value = value

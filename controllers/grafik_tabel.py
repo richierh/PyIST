@@ -1,6 +1,7 @@
 import wx
 from numpy import arange, sin, pi
 import numpy as np
+import pandas as pd
 from views.grafik_ist import GrafikLayout, GrafikHasil, GrafikProfesi
 from views.istcore import Norma, TabelNorma, FrameRow, NormaAll, TabelNormaLihat,BuatNormaSendiri
 from controllers.nama_norma_inherited import NamaNormaInherited
@@ -20,7 +21,7 @@ class TabelNormaSendiriInherited(TabelNorma):
 
 
         if self.m_dataViewListCtrl3.IsShown() == True :
-            print ("kesini")
+            # print ("kesini")
             for data in range(1,34):
                 self.m_dataViewListCtrl4.AppendItem([str(data),"","","","","","","","","",""])
 
@@ -45,8 +46,8 @@ class TabelNormaSendiriInherited(TabelNorma):
 
 
         else :
-            print ("tidak ada pilihan")
-
+            # print ("tidak ada pilihan")
+            pass
         pass
 
     def m_button_ok_tabel_normaOnButtonClick(self,event):
@@ -180,6 +181,39 @@ class BuatNormaSendiriInherited(BuatNormaSendiri):
 
         pass
 
+class GrafikFakultas():
+
+    def __init__(self,parent):
+        self.parent = parent
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        self.fig = plt.figure()
+        self.ax = self.fig.add_subplot(111)
+        self.ax.set_title('click on points')
+
+        self.x = [4,7,9,11,5,6,7,4]
+        self.y = [1,2,3,4,5,6,7,6]
+
+        # line, = ax.plot(np.random.rand(100), 'o', picker=5)  # 5 points tolerance
+        self.line = self.ax.barh(self.x,self.y,picker=5)#, left=None)  # 5 points tolerance
+
+        def onpick(event):
+            self.thisline = event.artist
+            self.xdata = self.thisline.get_xy()
+            self.xdata = self.thisline.get_bbox()
+            self.xdata = self.xdata.get_points()
+            self.data = int(self.xdata[1][0])
+            # xdata = thisline.get_xdata()
+            # ydata = thisline.get_ydata()
+            # ind = event.ind
+            # print ('onpick points:', zip(xdata[ind], ydata[ind]))
+            print("hello")
+            print(self.xdata)
+            print(self.data)
+        self.fig.canvas.mpl_connect('pick_event', onpick)
+
+        plt.show()
 class GrafikLayoutInherited(GrafikLayout):
 
     def __init__(self, parent):
@@ -195,7 +229,50 @@ class GrafikLayoutInherited(GrafikLayout):
         print("lewat sini nggak")
         return self.figure.savefig(self.path, dpi='figure')
 
+class GrafikProfesiInherited(GrafikProfesi):
 
+    def __init__(self,parent):
+        super().__init__(parent)
+
+    
+    def draw(self,parent = None):
+
+        # fig = plt.figure()
+        # ax = fig.add_subplot(111)
+        self.axes.set_title('click on points')
+
+        self.x = [4,7,9,11]#,5,6,7,4]
+        self.y = [1,2,3,4]#,5,6,7,6]
+  
+
+        df = pd.DataFrame({"kategori":self.x,"value":self.y})
+        df.set_index("value")
+        #  Penomoran 1,2,3,4 di bawah ini bisa diganti dengan warna untuk tiap keilmuan
+        # colors = {"Ilmu Pertanian ":'red', "Ilmu Sains":'green', "Teknik":'blue', "Sosial":'yellow'}
+
+        colors = {1:'red', 2:'green', 3:'blue', 4:'yellow'}
+
+        # line, = ax.plot(np.random.rand(100), 'o', picker=5)  # 5 points tolerance
+        self.line = self.axes.barh(df['kategori'],df['value'],picker=5,color=df['value'].map(colors))#, left=None)  # 5 points tolerance
+
+        def onpick(event):
+            thisline = event.artist
+            self.xdata = thisline.get_xy()
+            self.xdata = thisline.get_bbox()
+            self.xdata = self.xdata.get_points()
+            self.data = int(self.xdata[1][0])
+            # xdata = thisline.get_xdata()
+            # ydata = thisline.get_ydata()
+            # ind = event.ind
+            # print ('onpick points:', zip(xdata[ind], ydata[ind]))
+            print("hello")
+            print(self.xdata)
+            print(self.data)
+            self.bukaFakultas = GrafikFakultas(self)
+            # self.bukaFakultas.draw()
+        self.figure.canvas.mpl_connect('pick_event', onpick)
+
+        # plt.show()
 class GrafikHasilLayoutInherited(GrafikHasil):
 
     def __init__(self, parent):
@@ -222,6 +299,16 @@ class GrafikHasilLayoutInherited(GrafikHasil):
         # x = nilai
         self.rects = self.axes.barh(y, x, color='green')
         # self.axes.invert_yaxis()
+        self.rects[0].set_color('pink')
+        self.rects[1].set_color('lime')
+        self.rects[2].set_color('goldenrod')
+        self.rects[3].set_color('lightblue')
+        self.rects[4].set_color('tomato')
+        self.rects[5].set_color('violet')
+        self.rects[6].set_color('wheat')
+        self.rects[7].set_color('turquoise')
+
+        
         self.axes.set_xlim(left=50, right=300)
         self.axes.set_yticks(self.y)
         self.axes.set_title("PROFIL KEUNGGULAN IST")
@@ -305,8 +392,8 @@ class NormaAllInherited(NormaAll):
             self.tabelumur = "0"
         
         if int(self.getdata[0]) <= 11:
-            print (self.getdata[0])
-            print ("lewat")
+            # print (self.getdata[0])
+            # print ("lewat")
             self.query_data = TableDataKelompokUmurConnect(self.parent.databasekon)
             self.query_data.query_all(self.tabelumur)
 
@@ -314,7 +401,7 @@ class NormaAllInherited(NormaAll):
             self.query_data = TabelNormaSendiriConnect(self.parent.databasekon)
             # print (self.query_data)
             self.tabelumur = 15
-            print ("kkasdk")
+            # print ("kkasdk")
             self.query_data.query_all(self.tabelumur)
             print (self.tabelumur)
 
@@ -537,7 +624,7 @@ class NormaInherited(Norma):
             for data in self.data_norma :
                 self.saji_tabel.append(data[0:10])
 
-            print (self.saji_tabel)
+            # print (self.saji_tabel)
             self.parent.LNormaSendiri.SetLabel(self.getdata[2])
     
             pass
@@ -559,7 +646,7 @@ class NormaInherited(Norma):
             for data in self.data_norma :
                 self.saji_tabel.append(data[0:10])
 
-            print (self.saji_tabel)
+            # print (self.saji_tabel)
             pass
 
         elif self.m_dataViewListCtrl9.GetSelectedRow() != -1 :
@@ -580,7 +667,7 @@ class NormaInherited(Norma):
             for data in self.data_norma :
                 self.saji_tabel.append(data[0:10])
 
-            print (self.saji_tabel)
+            # print (self.saji_tabel)
             pass
 
         self.Close()
@@ -591,7 +678,8 @@ class NormaInherited(Norma):
         self.Close()
 
     def m_dataViewListCtrl8OnDataViewListCtrlItemValueChanged(self,event):
-        print ("kkk")
+        # print ("kkk")
+
         # self.norm_pekerjaan = JenisNorma(self.parent.connect_db)
         # self.datanormapekerjaan = self.norm_pekerjaan.select_data_norma_pekerjaan(2)[0]
         # self.datanormapekerjaan = [str(x) for x in self.datanormapekerjaan]
@@ -694,7 +782,7 @@ class TabelNormaInherited(TabelNorma):
             from models.query import NilaiNorma
             self.buka = NilaiNorma(self.connect_db)
 
-            print ("kesini nggak")
+            # print ("kesini nggak")
             self.data_norma = []
             for datarow in range(0, self.m_dataViewListCtrl4.GetItemCount()):
                 self.col11 = self.m_dataViewListCtrl4.GetValue(datarow, 0)
@@ -731,7 +819,7 @@ class TabelNormaInherited(TabelNorma):
             self.Close()
 
         else :
-            print ("k")
+            # print ("k")
             if self.parent.buat_baru_norma == 1 :
                 self.buka = NamaNormaInherited(self)
                 self.buka.Show()
@@ -740,11 +828,11 @@ class TabelNormaInherited(TabelNorma):
                 print("pass")   
 
                 self.Close()    
-            print ("ok")
+            # print ("ok")
 
         # self.Close()
 
     def m_button_batal_tabel_normaOnButtonClick(self, event):
-        print ("batal")
+        # print ("batal")
         self.Close()
 

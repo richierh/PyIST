@@ -9,7 +9,8 @@ import wx.dataview
 from views.istcore import ISTUtama,NormaSendiri,TabelDataPeserta,BuatNormaSendiri
 from models.query import SqliteDB,KonversiGE,TabelJawaban, \
     InputJawaban,Peserta,NoTes,HasilJawaban,\
-    KunciJawabanGE,Usia,NilaiNorma,Geasamt,Iq
+    KunciJawabanGE,Usia,NilaiNorma,Geasamt,Iq,\
+    BidangKeilmuan
 from pathlib import Path
 from views.dataview import RWSWScore, PanggilDataView, PanggilGrid, \
     PanggilInputTotal
@@ -107,7 +108,8 @@ class NormaSendiriInherited(NormaSendiri):
 
 
     def m_data_aktif_tabel_norma_sendiri(self,event):
-        print ("nyala")
+        # print ("nyala")
+        pass
 
     def m_button_tutup_normaAllOnButtonClick(self,event):
         print ('lew')
@@ -115,7 +117,7 @@ class NormaSendiriInherited(NormaSendiri):
         
 
     def m_button_pilih_norma_allOnButtonClick(self,event):
-        print ("sadfasdfs")
+        pass
 
 
 class DataView(ISTUtama):
@@ -172,6 +174,7 @@ class HalamanEventControl(CekDB):
         self.m_sebelumnya.Disable()
         self.m_kembali_ke_awal.Disable()
         self.pathpict = pathlib.Path.cwd() / "icons/menubar/man.png"
+        self.gaya_pemecahan_masalah.SetLabel("Kemantapan Berpikir")
 
         print (str(self.pathpict))
         self.image2 = wx.Image(str(self.pathpict))
@@ -496,13 +499,27 @@ class HalamanEventControl(CekDB):
         self.usia= int(self.peserta.get("Usia"))
         self.NormaId = Usia(self.connect_db)
         self.get_norma_id = self.NormaId.query(self.usia)[2]
+
+        self.NormaId = Usia(self.connect_db)
+        self.get_norma_id_keilmuan = self.NormaId.query(19)[2]
+
         
         self.nilai_norma = NilaiNorma(self.connect_db)
         self.get_nilai_norma = self.nilai_norma.query_by_norma_id(int(self.get_norma_id))
-        
+
+        self.nilai_norma = NilaiNorma(self.connect_db)
+        self.get_nilai_norma_keilmuan = self.nilai_norma.query_by_norma_id(int(self.get_norma_id_keilmuan))
+
         self.norma_np = np.array(self.get_nilai_norma)
         self.norma_pd = pd.DataFrame(self.norma_np)
+
+        self.norma_np_keilmuan = np.array(self.get_nilai_norma_keilmuan)
+        self.norma_pd_keilmuan = pd.DataFrame(self.norma_np_keilmuan)
+
+
         self.list_norma_rw_sw =[]
+
+        self.list_norma_rw_sw_keilmuan=[]
 
         j = 0
         for i in range(9):
@@ -510,8 +527,10 @@ class HalamanEventControl(CekDB):
             # import pdb
             # pdb.set_trace()
             self.nilai = self.norma_pd.loc[(self.norma_pd[2].astype(int))== int(self.total[i])]
+            self.nilai_keilmuan=self.norma_pd_keilmuan.loc[(self.norma_pd_keilmuan[2].astype(int))==int(self.total[i])]
             # self.list_norma_rw_sw.append([self.total[j]])
 
+            self.list_norma_rw_sw_keilmuan.append([self.total[i],self.nilai_keilmuan[i+3].tolist()[0]])
             self.list_norma_rw_sw.append([self.total[i],self.nilai[i+3].tolist()[0]])
             j = j+1
  
@@ -522,13 +541,22 @@ class HalamanEventControl(CekDB):
 
         self.norma_np = np.array(self.list_norma_rw_sw)
         self.norma_pd = pd.DataFrame(self.norma_np)
+
+        self.norma_np_keilmuan = np.array(self.list_norma_rw_sw_keilmuan)
+        self.norma_pd_keilmuan = pd.DataFrame(self.norma_np_keilmuan)
+
         self.rw = self.norma_pd[0].astype(int).tolist()
         self.sw = self.norma_pd[1].astype(int).tolist()
         self.sum_rts = sum(self.rw)
 
+        self.rw_keilmuan = self.norma_pd_keilmuan[0].astype(int).tolist()
+        self.sw_keilmuan = self.norma_pd_keilmuan[1].astype(int).tolist()
+        self.sum_rts_keilmuan = sum(self.rw_keilmuan)
+
+
         self.usia = Usia(self.connect_db)
         self.id_usia = self.usia.query(int(self.peserta.get("Usia")))[0]
-   
+
         self.geasamt = Geasamt(self.connect_db)
         self.nilai_geasamt = self.geasamt.query_by_rts(self.sum_rts,self.id_usia)[2]        
         self.iq = Iq(self.connect_db)
@@ -687,9 +715,6 @@ class HalamanEventControl(CekDB):
         self.Jawaban = HasilJawaban(self.connect_db)
         self.Jawaban.insert(self.total)
         self.hasil_jawaban = self.Jawaban.query(self.id_tes)
-        
-
-
 
         # self.total = np.array(self.total)
 
@@ -715,7 +740,9 @@ class HalamanEventControl(CekDB):
         # self.iq = self.hasil_sw.get_iq(self.geasamt)
 
         
-        self.usia= int(self.peserta.get("Usia"))
+        # self.usia= int(self.peserta.get(19))
+        self.usia = 19
+
         # self.NormaId = Usia(self.connect_db)
         # self.get_norma_id = self.NormaId.query(self.usia)[2]
 
@@ -725,9 +752,20 @@ class HalamanEventControl(CekDB):
         self.nilai_norma = NilaiNorma(self.connect_db)
         self.get_nilai_norma = self.nilai_norma.query_by_norma_id(int(self.get_norma_id))
         
+
+        self.NormaId = Usia(self.connect_db)
+        self.get_norma_id_keilmuan = self.NormaId.query(19)[2]
+        self.nilai_norma = NilaiNorma(self.connect_db)
+        self.get_nilai_norma_keilmuan = self.nilai_norma.query_by_norma_id(int(self.get_norma_id_keilmuan))
+
+        self.norma_np_keilmuan = np.array(self.get_nilai_norma_keilmuan)
+        self.norma_pd_keilmuan = pd.DataFrame(self.norma_np_keilmuan)
+
         self.norma_np = np.array(self.get_nilai_norma)
         self.norma_pd = pd.DataFrame(self.norma_np)
         self.list_norma_rw_sw =[]
+
+        self.list_norma_rw_sw_keilmuan=[]
 
         j = 0
         for i in range(9):
@@ -735,7 +773,10 @@ class HalamanEventControl(CekDB):
             # import pdb
             # pdb.set_trace()
             self.nilai = self.norma_pd.loc[(self.norma_pd[2].astype(int))== int(self.total[i])]
+            self.nilai_keilmuan=self.norma_pd_keilmuan.loc[(self.norma_pd_keilmuan[2].astype(int))==int(self.total[i])]
+
             # self.list_norma_rw_sw.append([self.total[j]])
+            self.list_norma_rw_sw_keilmuan.append([self.total[i],self.nilai_keilmuan[i+3].tolist()[0]])
 
             self.list_norma_rw_sw.append([self.total[i],self.nilai[i+3].tolist()[0]])
             j = j+1
@@ -747,13 +788,23 @@ class HalamanEventControl(CekDB):
 
         self.norma_np = np.array(self.list_norma_rw_sw)
         self.norma_pd = pd.DataFrame(self.norma_np)
+ 
+        self.norma_np_keilmuan = np.array(self.list_norma_rw_sw_keilmuan)
+        self.norma_pd_keilmuan = pd.DataFrame(self.norma_np_keilmuan)
+ 
         self.rw = self.norma_pd[0].astype(int).tolist()
         self.sw = self.norma_pd[1].astype(int).tolist()
-
         self.sum_rts = sum(self.rw)
+
+        self.rw_keilmuan = self.norma_pd_keilmuan[0].astype(int).tolist()
+        self.sw_keilmuan = self.norma_pd_keilmuan[1].astype(int).tolist()
+        self.sum_rts_keilmuan = sum(self.rw_keilmuan)
+
+ 
         self.usia = Usia(self.connect_db)
         self.id_usia = self.usia.query(int(self.peserta.get("Usia")))[0]
-   
+
+        self.id_usia = 10
         self.geasamt = Geasamt(self.connect_db)
         self.nilai_geasamt = self.geasamt.query_by_rts(self.sum_rts,self.id_usia)[2]        
         self.iq = Iq(self.connect_db)
@@ -922,56 +973,56 @@ class HalamanEventControl(CekDB):
             self.hasil_analisa_dict ={}
             import statistics
             self.data =[self.list_norma_dict["ZR"][1],self.list_norma_dict["FA"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Kemampuan Berhitung"] = self.value_dict
 
             self.data = [self.list_norma_dict["ME"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Daya Ingat dan Konsentrasi"] = self.value_dict
             
             # Kreatifitas
             self.data = [self.list_norma_dict["FA"][1],self.list_norma_dict["WU"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Kreatifitas"] = self.value_dict
 
             # Ketelitian
             self.data = [self.list_norma_dict["RA"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Ketelitian"] = self.value_dict
 
             # Judgment
             self.data = [self.list_norma_dict["SE"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Judgment"] = self.value_dict
 
             # Daya Analisis
             self.data = [self.list_norma_dict["AN"][1],self.list_norma_dict["WU"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Daya Analisis"] = self.value_dict
 
             # Pengambilan Keputusan
             self.data = [self.list_norma_dict["SE"][1],self.list_norma_dict["WU"][1],self.list_norma_dict["ZR"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Pengmabilan Keputusan"] = self.value_dict
 
             # Kemampuan Berbahasa
             self.data = [self.list_norma_dict["GE"][1],self.list_norma_dict["WA"][1]]
-            # self.value_dict = statistics.mean(self.data)
-            self.value_dict = sum(self.data)
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
             self.hasil_analisa_dict["Kemampuan Berbahasa"] = self.value_dict
 
@@ -1004,15 +1055,178 @@ class HalamanEventControl(CekDB):
             #     error_text == "select input tidak terdefinisikan"
             #     return error_text
             # self.getSel = self.getSel +1
-            self.gaya_pemecahan_masalah.SetLabel("Ini Bisa diisi apa saja")
-            self.gaya_pemecahan_masalah.SetLabelText()
-  
+            #  jika penjumlahan an + zr > GE + RA
+            self.sum_an_zr = self.list_norma_dict["AN"][1] + self.list_norma_dict["ZR"][1]
+            self.sum_ge_ra = self.list_norma_dict["GE"][1] + self.list_norma_dict["RA"][1]
+            if not self.sum_an_zr >= self.sum_ge_ra:
+                self.gaya_pemecahan_masalah.SetLabel("Fleksibilitas Berpikir")
+            else :
+                self.gaya_pemecahan_masalah.SetLabel("Kemantapan Berpikir")
             pass
 
         # elif self.m_simplebook1.GetPageText( self.m_simplebook1.FindPage(self.m_panel221 ) ) == "Pilih Norma":
         #     import pdb
         #     pdb.set_trace()
         elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )=="Hasil Analisis IST":
+            self.list_norma_dict_keilmuan = {}
+            # urutan SE,WA,AN, GE, RA,ZR,FA,WU,ME
+
+            self.list_norma_dict_keilmuan["SE"] = self.list_norma_rw_sw_keilmuan[0]
+            self.list_norma_dict_keilmuan["WA"] = self.list_norma_rw_sw_keilmuan[1]
+            self.list_norma_dict_keilmuan["AN"] = self.list_norma_rw_sw_keilmuan[2]
+            self.list_norma_dict_keilmuan["GE"] = self.list_norma_rw_sw_keilmuan[3]
+            self.list_norma_dict_keilmuan["RA"] = self.list_norma_rw_sw_keilmuan[4]
+            self.list_norma_dict_keilmuan["ZR"] = self.list_norma_rw_sw_keilmuan[5]
+            self.list_norma_dict_keilmuan["FA"] = self.list_norma_rw_sw_keilmuan[6]
+            self.list_norma_dict_keilmuan["WU"] = self.list_norma_rw_sw_keilmuan[7]
+            self.list_norma_dict_keilmuan["ME"] = self.list_norma_rw_sw_keilmuan[8]
+            
+            
+            self.database_bidang_keilmuan = BidangKeilmuan(self.connect_db)
+            self.data_bidang_keilmuan= self.database_bidang_keilmuan.query_bidang_keilmuan()
+            self.data_keilmuan_np = np.array(self.data_bidang_keilmuan)
+            self.data_keilmuan_pd = pd.DataFrame(self.data_keilmuan_np)
+
+            self.bidang_keilmuan = []
+            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                self.list_norma_dict_keilmuan["ZR"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+                    # print ("Sajikan tabel")
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Matematika & Ilmu Pengetahuan Alam'] 
+                    self.rslt_df_mipa = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_mipa)
+                    pass
+            
+            if self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                    self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                        self.list_norma_dict_keilmuan['WU']>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Pertanian'] 
+                    self.rslt_df_pertanian = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_pertanian)
+
+                    # print ("Sajikan tabel")
+                    pass
+
+            if self.list_norma_dict_keilmuan["WU"][1]>100 and \
+                self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["RA"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknik Sipil & Perencanaan'] 
+                    self.rslt_df_sipil = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_sipil)
+
+                    # print ("Sajikan tabel")
+                    pass
+
+            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                self.list_norma_dict_keilmuan["ZR"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknik Industri'] 
+                    self.rslt_df_industri = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_industri)
+
+                    # print ("Sajikan tabel")
+                    pass
+
+            if self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["ZR"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknologi Mineral'] 
+                    self.rslt_df_mineral = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_mineral)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["WU"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Kesehatan'] 
+                    self.rslt_df_kesehatan = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_kesehatan)
+
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                    self.list_norma_dict_keilmuan["SE"][1]>100:
+                    
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Sastra & Budaya'] 
+                    self.rslt_df_sastra = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_sastra)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["ZR"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Seni Rupa & Desain'] 
+                    self.rslt_df_senirupa = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_senirupa)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                    self.list_norma_dict_keilmuan["ZR"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ekonomi'] 
+                    self.rslt_df_ekonomi = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_ekonomi)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
+                self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["WA"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Hukum'] 
+                    self.rslt_df_hukum = self.rslt_df.to_numpy().tolist()
+                    
+                    self.bidang_keilmuan.extend(self.rslt_df_hukum)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
+                self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["GE"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Sosial & Politik'] 
+                    self.rslt_df_sospol = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_sospol)
+
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Komunikasi'] 
+                    self.rslt_df_komunikasi = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_komunikasi)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
+                self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["WA"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Psikologi'] 
+                    self.rslt_df_psikologi = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_psikologi)
+                    pass
+            # import pdb 
+            # pdb.set_trace()            
+
+                    # print ("Sajikan tabel")
+                    
+
             # elif self.getSel == 6:
             # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
             # global bsizer12
@@ -1033,6 +1247,8 @@ class HalamanEventControl(CekDB):
 
             # self.m_dataViewListCtrl1.InsertItem(0, ["df", "dfs", "sdf"])
             # self.m_staticText_berpikir.SetValue()
+            self.sajikan_grafik = GrafikProfesiInherited(self)
+            self.sajikan_grafik.draw()
             self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel9))
             pass
 
@@ -1079,14 +1295,12 @@ class HalamanEventControl(CekDB):
             #         self.get_biodata()[8],
             #         self.get_biodata()[9]
             #     ]
-
             # self.grafik_profesi = GrafikProfesi(self)
             # self.grafik_profesi.draw()
             self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel10))
             self.m_selanjutnya.Disable()
             self.m_dataViewListCtrl2.DeleteAllItems()
             self.halaman_terakhir(self)
-
             pass
 
         elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Halaman Terakhir":

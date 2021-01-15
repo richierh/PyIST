@@ -281,15 +281,19 @@ class TabelDataPesertaIn(TabelDataPeserta):
     def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
+        self.data_peserta = self.parent.data_peserta
 
         
         self.data_peserta = Peserta(self.parent.connect_db)
         self.data_list =[]
         for data in self.data_peserta.query_data_peserta():
             index =  self.data_peserta.query_data_peserta().index(data)+1
-            self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
+            self.data_list.append([str(index),str(data[0]),str(data[1]),str(data[3]),str(data[12])])
         for data in self.data_list:
             self.m_dataViewListCtrl3.AppendItem(data)
+        # import pdb
+        # pdb.set_trace()
+
         pass    
 
 
@@ -307,9 +311,9 @@ class TabelDataPesertaIn(TabelDataPeserta):
 
         if self.m_dataViewListCtrl3.GetSelectedRow() != -1:
             self.data = self.m_dataViewListCtrl3.GetValue(self.m_dataViewListCtrl3.GetSelectedRow(),1)
-
             self.m_dataViewListCtrl3.DeleteItem(self.m_dataViewListCtrl3.GetSelectedRow())
             # print(self.data)
+
             self.data_peserta.hapus_peserta(self.data)
 
             self.m_dataViewListCtrl3.DeleteAllItems()
@@ -317,7 +321,7 @@ class TabelDataPesertaIn(TabelDataPeserta):
             self.data_list =[]
             for data in self.data_peserta.query_data_peserta():
                 index =  self.data_peserta.query_data_peserta().index(data)+1
-                self.data_list.append([str(index),str(data[0]),str(data[3]),str(data[12])])
+                self.data_list.append([str(index),str(data[0]),str(data[1]),str(data[3]),str(data[12])])
             for data in self.data_list:
                 self.m_dataViewListCtrl3.AppendItem(data)
 

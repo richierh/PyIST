@@ -165,19 +165,19 @@ class GrafikProfesi():
         # self.SetSizer(self.sizer)
         # self.Fit()
 
-    def draw(self, nilai_grafik=None):
-        self.grafik = nilai_grafik
-        # print (t)
-        x = ["a", "b", "c",
-            "d", "e", "f", "g"]
-        self.x = arange(len(x))
-        y = [130, 136, 79, 125, 128, 146, 128]
-        self.rects = self.axes.bar(x, y, color='green')
-        # self.axes.invert_yaxis()
-        self.axes.set_ylim(bottom=50, top=150)
-        self.axes.set_xticks(self.x)
-        self.axes.set_title("PROFESI JURUSAN")
-        self.autolabel()
+    # def draw(self, nilai_grafik=None):
+    #     self.grafik = nilai_grafik
+    #     # print (t)
+    #     x = ["a", "b", "c",
+    #         "d", "e", "f", "g"]
+    #     self.x = arange(len(x))
+    #     y = [130, 136, 79, 125, 128, 146, 128]
+    #     self.rects = self.axes.bar(x, y, color='green')
+    #     # self.axes.invert_yaxis()
+    #     self.axes.set_ylim(bottom=50, top=150)
+    #     self.axes.set_xticks(self.x)
+    #     self.axes.set_title("PROFESI JURUSAN")
+    #     self.autolabel()
 
     def autolabel(self):
 

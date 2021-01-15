@@ -2269,7 +2269,7 @@ class ISTUtama ( wx.Frame ):
 
 		bSizer12.Add( ( 0, 0), 1, wx.EXPAND, 5 )
 
-		self.gaya_pemecahan_masalah = wx.StaticText( self.m_panel7, wx.ID_ANY, u"Keunggulan akan terisi apabila subjek mendapat skor SW lebih dari 100 pada beberapa subtest", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.gaya_pemecahan_masalah = wx.StaticText( self.m_panel7, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.gaya_pemecahan_masalah.Wrap( -1 )
 
 		self.gaya_pemecahan_masalah.SetFont( wx.Font( 16, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Tw Cen MT" ) )
@@ -2779,6 +2779,7 @@ class TabelDataPeserta ( wx.Frame ):
 
 		self.m_dataViewListColumn9 = self.m_dataViewListCtrl3.AppendTextColumn( u"No", wx.dataview.DATAVIEW_CELL_INERT, 75, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn8 = self.m_dataViewListCtrl3.AppendTextColumn( u"ID Peserta", wx.dataview.DATAVIEW_CELL_INERT, 150, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
+		self.m_dataViewListColumn58 = self.m_dataViewListCtrl3.AppendTextColumn( u"No Tes", wx.dataview.DATAVIEW_CELL_INERT, 150, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn10 = self.m_dataViewListCtrl3.AppendTextColumn( u"Nama Peserta", wx.dataview.DATAVIEW_CELL_INERT, 250, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		self.m_dataViewListColumn36 = self.m_dataViewListCtrl3.AppendTextColumn( u"Keterangan", wx.dataview.DATAVIEW_CELL_INERT, -1, wx.ALIGN_LEFT, wx.dataview.DATAVIEW_COL_RESIZABLE )
 		bSizer34.Add( self.m_dataViewListCtrl3, 1, wx.ALL|wx.EXPAND, 5 )

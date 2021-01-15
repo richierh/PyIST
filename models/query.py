@@ -239,7 +239,7 @@ FROM norma_sendiri ORDER BY id_norma DESC LIMIT 1
         getdata = self.cursorexe.execute(self.sql_cmd).fetchone()
         if getdata is None:
             getdata = (1,)
-            print ("hello")
+            # print ("hello")
         
         self.close_db()
         return getdata[0]
@@ -369,6 +369,22 @@ FROM norma_sendiri ORDER BY id_norma DESC LIMIT 1
         self.conn.commit()
         self.close_db()
         return True
+class BidangKeilmuan(SqliteDB):
+
+    def __init__(self,parent):
+        super().__init__(parent)
+
+    def query_bidang_keilmuan(self,value=None):
+        self.conn = self.connect_db()
+        self.cursorexe = self.conn.cursor()
+        self.value = value
+
+        self.sql_cmd = """
+        SELECT * FROM [Bidang Keilmuan];        
+        """
+        self.cursorexe.execute(self.sql_cmd)
+        self.data = self.cursorexe.fetchall()
+        return self.data
 
 class KonversiGE(SqliteDB):
 
@@ -804,7 +820,7 @@ class InputJawaban(SqliteDB):
                     Left Join [Kunci Jawaban]
                     On "Input Jawaban".id_kunci = "Kunci Jawaban".id_kunci
                     where "Input Jawaban".id_tes = ?"""        
-        print (self.sql_cmd)
+        # print (self.sql_cmd)
 
         self.cursorexe.execute(self.sql_cmd,[self.values,])
         self.result = self.cursorexe.fetchall()
@@ -1243,44 +1259,44 @@ class TabelNormaSendiri(SqliteDB):
         return self.getdatas
 
 
-class BidangKeilmuan(SqliteDB):
+# class BidangKeilmuan(SqliteDB):
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.parent = parent
-        pass
+#     def __init__(self, parent=None):
+#         super().__init__(parent)
+#         self.parent = parent
+#         pass
     
-    def __repr__(self):
-        return True
+#     def __repr__(self):
+#         return True
     
-    def query_keilmuan(self, nilai_id):
-        self.id = nilai_id
-        # self.nilai = nilai_rw
-        print(f"ini ada {self.id}")
-        self.conn = self.connect_db()
-        self.cursorexe = self.conn.cursor()
-        self.sql_cmd = """SELECT
-                fakultas.id,
-                bidang_keilmuan.bidang_keilmuan,
-                id_fak,
-                fakultas.fakultas,
-                id_jur,
-                jurusan
-            FROM jurusan
-            LEFT JOIN fakultas
-            ON jurusan.id_fak = fakultas.id_fak 
-            LEFT JOIN bidang_keilmuan
-            ON bidang_keilmuan.id=fakultas.id
-            WHERE jurusan.id_fak=?
-            ;
-                    """
+#     def query_keilmuan(self, nilai_id):
+#         self.id = nilai_id
+#         # self.nilai = nilai_rw
+#         print(f"ini ada {self.id}")
+#         self.conn = self.connect_db()
+#         self.cursorexe = self.conn.cursor()
+#         self.sql_cmd = """SELECT
+#                 fakultas.id,
+#                 bidang_keilmuan.bidang_keilmuan,
+#                 id_fak,
+#                 fakultas.fakultas,
+#                 id_jur,
+#                 jurusan
+#             FROM jurusan
+#             LEFT JOIN fakultas
+#             ON jurusan.id_fak = fakultas.id_fak 
+#             LEFT JOIN bidang_keilmuan
+#             ON bidang_keilmuan.id=fakultas.id
+#             WHERE jurusan.id_fak=?
+#             ;
+#                     """
 
-        self.cursorexe.execute(self.sql_cmd, (self.nilai_total_rw,))
-        self.getdatas = self.cursorexe.fetchall()
+#         self.cursorexe.execute(self.sql_cmd, (self.nilai_total_rw,))
+#         self.getdatas = self.cursorexe.fetchall()
 
-        self.close_db()
+#         self.close_db()
 
-        return self.getdatas
+#         return self.getdatas
 
 
 class TabelNormaPekerjaan(SqliteDB) :
@@ -1420,7 +1436,8 @@ class JenisNorma(SqliteDB):
         self.cursorexe.execute(self.sql_cmd, self.id)
         self.getdatas = self.cursorexe.fetchall()
         for data in self.getdatas:
-            print (data)
+            # print (data)
+            pass
 
         self.close_db()
         return self.getdatas
@@ -1478,7 +1495,8 @@ class JenisNorma(SqliteDB):
         self.cursorexe.execute(self.sql_cmd, self.id)
         self.getdatas = self.cursorexe.fetchall()
         for data in self.getdatas:
-            print (data)
+            # print (data)
+            pass
 
         self.close_db()
         return self.getdatas        
@@ -1801,4 +1819,4 @@ if __name__ == "__main__":
     #         # print(f"berhasil : {cek[2]}")
     #         pass
     tes = NormaSarjana(connect_db)
-    print (tes.get_score(150))
+    # print (tes.get_score(150))

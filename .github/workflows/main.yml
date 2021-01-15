@@ -23,7 +23,7 @@ jobs:
         pip install pyinstaller
     - name: build with pyinstaller
       run: |
-        pyinstaller run.py -w
+        pyinstaller ./run.py -w
 
     - uses: actions/upload-artifact@v2
       with:

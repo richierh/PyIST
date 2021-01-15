@@ -1,0 +1,16 @@
+        SELECT
+            rs,
+            se,
+            wa,
+            an,
+            ge,
+            ra,
+            zr,
+            fa,
+            wu,
+            me
+        FROM norma_sendiri_kunci
+        LEFT JOIN norma_sendiri
+        ON norma_sendiri.id_norma = norma_sendiri_kunci.id_norma
+        WHERE norma_sendiri.id_norma = ?
+                ;

@@ -25,6 +25,9 @@ class PilihTabelInherited(PilihTabel):
 
         self.parent = parent
         self.SetTitle("Pilih Norma")
+        self.m_staticText1.SetLabel("Norma Usia")
+        self.m_staticText2.SetLabel("Norma Pendidikan")
+        self.m_staticText3.SetLabel("Norma Sendiri")
 
         # Norma Pendidikan dan Usia
     def normapendidikanOnButtonClick(self,event):

@@ -181,6 +181,7 @@ class BuatNormaSendiriInherited(BuatNormaSendiri):
 
         pass
 
+
 class GrafikFakultas():
 
     def __init__(self,parent):
@@ -214,6 +215,8 @@ class GrafikFakultas():
         self.fig.canvas.mpl_connect('pick_event', onpick)
 
         plt.show()
+
+
 class GrafikLayoutInherited(GrafikLayout):
 
     def __init__(self, parent):
@@ -228,6 +231,7 @@ class GrafikLayoutInherited(GrafikLayout):
         print(self.path)
         print("lewat sini nggak")
         return self.figure.savefig(self.path, dpi='figure')
+
 
 class GrafikProfesiInherited(GrafikProfesi):
 
@@ -273,6 +277,8 @@ class GrafikProfesiInherited(GrafikProfesi):
         self.figure.canvas.mpl_connect('pick_event', onpick)
 
         # plt.show()
+
+
 class GrafikHasilLayoutInherited(GrafikHasil):
 
     def __init__(self, parent):

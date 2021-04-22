@@ -4,7 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
         {
             "name": "Python: SchemaCrawler",
             "type": "python",
@@ -25,12 +31,5 @@
             "request": "launch",
             "program": "${workspaceFolder}/models/sql_cmd.py",
             "console": "integratedTerminal"
-        },
-        {
-            "name": "Python: fb",
-            "type": "python",
-            "request": "launch",
-            "program": "/home/cireng/Projects/fb/fb.py",
-            "console": "integratedTerminal"
+        }
     ]
-}

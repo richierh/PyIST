@@ -623,7 +623,7 @@ class NilaiNorma(SqliteDB):
         self.conn=self.connect_db()
         self.cursorexe = self.conn.cursor()
         self.values=values
-
+        # id_nilai_norma,[No],RS,SE,WA,AN,GE,ME,RA,ZR,FA,WU,NormaID
         self.sql_cmd ="""
         SELECT *
         FROM [Nilai Norma]

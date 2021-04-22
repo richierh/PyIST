@@ -109,7 +109,6 @@ class NormaSendiriInherited(NormaSendiri):
         for data in self.data_str:
             self.m_dataViewListCtrl30.AppendItem(data)
 
-
     def m_data_aktif_tabel_norma_sendiri(self,event):
         # print ("nyala")
         pass
@@ -189,7 +188,6 @@ class HalamanEventControl(CekDB):
         self.tipe_biodata = 0
         pass
 
-
     def m_kembali_ke_awalOnButtonClick(self, event):
         self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel1))
         self.m_sebelumnya.Disable()
@@ -242,72 +240,416 @@ class HalamanEventControl(CekDB):
             self.halaman_terakhir(self)
         pass
 
-
-
     def m_sebelumnyaOnButtonClick(self, event):
 
-    #     self.getSel = self.m_simplebook1.GetSelection()
-    #     self.m_simplebook1.SetSelection(self.getSel - 1)
-    #     self.getSel = self.m_simplebook1.GetSelection()
-        
-        if self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )== "Pilihan Cara Input":
-            self.m_selanjutnya.Enable()        
-            self.m_sebelumnya.Disable()
-            self.m_kembali_ke_awal.Disable()
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel1))
-            pass
-        
-        # elif self.getSel == 1:
-        #     self.m_selanjutnya.Disable()        
-        #     self.m_sebelumnya.Enable()
-        #     self.m_kembali_ke_awal.Enable()
-        #     pass
-        
-        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )== "Jenis Input":
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel2))
+        #     self.getSel = self.m_simplebook1.GetSelection()
+        #     self.m_simplebook1.SetSelection(self.getSel - 1)
+        #     self.getSel = self.m_simplebook1.GetSelection()
+            
+            if self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )== "Pilihan Cara Input":
+                self.m_selanjutnya.Enable()        
+                self.m_sebelumnya.Disable()
+                self.m_kembali_ke_awal.Disable()
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel1))
+                pass
+            
+            # elif self.getSel == 1:
+            #     self.m_selanjutnya.Disable()        
+            #     self.m_sebelumnya.Enable()
+            #     self.m_kembali_ke_awal.Enable()
+            #     pass
+            
+            elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )== "Jenis Input":
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel2))
+                self.m_selanjutnya.Disable()        
+                self.m_sebelumnya.Enable()
+                self.m_kembali_ke_awal.Enable()
+
+
+            elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Pilih Norma":
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel3))
+                self.m_selanjutnya.Enable()
+
+            # elif self.getSel == 3:
+            #     'Proses hitung dimulai ketika halaman 3, atau pada saat penyajian grafik'
+            #     # print ("di halaman 3 penyajian grafik")
+            #     self.m_selanjutnya.Disable()
+            #     # import pdb
+            #     # pdb.set_trace()
+            #     # self.grafik = (self)
+            #     # self.grafik.draw(self.input_peserta_rw_sw)
+            #     from models.query import Peserta
+            #     self.id = self.databasepeserta.last_row()
+            #     self.datapeserta = Peserta(self.connect_db)
+            #     self.datapeserta.hapus_peserta(self.id)
+
+            #     pass
+
+            elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Hasil Norma":
+            # elif self.getSel == 4:
+
+                self.id = self.databasepeserta.last_row()
+                self.datapeserta = Peserta(self.connect_db)
+                self.datapeserta.hapus_peserta(self.id)
+
+                self.m_selanjutnya.Disable()
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel221))
+
+
+            elif self.m_simplebook1.GetPageText(self.m_simplebook1.GetSelection()) == "Hasil Analisis IST":
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel6))
+
+
+
+                # global bsizer12
+                # self.grafik_y = {}
+
+                # self.grafik_y["Kemampuan Berhitung"] = mean([self.input_peserta_rw_sw[5][1]\
+                #    , self.input_peserta_rw_sw[6][1]])
+                # self.grafik_y["Daya Ingat dan Konsentrasi"] = self.input_peserta_rw_sw[4][1]
+                # self.grafik_y["Kreatifitas"] = mean([self.input_peserta_rw_sw[7][1], self.input_peserta_rw_sw[8][1]])
+                # self.grafik_y["Ketelitian"] = self.input_peserta_rw_sw[5][1]
+                # self.grafik_y["Judgement"] = self.input_peserta_rw_sw[0][1]
+                # self.grafik_y["Daya Analisis"] = mean([self.input_peserta_rw_sw[2][1], self.input_peserta_rw_sw[8][1]])
+                # self.grafik_y["Pengembalian Keputusan"] = mean([self.input_peserta_rw_sw[0][1], self.input_peserta_rw_sw[6][1], self.input_peserta_rw_sw[8][1]])
+                # self.grafik_y["Kemampuan Berbahasa"] = mean([self.input_peserta_rw_sw[1][1], self.input_peserta_rw_sw[3][1]])
+
+                # self.grafik_hasil = GrafikHasilLayoutInherited(self)
+                # self.grafik_hasil.draw(self.grafik_y)
+                pass
+
+            elif self.m_simplebook1.GetPageText(self.m_simplebook1.GetSelection()) == "Penjurusan":
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel7))
+
+            # elif self.getSel == 5:
+
+            #     self.jawab_tambah =  self.jawaban.query_kunci_jawaban()
+            #     self.jawaban_list = [data[2:] for data in self.jawab_tambah]
+            #     self.gab = []
+
+            #     self.i = 0
+            #     for data in self.input_peserta:
+            #         self.gab.append([*data,*self.jawaban_list[self.i]])
+            #         print (self.i)
+            #         self.i += 1
+
+            #     self.m_selanjutnya.Disable()
+
+            # elif self.getSel == 6 :
+            #     self.m_selanjutnya.Enable()
+
+            # else:
+            #     pass
+
+            elif self.m_simplebook1.GetPageText(self.m_simplebook1.GetSelection()) == "Halaman Terakhir":
+                self.m_selanjutnya.Enable()
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel9))
+                pass
+
+        # pilihan norma usia
+
+    def m_selanjutnyaOnButtonClick(self, event):
+        pass
+
+        if self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection()) == "Halaman Biodata":
             self.m_selanjutnya.Disable()        
             self.m_sebelumnya.Enable()
             self.m_kembali_ke_awal.Enable()
+            if self.m_textCtrl_no_tes.GetValue() == "":
+                from views.required_field import RequiredField
+                self.buka_required_not_complete = RequiredField(self)
+                self.buka_required_not_complete.Show()
+                self.m_selanjutnya.Disable()        
+                self.m_sebelumnya.Disable()
+            else :
+                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel2))
+            pass
 
 
-        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Pilih Norma":
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel3))
-            self.m_selanjutnya.Enable()
+        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Jenis Input":
+            
+            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel221))
+            self.m_selanjutnya.Disable()
 
-        # elif self.getSel == 3:
-        #     'Proses hitung dimulai ketika halaman 3, atau pada saat penyajian grafik'
-        #     # print ("di halaman 3 penyajian grafik")
-        #     self.m_selanjutnya.Disable()
-        #     # import pdb
-        #     # pdb.set_trace()
-        #     # self.grafik = (self)
-        #     # self.grafik.draw(self.input_peserta_rw_sw)
-        #     from models.query import Peserta
-        #     self.id = self.databasepeserta.last_row()
-        #     self.datapeserta = Peserta(self.connect_db)
-        #     self.datapeserta.hapus_peserta(self.id)
-
-        #     pass
+            pass
 
         elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Hasil Norma":
-        # elif self.getSel == 4:
 
-            self.id = self.databasepeserta.last_row()
-            self.datapeserta = Peserta(self.connect_db)
-            self.datapeserta.hapus_peserta(self.id)
+            self.list_norma_dict = {}
+            # urutan SE,WA,AN, GE, RA,ZR,FA,WU,ME
 
-            self.m_selanjutnya.Disable()
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel221))
+            self.list_norma_dict["SE"] = self.list_norma_rw_sw[0]
+            self.list_norma_dict["WA"] = self.list_norma_rw_sw[1]
+            self.list_norma_dict["AN"] = self.list_norma_rw_sw[2]
+            self.list_norma_dict["GE"] = self.list_norma_rw_sw[3]
+            self.list_norma_dict["RA"] = self.list_norma_rw_sw[4]
+            self.list_norma_dict["ZR"] = self.list_norma_rw_sw[5]
+            self.list_norma_dict["FA"] = self.list_norma_rw_sw[6]
+            self.list_norma_dict["WU"] = self.list_norma_rw_sw[7]
+            self.list_norma_dict["ME"] = self.list_norma_rw_sw[8]
 
 
-        elif self.m_simplebook1.GetPageText(self.m_simplebook1.GetSelection()) == "Hasil Analisis IST":
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel6))
+            # Perhitungan untuk analisa hasil IST
+            # Kemampuan berhitung = Ra dan zr
+            self.hasil_analisa_dict ={}
+            import statistics
+            self.data =[self.list_norma_dict["ZR"][1],self.list_norma_dict["FA"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
+            self.hasil_analisa_dict["Kemampuan Berhitung"] = self.value_dict
 
+            self.data = [self.list_norma_dict["ME"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
 
+            self.hasil_analisa_dict["Daya Ingat dan Konsentrasi"] = self.value_dict
+            
+            # Kreatifitas
+            self.data = [self.list_norma_dict["FA"][1],self.list_norma_dict["WU"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
+
+            self.hasil_analisa_dict["Kreatifitas"] = self.value_dict
+
+            # Ketelitian
+            self.data = [self.list_norma_dict["RA"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
+
+            self.hasil_analisa_dict["Ketelitian"] = self.value_dict
+
+            # Judgment
+            self.data = [self.list_norma_dict["SE"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
+
+            self.hasil_analisa_dict["Judgment"] = self.value_dict
+
+            # Daya Analisis
+            self.data = [self.list_norma_dict["AN"][1],self.list_norma_dict["WU"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
+
+            self.hasil_analisa_dict["Daya Analisis"] = self.value_dict
+
+            # Pengambilan Keputusan
+            self.data = [self.list_norma_dict["SE"][1],self.list_norma_dict["WU"][1],self.list_norma_dict["ZR"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
+
+            self.hasil_analisa_dict["Pengmabilan Keputusan"] = self.value_dict
+
+            # Kemampuan Berbahasa
+            self.data = [self.list_norma_dict["GE"][1],self.list_norma_dict["WA"][1]]
+            self.value_dict = statistics.mean(self.data)
+            # self.value_dict = sum(self.data)
+
+            self.hasil_analisa_dict["Kemampuan Berbahasa"] = self.value_dict
+
+            # import pdb
+            # pdb.set_trace()
+
+            'Proses hitung dimulai ketika halaman 3, atau pada saat penyajian grafik'
+            print("penyajian grafik proses hitung")
+            self.grafik_hasil = GrafikHasilLayoutInherited(self)
+            self.tampilan_grafik = self.grafik_hasil.draw()
+            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel7))
+            # if self.select_input == 1:
+            #    pass
+            # elif self.select_input == 2:
+            #     self.ambil_ge = self.panggil_nilai_total.getdata()
+            #     self.ge = self.ambil_ge[3]
+            #     self.kelompok_usia = self.m_spinCtrl_usia.GetValue()
+            #     self.databasekon = DatabaseConnect(self.nama_file)
+            #     # konversi nilai GE, hasil akhirnya adalah self.nilai_ge
+            #     # self.nilai_ge adalah hasil input yang telah dikonversi kedalam GE
+            #     self.con_datakonversi_ge = DataKonversiGE(self.databasekon)
+            #     self.nilai_ge = self.con_datakonversi_ge.konversi_ge(self.ge)
+            #     self.nilai_ge = self.nilai_ge[3]
+            #     # self.input_peserta adalah input peserta total (contoh di bawah adalah 
+            #     # self.input_peserta = self.panggil_nilai_total.getdata_arrange()) dari 
+            #     # GUI SpinControl yang kemudian di hitung menghasilkan 
+            #     # bentuk output yang diterima oleh proses selanjutnya, yakni menghitung SW
+            #     self.input_peserta = self.panggil_nilai_total.getdata_arrange()
+            # else:
+            #     error_text == "select input tidak terdefinisikan"
+            #     return error_text
+            # self.getSel = self.getSel +1
+            #  jika penjumlahan an + zr > GE + RA
+            self.sum_an_zr = self.list_norma_dict["AN"][1] + self.list_norma_dict["ZR"][1]
+            self.sum_ge_ra = self.list_norma_dict["GE"][1] + self.list_norma_dict["RA"][1]
+            if not self.sum_an_zr >= self.sum_ge_ra:
+                self.gaya_pemecahan_masalah.SetLabel("Fleksibilitas Berpikir")
+            else :
+                self.gaya_pemecahan_masalah.SetLabel("Kemantapan Berpikir")
+            pass
+
+        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )=="Hasil Analisis IST":
+            self.list_norma_dict_keilmuan = {}
+            # urutan SE,WA,AN, GE, RA,ZR,FA,WU,ME
+
+            self.list_norma_dict_keilmuan["SE"] = self.list_norma_rw_sw_keilmuan[0]
+            self.list_norma_dict_keilmuan["WA"] = self.list_norma_rw_sw_keilmuan[1]
+            self.list_norma_dict_keilmuan["AN"] = self.list_norma_rw_sw_keilmuan[2]
+            self.list_norma_dict_keilmuan["GE"] = self.list_norma_rw_sw_keilmuan[3]
+            self.list_norma_dict_keilmuan["RA"] = self.list_norma_rw_sw_keilmuan[4]
+            self.list_norma_dict_keilmuan["ZR"] = self.list_norma_rw_sw_keilmuan[5]
+            self.list_norma_dict_keilmuan["FA"] = self.list_norma_rw_sw_keilmuan[6]
+            self.list_norma_dict_keilmuan["WU"] = self.list_norma_rw_sw_keilmuan[7]
+            self.list_norma_dict_keilmuan["ME"] = self.list_norma_rw_sw_keilmuan[8]
+            
+            
+            self.database_bidang_keilmuan = BidangKeilmuan(self.connect_db)
+            self.data_bidang_keilmuan= self.database_bidang_keilmuan.query_bidang_keilmuan()
+            self.data_keilmuan_np = np.array(self.data_bidang_keilmuan)
+            self.data_keilmuan_pd = pd.DataFrame(self.data_keilmuan_np)
+
+            self.bidang_keilmuan = []
+            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                self.list_norma_dict_keilmuan["ZR"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+                    # print ("Sajikan tabel")
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Matematika & Ilmu Pengetahuan Alam'] 
+                    self.rslt_df_mipa = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_mipa)
+                    pass
+            
+            if self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                    self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                        self.list_norma_dict_keilmuan['WU']>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Pertanian'] 
+                    self.rslt_df_pertanian = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_pertanian)
+
+                    # print ("Sajikan tabel")
+                    pass
+
+            if self.list_norma_dict_keilmuan["WU"][1]>100 and \
+                self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["RA"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknik Sipil & Perencanaan'] 
+                    self.rslt_df_sipil = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_sipil)
+
+                    # print ("Sajikan tabel")
+                    pass
+
+            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                self.list_norma_dict_keilmuan["ZR"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknik Industri'] 
+                    self.rslt_df_industri = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_industri)
+
+                    # print ("Sajikan tabel")
+                    pass
+
+            if self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["ZR"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknologi Mineral'] 
+                    self.rslt_df_mineral = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_mineral)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["WU"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Kesehatan'] 
+                    self.rslt_df_kesehatan = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_kesehatan)
+
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                    self.list_norma_dict_keilmuan["SE"][1]>100:
+                    
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Sastra & Budaya'] 
+                    self.rslt_df_sastra = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_sastra)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["FA"][1]>100 and \
+                self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["ZR"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Seni Rupa & Desain'] 
+                    self.rslt_df_senirupa = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_senirupa)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
+                self.list_norma_dict_keilmuan["GE"][1]>100 and \
+                    self.list_norma_dict_keilmuan["ZR"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ekonomi'] 
+                    self.rslt_df_ekonomi = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_ekonomi)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
+                self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["WA"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Hukum'] 
+                    self.rslt_df_hukum = self.rslt_df.to_numpy().tolist()
+                    
+                    self.bidang_keilmuan.extend(self.rslt_df_hukum)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
+                self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["GE"][1]>100:
+
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Sosial & Politik'] 
+                    self.rslt_df_sospol = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_sospol)
+
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["ME"][1]>100 and \
+                self.list_norma_dict_keilmuan["WA"][1]>100 and \
+                    self.list_norma_dict_keilmuan["AN"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Komunikasi'] 
+                    self.rslt_df_komunikasi = self.rslt_df.to_numpy().tolist()
+
+                    self.bidang_keilmuan.extend(self.rslt_df_komunikasi)
+                    # print ("Sajikan tabel")
+                    pass
+            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
+                self.list_norma_dict_keilmuan["AN"][1]>100 and \
+                    self.list_norma_dict_keilmuan["WA"][1]>100:
+                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Psikologi'] 
+                    self.rslt_df_psikologi = self.rslt_df.to_numpy().tolist()
+                    self.bidang_keilmuan.extend(self.rslt_df_psikologi)
+                    pass
+            # import pdb 
+            # pdb.set_trace()            
+
+                    # print ("Sajikan tabel")
+                    
+
+            # elif self.getSel == 6:
+            # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
             # global bsizer12
+            # # self.properties_tamp.tabel_show()
             # self.grafik_y = {}
-
             # self.grafik_y["Kemampuan Berhitung"] = mean([self.input_peserta_rw_sw[5][1]\
             #    , self.input_peserta_rw_sw[6][1]])
             # self.grafik_y["Daya Ingat dan Konsentrasi"] = self.input_peserta_rw_sw[4][1]
@@ -320,37 +662,81 @@ class HalamanEventControl(CekDB):
 
             # self.grafik_hasil = GrafikHasilLayoutInherited(self)
             # self.grafik_hasil.draw(self.grafik_y)
-            pass
 
-        elif self.m_simplebook1.GetPageText(self.m_simplebook1.GetSelection()) == "Penjurusan":
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel7))
+            # self.m_dataViewListCtrl1.InsertItem(0, ["df", "dfs", "sdf"])
+            # self.m_staticText_berpikir.SetValue()
+            self.keilmuan_pd = pd.DataFrame(self.bidang_keilmuan)
 
-        # elif self.getSel == 5:
 
-        #     self.jawab_tambah =  self.jawaban.query_kunci_jawaban()
-        #     self.jawaban_list = [data[2:] for data in self.jawab_tambah]
-        #     self.gab = []
-
-        #     self.i = 0
-        #     for data in self.input_peserta:
-        #         self.gab.append([*data,*self.jawaban_list[self.i]])
-        #         print (self.i)
-        #         self.i += 1
-
-        #     self.m_selanjutnya.Disable()
-
-        # elif self.getSel == 6 :
-        #     self.m_selanjutnya.Enable()
-
-        # else:
-        #     pass
-
-        elif self.m_simplebook1.GetPageText(self.m_simplebook1.GetSelection()) == "Halaman Terakhir":
-            self.m_selanjutnya.Enable()
+            self.sajikan_grafik = GrafikProfesiInherited(self)
+            self.sajikan_grafik.draw()
             self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel9))
             pass
 
-    # pilihan norma usia
+        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection()) == "Penjurusan":
+        # elif self.getSel == 7:
+            # if self.tipe_biodata == 0:
+            #     self.grafik_profesi = GrafikProfesi(self)
+            #     self.grafik_profesi.draw()
+
+            #     pass
+
+            # if self.tipe_biodata == 1:
+            #     self.biodata_kandidat = [
+            #         self.tipe_biodata,
+            #         self.get_biodata()[0],
+            #         self.get_biodata()[1],
+            #         self.get_biodata()[3],
+            #         self.get_biodata()[4]
+            #     ]
+            #     self.biodata_kandidat_tamb1 = [
+            #         self.get_biodata()[5],
+            #         self.get_biodata()[6],
+            #         self.get_biodata()[7],
+            #         self.get_biodata()[8],
+            #         self.get_biodata()[9],
+            #         self.get_biodata()[10],
+            #         self.get_biodata()[11],
+            #         self.get_biodata()[12],
+            #         self.get_biodata()[13],
+            #         self.kelompok_usia
+            #     ]
+            # elif self.tipe_biodata == 2:
+            #     self.biodata_kandidat = [
+            #         self.tipe_biodata,
+            #         self.get_biodata()[2],
+            #         self.get_biodata()[1],
+            #         self.get_biodata()[3],
+            #         self.get_biodata()[4]
+            #     ]
+            #     self.biodata_kandidat_tamb2 = [
+            #         self.get_biodata()[5],
+            #         self.get_biodata()[6],
+            #         self.get_biodata()[7],
+            #         self.get_biodata()[8],
+            #         self.get_biodata()[9]
+            #     ]
+            # self.grafik_profesi = GrafikProfesi(self)
+            # self.grafik_profesi.draw()
+            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel10))
+            self.m_selanjutnya.Disable()
+            self.m_dataViewListCtrl2.DeleteAllItems()
+            self.halaman_terakhir(self)
+            
+            pass
+
+        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Halaman Terakhir":
+
+            pass
+
+        else:
+            # self.m_button3.Enable()
+            # print ("masuk halaman 5")
+            pass
+        # self.m_simplebook1.SetSelection(self.getSel)
+        # print ("kesini nggak")
+        pass
+
     def m_button_norma_usia(self, event):
         from controllers.hitung_ge import GE
 
@@ -808,7 +1194,10 @@ class HalamanEventControl(CekDB):
         self.id_usia = self.usia.query(int(self.peserta.get("Usia")))[0]
 
         self.id_usia = 10
+        if self.sum_rts < 25 :
+            self.sum_rts = 25
         self.geasamt = Geasamt(self.connect_db)
+        
         self.nilai_geasamt = self.geasamt.query_by_rts(self.sum_rts,self.id_usia)[2]        
         self.iq = Iq(self.connect_db)
         self.nilai_iq = self.iq.query_by_geasamt(self.nilai_geasamt)[2]
@@ -897,427 +1286,6 @@ class HalamanEventControl(CekDB):
 
 
 
-    def m_selanjutnyaOnButtonClick(self, event):
-        # print("klik Selanjutnya")
-        # self.getSel = self.m_simplebook1.GetSelection()
-
-        if self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection()) == "Halaman Biodata":
-            # import pdb
-            # pdb.set_trace()
-            self.m_selanjutnya.Disable()        
-            self.m_sebelumnya.Enable()
-            self.m_kembali_ke_awal.Enable()
-            if self.m_textCtrl_no_tes.GetValue() == "":
-                from views.required_field import RequiredField
-                self.buka_required_not_complete = RequiredField(self)
-                self.buka_required_not_complete.Show()
-                self.m_selanjutnya.Disable()        
-                self.m_sebelumnya.Disable()
-            else :
-                self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel2))
-                # self.m_simplebook1.GetSelection(self.m_simplebook1.FindPage(self.m_panel2))
-
-                # self.getSel = self.getSel + 1
-            pass
-
-
-        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Jenis Input":
-            
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel221))
-            self.m_selanjutnya.Disable()
-
-            pass
-        
-
-        # elif self.getSel == 4:
-        #     # self.m_textCtrl_biodata.SetValue(self.biodata[2])
-        #     # self.m_choice3.SetItems(["0", "2"])
-        #     # import pdb
-        #     # pdb.set_trace()
-        #     if self.pilih == 0:
-        #         pass
-        #     else:
-        #         self.m_staticText_pilih_norma_sendir.SetLabel(self.buka_jendela_norma.getdata[2])
-
-        #         # self.m_panel221.Layout()
-        #         pass
-            
-        #     # Tempat memasukkan data input total atau input manual
-        #     self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel6))
-
-        #     # self.getSel = self.getSel +1
-
-
-            # import pdb
-            # pdb.set_trace()
-
-
-
-            pass
-
-        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Hasil Norma":
-
-            self.list_norma_dict = {}
-            # urutan SE,WA,AN, GE, RA,ZR,FA,WU,ME
-
-            self.list_norma_dict["SE"] = self.list_norma_rw_sw[0]
-            self.list_norma_dict["WA"] = self.list_norma_rw_sw[1]
-            self.list_norma_dict["AN"] = self.list_norma_rw_sw[2]
-            self.list_norma_dict["GE"] = self.list_norma_rw_sw[3]
-            self.list_norma_dict["RA"] = self.list_norma_rw_sw[4]
-            self.list_norma_dict["ZR"] = self.list_norma_rw_sw[5]
-            self.list_norma_dict["FA"] = self.list_norma_rw_sw[6]
-            self.list_norma_dict["WU"] = self.list_norma_rw_sw[7]
-            self.list_norma_dict["ME"] = self.list_norma_rw_sw[8]
-
-
-            # Perhitungan untuk analisa hasil IST
-            # Kemampuan berhitung = Ra dan zr
-            self.hasil_analisa_dict ={}
-            import statistics
-            self.data =[self.list_norma_dict["ZR"][1],self.list_norma_dict["FA"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Kemampuan Berhitung"] = self.value_dict
-
-            self.data = [self.list_norma_dict["ME"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Daya Ingat dan Konsentrasi"] = self.value_dict
-            
-            # Kreatifitas
-            self.data = [self.list_norma_dict["FA"][1],self.list_norma_dict["WU"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Kreatifitas"] = self.value_dict
-
-            # Ketelitian
-            self.data = [self.list_norma_dict["RA"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Ketelitian"] = self.value_dict
-
-            # Judgment
-            self.data = [self.list_norma_dict["SE"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Judgment"] = self.value_dict
-
-            # Daya Analisis
-            self.data = [self.list_norma_dict["AN"][1],self.list_norma_dict["WU"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Daya Analisis"] = self.value_dict
-
-            # Pengambilan Keputusan
-            self.data = [self.list_norma_dict["SE"][1],self.list_norma_dict["WU"][1],self.list_norma_dict["ZR"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Pengmabilan Keputusan"] = self.value_dict
-
-            # Kemampuan Berbahasa
-            self.data = [self.list_norma_dict["GE"][1],self.list_norma_dict["WA"][1]]
-            self.value_dict = statistics.mean(self.data)
-            # self.value_dict = sum(self.data)
-
-            self.hasil_analisa_dict["Kemampuan Berbahasa"] = self.value_dict
-
-            # import pdb
-            # pdb.set_trace()
-
-            'Proses hitung dimulai ketika halaman 3, atau pada saat penyajian grafik'
-            print("penyajian grafik proses hitung")
-            self.grafik_hasil = GrafikHasilLayoutInherited(self)
-            self.tampilan_grafik = self.grafik_hasil.draw()
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel7))
-            # if self.select_input == 1:
-            #    pass
-            # elif self.select_input == 2:
-            #     self.ambil_ge = self.panggil_nilai_total.getdata()
-            #     self.ge = self.ambil_ge[3]
-            #     self.kelompok_usia = self.m_spinCtrl_usia.GetValue()
-            #     self.databasekon = DatabaseConnect(self.nama_file)
-            #     # konversi nilai GE, hasil akhirnya adalah self.nilai_ge
-            #     # self.nilai_ge adalah hasil input yang telah dikonversi kedalam GE
-            #     self.con_datakonversi_ge = DataKonversiGE(self.databasekon)
-            #     self.nilai_ge = self.con_datakonversi_ge.konversi_ge(self.ge)
-            #     self.nilai_ge = self.nilai_ge[3]
-            #     # self.input_peserta adalah input peserta total (contoh di bawah adalah 
-            #     # self.input_peserta = self.panggil_nilai_total.getdata_arrange()) dari 
-            #     # GUI SpinControl yang kemudian di hitung menghasilkan 
-            #     # bentuk output yang diterima oleh proses selanjutnya, yakni menghitung SW
-            #     self.input_peserta = self.panggil_nilai_total.getdata_arrange()
-            # else:
-            #     error_text == "select input tidak terdefinisikan"
-            #     return error_text
-            # self.getSel = self.getSel +1
-            #  jika penjumlahan an + zr > GE + RA
-            self.sum_an_zr = self.list_norma_dict["AN"][1] + self.list_norma_dict["ZR"][1]
-            self.sum_ge_ra = self.list_norma_dict["GE"][1] + self.list_norma_dict["RA"][1]
-            if not self.sum_an_zr >= self.sum_ge_ra:
-                self.gaya_pemecahan_masalah.SetLabel("Fleksibilitas Berpikir")
-            else :
-                self.gaya_pemecahan_masalah.SetLabel("Kemantapan Berpikir")
-            pass
-
-        # elif self.m_simplebook1.GetPageText( self.m_simplebook1.FindPage(self.m_panel221 ) ) == "Pilih Norma":
-        #     import pdb
-        #     pdb.set_trace()
-        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )=="Hasil Analisis IST":
-            self.list_norma_dict_keilmuan = {}
-            # urutan SE,WA,AN, GE, RA,ZR,FA,WU,ME
-
-            self.list_norma_dict_keilmuan["SE"] = self.list_norma_rw_sw_keilmuan[0]
-            self.list_norma_dict_keilmuan["WA"] = self.list_norma_rw_sw_keilmuan[1]
-            self.list_norma_dict_keilmuan["AN"] = self.list_norma_rw_sw_keilmuan[2]
-            self.list_norma_dict_keilmuan["GE"] = self.list_norma_rw_sw_keilmuan[3]
-            self.list_norma_dict_keilmuan["RA"] = self.list_norma_rw_sw_keilmuan[4]
-            self.list_norma_dict_keilmuan["ZR"] = self.list_norma_rw_sw_keilmuan[5]
-            self.list_norma_dict_keilmuan["FA"] = self.list_norma_rw_sw_keilmuan[6]
-            self.list_norma_dict_keilmuan["WU"] = self.list_norma_rw_sw_keilmuan[7]
-            self.list_norma_dict_keilmuan["ME"] = self.list_norma_rw_sw_keilmuan[8]
-            
-            
-            self.database_bidang_keilmuan = BidangKeilmuan(self.connect_db)
-            self.data_bidang_keilmuan= self.database_bidang_keilmuan.query_bidang_keilmuan()
-            self.data_keilmuan_np = np.array(self.data_bidang_keilmuan)
-            self.data_keilmuan_pd = pd.DataFrame(self.data_keilmuan_np)
-
-            self.bidang_keilmuan = []
-            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
-                self.list_norma_dict_keilmuan["ZR"][1]>100 and \
-                    self.list_norma_dict_keilmuan["AN"][1]>100:
-                    # print ("Sajikan tabel")
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Matematika & Ilmu Pengetahuan Alam'] 
-                    self.rslt_df_mipa = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_mipa)
-                    pass
-            
-            if self.list_norma_dict_keilmuan["AN"][1]>100 and \
-                self.list_norma_dict_keilmuan["GE"][1]>100 and \
-                    self.list_norma_dict_keilmuan["FA"][1]>100 and \
-                        self.list_norma_dict_keilmuan['WU']>100:
-
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Pertanian'] 
-                    self.rslt_df_pertanian = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_pertanian)
-
-                    # print ("Sajikan tabel")
-                    pass
-
-            if self.list_norma_dict_keilmuan["WU"][1]>100 and \
-                self.list_norma_dict_keilmuan["FA"][1]>100 and \
-                    self.list_norma_dict_keilmuan["RA"][1]>100:
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknik Sipil & Perencanaan'] 
-                    self.rslt_df_sipil = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_sipil)
-
-                    # print ("Sajikan tabel")
-                    pass
-
-            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
-                self.list_norma_dict_keilmuan["ZR"][1]>100 and \
-                    self.list_norma_dict_keilmuan["AN"][1]>100:
-
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknik Industri'] 
-                    self.rslt_df_industri = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_industri)
-
-                    # print ("Sajikan tabel")
-                    pass
-
-            if self.list_norma_dict_keilmuan["FA"][1]>100 and \
-                self.list_norma_dict_keilmuan["RA"][1]>100 and \
-                    self.list_norma_dict_keilmuan["ZR"][1]>100:
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Teknologi Mineral'] 
-                    self.rslt_df_mineral = self.rslt_df.to_numpy().tolist()
-
-                    self.bidang_keilmuan.extend(self.rslt_df_mineral)
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["ME"][1]>100 and \
-                self.list_norma_dict_keilmuan["GE"][1]>100 and \
-                self.list_norma_dict_keilmuan["AN"][1]>100 and \
-                self.list_norma_dict_keilmuan["FA"][1]>100 and \
-                    self.list_norma_dict_keilmuan["WU"][1]>100:
-
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Kesehatan'] 
-                    self.rslt_df_kesehatan = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_kesehatan)
-
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["WA"][1]>100 and \
-                self.list_norma_dict_keilmuan["GE"][1]>100 and \
-                self.list_norma_dict_keilmuan["ME"][1]>100 and \
-                    self.list_norma_dict_keilmuan["SE"][1]>100:
-                    
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ilmu Sastra & Budaya'] 
-                    self.rslt_df_sastra = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_sastra)
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["FA"][1]>100 and \
-                self.list_norma_dict_keilmuan["WA"][1]>100 and \
-                self.list_norma_dict_keilmuan["GE"][1]>100 and \
-                self.list_norma_dict_keilmuan["AN"][1]>100 and \
-                    self.list_norma_dict_keilmuan["ZR"][1]>100:
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Seni Rupa & Desain'] 
-                    self.rslt_df_senirupa = self.rslt_df.to_numpy().tolist()
-
-                    self.bidang_keilmuan.extend(self.rslt_df_senirupa)
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["RA"][1]>100 and \
-                self.list_norma_dict_keilmuan["GE"][1]>100 and \
-                    self.list_norma_dict_keilmuan["ZR"][1]>100 and \
-                    self.list_norma_dict_keilmuan["AN"][1]>100:
-
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Ekonomi'] 
-                    self.rslt_df_ekonomi = self.rslt_df.to_numpy().tolist()
-
-                    self.bidang_keilmuan.extend(self.rslt_df_ekonomi)
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
-                self.list_norma_dict_keilmuan["ME"][1]>100 and \
-                    self.list_norma_dict_keilmuan["AN"][1]>100 and \
-                    self.list_norma_dict_keilmuan["WA"][1]>100:
-
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Hukum'] 
-                    self.rslt_df_hukum = self.rslt_df.to_numpy().tolist()
-                    
-                    self.bidang_keilmuan.extend(self.rslt_df_hukum)
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
-                self.list_norma_dict_keilmuan["WA"][1]>100 and \
-                    self.list_norma_dict_keilmuan["AN"][1]>100 and \
-                    self.list_norma_dict_keilmuan["GE"][1]>100:
-
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Sosial & Politik'] 
-                    self.rslt_df_sospol = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_sospol)
-
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["ME"][1]>100 and \
-                self.list_norma_dict_keilmuan["WA"][1]>100 and \
-                    self.list_norma_dict_keilmuan["AN"][1]>100:
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Komunikasi'] 
-                    self.rslt_df_komunikasi = self.rslt_df.to_numpy().tolist()
-
-                    self.bidang_keilmuan.extend(self.rslt_df_komunikasi)
-                    # print ("Sajikan tabel")
-                    pass
-            if self.list_norma_dict_keilmuan["SE"][1]>100 and \
-                self.list_norma_dict_keilmuan["AN"][1]>100 and \
-                    self.list_norma_dict_keilmuan["WA"][1]>100:
-                    self.rslt_df = self.data_keilmuan_pd[self.data_keilmuan_pd[2] == 'Psikologi'] 
-                    self.rslt_df_psikologi = self.rslt_df.to_numpy().tolist()
-                    self.bidang_keilmuan.extend(self.rslt_df_psikologi)
-                    pass
-            # import pdb 
-            # pdb.set_trace()            
-
-                    # print ("Sajikan tabel")
-                    
-
-            # elif self.getSel == 6:
-            # self.m_button3.Disable()  #         print(self.text_entry.get_input_versi24())
-            # global bsizer12
-            # # self.properties_tamp.tabel_show()
-            # self.grafik_y = {}
-            # self.grafik_y["Kemampuan Berhitung"] = mean([self.input_peserta_rw_sw[5][1]\
-            #    , self.input_peserta_rw_sw[6][1]])
-            # self.grafik_y["Daya Ingat dan Konsentrasi"] = self.input_peserta_rw_sw[4][1]
-            # self.grafik_y["Kreatifitas"] = mean([self.input_peserta_rw_sw[7][1], self.input_peserta_rw_sw[8][1]])
-            # self.grafik_y["Ketelitian"] = self.input_peserta_rw_sw[5][1]
-            # self.grafik_y["Judgement"] = self.input_peserta_rw_sw[0][1]
-            # self.grafik_y["Daya Analisis"] = mean([self.input_peserta_rw_sw[2][1], self.input_peserta_rw_sw[8][1]])
-            # self.grafik_y["Pengembalian Keputusan"] = mean([self.input_peserta_rw_sw[0][1], self.input_peserta_rw_sw[6][1], self.input_peserta_rw_sw[8][1]])
-            # self.grafik_y["Kemampuan Berbahasa"] = mean([self.input_peserta_rw_sw[1][1], self.input_peserta_rw_sw[3][1]])
-
-            # self.grafik_hasil = GrafikHasilLayoutInherited(self)
-            # self.grafik_hasil.draw(self.grafik_y)
-
-            # self.m_dataViewListCtrl1.InsertItem(0, ["df", "dfs", "sdf"])
-            # self.m_staticText_berpikir.SetValue()
-            self.sajikan_grafik = GrafikProfesiInherited(self)
-            self.sajikan_grafik.draw()
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel9))
-            pass
-
-        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() )=="Penjurusan":
-        # elif self.getSel == 7:
-            # if self.tipe_biodata == 0:
-            #     self.grafik_profesi = GrafikProfesi(self)
-            #     self.grafik_profesi.draw()
-
-            #     pass
-
-            # if self.tipe_biodata == 1:
-            #     self.biodata_kandidat = [
-            #         self.tipe_biodata,
-            #         self.get_biodata()[0],
-            #         self.get_biodata()[1],
-            #         self.get_biodata()[3],
-            #         self.get_biodata()[4]
-            #     ]
-            #     self.biodata_kandidat_tamb1 = [
-            #         self.get_biodata()[5],
-            #         self.get_biodata()[6],
-            #         self.get_biodata()[7],
-            #         self.get_biodata()[8],
-            #         self.get_biodata()[9],
-            #         self.get_biodata()[10],
-            #         self.get_biodata()[11],
-            #         self.get_biodata()[12],
-            #         self.get_biodata()[13],
-            #         self.kelompok_usia
-            #     ]
-            # elif self.tipe_biodata == 2:
-            #     self.biodata_kandidat = [
-            #         self.tipe_biodata,
-            #         self.get_biodata()[2],
-            #         self.get_biodata()[1],
-            #         self.get_biodata()[3],
-            #         self.get_biodata()[4]
-            #     ]
-            #     self.biodata_kandidat_tamb2 = [
-            #         self.get_biodata()[5],
-            #         self.get_biodata()[6],
-            #         self.get_biodata()[7],
-            #         self.get_biodata()[8],
-            #         self.get_biodata()[9]
-            #     ]
-            # self.grafik_profesi = GrafikProfesi(self)
-            # self.grafik_profesi.draw()
-            self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel10))
-            self.m_selanjutnya.Disable()
-            self.m_dataViewListCtrl2.DeleteAllItems()
-            self.halaman_terakhir(self)
-            pass
-
-        elif self.m_simplebook1.GetPageText( self.m_simplebook1.GetSelection() ) == "Halaman Terakhir":
-        # elif self.getSel == 8:
-            # self.m_simplebook1.SetSelection(self.m_simplebook1.FindPage(self.m_panel10))
-            pass
-
-        else:
-            # self.m_button3.Enable()
-            # print ("masuk halaman 5")
-            pass
-        # self.m_simplebook1.SetSelection(self.getSel)
-        # print ("kesini nggak")
-        pass
 
     def m_input_manualOnButtonClick(self, event):
         self.select_input = "Input Manual"

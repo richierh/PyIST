@@ -15,14 +15,11 @@ import os
 import pathlib
 import sys
 import platform
+from views.app import MyApp
+from pathlib import Path
 
 if platform.system() == "Windows":
     locale.setlocale(locale.LC_ALL, 'C')
-else :
-    pass
-
-from views.app import MyApp
-from pathlib import Path
 
 pathwd = pathlib.Path.cwd() / "views"
 sys.path.append(str(pathwd))
@@ -56,28 +53,33 @@ def close():
     start.Show()
     return None
 
-openWindows()
-# if platform.system() == "Windows":
-#     my_file = Path("C:\\ProgramData\\4251.txt")
-#     if my_file.is_file():
-#         openWindows()
-#     else :
-#         KeyVerification = VerifyKey("2")
-#         if KeyVerification.Verify() == "1":
-#             openWindows()
-#         else :
-#             close()
+def chooseplatform() :
+    if platform.system() == "Windows":
+        my_file = Path("C:\\ProgramData\\4251.txt")
+        if my_file.is_file():
+            openWindows()
+        else :
+            KeyVerification = VerifyKey("2")
+            if KeyVerification.Verify() == "1":
+                openWindows()
+            else :
+                close()
 
-# elif platform.system() == "Linux" :
-#     print (platform.system())
-#     my_file = Path.home() / ".4251"
-#     print (my_file)
-#     if my_file.is_file():
-#         print ("file ada")
-#         openWindows()
-#     else :
-#         KeyVerification = VerifyKey("2")
-#         if KeyVerification.Verify() == "1":
-#             openWindows()
-#         else :
-#             close()
+    elif platform.system() == "Linux" :
+        print (platform.system())
+        my_file = Path.home() / ".4251"
+        print (my_file)
+        if my_file.is_file():
+            print ("file ada")
+            openWindows()
+        else :
+            KeyVerification = VerifyKey("2")
+            if KeyVerification.Verify() == "1":
+                openWindows()
+            else :
+                close()
+
+
+if __name__ == "__main__":
+    openWindows()
+    # chooseplatform()
